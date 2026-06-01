@@ -1,0 +1,131 @@
+version: 2
+
+semantic_models:
+  - name: orders
+    description: Order-level semantic model for operational and customer metrics.
+    model: ref('fct_orders')
+    defaults:
+      agg_time_dimension: ordered_date
+    entities:
+      - name: order
+        type: primary
+        expr: order_id
+      - name: customer
+        type: foreign
+        expr: customer_id
+      - name: location
+        type: foreign
+        expr: store_id
+    dimensions:
+      - name: ordered_date
+        type: time
+        expr: ordered_date_utc
+        type_params:
+          time_granularity: day
+      - name: order_status
+        type: categorical
+      - name: channel
+        type: categorical
+      - name: country_code
+        type: categorical
+      - name: currency
+        type: categorical
+    measures:
+      - name: order_count
+        description: Count of orders.
+        expr: 1
+        agg: sum
+      - name: completed_order_count
+        description: Count of completed orders.
+        expr: case when is_completed_order then 1 else 0 end
+        agg: sum
+      - name: gross_order_amount_usd
+        description: Gross order amount converted to USD.
+        expr: order_total_usd
+        agg: sum
+      - name: refunded_order_count
+        description: Count of orders with at least one refund event.
+        expr: case when refund_event_count > 0 then 1 else 0 end
+        agg: sum
+
+  - name: order_items
+    description: Item-level semantic model for basket composition metrics.
+    model: ref('fct_order_items')
+    defaults:
+      agg_time_dimension: ordered_date
+    entities:
+      - name: order_item
+        type: primary
+        expr: order_item_id
+      - name: order
+        type: foreign
+        expr: order_id
+      - name: product
+        type: foreign
+        expr: product_id
+    dimensions:
+      - name: ordered_date
+        type: time
+        expr: ordered_date_utc
+        type_params:
+          time_granularity: day
+      - name: product_family
+        type: categorical
+      - name: category
+        type: categorical
+      - name: supply_currency
+        type: categorical
+    measures:
+      - name: item_quantity
+        expr: quantity
+        agg: sum
+      - name: item_total
+        expr: item_total_major
+        agg: sum
+      - name: estimated_supply_cost
+        expr: estimated_supply_cost_minor
+        agg: sum
+
+metrics:
+  - name: completed_orders
+    description: Completed order count.
+    type: simple
+    label: Completed Orders
+    type_params:
+      measure: completed_order_count
+
+  - name: order_count
+    description: Count of all orders.
+    type: simple
+    label: Order Count
+    type_params:
+      measure: order_count
+
+  - name: refunded_order_count
+    description: Count of orders with at least one refund event.
+    type: simple
+    label: Refunded Order Count
+    type_params:
+      measure: refunded_order_count
+
+  - name: gross_order_amount_usd
+    description: Gross order amount in USD.
+    type: simple
+    label: Gross Order Amount USD
+    type_params:
+      measure: gross_order_amount_usd
+
+  - name: item_quantity
+    description: Total item quantity.
+    type: simple
+    label: Item Quantity
+    type_params:
+      measure: item_quantity
+
+  - name: order_refund_event_rate
+    description: Share of orders with refund events.
+    type: ratio
+    label: Order Refund Event Rate
+    type_params:
+      numerator: refunded_order_count
+      denominator: order_count

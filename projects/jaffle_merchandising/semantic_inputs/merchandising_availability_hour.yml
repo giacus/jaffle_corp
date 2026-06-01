@@ -1,0 +1,16 @@
+name: merchandising_availability_hour
+grain: product_store_hour
+owner: merchandising
+description: Example MetricFlow query spec for hourly product availability.
+semantic_model: product_store_hour_availability
+time_dimension: availability_hour
+dimensions:
+  - product__product_id
+  - location__store_id
+  - availability_status
+  - product_family
+metrics:
+  - merchandising_observed_hours
+  - merchandising_available_hours
+  - merchandising_availability_rate
+  - merchandising_outage_minutes

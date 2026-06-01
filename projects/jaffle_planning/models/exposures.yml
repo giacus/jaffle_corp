@@ -1,0 +1,17 @@
+version: 2
+
+exposures:
+  - name: weekly_planning_packet
+    label: Weekly Planning Packet
+    type: notebook
+    maturity: low
+    url: https://example.com/jaffle/weekly-planning-packet
+    description: Fictional planning packet used for forecast, capacity, and component plan exercises.
+    depends_on:
+      - ref('fct_store_hour_forecast_accuracy')
+      - ref('fct_product_day_forecast_accuracy')
+      - ref('fct_component_week_plan_variance')
+      - ref('fct_store_day_capacity_plan')
+    owner:
+      name: Jaffle Planning Guild
+      email: planning@jaffle.example

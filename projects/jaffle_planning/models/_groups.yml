@@ -1,0 +1,5 @@
+groups:
+  - name: planning
+    owner:
+      name: Jaffle Planning Guild
+      email: planning@jaffle.example

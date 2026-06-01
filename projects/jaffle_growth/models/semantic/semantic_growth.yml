@@ -1,0 +1,173 @@
+version: 2
+
+semantic_models:
+  - name: customer_lifecycle
+    description: Growth semantic model for customer lifecycle reporting.
+    model: ref('fct_customer_lifecycle')
+    defaults:
+      agg_time_dimension: first_seen_date
+    entities:
+      - name: customer
+        type: primary
+        expr: customer_id
+    dimensions:
+      - name: first_seen_date
+        type: time
+        expr: cast(first_seen_at as date)
+        type_params:
+          time_granularity: day
+      - name: lifecycle_stage
+        type: categorical
+      - name: loyalty_region
+        type: categorical
+      - name: latest_program_tier
+        type: categorical
+    measures:
+      - name: activated_customer_count
+        expr: case when completed_order_count > 0 then 1 else 0 end
+        agg: sum
+      - name: repeat_customer_count
+        expr: case when completed_order_count >= 2 then 1 else 0 end
+        agg: sum
+      - name: growth_customer_count
+        expr: 1
+        agg: sum
+      - name: lifetime_net_revenue_usd
+        expr: lifetime_net_revenue_usd
+        agg: sum
+
+  - name: campaign_performance
+    description: Campaign semantic model for attribution metrics.
+    model: ref('fct_campaign_performance')
+    defaults:
+      agg_time_dimension: campaign_date
+    entities:
+      - name: campaign_performance
+        type: primary
+        expr: campaign_performance_key
+    dimensions:
+      - name: campaign_date
+        type: time
+        expr: event_date_utc
+        type_params:
+          time_granularity: day
+      - name: campaign_id
+        type: categorical
+      - name: channel
+        type: categorical
+    measures:
+      - name: attributed_order_count
+        expr: attributed_order_count
+        agg: sum
+      - name: attributed_net_revenue_usd
+        expr: attributed_net_revenue_usd
+        agg: sum
+      - name: estimated_campaign_cost_usd
+        expr: estimated_campaign_cost_usd
+        agg: sum
+
+  - name: experiment_conversion
+    description: Growth semantic model for experiment conversion rollups.
+    model: ref('fct_experiment_conversion')
+    defaults:
+      agg_time_dimension: exposed_date
+    entities:
+      - name: experiment_conversion
+        type: primary
+        expr: experiment_conversion_key
+    dimensions:
+      - name: exposed_date
+        type: time
+        expr: exposed_date_utc
+        type_params:
+          time_granularity: day
+      - name: experiment_id
+        type: categorical
+      - name: variant_id
+        type: categorical
+      - name: surface
+        type: categorical
+    measures:
+      - name: growth_experiment_exposure_count
+        expr: exposure_count
+        agg: sum
+      - name: growth_experiment_conversion_count
+        expr: conversion_count
+        agg: sum
+      - name: growth_experiment_revenue_usd_7d
+        expr: net_revenue_usd_7d
+        agg: sum
+
+metrics:
+  - name: activated_customers
+    description: Customers with at least one completed order.
+    type: simple
+    label: Activated Customers
+    type_params:
+      measure: activated_customer_count
+
+  - name: growth_customer_count
+    description: Count of customers in the growth lifecycle mart.
+    type: simple
+    label: Growth Customer Count
+    type_params:
+      measure: growth_customer_count
+
+  - name: repeat_customers
+    description: Customers with at least two completed orders.
+    type: simple
+    label: Repeat Customers
+    type_params:
+      measure: repeat_customer_count
+
+  - name: activation_rate
+    description: Share of customers who completed an order.
+    type: ratio
+    label: Activation Rate
+    type_params:
+      numerator: activated_customers
+      denominator: growth_customer_count
+
+  - name: attributed_net_revenue_usd
+    description: Net revenue attributed to campaigns.
+    type: simple
+    label: Attributed Net Revenue USD
+    type_params:
+      measure: attributed_net_revenue_usd
+
+  - name: estimated_campaign_cost_usd
+    description: Estimated campaign cost in USD.
+    type: simple
+    label: Estimated Campaign Cost USD
+    type_params:
+      measure: estimated_campaign_cost_usd
+
+  - name: campaign_roas
+    description: Attributed net revenue divided by estimated campaign cost.
+    type: ratio
+    label: Campaign ROAS
+    type_params:
+      numerator: attributed_net_revenue_usd
+      denominator: estimated_campaign_cost_usd
+
+  - name: growth_experiment_exposures
+    description: Count of experiment exposures in growth rollups.
+    type: simple
+    label: Growth Experiment Exposures
+    type_params:
+      measure: growth_experiment_exposure_count
+
+  - name: growth_experiment_conversions
+    description: Count of converted experiment exposures in growth rollups.
+    type: simple
+    label: Growth Experiment Conversions
+    type_params:
+      measure: growth_experiment_conversion_count
+
+  - name: growth_experiment_conversion_rate
+    description: Share of growth experiment exposures that converted.
+    type: ratio
+    label: Growth Experiment Conversion Rate
+    type_params:
+      numerator: growth_experiment_conversions
+      denominator: growth_experiment_exposures

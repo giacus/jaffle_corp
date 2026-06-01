@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: stg_support_tickets
+    config:
+      group: experience
+    columns:
+      - name: support_ticket_id
+        data_tests: [not_null, unique]
+      - name: normalized_issue_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["cold_food", "late_pickup", "missing_item", "wrong_item", "payment_question", "account_help", "other"]
+
+  - name: stg_customer_contacts
+    config:
+      group: experience
+    columns:
+      - name: contact_event_id
+        data_tests: [not_null, unique]
+      - name: contact_direction
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["inbound", "outbound"]
+
+  - name: stg_experiment_exposures
+    config:
+      group: experience
+    columns:
+      - name: exposure_id
+        data_tests: [not_null, unique]
+      - name: experiment_id
+        data_tests: [not_null]
+
+  - name: stg_menu_price_tests
+    config:
+      group: experience
+    columns:
+      - name: price_test_id
+        data_tests: [not_null, unique]
+      - name: product_id
+        data_tests: [not_null]
+

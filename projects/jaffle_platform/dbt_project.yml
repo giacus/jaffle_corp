@@ -1,0 +1,49 @@
+name: jaffle_platform
+version: "0.1.0"
+config-version: 2
+
+profile: jaffle_corp
+require-dbt-version: ">=1.8.0,<2.0.0"
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: target
+clean-targets:
+  - target
+  - dbt_packages
+
+vars:
+  data_interval_start: "2026-01-01 00:00:00"
+  data_interval_end: "2026-01-08 00:00:00"
+  window_hours_back: 6
+
+models:
+  jaffle_platform:
+    +materialized: view
+    +post-hook: "{{ jaffle_shared.audit_noop() }}"
+    +meta:
+      domain: platform
+      source_system: synthetic_jaffle_corp
+    staging:
+      +schema: stg
+      +materialized: view
+      +tags: ["staging"]
+      +access: protected
+    intermediate:
+      +schema: int
+      +materialized: ephemeral
+      +tags: ["intermediate"]
+      +access: protected
+    marts:
+      +schema: mart
+      +materialized: table
+      +tags: ["mart"]
+seeds:
+  jaffle_platform:
+    +schema: raw
+    +quote_columns: false

@@ -1,0 +1,21 @@
+select
+    component_week_plan_variance_key,
+    plan_id,
+    store_id,
+    component_id,
+    component_name,
+    component_family,
+    recipe_unit,
+    plan_week_start_utc,
+    scenario_name,
+    planned_receipt_quantity,
+    planned_usage_quantity,
+    planned_waste_quantity,
+    actual_received_quantity,
+    actual_used_quantity,
+    actual_waste_quantity,
+    actual_received_cost_usd,
+    usage_quantity_variance,
+    usage_variance_status,
+    updated_at_utc
+from {{ ref('int_component_week_plan_actuals') }}

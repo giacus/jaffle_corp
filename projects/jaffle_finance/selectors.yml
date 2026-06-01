@@ -1,0 +1,23 @@
+selectors:
+  - name: finance_public_interface
+    description: Public finance outputs available to downstream projects.
+    definition:
+      union:
+        - method: fqn
+          value: fct_order_revenue
+        - method: fqn
+          value: fct_daily_store_pnl
+        - method: fqn
+          value: fct_order_margin_waterfall
+        - method: fqn
+          value: fct_store_day_revenue_quality
+        - method: fqn
+          value: fct_component_cost_variance
+        - method: fqn
+          value: dim_finance_controls
+
+  - name: finance_incremental_window
+    description: Models that should respect the configured processing window.
+    definition:
+      method: tag
+      value: finance

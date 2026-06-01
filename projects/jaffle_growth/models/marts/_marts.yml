@@ -1,0 +1,228 @@
+version: 2
+
+models:
+  - name: fct_customer_lifecycle
+    description: Public growth fact at one row per customer lifecycle state.
+    config:
+      group: growth
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: customer_lifecycle_key
+        data_type: varchar
+        data_tests: [not_null, unique]
+      - name: customer_id
+        data_type: varchar
+      - name: customer_name
+        data_type: varchar
+      - name: email_domain
+        data_type: varchar
+      - name: loyalty_region
+        data_type: varchar
+      - name: first_seen_at
+        data_type: timestamp
+      - name: default_currency
+        data_type: varchar
+      - name: marketing_consent
+        data_type: boolean
+      - name: first_ordered_at_utc
+        data_type: timestamp
+      - name: most_recent_ordered_at_utc
+        data_type: timestamp
+      - name: order_count
+        data_type: integer
+      - name: completed_order_count
+        data_type: integer
+      - name: lifetime_net_revenue_usd
+        data_type: double
+      - name: lifetime_margin_usd
+        data_type: double
+      - name: net_loyalty_points
+        data_type: integer
+      - name: latest_program_tier
+        data_type: varchar
+      - name: lifecycle_stage
+        data_type: varchar
+      - name: days_to_first_order
+        data_type: bigint
+
+  - name: fct_campaign_performance
+    description: Public growth fact at one row per campaign, day, and channel.
+    config:
+      group: growth
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: campaign_performance_key
+        data_type: varchar
+        data_tests: [not_null, unique]
+      - name: campaign_id
+        data_type: varchar
+      - name: event_date_utc
+        data_type: date
+      - name: channel
+        data_type: varchar
+      - name: touchpoint_count
+        data_type: integer
+      - name: click_count
+        data_type: integer
+      - name: redemption_count
+        data_type: integer
+      - name: attributed_order_count
+        data_type: integer
+      - name: estimated_campaign_cost_usd
+        data_type: double
+      - name: attributed_net_revenue_usd
+        data_type: double
+      - name: attributed_margin_usd
+        data_type: double
+      - name: estimated_roas
+        data_type: double
+
+  - name: fct_customer_value_segments
+    description: Public customer value segmentation fact combining growth, finance, and support signals.
+    config:
+      group: growth
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: customer_value_segment_key
+        data_type: varchar
+        data_tests: [not_null, unique]
+      - name: customer_id
+        data_type: varchar
+      - name: customer_name
+        data_type: varchar
+      - name: loyalty_region
+        data_type: varchar
+      - name: lifecycle_stage
+        data_type: varchar
+      - name: marketing_consent
+        data_type: boolean
+      - name: finance_order_count
+        data_type: bigint
+      - name: lifetime_net_revenue_usd
+        data_type: double
+      - name: lifetime_recipe_margin_usd
+        data_type: double
+      - name: most_recent_recognized_date
+        data_type: date
+      - name: support_ticket_count
+        data_type: bigint
+      - name: first_response_sla_met_count
+        data_type: hugeint
+      - name: concession_major
+        data_type: double
+      - name: exposure_count
+        data_type: bigint
+      - name: converted_exposure_count
+        data_type: hugeint
+      - name: value_band
+        data_type: varchar
+      - name: care_profile
+        data_type: varchar
+
+  - name: fct_loyalty_balance_daily
+    description: Public customer-day loyalty balance projection.
+    config:
+      group: growth
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: loyalty_balance_daily_key
+        data_type: varchar
+        data_tests: [not_null, unique]
+      - name: customer_id
+        data_type: varchar
+      - name: event_date_utc
+        data_type: date
+      - name: points_delta
+        data_type: hugeint
+      - name: projected_points_balance
+        data_type: hugeint
+      - name: latest_program_tier
+        data_type: varchar
+      - name: loyalty_event_count
+        data_type: bigint
+      - name: loyalty_balance_status
+        data_type: varchar
+
+  - name: fct_experiment_conversion
+    description: Public experiment-day conversion fact.
+    config:
+      group: growth
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: experiment_conversion_key
+        data_type: varchar
+        data_tests: [not_null, unique]
+      - name: experiment_id
+        data_type: varchar
+      - name: variant_id
+        data_type: varchar
+      - name: exposed_date_utc
+        data_type: date
+      - name: surface
+        data_type: varchar
+      - name: exposure_count
+        data_type: bigint
+      - name: conversion_count
+        data_type: hugeint
+      - name: order_count_7d
+        data_type: hugeint
+      - name: net_revenue_usd_7d
+        data_type: double
+      - name: estimated_margin_usd_7d
+        data_type: double
+      - name: conversion_rate
+        data_type: double
+
+  - name: fct_campaign_incrementality
+    description: Public campaign-day fact with deliberately simple incrementality heuristics.
+    config:
+      group: growth
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: campaign_incrementality_key
+        data_type: varchar
+        data_tests: [not_null, unique]
+      - name: campaign_id
+        data_type: varchar
+      - name: event_date_utc
+        data_type: date
+      - name: channel
+        data_type: varchar
+      - name: touchpoint_count
+        data_type: integer
+      - name: click_count
+        data_type: integer
+      - name: redemption_count
+        data_type: integer
+      - name: attributed_order_count
+        data_type: integer
+      - name: estimated_campaign_cost_usd
+        data_type: double
+      - name: attributed_net_revenue_usd
+        data_type: double
+      - name: attributed_margin_usd
+        data_type: double
+      - name: nearby_exposure_count
+        data_type: hugeint
+      - name: nearby_conversion_count
+        data_type: hugeint
+      - name: nearby_experiment_net_revenue_usd_7d
+        data_type: double
+      - name: heuristic_incremental_revenue_usd
+        data_type: double
+      - name: heuristic_incremental_margin_usd
+        data_type: double
+      - name: heuristic_incremental_roas
+        data_type: double

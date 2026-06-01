@@ -1,0 +1,6 @@
+groups:
+  - name: finance
+    owner:
+      name: Jaffle Finance Guild
+      email: finance@jaffle.example
+

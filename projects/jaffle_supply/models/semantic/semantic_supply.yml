@@ -1,0 +1,124 @@
+version: 2
+
+semantic_models:
+  - name: supply_risk
+    description: Supply semantic model for component risk and inventory metrics.
+    model: ref('fct_supply_risk_daily')
+    defaults:
+      agg_time_dimension: balance_date
+    entities:
+      - name: supply_risk_day
+        type: primary
+        expr: supply_risk_daily_key
+      - name: location
+        type: foreign
+        expr: store_id
+      - name: component
+        type: foreign
+        expr: component_id
+    dimensions:
+      - name: balance_date
+        type: time
+        expr: balance_date_utc
+        type_params:
+          time_granularity: day
+      - name: supply_risk_status
+        type: categorical
+      - name: component_unit
+        type: categorical
+        expr: unit
+    measures:
+      - name: supply_risk_day_count
+        expr: 1
+        agg: sum
+      - name: risky_supply_day_count
+        expr: case when has_supply_risk then 1 else 0 end
+        agg: sum
+      - name: observed_waste_quantity
+        expr: observed_waste_quantity
+        agg: sum
+      - name: estimated_closing_quantity
+        expr: estimated_closing_quantity
+        agg: sum
+
+  - name: purchase_orders
+    description: Purchase-order semantic model for receipt quality.
+    model: ref('fct_purchase_orders')
+    defaults:
+      agg_time_dimension: received_date
+    entities:
+      - name: purchase_order
+        type: primary
+        expr: purchase_order_id
+      - name: location
+        type: foreign
+        expr: store_id
+      - name: component
+        type: foreign
+        expr: component_id
+    dimensions:
+      - name: received_date
+        type: time
+        expr: received_date_utc
+        type_params:
+          time_granularity: day
+      - name: purchase_order_status
+        type: categorical
+      - name: receipt_delay_bucket
+        type: categorical
+    measures:
+      - name: purchase_order_count
+        expr: 1
+        agg: sum
+      - name: late_purchase_order_count
+        expr: case when is_late_receipt then 1 else 0 end
+        agg: sum
+      - name: received_cost_usd
+        expr: quantity_received * unit_cost_usd
+        agg: sum
+
+metrics:
+  - name: supply_risk_days
+    description: Count of store-component days with a supply risk flag.
+    type: simple
+    label: Supply Risk Days
+    type_params:
+      measure: risky_supply_day_count
+
+  - name: supply_risk_day_count
+    description: Count of store-component-day records.
+    type: simple
+    label: Supply Risk Day Count
+    type_params:
+      measure: supply_risk_day_count
+
+  - name: supply_risk_rate
+    description: Share of component days with a risk flag.
+    type: ratio
+    label: Supply Risk Rate
+    type_params:
+      numerator: supply_risk_days
+      denominator: supply_risk_day_count
+
+  - name: purchase_order_count
+    description: Count of purchase orders.
+    type: simple
+    label: Purchase Order Count
+    type_params:
+      measure: purchase_order_count
+
+  - name: late_purchase_order_count
+    description: Count of late purchase orders.
+    type: simple
+    label: Late Purchase Order Count
+    type_params:
+      measure: late_purchase_order_count
+
+  - name: late_purchase_order_rate
+    description: Share of purchase orders received after the expected timestamp.
+    type: ratio
+    label: Late Purchase Order Rate
+    type_params:
+      numerator: late_purchase_order_count
+      denominator: purchase_order_count
+

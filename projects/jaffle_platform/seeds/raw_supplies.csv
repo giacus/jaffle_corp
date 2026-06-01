@@ -1,0 +1,5 @@
+supply_id,product_id,supplier_name,supplier_country_code,unit_cost_minor,currency,perishable,lead_time_days,replenishment_mode,updated_at_utc
+sup_001,prod_100,Crust Cooperative,GB,210,GBP,true,2,scheduled,2026-01-06 10:00:00
+sup_002,prod_200,Bean Barn,CA,260,CAD,true,4,threshold,2026-01-06 10:00:00
+sup_003,prod_300,Orchard Heat Works,NL,310,EUR,true,6,manual,2026-01-06 10:00:00
+sup_004,prod_400,Pickle Parcel,SG,120,SGD,false,10,scheduled,2026-01-06 10:00:00

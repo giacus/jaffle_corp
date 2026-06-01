@@ -1,0 +1,5 @@
+packages:
+  - local: ../jaffle_shared
+  - package: dbt-labs/dbt_utils
+    version: 1.3.3
+

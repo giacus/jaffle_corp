@@ -1,0 +1,8 @@
+product_id,component_id,component_name,component_family,unit,quantity_per_item,waste_factor,updated_at_utc
+prod_100,comp_bread,Sourdough Slice,bakery,each,2,0.04,2026-01-06 10:00:00
+prod_100,comp_cheese,Mellow Cheese,dairy,grams,55,0.03,2026-01-06 10:00:00
+prod_200,comp_bread,Sourdough Slice,bakery,each,2,0.04,2026-01-06 10:00:00
+prod_200,comp_beans,Smoky Beans,pantry,grams,85,0.02,2026-01-06 10:00:00
+prod_300,comp_bread,Sourdough Slice,bakery,each,2,0.05,2026-01-06 10:00:00
+prod_300,comp_chutney,Orchard Chutney,pantry,grams,70,0.08,2026-01-06 10:00:00
+prod_400,comp_pickle,Pickle Coins,pantry,grams,90,0.06,2026-01-06 10:00:00

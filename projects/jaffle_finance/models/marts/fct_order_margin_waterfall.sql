@@ -1,0 +1,28 @@
+select
+    {{ jaffle_shared.stable_hash(['order_id', 'recognized_date']) }} as order_margin_waterfall_key,
+    order_id,
+    customer_id,
+    store_id,
+    recognized_date,
+    order_status,
+    channel,
+    country_code,
+    city,
+    gross_revenue_usd,
+    captured_amount_usd,
+    refunded_amount_usd,
+    net_revenue_usd,
+    platform_supply_cost_usd,
+    recipe_expected_component_cost_usd,
+    recipe_cost_variance_usd,
+    recipe_margin_usd,
+    platform_margin_usd,
+    margin_method_variance_usd,
+    component_count,
+    order_item_count,
+    total_item_quantity,
+    payment_attempt_count,
+    refund_event_count,
+    revenue_quality_status
+from {{ ref('int_order_margin_waterfall') }}
+

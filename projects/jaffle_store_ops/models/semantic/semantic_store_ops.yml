@@ -1,0 +1,89 @@
+version: 2
+
+semantic_models:
+  - name: store_day_operations
+    description: Store operations semantic model for day-grain operating health.
+    model: ref('fct_store_day_operations')
+    defaults:
+      agg_time_dimension: operating_date
+    entities:
+      - name: store_day_operations
+        type: primary
+        expr: store_day_operations_key
+      - name: location
+        type: foreign
+        expr: store_id
+    dimensions:
+      - name: operating_date
+        type: time
+        expr: operating_date
+        type_params:
+          time_granularity: day
+      - name: store_day_status
+        type: categorical
+      - name: country_code
+        type: categorical
+    measures:
+      - name: store_ops_day_count
+        expr: 1
+        agg: sum
+      - name: store_ops_order_count
+        expr: order_count
+        agg: sum
+      - name: store_ops_ready_inside_target_count
+        expr: ready_inside_target_count
+        agg: sum
+      - name: store_ops_order_timing_count
+        expr: order_timing_count
+        agg: sum
+      - name: store_ops_quality_exception_count
+        expr: quality_exception_count
+        agg: sum
+      - name: store_ops_incident_count
+        expr: incident_count
+        agg: sum
+
+metrics:
+  - name: store_ops_order_count
+    description: Store operations order count.
+    type: simple
+    label: Store Ops Order Count
+    type_params:
+      measure: store_ops_order_count
+
+  - name: store_ops_ready_inside_target_count
+    description: Orders ready inside target.
+    type: simple
+    label: Store Ops Ready Inside Target Count
+    type_params:
+      measure: store_ops_ready_inside_target_count
+
+  - name: store_ops_order_timing_count
+    description: Orders with service-time records.
+    type: simple
+    label: Store Ops Order Timing Count
+    type_params:
+      measure: store_ops_order_timing_count
+
+  - name: kitchen_ready_target_rate
+    description: Share of timed orders ready inside target.
+    type: ratio
+    label: Kitchen Ready Target Rate
+    type_params:
+      numerator: store_ops_ready_inside_target_count
+      denominator: store_ops_order_timing_count
+
+  - name: store_ops_quality_exception_count
+    description: Count of quality exceptions in store operations.
+    type: simple
+    label: Store Ops Quality Exception Count
+    type_params:
+      measure: store_ops_quality_exception_count
+
+  - name: store_ops_incident_count
+    description: Count of store incidents.
+    type: simple
+    label: Store Ops Incident Count
+    type_params:
+      measure: store_ops_incident_count
+

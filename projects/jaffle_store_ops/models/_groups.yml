@@ -1,0 +1,6 @@
+groups:
+  - name: store_ops
+    owner:
+      name: Jaffle Store Ops Guild
+      email: store-ops@jaffle.example
+

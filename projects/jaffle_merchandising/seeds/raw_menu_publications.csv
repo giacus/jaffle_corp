@@ -1,0 +1,11 @@
+publication_id,store_id,product_id,published_at_utc,retired_at_utc,menu_section,display_rank,is_featured,published_price_minor,currency,menu_surface,updated_at_utc
+menu_pub_001,store_101,prod_100,2026-01-01 05:00:00,,griddled_jaffles,1,true,650,GBP,app,2026-01-01 05:05:00
+menu_pub_002,store_101,prod_400,2026-01-01 05:00:00,2026-01-05 23:00:00,sides,2,false,350,GBP,app,2026-01-01 05:05:00
+menu_pub_003,store_101,prod_200,2026-01-01 05:00:00,,vegetarian_jaffles,3,false,780,GBP,counter,2026-01-01 05:05:00
+menu_pub_004,store_202,prod_100,2026-01-01 06:00:00,,griddled_jaffles,1,true,650,CAD,app,2026-01-01 06:05:00
+menu_pub_005,store_202,prod_200,2026-01-01 06:00:00,,vegetarian_jaffles,4,false,780,CAD,counter,2026-01-01 06:05:00
+menu_pub_006,store_303,prod_300,2026-01-01 04:00:00,,seasonal_jaffles,2,true,920,SGD,app,2026-01-01 04:05:00
+menu_pub_007,store_303,prod_400,2026-01-02 04:00:00,,sides,5,false,350,SGD,app,2026-01-02 04:05:00
+menu_pub_008,store_404,prod_100,2026-01-01 07:00:00,,griddled_jaffles,1,true,650,EUR,counter,2026-01-01 07:05:00
+menu_pub_009,store_404,prod_300,2026-01-03 07:00:00,,seasonal_jaffles,3,false,920,EUR,app,2026-01-03 07:05:00
+menu_pub_010,store_404,prod_400,2026-01-01 08:00:00,,sides,2,true,350,EUR,app,2026-01-01 08:05:00

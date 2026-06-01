@@ -1,0 +1,9 @@
+packages:
+  - local: ../jaffle_shared
+    name: jaffle_shared
+  - local: ../jaffle_platform
+    name: jaffle_platform
+  - name: dbt_utils
+    package: dbt-labs/dbt_utils
+    version: 1.3.3
+sha1_hash: 2c903aeccc08085dd2518fa3e702904cb8e2fef8

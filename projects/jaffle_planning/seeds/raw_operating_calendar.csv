@@ -1,0 +1,6 @@
+calendar_id,store_id,calendar_date_utc,day_type,expected_open_minutes,local_holiday_name,menu_focus,updated_at_utc
+cal_001,store_101,2026-01-02,regular,840,,classic,2026-01-01 01:00:00
+cal_002,store_202,2026-01-02,regular,780,,vegetarian,2026-01-01 01:00:00
+cal_003,store_303,2026-01-03,weekend,900,,seasonal,2026-01-01 01:00:00
+cal_004,store_404,2026-01-04,weekend,720,Canal Picnic Day,seasonal,2026-01-01 01:00:00
+cal_005,store_404,2026-01-05,regular,840,,classic,2026-01-01 01:00:00

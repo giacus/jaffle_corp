@@ -1,0 +1,22 @@
+selectors:
+  - name: experience_public_interface
+    description: Public experience outputs for support and experiment reporting.
+    definition:
+      union:
+        - method: fqn
+          value: fct_support_tickets
+        - method: fqn
+          value: fct_customer_contact_threads
+        - method: fqn
+          value: fct_experiment_outcomes
+        - method: fqn
+          value: fct_menu_price_test_results
+        - method: fqn
+          value: dim_experiment_variants
+
+  - name: experience_sla_models
+    description: Models that shape support SLA reporting.
+    definition:
+      method: tag
+      value: experience
+

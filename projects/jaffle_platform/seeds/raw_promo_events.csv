@@ -1,0 +1,5 @@
+promo_event_id,customer_id,order_id,campaign_id,event_type,event_at_utc,channel,cost_minor,currency,updated_at_utc
+promo_001,cust_001,ord_9001,camp_winter_crisp,redeemed,2026-01-02 08:10:00,email,25,GBP,2026-01-02 09:00:00
+promo_002,cust_003,ord_9003,camp_spice_route,clicked,2026-01-03 02:00:00,push,10,SGD,2026-01-03 06:00:00
+promo_003,cust_004,ord_9004,camp_spice_route,redeemed,2026-01-04 12:05:00,web,15,EUR,2026-01-04 12:30:00
+promo_004,cust_001,ord_9005,camp_winter_crisp,redeemed,2026-01-05 19:30:00,email,20,EUR,2026-01-05 20:15:00

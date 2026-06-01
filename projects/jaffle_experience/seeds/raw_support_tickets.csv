@@ -1,0 +1,6 @@
+support_ticket_id,customer_id,order_id,store_id,opened_at_utc,first_response_at_utc,resolved_at_utc,issue_type,ticket_status,resolution_type,satisfaction_score,concession_minor,currency,updated_at_utc
+ticket_001,cust_001,ord_9001,store_101,2026-01-02 08:24:00,2026-01-02 08:28:00,2026-01-02 08:50:00,cold_food,resolved,credit,4,100,GBP,2026-01-02 09:00:00
+ticket_002,cust_003,ord_9003,store_303,2026-01-03 04:30:00,2026-01-03 04:42:00,2026-01-03 05:20:00,missing_item,resolved,refund,3,350,SGD,2026-01-03 06:00:00
+ticket_003,cust_004,ord_9004,store_404,2026-01-04 12:11:00,2026-01-04 12:14:00,2026-01-04 12:22:00,payment_question,resolved,explain,5,0,EUR,2026-01-04 12:30:00
+ticket_004,cust_001,ord_9005,store_404,2026-01-05 20:05:00,2026-01-05 20:20:00,2026-01-05 21:10:00,wrong_item,resolved,credit,2,250,EUR,2026-01-05 21:30:00
+ticket_005,cust_002,,store_202,2026-01-06 10:00:00,2026-01-06 10:04:00,,account_help,open,pending,,0,CAD,2026-01-06 10:15:00

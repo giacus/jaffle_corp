@@ -1,0 +1,13 @@
+jaffle_corp:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: jaffle_corp.duckdb
+      threads: 4
+      schema: dev
+    ci:
+      type: duckdb
+      path: jaffle_corp_ci.duckdb
+      threads: 4
+      schema: ci

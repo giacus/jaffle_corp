@@ -1,0 +1,6 @@
+inventory_count_id,store_id,component_id,counted_at_utc,quantity_on_hand,unit,count_quality,source_version,updated_at_utc
+inv_001,store_101,comp_bread,2026-01-02 07:00:00,72,each,ok,v2,2026-01-02 07:05:00
+inv_002,store_101,comp_cheese,2026-01-02 07:00:00,5600,grams,ok,v2,2026-01-02 07:05:00
+inv_003,store_202,comp_beans,2026-01-02 16:30:00,3600,grams,review,v1,2026-01-02 17:00:00
+inv_004,store_303,comp_chutney,2026-01-03 01:30:00,2920,grams,ok,v2,2026-01-03 01:40:00
+inv_005,store_404,comp_pickle,2026-01-05 13:00:00,2460,grams,ok,v2,2026-01-05 13:05:00

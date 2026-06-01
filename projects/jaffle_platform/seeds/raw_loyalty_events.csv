@@ -1,0 +1,6 @@
+loyalty_event_id,customer_id,order_id,event_type,points_delta,event_at_utc,program_tier,updated_at_utc
+loy_001,cust_001,ord_9001,redeem,-20,2026-01-02 08:16:00,gold,2026-01-02 09:00:00
+loy_002,cust_001,ord_9001,earn,16,2026-01-02 08:17:00,gold,2026-01-02 09:00:00
+loy_003,cust_003,ord_9003,earn,13,2026-01-03 03:47:00,silver,2026-01-03 06:00:00
+loy_004,cust_001,ord_9005,redeem,-50,2026-01-05 19:41:00,gold,2026-01-05 20:15:00
+loy_005,cust_001,ord_9005,earn,19,2026-01-05 19:42:00,gold,2026-01-05 20:15:00

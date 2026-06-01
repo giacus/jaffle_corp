@@ -1,0 +1,14 @@
+name: planning_component_week
+grain: component_store_week
+owner: planning
+description: Example MetricFlow query spec for component-week plan variance.
+semantic_model: component_week_plan_variance
+time_dimension: plan_week
+dimensions:
+  - location__store_id
+  - component__component_id
+  - scenario_name
+  - usage_variance_status
+metrics:
+  - planned_component_usage
+  - actual_component_usage

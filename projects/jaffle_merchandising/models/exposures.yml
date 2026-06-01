@@ -1,0 +1,16 @@
+version: 2
+
+exposures:
+  - name: merchandising_weekly_review
+    label: Merchandising Weekly Review
+    type: dashboard
+    maturity: medium
+    url: https://example.com/jaffle/merchandising-weekly-review
+    description: Fictional review surface for menu goals, availability, and product pairings.
+    depends_on:
+      - ref('fct_menu_goal_progress')
+      - ref('fct_product_store_day_availability')
+      - ref('fct_basket_pair_affinity')
+    owner:
+      name: Jaffle Merchandising Guild
+      email: merchandising@jaffle.example

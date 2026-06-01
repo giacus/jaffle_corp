@@ -1,0 +1,21 @@
+selectors:
+  - name: legacy_surface_area
+    description: Everything that should eventually be replaced.
+    definition:
+      method: tag
+      value: legacy
+
+  - name: deprecated_dashboards
+    description: Deprecated marts that mimic old dashboard dependencies.
+    definition:
+      method: tag
+      value: deprecated
+
+  - name: legacy_customer_surfaces
+    description: Deprecated customer-facing model surfaces.
+    definition:
+      union:
+        - method: fqn
+          value: legacy_customer_360_v1
+        - method: fqn
+          value: legacy_refund_reason_bridge_v0

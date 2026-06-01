@@ -1,0 +1,23 @@
+select
+    {{ jaffle_shared.stable_hash(['order_item_id', 'order_id']) }} as order_item_key,
+    order_item_id,
+    order_id,
+    ordered_date_utc,
+    product_id,
+    sku,
+    product_name,
+    category,
+    product_family,
+    quantity,
+    item_subtotal_minor,
+    item_discount_minor,
+    item_tax_minor,
+    item_total_minor,
+    item_total_major,
+    customization_count,
+    unit_cost_minor,
+    supply_currency,
+    has_perishable_supply,
+    max_lead_time_days,
+    estimated_supply_cost_minor
+from {{ ref('int_order_items_enriched') }}

@@ -1,0 +1,13 @@
+availability_id,store_id,product_id,available_date_utc,hour_local,availability_status,observed_on_hand_units,expected_menu_units,outage_minutes,updated_at_utc
+avail_001,store_101,prod_100,2026-01-02,8,available,42,35,0,2026-01-02 08:20:00
+avail_002,store_101,prod_100,2026-01-02,12,limited,16,35,8,2026-01-02 12:20:00
+avail_003,store_101,prod_400,2026-01-02,12,unavailable,0,18,42,2026-01-02 12:25:00
+avail_004,store_202,prod_100,2026-01-02,9,available,38,30,0,2026-01-02 09:20:00
+avail_005,store_202,prod_200,2026-01-03,13,limited,7,16,15,2026-01-03 13:20:00
+avail_006,store_303,prod_300,2026-01-02,11,available,28,20,0,2026-01-02 11:20:00
+avail_007,store_303,prod_400,2026-01-03,14,paused,3,15,31,2026-01-03 14:20:00
+avail_008,store_404,prod_100,2026-01-04,10,available,44,32,0,2026-01-04 10:20:00
+avail_009,store_404,prod_300,2026-01-04,16,limited,9,14,11,2026-01-04 16:20:00
+avail_010,store_404,prod_400,2026-01-05,12,featured,26,20,0,2026-01-05 12:20:00
+avail_011,store_101,prod_200,2026-01-03,15,available,18,18,0,2026-01-03 15:20:00
+avail_012,store_404,prod_100,2026-01-05,9,low_stock,8,28,18,2026-01-05 09:20:00

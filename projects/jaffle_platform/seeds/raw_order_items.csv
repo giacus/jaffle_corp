@@ -1,0 +1,9 @@
+order_item_id,order_id,product_id,quantity,item_subtotal_minor,item_discount_minor,item_tax_minor,customization_count,updated_at_utc
+item_001,ord_9001,prod_100,1,650,50,130,0,2026-01-02 09:00:00
+item_002,ord_9001,prod_400,2,780,50,156,1,2026-01-02 09:00:00
+item_003,ord_9002,prod_200,1,780,0,101,0,2026-01-02 18:00:00
+item_004,ord_9003,prod_300,1,920,50,83,2,2026-01-03 06:00:00
+item_005,ord_9003,prod_400,1,350,0,31,0,2026-01-03 06:00:00
+item_006,ord_9004,prod_300,1,920,0,193,1,2026-01-04 12:30:00
+item_007,ord_9005,prod_100,2,1300,100,273,0,2026-01-05 20:15:00
+item_008,ord_9005,prod_400,1,400,50,84,1,2026-01-05 20:15:00

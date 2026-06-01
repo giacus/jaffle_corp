@@ -1,0 +1,21 @@
+version: 2
+
+sources:
+  - name: jaffle_planning_app
+    schema: "{{ target.schema }}_raw"
+    description: Synthetic planning source tables for forecasts, scenarios, and calendars.
+    freshness:
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 96, period: hour}
+    loaded_at_field: updated_at_utc
+    tables:
+      - name: raw_store_hour_forecasts
+        description: Store-hour order forecasts.
+      - name: raw_product_day_forecasts
+        description: Store-product-day unit forecasts.
+      - name: raw_component_week_plans
+        description: Store-component-week supply plans.
+      - name: raw_operating_calendar
+        description: Store operating calendar assumptions.
+      - name: raw_capacity_scenarios
+        description: Scenario capacity targets.

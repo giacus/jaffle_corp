@@ -1,0 +1,5 @@
+waste_event_id,store_id,component_id,product_id,order_id,wasted_at_utc,wasted_quantity,unit,reason_code,updated_at_utc
+waste_001,store_101,comp_bread,prod_100,ord_9001,2026-01-02 08:30:00,2,each,burnt,2026-01-02 09:00:00
+waste_002,store_202,comp_beans,prod_200,ord_9002,2026-01-02 17:45:00,120,grams,overfilled,2026-01-02 18:00:00
+waste_003,store_303,comp_chutney,prod_300,ord_9003,2026-01-03 04:00:00,90,grams,spill,2026-01-03 06:00:00
+waste_004,store_404,comp_pickle,prod_400,ord_9005,2026-01-05 20:00:00,60,grams,quality_hold,2026-01-05 20:15:00

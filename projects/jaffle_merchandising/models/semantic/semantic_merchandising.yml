@@ -1,0 +1,186 @@
+version: 2
+
+semantic_models:
+  - name: product_store_hour_availability
+    description: MetricFlow model for hourly product availability.
+    model: ref('fct_product_store_hour_availability')
+    defaults:
+      agg_time_dimension: availability_hour
+    entities:
+      - name: product_store_hour
+        type: primary
+        expr: product_store_hour_key
+      - name: product
+        type: foreign
+        expr: product_id
+      - name: location
+        type: foreign
+        expr: store_id
+    dimensions:
+      - name: availability_hour
+        type: time
+        expr: availability_hour_utc
+        type_params:
+          time_granularity: hour
+      - name: availability_status
+        type: categorical
+      - name: availability_health
+        type: categorical
+      - name: product_family
+        type: categorical
+      - name: menu_surface
+        type: categorical
+      - name: country_code
+        type: categorical
+    measures:
+      - name: merchandising_observed_hour_count
+        expr: 1
+        agg: sum
+      - name: merchandising_available_hour_count
+        expr: available_hour_count
+        agg: sum
+      - name: merchandising_unavailable_hour_count
+        expr: unavailable_hour_count
+        agg: sum
+      - name: merchandising_outage_minutes
+        expr: outage_minutes
+        agg: sum
+
+  - name: menu_goal_progress
+    description: MetricFlow model for weekly merchandising goal progress.
+    model: ref('fct_menu_goal_progress')
+    defaults:
+      agg_time_dimension: goal_week
+    entities:
+      - name: menu_goal
+        type: primary
+        expr: menu_goal_progress_key
+      - name: location
+        type: foreign
+        expr: store_id
+    dimensions:
+      - name: goal_week
+        type: time
+        expr: goal_week_start_utc
+        type_params:
+          time_granularity: week
+      - name: product_family
+        type: categorical
+      - name: unit_goal_status
+        type: categorical
+      - name: owner_role
+        type: categorical
+    measures:
+      - name: menu_target_units
+        expr: target_units
+        agg: sum
+      - name: menu_actual_units
+        expr: actual_units
+        agg: sum
+      - name: menu_target_revenue_usd
+        expr: target_net_revenue_usd
+        agg: sum
+      - name: menu_actual_revenue_usd
+        expr: actual_item_revenue_usd
+        agg: sum
+
+  - name: basket_pair_affinity
+    description: MetricFlow model for product-pair behavior.
+    model: ref('fct_basket_pair_affinity')
+    defaults:
+      agg_time_dimension: ordered_date
+    entities:
+      - name: basket_pair
+        type: primary
+        expr: basket_pair_affinity_key
+      - name: anchor_product
+        type: foreign
+        expr: anchor_product_id
+      - name: paired_product
+        type: foreign
+        expr: paired_product_id
+    dimensions:
+      - name: ordered_date
+        type: time
+        expr: ordered_date_utc
+        type_params:
+          time_granularity: day
+      - name: pairing_reason
+        type: categorical
+      - name: is_curated_pair
+        type: categorical
+    measures:
+      - name: basket_pair_order_count
+        expr: paired_order_count
+        agg: sum
+      - name: basket_pair_item_total
+        expr: paired_item_total_major
+        agg: sum
+
+metrics:
+  - name: merchandising_available_hours
+    description: Count of product-store hours with available status.
+    type: simple
+    label: Merchandising Available Hours
+    type_params:
+      measure: merchandising_available_hour_count
+
+  - name: merchandising_observed_hours
+    description: Count of observed product-store hours.
+    type: simple
+    label: Merchandising Observed Hours
+    type_params:
+      measure: merchandising_observed_hour_count
+
+  - name: merchandising_availability_rate
+    description: Share of observed product-store hours that were available.
+    type: ratio
+    label: Merchandising Availability Rate
+    type_params:
+      numerator: merchandising_available_hours
+      denominator: merchandising_observed_hours
+
+  - name: merchandising_outage_minutes
+    description: Sum of unavailable or constrained menu minutes.
+    type: simple
+    label: Merchandising Outage Minutes
+    type_params:
+      measure: merchandising_outage_minutes
+
+  - name: menu_actual_units
+    description: Units sold against weekly menu goals.
+    type: simple
+    label: Menu Actual Units
+    type_params:
+      measure: menu_actual_units
+
+  - name: menu_target_units
+    description: Target units for weekly menu goals.
+    type: simple
+    label: Menu Target Units
+    type_params:
+      measure: menu_target_units
+
+  - name: menu_unit_attainment_rate
+    description: Actual units divided by target units.
+    type: ratio
+    label: Menu Unit Attainment Rate
+    type_params:
+      numerator: menu_actual_units
+      denominator: menu_target_units
+
+  - name: basket_pair_orders
+    description: Orders that contained a product pair.
+    type: simple
+    label: Basket Pair Orders
+    type_params:
+      measure: basket_pair_order_count
+
+  - name: cumulative_menu_actual_units_4w
+    description: Four-week cumulative menu actual units.
+    type: cumulative
+    label: Cumulative Menu Actual Units 4W
+    type_params:
+      measure: menu_actual_units
+      cumulative_type_params:
+        window: 4 weeks

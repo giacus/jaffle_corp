@@ -1,0 +1,22 @@
+selectors:
+  - name: store_ops_public_interface
+    description: Public store operations outputs.
+    definition:
+      union:
+        - method: fqn
+          value: fct_order_service_times
+        - method: fqn
+          value: fct_store_day_operations
+        - method: fqn
+          value: fct_quality_events
+        - method: fqn
+          value: fct_incident_reviews
+        - method: fqn
+          value: dim_store_operating_profiles
+
+  - name: store_day_operating_stack
+    description: Store-day operations models and dependencies.
+    definition:
+      method: tag
+      value: store_ops
+

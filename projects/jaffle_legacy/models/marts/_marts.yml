@@ -1,0 +1,100 @@
+version: 2
+
+models:
+  - name: legacy_daily_store_rollup
+    description: Deprecated mixed-currency store-day rollup retained for migration exercises.
+    config:
+      meta:
+        migration_owner: analytics-modernization@jaffle.example
+        replacement_target: jaffle_finance.fct_daily_store_pnl
+    columns:
+      - name: legacy_store_day_key
+        data_tests: [not_null, unique]
+      - name: shop
+      - name: business_dt
+      - name: money_kind
+      - name: orders_cnt
+      - name: gross_amt
+      - name: refund_amt
+      - name: net_amt
+      - name: good_orders_cnt
+      - name: bad_orders_cnt
+      - name: refund_orders_cnt
+
+  - name: legacy_order_margin_v0
+    description: Deprecated order margin model with intentionally approximate supply costs.
+    config:
+      meta:
+        migration_owner: analytics-modernization@jaffle.example
+        replacement_target: jaffle_finance.fct_order_revenue
+    columns:
+      - name: order_no
+        data_tests: [not_null]
+      - name: modern_order_id
+      - name: cust
+      - name: shop
+      - name: business_dt
+      - name: old_status_bucket
+      - name: money_kind
+      - name: gross_amt
+      - name: net_amt
+      - name: approximate_supply_cost_major
+      - name: margin_guess_major
+      - name: needs_currency_review
+
+  - name: legacy_customer_360_v1
+    description: Deprecated customer rollup with mixed behavioral and support columns.
+    config:
+      meta:
+        migration_owner: analytics-modernization@jaffle.example
+        replacement_target: jaffle_growth.fct_customer_value_segments
+    columns:
+      - name: cust
+        data_tests: [not_null, unique]
+      - name: cust_name
+      - name: region_hint
+      - name: old_lifecycle_bucket
+      - name: contact_flag
+      - name: order_cnt
+      - name: gross_amt
+      - name: refund_cnt
+      - name: ticket_cnt
+      - name: make_good_amt
+      - name: last_business_dt
+      - name: old_customer_note_blob
+
+  - name: legacy_menu_mix_report_v2
+    description: Deprecated menu mix rollup with approximate supply cost.
+    config:
+      meta:
+        migration_owner: analytics-modernization@jaffle.example
+        replacement_target: jaffle_finance.fct_component_cost_variance
+    columns:
+      - name: legacy_menu_mix_key
+        data_tests: [not_null, unique]
+      - name: business_dt
+      - name: family
+      - name: cat
+      - name: orders_cnt
+      - name: items_qty
+      - name: item_amt
+      - name: supply_guess_amt
+      - name: margin_guess_amt
+
+  - name: legacy_refund_reason_bridge_v0
+    description: Deprecated refund and support bridge retained for migration exercises.
+    config:
+      meta:
+        migration_owner: analytics-modernization@jaffle.example
+        replacement_target: jaffle_experience.fct_support_tickets
+    columns:
+      - name: old_refund_bridge_key
+        data_tests: [not_null, unique]
+      - name: order_no
+      - name: business_dt
+      - name: money_status
+      - name: old_reason
+      - name: old_resolution
+      - name: refund_amt_usd
+      - name: make_good_amt
+      - name: net_amt_usd

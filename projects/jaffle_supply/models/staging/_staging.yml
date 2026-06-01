@@ -1,0 +1,50 @@
+version: 2
+
+models:
+  - name: stg_recipe_components
+    config:
+      group: supply
+    columns:
+      - name: recipe_component_key
+        data_tests: [not_null, unique]
+      - name: product_id
+        data_tests: [not_null]
+      - name: component_id
+        data_tests: [not_null]
+
+  - name: stg_purchase_orders
+    config:
+      group: supply
+    columns:
+      - name: purchase_order_id
+        data_tests: [not_null, unique]
+      - name: purchase_order_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["received", "partially_received", "open", "cancelled", "unknown"]
+
+  - name: stg_inventory_counts
+    config:
+      group: supply
+    columns:
+      - name: inventory_count_id
+        data_tests: [not_null, unique]
+      - name: count_quality
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["ok", "review"]
+
+  - name: stg_waste_events
+    config:
+      group: supply
+    columns:
+      - name: waste_event_id
+        data_tests: [not_null, unique]
+      - name: wasted_quantity
+        data_tests:
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: ">= 0"
+

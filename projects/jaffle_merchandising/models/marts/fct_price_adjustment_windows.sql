@@ -1,0 +1,19 @@
+select
+    price_adjustment_window_key,
+    price_adjustment_id,
+    store_id,
+    product_id,
+    product_name,
+    product_family,
+    country_code,
+    effective_from_utc,
+    effective_to_utc,
+    adjustment_reason,
+    adjustment_price_minor,
+    published_price_minor,
+    adjustment_delta_minor,
+    adjustment_delta_rate,
+    approved_by_role,
+    adjustment_price_band,
+    updated_at_utc
+from {{ ref('int_price_adjustment_windows') }}

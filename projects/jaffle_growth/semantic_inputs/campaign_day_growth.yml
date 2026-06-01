@@ -1,0 +1,15 @@
+name: mart_campaign_day_growth
+description: Example generator input for a MetricFlow-backed campaign-day mart.
+semantic_model: campaign_performance
+time_dimension: campaign_date
+grain: day
+dimensions:
+  - campaign_performance__campaign_id
+  - campaign_performance__channel
+metrics:
+  - attributed_net_revenue_usd
+  - campaign_roas
+materialization:
+  type: incremental
+  owner: growth@jaffle.example
+

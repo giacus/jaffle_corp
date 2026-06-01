@@ -1,0 +1,6 @@
+groups:
+  - name: experience
+    owner:
+      name: Jaffle Experience Guild
+      email: experience@jaffle.example
+

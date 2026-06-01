@@ -1,0 +1,32 @@
+selectors:
+  - name: platform_public_interface
+    description: Public platform models consumed by downstream projects.
+    definition:
+      union:
+        - method: fqn
+          value: fct_orders
+        - method: fqn
+          value: fct_order_items
+        - method: fqn
+          value: dim_customers
+        - method: fqn
+          value: dim_locations
+        - method: fqn
+          value: dim_products
+        - method: fqn
+          value: dim_exchange_rates
+        - method: fqn
+          value: fct_promo_events
+        - method: fqn
+          value: fct_loyalty_events
+
+  - name: source_freshness_platform
+    description: Source freshness checks for raw platform feeds.
+    definition:
+      union:
+        - method: source
+          value: jaffle_app.raw_orders
+        - method: source
+          value: jaffle_app.raw_payments
+        - method: source
+          value: jaffle_app.raw_refunds

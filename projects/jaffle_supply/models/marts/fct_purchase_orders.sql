@@ -1,0 +1,26 @@
+select
+    {{ jaffle_shared.stable_hash(['purchase_order_id']) }} as purchase_order_key,
+    purchase_order_id,
+    store_id,
+    country_code,
+    city,
+    component_id,
+    supplier_name,
+    ordered_at_utc,
+    expected_at_utc,
+    received_at_utc,
+    received_date_utc,
+    purchase_order_status,
+    quantity_ordered,
+    quantity_received,
+    unit,
+    unit_cost_major,
+    currency,
+    unit_cost_usd,
+    receipt_fill_rate,
+    receipt_delay_minutes,
+    {{ jaffle_shared.bucket_minutes('receipt_delay_minutes') }} as receipt_delay_bucket,
+    is_late_receipt,
+    updated_at_utc
+from {{ ref('int_purchase_order_receipts') }}
+

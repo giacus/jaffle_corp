@@ -1,0 +1,5 @@
+projects:
+  - name: jaffle_platform
+  - name: jaffle_finance
+  - name: jaffle_experience
+

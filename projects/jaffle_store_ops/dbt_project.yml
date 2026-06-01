@@ -1,0 +1,51 @@
+name: jaffle_store_ops
+version: "0.1.0"
+config-version: 2
+
+profile: jaffle_corp
+require-dbt-version: ">=1.8.0,<2.0.0"
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: target
+clean-targets:
+  - target
+  - dbt_packages
+
+vars:
+  data_interval_start: "2026-01-01 00:00:00"
+  data_interval_end: "2026-01-08 00:00:00"
+  kitchen_ready_target_minutes: 12
+
+models:
+  jaffle_store_ops:
+    +materialized: view
+    +post-hook: "{{ jaffle_shared.audit_noop() }}"
+    +meta:
+      domain: store_ops
+      source_system: synthetic_jaffle_corp
+    staging:
+      +schema: stg_store_ops
+      +materialized: view
+      +tags: ["staging", "store_ops"]
+      +access: protected
+    intermediate:
+      +schema: int_store_ops
+      +materialized: ephemeral
+      +tags: ["intermediate", "store_ops"]
+      +access: protected
+    marts:
+      +schema: mart_store_ops
+      +materialized: table
+      +tags: ["mart", "store_ops"]
+
+seeds:
+  jaffle_store_ops:
+    +schema: raw
+    +quote_columns: false
+

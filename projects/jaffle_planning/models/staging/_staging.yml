@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: stg_store_hour_forecasts
+    config:
+      group: planning
+    columns:
+      - name: forecast_id
+        data_tests: [not_null, unique]
+      - name: forecasted_order_count
+        data_tests:
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: ">= 0"
+
+  - name: stg_product_day_forecasts
+    config:
+      group: planning
+    columns:
+      - name: forecast_id
+        data_tests: [not_null, unique]
+      - name: forecasted_units
+        data_tests:
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: ">= 0"
+
+  - name: stg_component_week_plans
+    config:
+      group: planning
+    columns:
+      - name: plan_id
+        data_tests: [not_null, unique]
+
+  - name: stg_operating_calendar
+    config:
+      group: planning
+    columns:
+      - name: calendar_id
+        data_tests: [not_null, unique]
+
+  - name: stg_capacity_scenarios
+    config:
+      group: planning
+    columns:
+      - name: scenario_id
+        data_tests: [not_null, unique]

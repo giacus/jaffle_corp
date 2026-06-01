@@ -1,0 +1,5 @@
+store_id,store_name,country_code,city,opened_at,timezone_name,operating_currency,tax_jurisdiction,franchise_owner,is_dark_kitchen,updated_at_utc
+store_101,Crimp Street Jaffles,GB,London,2024-04-12 10:00:00,Europe/London,GBP,GB-LON,North Crimp Foods,false,2026-01-06 10:00:00
+store_202,Maple Press Jaffles,CA,Toronto,2024-09-30 10:00:00,America/Toronto,CAD,CA-ON,Maple Press Group,false,2026-01-06 10:00:00
+store_303,Lion City Toasts,SG,Singapore,2025-03-18 10:00:00,Asia/Singapore,SGD,SG,Panini Planet,true,2026-01-06 10:00:00
+store_404,Canal Fold Jaffles,NL,Amsterdam,2025-07-05 10:00:00,Europe/Amsterdam,EUR,NL,Northern Fold Foods,false,2026-01-06 10:00:00

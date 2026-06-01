@@ -1,0 +1,16 @@
+version: 2
+
+exposures:
+  - name: legacy_store_scorecard
+    label: Legacy Store Scorecard
+    type: dashboard
+    maturity: low
+    url: https://example.com/jaffle-tangle/legacy-store-scorecard
+    description: Deprecated dashboard kept to demonstrate migration tracking.
+    depends_on:
+      - ref('legacy_daily_store_rollup')
+      - ref('legacy_order_margin_v0')
+    owner:
+      name: Analytics Modernization Guild
+      email: analytics-modernization@jaffle.example
+

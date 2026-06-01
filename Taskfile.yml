@@ -1,0 +1,50 @@
+version: "3"
+
+vars:
+  PROJECTS: "projects/jaffle_platform projects/jaffle_supply projects/jaffle_finance projects/jaffle_experience projects/jaffle_growth projects/jaffle_store_ops projects/jaffle_merchandising projects/jaffle_planning projects/jaffle_legacy"
+  SEED_PROJECTS: "projects/jaffle_platform projects/jaffle_supply projects/jaffle_experience projects/jaffle_store_ops projects/jaffle_merchandising projects/jaffle_planning"
+
+tasks:
+  deps:
+    cmds:
+      - for: { var: PROJECTS }
+        cmd: dbt deps --project-dir {{ .ITEM }} --profiles-dir .
+
+  seed:
+    cmds:
+      - for: { var: SEED_PROJECTS }
+        cmd: dbt seed --project-dir {{ .ITEM }} --profiles-dir .
+
+  parse:
+    deps: [deps]
+    cmds:
+      - for: { var: PROJECTS }
+        cmd: dbt parse --project-dir {{ .ITEM }} --profiles-dir .
+
+  build:
+    deps: [deps, seed]
+    cmds:
+      - for: { var: PROJECTS }
+        cmd: dbt build --project-dir {{ .ITEM }} --profiles-dir .
+
+  build-platform:
+    deps: [deps, seed]
+    cmds:
+      - dbt build --project-dir projects/jaffle_platform --profiles-dir .
+
+  build-public-stack:
+    deps: [deps, seed]
+    cmds:
+      - dbt build --project-dir projects/jaffle_platform --profiles-dir .
+      - dbt build --project-dir projects/jaffle_supply --profiles-dir .
+      - dbt build --project-dir projects/jaffle_finance --profiles-dir .
+      - dbt build --project-dir projects/jaffle_experience --profiles-dir .
+      - dbt build --project-dir projects/jaffle_growth --profiles-dir .
+      - dbt build --project-dir projects/jaffle_store_ops --profiles-dir .
+      - dbt build --project-dir projects/jaffle_merchandising --profiles-dir .
+      - dbt build --project-dir projects/jaffle_planning --profiles-dir .
+
+  clean:
+    cmds:
+      - for: { var: PROJECTS }
+        cmd: dbt clean --project-dir {{ .ITEM }} --profiles-dir .

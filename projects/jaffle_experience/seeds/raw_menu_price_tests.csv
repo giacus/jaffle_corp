@@ -1,0 +1,5 @@
+price_test_id,product_id,store_id,experiment_id,variant_id,effective_from_utc,effective_to_utc,list_price_minor,currency,updated_at_utc
+price_001,prod_100,store_101,exp_crisp_copy,control,2026-01-02 00:00:00,2026-01-04 00:00:00,650,GBP,2026-01-02 00:05:00
+price_002,prod_100,store_404,exp_crisp_copy,extra_crunch,2026-01-05 00:00:00,2026-01-07 00:00:00,690,EUR,2026-01-05 00:05:00
+price_003,prod_400,store_303,exp_pickle_attach,control,2026-01-03 00:00:00,2026-01-05 00:00:00,350,SGD,2026-01-03 00:05:00
+price_004,prod_400,store_404,exp_pickle_attach,pickle_prompt,2026-01-05 00:00:00,2026-01-07 00:00:00,400,EUR,2026-01-05 00:05:00

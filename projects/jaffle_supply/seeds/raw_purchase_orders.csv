@@ -1,0 +1,6 @@
+purchase_order_id,store_id,component_id,supplier_name,ordered_at_utc,expected_at_utc,received_at_utc,status,quantity_ordered,quantity_received,unit,unit_cost_minor,currency,updated_at_utc
+po_001,store_101,comp_bread,Crust Cooperative,2026-01-01 08:00:00,2026-01-02 06:00:00,2026-01-02 05:40:00,received,80,80,each,48,GBP,2026-01-02 06:10:00
+po_002,store_101,comp_cheese,Dairy Fold Works,2026-01-01 08:05:00,2026-01-02 06:00:00,2026-01-02 06:20:00,received,6000,5800,grams,2,GBP,2026-01-02 06:30:00
+po_003,store_202,comp_beans,Bean Barn,2026-01-01 14:00:00,2026-01-02 14:00:00,2026-01-02 15:30:00,partial,4500,3900,grams,3,CAD,2026-01-02 16:00:00
+po_004,store_303,comp_chutney,Orchard Heat Works,2026-01-02 01:00:00,2026-01-03 01:00:00,2026-01-03 00:20:00,received,3000,3000,grams,4,SGD,2026-01-03 01:00:00
+po_005,store_404,comp_pickle,Pickle Parcel,2026-01-03 09:00:00,2026-01-05 09:00:00,2026-01-05 12:10:00,received,2500,2500,grams,2,EUR,2026-01-05 12:30:00

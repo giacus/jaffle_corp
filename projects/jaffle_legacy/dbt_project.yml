@@ -1,0 +1,41 @@
+name: jaffle_legacy
+version: "0.1.0"
+config-version: 2
+
+profile: jaffle_corp
+require-dbt-version: ">=1.8.0,<2.0.0"
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: target
+clean-targets:
+  - target
+  - dbt_packages
+
+vars:
+  data_interval_start: "2026-01-01 00:00:00"
+  data_interval_end: "2026-01-08 00:00:00"
+  legacy_default_currency: "USD"
+
+models:
+  jaffle_legacy:
+    +materialized: table
+    +meta:
+      domain: legacy
+      migration_status: needs_rewrite
+    staging:
+      +schema: stg_legacy
+      +tags: ["legacy", "staging"]
+      +access: protected
+    marts:
+      +schema: legacy
+      +tags: ["legacy", "deprecated"]
+      +access: protected
+    archived:
+      +enabled: false
+      +tags: ["legacy", "archived"]

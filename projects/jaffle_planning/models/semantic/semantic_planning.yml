@@ -1,0 +1,260 @@
+version: 2
+
+semantic_models:
+  - name: store_hour_forecast_accuracy
+    description: MetricFlow model for store-hour forecast accuracy.
+    model: ref('fct_store_hour_forecast_accuracy')
+    defaults:
+      agg_time_dimension: forecast_hour
+    entities:
+      - name: store_hour_forecast
+        type: primary
+        expr: store_hour_forecast_accuracy_key
+      - name: location
+        type: foreign
+        expr: store_id
+    dimensions:
+      - name: forecast_hour
+        type: time
+        expr: forecast_hour_utc
+        type_params:
+          time_granularity: hour
+      - name: scenario_name
+        type: categorical
+      - name: model_version
+        type: categorical
+      - name: forecast_accuracy_band
+        type: categorical
+    measures:
+      - name: forecasted_orders
+        expr: forecasted_order_count
+        agg: sum
+      - name: actual_orders_for_forecast
+        expr: actual_order_count
+        agg: sum
+      - name: absolute_order_forecast_error
+        expr: absolute_forecast_error_orders
+        agg: sum
+      - name: inside_prediction_interval_count
+        expr: case when actual_inside_prediction_interval then 1 else 0 end
+        agg: sum
+      - name: forecast_row_count
+        expr: 1
+        agg: sum
+
+  - name: product_day_forecast_accuracy
+    description: MetricFlow model for product-day unit forecasts.
+    model: ref('fct_product_day_forecast_accuracy')
+    defaults:
+      agg_time_dimension: forecast_date
+    entities:
+      - name: product_day_forecast
+        type: primary
+        expr: product_day_forecast_accuracy_key
+      - name: product
+        type: foreign
+        expr: product_id
+      - name: location
+        type: foreign
+        expr: store_id
+    dimensions:
+      - name: forecast_date
+        type: time
+        expr: forecast_date_utc
+        type_params:
+          time_granularity: day
+      - name: scenario_name
+        type: categorical
+      - name: product_family
+        type: categorical
+      - name: forecast_accuracy_band
+        type: categorical
+    measures:
+      - name: forecasted_product_units
+        expr: forecasted_units
+        agg: sum
+      - name: actual_product_units
+        expr: actual_units
+        agg: sum
+      - name: absolute_product_unit_error
+        expr: absolute_forecast_error_units
+        agg: sum
+
+  - name: component_week_plan_variance
+    description: MetricFlow model for component plan variance.
+    model: ref('fct_component_week_plan_variance')
+    defaults:
+      agg_time_dimension: plan_week
+    entities:
+      - name: component_week_plan
+        type: primary
+        expr: component_week_plan_variance_key
+      - name: component
+        type: foreign
+        expr: component_id
+      - name: location
+        type: foreign
+        expr: store_id
+    dimensions:
+      - name: plan_week
+        type: time
+        expr: plan_week_start_utc
+        type_params:
+          time_granularity: week
+      - name: scenario_name
+        type: categorical
+      - name: component_family
+        type: categorical
+      - name: usage_variance_status
+        type: categorical
+    measures:
+      - name: planned_component_usage
+        expr: planned_usage_quantity
+        agg: sum
+      - name: actual_component_usage
+        expr: actual_used_quantity
+        agg: sum
+      - name: component_usage_variance
+        expr: usage_quantity_variance
+        agg: sum
+
+  - name: store_day_capacity_plan
+    description: MetricFlow model for scenario store-day capacity plans.
+    model: ref('fct_store_day_capacity_plan')
+    defaults:
+      agg_time_dimension: calendar_date
+    entities:
+      - name: store_day_plan
+        type: primary
+        expr: store_day_capacity_plan_key
+      - name: location
+        type: foreign
+        expr: store_id
+    dimensions:
+      - name: calendar_date
+        type: time
+        expr: calendar_date_utc
+        type_params:
+          time_granularity: day
+      - name: scenario_name
+        type: categorical
+      - name: day_type
+        type: categorical
+      - name: menu_focus
+        type: categorical
+    measures:
+      - name: planned_open_minutes
+        expr: expected_open_minutes
+        agg: sum
+      - name: store_day_forecasted_orders
+        expr: forecasted_order_count
+        agg: sum
+      - name: store_day_actual_orders
+        expr: actual_order_count
+        agg: sum
+      - name: store_day_net_revenue_usd
+        expr: net_revenue_usd
+        agg: sum
+
+metrics:
+  - name: forecasted_orders
+    description: Forecasted store-hour orders.
+    type: simple
+    label: Forecasted Orders
+    type_params:
+      measure: forecasted_orders
+
+  - name: actual_orders_for_forecast
+    description: Actual orders aligned to store-hour forecasts.
+    type: simple
+    label: Actual Orders For Forecast
+    type_params:
+      measure: actual_orders_for_forecast
+
+  - name: absolute_order_forecast_error
+    description: Absolute order forecast error.
+    type: simple
+    label: Absolute Order Forecast Error
+    type_params:
+      measure: absolute_order_forecast_error
+
+  - name: inside_prediction_interval_count
+    description: Forecast rows where actual orders were inside the prediction interval.
+    type: simple
+    label: Inside Prediction Interval Count
+    type_params:
+      measure: inside_prediction_interval_count
+
+  - name: forecast_row_count
+    description: Count of store-hour forecast rows.
+    type: simple
+    label: Forecast Row Count
+    type_params:
+      measure: forecast_row_count
+
+  - name: forecast_interval_hit_rate
+    description: Share of forecast rows where actuals were inside the prediction interval.
+    type: ratio
+    label: Forecast Interval Hit Rate
+    type_params:
+      numerator: inside_prediction_interval_count
+      denominator: forecast_row_count
+
+  - name: forecasted_product_units
+    description: Forecasted product units.
+    type: simple
+    label: Forecasted Product Units
+    type_params:
+      measure: forecasted_product_units
+
+  - name: actual_product_units
+    description: Actual product units.
+    type: simple
+    label: Actual Product Units
+    type_params:
+      measure: actual_product_units
+
+  - name: product_unit_attainment_rate
+    description: Actual product units divided by forecasted product units.
+    type: ratio
+    label: Product Unit Attainment Rate
+    type_params:
+      numerator: actual_product_units
+      denominator: forecasted_product_units
+
+  - name: planned_component_usage
+    description: Planned component usage quantity.
+    type: simple
+    label: Planned Component Usage
+    type_params:
+      measure: planned_component_usage
+
+  - name: actual_component_usage
+    description: Actual component usage quantity.
+    type: simple
+    label: Actual Component Usage
+    type_params:
+      measure: actual_component_usage
+
+  - name: store_day_forecasted_orders
+    description: Store-day forecasted orders.
+    type: simple
+    label: Store Day Forecasted Orders
+    type_params:
+      measure: store_day_forecasted_orders
+
+  - name: store_day_actual_orders
+    description: Store-day actual orders.
+    type: simple
+    label: Store Day Actual Orders
+    type_params:
+      measure: store_day_actual_orders
+
+  - name: cumulative_store_day_actual_orders_7d
+    description: Seven-day cumulative actual orders for store-day plans.
+    type: cumulative
+    label: Cumulative Store Day Actual Orders 7D
+    type_params:
+      measure: store_day_actual_orders
+      cumulative_type_params:
+        window: 7 days

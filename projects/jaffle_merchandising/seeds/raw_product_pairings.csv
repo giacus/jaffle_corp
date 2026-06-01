@@ -1,0 +1,6 @@
+pairing_id,anchor_product_id,paired_product_id,pairing_reason,effective_from_utc,effective_to_utc,pairing_rank
+pair_001,prod_100,prod_400,core_plus_side,2026-01-01 00:00:00,,1
+pair_002,prod_100,prod_200,balanced_combo,2026-01-01 00:00:00,,2
+pair_003,prod_300,prod_400,seasonal_plus_side,2026-01-01 00:00:00,,1
+pair_004,prod_200,prod_300,savory_combo,2026-01-01 00:00:00,2026-01-06 00:00:00,1
+pair_005,prod_200,prod_400,vegetarian_plus_side,2026-01-01 00:00:00,,1

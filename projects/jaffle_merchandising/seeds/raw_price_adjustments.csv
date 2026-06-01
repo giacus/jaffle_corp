@@ -1,0 +1,7 @@
+price_adjustment_id,store_id,product_id,effective_from_utc,effective_to_utc,adjustment_reason,adjustment_price_minor,approved_by_role,updated_at_utc
+price_001,store_101,prod_400,2026-01-02 10:00:00,2026-01-02 16:00:00,side_hour,325,menu_lead,2026-01-02 09:30:00
+price_002,store_202,prod_100,2026-01-03 08:00:00,2026-01-03 11:00:00,morning_bundle,625,store_lead,2026-01-03 07:40:00
+price_003,store_303,prod_300,2026-01-04 12:00:00,2026-01-04 18:00:00,seasonal_test,880,menu_lead,2026-01-04 11:35:00
+price_004,store_404,prod_300,2026-01-04 14:00:00,2026-01-04 17:00:00,case_test,860,analyst,2026-01-04 13:35:00
+price_005,store_404,prod_400,2026-01-05 09:00:00,2026-01-05 15:00:00,stock_balance,320,store_lead,2026-01-05 08:35:00
+price_006,store_101,prod_100,2026-01-05 08:00:00,2026-01-05 12:00:00,morning_bundle,625,analyst,2026-01-05 07:35:00

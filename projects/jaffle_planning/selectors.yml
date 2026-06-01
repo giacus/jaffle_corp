@@ -1,0 +1,15 @@
+selectors:
+  - name: planning_metricflow_surface
+    description: Planning marts and semantic nodes.
+    definition:
+      union:
+        - method: path
+          value: models/marts
+        - method: path
+          value: models/semantic
+
+  - name: forecast_accuracy_models
+    description: Forecast-vs-actual mart models.
+    definition:
+      method: tag
+      value: forecast_accuracy

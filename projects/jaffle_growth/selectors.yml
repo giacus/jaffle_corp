@@ -1,0 +1,23 @@
+selectors:
+  - name: growth_public_interface
+    description: Public growth outputs.
+    definition:
+      union:
+        - method: fqn
+          value: fct_customer_lifecycle
+        - method: fqn
+          value: fct_campaign_performance
+        - method: fqn
+          value: fct_customer_value_segments
+        - method: fqn
+          value: fct_loyalty_balance_daily
+        - method: fqn
+          value: fct_experiment_conversion
+        - method: fqn
+          value: fct_campaign_incrementality
+
+  - name: campaign_attribution
+    description: Campaign attribution models and their parents.
+    definition:
+      method: tag
+      value: growth

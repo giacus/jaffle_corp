@@ -1,0 +1,18 @@
+name: supply_component_day
+grain: store_component_day
+owner: supply
+description: Lightweight example spec for generating a component-day mart from public supply facts.
+inputs:
+  - ref: fct_inventory_daily
+    time_column: balance_date_utc
+  - ref: fct_supply_risk_daily
+    time_column: balance_date_utc
+dimensions:
+  - store_id
+  - component_id
+  - supply_risk_status
+measures:
+  - counted_quantity
+  - estimated_closing_quantity
+  - observed_waste_quantity
+

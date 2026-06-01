@@ -1,0 +1,353 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: Customer dimension enriched with order lifecycle attributes.
+    config:
+      group: platform
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: customer_id
+        data_type: varchar
+        data_tests: [not_null, unique]
+      - name: customer_name
+        data_type: varchar
+      - name: email_domain
+        data_type: varchar
+      - name: loyalty_region
+        data_type: varchar
+      - name: first_seen_at
+        data_type: timestamp
+      - name: default_currency
+        data_type: varchar
+      - name: marketing_consent
+        data_type: boolean
+      - name: first_ordered_at_utc
+        data_type: timestamp
+      - name: most_recent_ordered_at_utc
+        data_type: timestamp
+      - name: lifetime_order_count
+        data_type: integer
+      - name: lifetime_completed_order_count
+        data_type: integer
+      - name: lifetime_order_value_usd
+        data_type: double
+      - name: lifetime_refunded_order_count
+        data_type: integer
+      - name: lifecycle_stage
+        data_type: varchar
+
+  - name: dim_locations
+    description: Store and location dimension with a legacy hours field retained for migration work.
+    config:
+      group: platform
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: store_id
+        data_type: varchar
+        data_tests: [not_null, unique]
+      - name: store_name
+        data_type: varchar
+      - name: country_code
+        data_type: varchar
+      - name: city
+        data_type: varchar
+      - name: opened_at
+        data_type: timestamp
+      - name: timezone_name
+        data_type: varchar
+      - name: operating_currency
+        data_type: varchar
+      - name: tax_jurisdiction
+        data_type: varchar
+      - name: franchise_owner
+        data_type: varchar
+      - name: is_dark_kitchen
+        data_type: boolean
+      - name: legacy_hours_blob
+        data_type: varchar
+      - name: legacy_hours_effective_from
+        data_type: date
+
+  - name: dim_products
+    description: Product dimension enriched with supply complexity.
+    config:
+      group: merchandising
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: product_id
+        data_type: varchar
+        data_tests: [not_null, unique]
+      - name: sku
+        data_type: varchar
+      - name: product_name
+        data_type: varchar
+      - name: category
+        data_type: varchar
+      - name: product_family
+        data_type: varchar
+      - name: list_price_minor
+        data_type: integer
+      - name: list_price_usd
+        data_type: double
+      - name: catalog_currency
+        data_type: varchar
+      - name: is_limited_time
+        data_type: boolean
+      - name: introduced_at
+        data_type: timestamp
+      - name: supply_option_count
+        data_type: integer
+      - name: lowest_unit_cost_major
+        data_type: double
+      - name: longest_lead_time_days
+        data_type: integer
+      - name: has_perishable_supply
+        data_type: boolean
+
+  - name: dim_exchange_rates
+    description: Public exchange-rate dimension for downstream currency normalization examples.
+    config:
+      group: platform
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: exchange_rate_key
+        data_type: varchar
+        data_tests: [not_null, unique]
+      - name: currency
+        data_type: varchar
+      - name: rate_date
+        data_type: date
+      - name: usd_rate
+        data_type: double
+
+  - name: fct_orders
+    description: Public order fact at one row per order.
+    config:
+      group: platform
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: order_key
+        data_type: varchar
+        data_tests: [not_null, unique]
+      - name: order_id
+        data_type: varchar
+        data_tests: [not_null, unique]
+      - name: customer_id
+        data_type: varchar
+      - name: store_id
+        data_type: varchar
+      - name: ordered_at_utc
+        data_type: timestamp
+      - name: ordered_date_utc
+        data_type: date
+      - name: order_status
+        data_type: varchar
+      - name: channel
+        data_type: varchar
+      - name: currency
+        data_type: varchar
+      - name: country_code
+        data_type: varchar
+      - name: city
+        data_type: varchar
+      - name: timezone_name
+        data_type: varchar
+      - name: tax_jurisdiction
+        data_type: varchar
+      - name: franchise_owner
+        data_type: varchar
+      - name: is_dark_kitchen
+        data_type: boolean
+      - name: subtotal_minor
+        data_type: integer
+      - name: tax_minor
+        data_type: integer
+      - name: discount_minor
+        data_type: integer
+      - name: service_fee_minor
+        data_type: integer
+      - name: loyalty_points_redeemed
+        data_type: integer
+      - name: order_total_minor
+        data_type: integer
+      - name: order_total_major
+        data_type: double
+      - name: order_total_usd
+        data_type: double
+      - name: captured_amount_minor
+        data_type: integer
+      - name: captured_amount_major
+        data_type: double
+      - name: refunded_amount_minor
+        data_type: integer
+      - name: refunded_amount_major
+        data_type: double
+      - name: payment_attempt_count
+        data_type: integer
+      - name: refund_event_count
+        data_type: integer
+      - name: has_failed_payment
+        data_type: boolean
+      - name: is_completed_order
+        data_type: boolean
+      - name: is_cancelled_order
+        data_type: boolean
+      - name: legacy_order_number
+        data_type: varchar
+      - name: updated_at_utc
+        data_type: timestamp
+
+  - name: fct_order_items
+    description: Public order item fact at one row per item.
+    config:
+      group: platform
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: order_item_key
+        data_type: varchar
+        data_tests: [not_null, unique]
+      - name: order_item_id
+        data_type: varchar
+      - name: order_id
+        data_type: varchar
+      - name: ordered_date_utc
+        data_type: date
+      - name: product_id
+        data_type: varchar
+      - name: sku
+        data_type: varchar
+      - name: product_name
+        data_type: varchar
+      - name: category
+        data_type: varchar
+      - name: product_family
+        data_type: varchar
+      - name: quantity
+        data_type: integer
+      - name: item_subtotal_minor
+        data_type: integer
+      - name: item_discount_minor
+        data_type: integer
+      - name: item_tax_minor
+        data_type: integer
+      - name: item_total_minor
+        data_type: integer
+      - name: item_total_major
+        data_type: double
+      - name: customization_count
+        data_type: integer
+      - name: unit_cost_minor
+        data_type: integer
+      - name: supply_currency
+        data_type: varchar
+      - name: has_perishable_supply
+        data_type: boolean
+      - name: max_lead_time_days
+        data_type: integer
+      - name: estimated_supply_cost_minor
+        data_type: integer
+
+  - name: fct_promo_events
+    description: Public promo event fact for campaign attribution examples.
+    config:
+      group: platform
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: promo_event_key
+        data_type: varchar
+        data_tests: [not_null, unique]
+      - name: promo_event_id
+        data_type: varchar
+      - name: customer_id
+        data_type: varchar
+      - name: order_id
+        data_type: varchar
+      - name: campaign_id
+        data_type: varchar
+      - name: event_type
+        data_type: varchar
+      - name: event_at_utc
+        data_type: timestamp
+      - name: event_date_utc
+        data_type: date
+      - name: channel
+        data_type: varchar
+      - name: cost_minor
+        data_type: integer
+      - name: cost_major
+        data_type: double
+      - name: currency
+        data_type: varchar
+      - name: updated_at_utc
+        data_type: timestamp
+
+  - name: fct_loyalty_events
+    description: Public loyalty event fact for customer lifecycle examples.
+    config:
+      group: platform
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: loyalty_event_key
+        data_type: varchar
+        data_tests: [not_null, unique]
+      - name: loyalty_event_id
+        data_type: varchar
+      - name: customer_id
+        data_type: varchar
+      - name: order_id
+        data_type: varchar
+      - name: event_type
+        data_type: varchar
+      - name: points_delta
+        data_type: integer
+      - name: event_at_utc
+        data_type: timestamp
+      - name: event_date_utc
+        data_type: date
+      - name: program_tier
+        data_type: varchar
+      - name: updated_at_utc
+        data_type: timestamp
+
+  - name: metricflow_time_spine
+    time_spine:
+      standard_granularity_column: date_day
+    config:
+      group: platform
+      meta:
+        metricflow_time_spine: true
+    columns:
+      - name: date_day
+        data_type: date
+        granularity: day
+        data_tests: [not_null, unique]
+
+  - name: metricflow_time_spine_hourly
+    time_spine:
+      standard_granularity_column: date_hour
+    config:
+      group: platform
+      meta:
+        metricflow_time_spine: true
+    columns:
+      - name: date_hour
+        data_type: timestamp
+        granularity: hour
+        data_tests: [not_null, unique]

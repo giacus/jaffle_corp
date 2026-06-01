@@ -1,0 +1,15 @@
+version: 2
+
+exposures:
+  - name: guest_care_daily_review
+    type: dashboard
+    maturity: medium
+    url: https://example.test/jaffle-corp/guest-care
+    description: Fictional support review dashboard for demo lineage.
+    depends_on:
+      - ref('fct_support_tickets')
+      - ref('fct_customer_contact_threads')
+    owner:
+      name: Jaffle Experience Guild
+      email: experience@jaffle.example
+

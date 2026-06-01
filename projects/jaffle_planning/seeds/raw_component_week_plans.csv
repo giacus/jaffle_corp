@@ -1,0 +1,7 @@
+plan_id,store_id,component_id,plan_week_start_utc,planned_receipt_quantity,planned_usage_quantity,planned_waste_quantity,scenario_name,updated_at_utc
+cwp_001,store_101,comp_bread,2025-12-29,120,72,6,base,2026-01-01 03:00:00
+cwp_002,store_101,comp_cheese,2025-12-29,8500,5800,160,base,2026-01-01 03:00:00
+cwp_003,store_202,comp_beans,2025-12-29,5400,3900,80,base,2026-01-01 03:00:00
+cwp_004,store_303,comp_chutney,2025-12-29,4200,3100,250,base,2026-01-01 03:00:00
+cwp_005,store_404,comp_pickle,2025-12-29,4100,2550,130,base,2026-01-01 03:00:00
+cwp_006,store_404,comp_bread,2025-12-29,160,94,8,stretch,2026-01-01 03:15:00

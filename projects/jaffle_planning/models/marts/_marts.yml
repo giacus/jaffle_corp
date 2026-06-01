@@ -1,0 +1,60 @@
+version: 2
+
+models:
+  - name: fct_store_hour_forecast_accuracy
+    description: Forecast accuracy at store-hour-scenario grain.
+    config:
+      group: planning
+    columns:
+      - name: store_hour_forecast_accuracy_key
+        data_tests: [not_null, unique]
+
+  - name: fct_product_day_forecast_accuracy
+    description: Forecast accuracy at store-product-day-scenario grain.
+    config:
+      group: planning
+      meta:
+        exercise_hint: "This grain key deliberately omits scenario_name even though the seed has multiple scenarios for one store-product-day."
+    columns:
+      - name: product_day_forecast_accuracy_key
+        data_tests: [not_null]
+
+  - name: fct_component_week_plan_variance
+    description: Planned versus actual component usage at store-component-week grain.
+    config:
+      group: planning
+    columns:
+      - name: component_week_plan_variance_key
+        data_tests: [not_null]
+
+  - name: fct_store_day_capacity_plan
+    description: Store-day planning summary that blends forecasts, calendar, operations, and finance actuals.
+    config:
+      group: planning
+    columns:
+      - name: store_day_capacity_plan_key
+        data_tests: [not_null, unique]
+
+  - name: fct_planning_exception_daily
+    description: Daily planning exceptions by scenario and exception family.
+    config:
+      group: planning
+    columns:
+      - name: planning_exception_daily_key
+        data_tests: [not_null, unique]
+
+  - name: dim_planning_scenarios
+    description: Scenario capacity windows by store.
+    config:
+      group: planning
+    columns:
+      - name: capacity_scenario_window_key
+        data_tests: [not_null, unique]
+
+  - name: dim_operating_calendar
+    description: Store operating calendar assumptions.
+    config:
+      group: planning
+    columns:
+      - name: calendar_id
+        data_tests: [not_null, unique]

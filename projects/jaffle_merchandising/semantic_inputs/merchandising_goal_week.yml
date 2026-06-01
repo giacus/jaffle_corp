@@ -1,0 +1,15 @@
+name: merchandising_goal_week
+grain: store_product_family_week
+owner: merchandising
+description: Example MetricFlow query spec for weekly menu goal attainment.
+semantic_model: menu_goal_progress
+time_dimension: goal_week
+dimensions:
+  - location__store_id
+  - product_family
+  - unit_goal_status
+metrics:
+  - menu_actual_units
+  - menu_target_units
+  - menu_unit_attainment_rate
+  - cumulative_menu_actual_units_4w

@@ -1,0 +1,26 @@
+version: 2
+
+sources:
+  - name: jaffle_merchandising_app
+    schema: "{{ target.schema }}_raw"
+    description: Synthetic merchandising source tables for menus, availability, and pricing examples.
+    freshness:
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 96, period: hour}
+    loaded_at_field: updated_at_utc
+    tables:
+      - name: raw_menu_publications
+        description: Product publication windows on store menus.
+      - name: raw_product_availability
+        description: Hourly menu availability observations.
+      - name: raw_price_adjustments
+        description: Temporary menu price adjustments.
+      - name: raw_menu_goals
+        description: Weekly merchandising targets by store and product family.
+        loaded_at_field: goal_week_start_utc
+      - name: raw_product_pairings
+        description: Recommended product pairings.
+        loaded_at_field: effective_from_utc
+      - name: raw_substitution_rules
+        description: Fallback product rules for menu gaps.
+        loaded_at_field: effective_from_utc

@@ -1,0 +1,39 @@
+version: 2
+
+sources:
+  - name: jaffle_app
+    schema: "{{ target.schema }}_raw"
+    description: Synthetic source tables for the jaffle-corp platform project.
+    freshness:
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 72, period: hour}
+    loaded_at_field: updated_at_utc
+    tables:
+      - name: raw_customers
+        description: One row per customer profile from the fictional jaffle app.
+      - name: raw_stores
+        description: Store metadata with local currency and timezone fields.
+      - name: raw_products
+        description: Product catalog snapshots.
+      - name: raw_supplies
+        description: Supply costs by product and supplier.
+      - name: raw_orders
+        description: Order headers in source-system currency.
+      - name: raw_order_items
+        description: Line items for jaffle orders.
+      - name: raw_payments
+        description: Payment authorizations and captures.
+      - name: raw_refunds
+        description: Refund events by order.
+      - name: raw_fx_rates
+        description: Daily exchange rates to USD.
+        freshness: null
+        loaded_at_field: null
+      - name: raw_promo_events
+        description: Campaign touch and redemption events.
+      - name: raw_loyalty_events
+        description: Loyalty point balance changes.
+      - name: raw_store_hours_legacy
+        description: Legacy comma-delimited store opening windows.
+        freshness: null
+        loaded_at_field: null

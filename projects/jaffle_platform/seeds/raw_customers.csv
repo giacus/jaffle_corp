@@ -1,0 +1,5 @@
+customer_id,customer_name,email,loyalty_region,first_seen_at,default_currency,marketing_consent,updated_at_utc
+cust_001,Ada Batter,ada.batter@example.test,EMEA,2025-11-20 08:30:00,EUR,true,2026-01-06 11:00:00
+cust_002,Bruno Toast,bruno.toast@example.test,AMER,2025-12-01 13:20:00,USD,true,2026-01-06 11:00:00
+cust_003,Cleo Crimp,cleo.crimp@example.test,APAC,2025-12-12 22:15:00,SGD,false,2026-01-06 11:00:00
+cust_004,Dina Melt,dina.melt@example.test,EMEA,2026-01-02 09:05:00,GBP,true,2026-01-06 11:00:00

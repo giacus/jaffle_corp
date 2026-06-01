@@ -1,0 +1,22 @@
+selectors:
+  - name: supply_public_interface
+    description: Public supply outputs available to downstream projects.
+    definition:
+      union:
+        - method: fqn
+          value: dim_components
+        - method: fqn
+          value: fct_product_component_costs
+        - method: fqn
+          value: fct_inventory_daily
+        - method: fqn
+          value: fct_supply_risk_daily
+        - method: fqn
+          value: fct_purchase_orders
+
+  - name: supply_operating_window
+    description: Supply models that should respect the configured processing window.
+    definition:
+      method: tag
+      value: supply
+

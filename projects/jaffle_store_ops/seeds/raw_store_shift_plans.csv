@@ -1,0 +1,6 @@
+shift_plan_id,store_id,shift_date,daypart,planned_minutes,actual_minutes,team_member_count,role_mix_code,source_version,updated_at_utc
+shift_001,store_101,2026-01-02,morning,720,700,4,balanced,v2,2026-01-02 09:00:00
+shift_002,store_202,2026-01-02,evening,540,505,3,lean,v2,2026-01-02 18:00:00
+shift_003,store_303,2026-01-03,late,600,660,3,press_heavy,v1,2026-01-03 06:00:00
+shift_004,store_404,2026-01-04,midday,480,360,2,lean,v1,2026-01-04 12:30:00
+shift_005,store_404,2026-01-05,evening,600,640,4,balanced,v2,2026-01-05 20:15:00

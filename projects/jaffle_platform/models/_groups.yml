@@ -1,0 +1,10 @@
+groups:
+  - name: platform
+    owner:
+      name: Jaffle Platform Guild
+      email: platform@jaffle.example
+  - name: merchandising
+    owner:
+      name: Jaffle Merchandising Guild
+      email: merchandising@jaffle.example
+

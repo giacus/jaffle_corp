@@ -1,0 +1,13 @@
+kitchen_event_id,order_id,store_id,station,event_type,event_at_utc,batch_id,operator_initials,updated_at_utc
+kitch_001,ord_9001,store_101,press,received,2026-01-02 08:15:20,batch_001,AB,2026-01-02 09:00:00
+kitch_002,ord_9001,store_101,press,prep_started,2026-01-02 08:16:00,batch_001,AB,2026-01-02 09:00:00
+kitch_003,ord_9001,store_101,pass,ready,2026-01-02 08:24:00,batch_001,AB,2026-01-02 09:00:00
+kitch_004,ord_9001,store_101,pass,served,2026-01-02 08:26:00,batch_001,AB,2026-01-02 09:00:00
+kitch_005,ord_9002,store_202,press,received,2026-01-02 17:30:30,batch_002,BT,2026-01-02 18:00:00
+kitch_006,ord_9002,store_202,pass,ready,2026-01-02 17:43:00,batch_002,BT,2026-01-02 18:00:00
+kitch_007,ord_9003,store_303,press,received,2026-01-03 03:45:30,batch_003,CC,2026-01-03 06:00:00
+kitch_008,ord_9003,store_303,press,prep_started,2026-01-03 03:47:00,batch_003,CC,2026-01-03 06:00:00
+kitch_009,ord_9003,store_303,pass,ready,2026-01-03 04:03:00,batch_003,CC,2026-01-03 06:00:00
+kitch_010,ord_9005,store_404,press,received,2026-01-05 19:40:30,batch_004,DM,2026-01-05 20:15:00
+kitch_011,ord_9005,store_404,press,prep_started,2026-01-05 19:43:00,batch_004,DM,2026-01-05 20:15:00
+kitch_012,ord_9005,store_404,pass,ready,2026-01-05 19:58:00,batch_004,DM,2026-01-05 20:15:00

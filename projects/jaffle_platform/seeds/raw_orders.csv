@@ -1,0 +1,6 @@
+order_id,customer_id,store_id,ordered_at_utc,order_status,channel,currency,subtotal_minor,tax_minor,discount_minor,service_fee_minor,loyalty_points_redeemed,legacy_order_number,updated_at_utc
+ord_9001,cust_001,store_101,2026-01-02 08:15:00,served,app,GBP,1430,286,100,50,20,LON-0001,2026-01-02 09:00:00
+ord_9002,cust_002,store_202,2026-01-02 17:30:00,completed,kiosk,CAD,780,101,0,0,0,TOR-0007,2026-01-02 18:00:00
+ord_9003,cust_003,store_303,2026-01-03 03:45:00,partially_refunded,app,SGD,1270,114,50,30,0,SG-0042,2026-01-03 06:00:00
+ord_9004,cust_004,store_404,2026-01-04 12:10:00,cancel,web,EUR,920,193,0,25,0,AMS-0100,2026-01-04 12:30:00
+ord_9005,cust_001,store_404,2026-01-05 19:40:00,fulfilled,app,EUR,1700,357,150,25,50,AMS-0109,2026-01-05 20:15:00

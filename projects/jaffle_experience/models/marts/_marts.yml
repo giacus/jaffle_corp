@@ -1,0 +1,225 @@
+version: 2
+
+models:
+  - name: fct_support_tickets
+    description: Public support ticket fact with SLA and order context.
+    config:
+      group: experience
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: support_ticket_key
+        data_type: varchar
+        data_tests: [not_null, unique]
+      - name: support_ticket_id
+        data_type: varchar
+      - name: customer_id
+        data_type: varchar
+      - name: order_id
+        data_type: varchar
+      - name: store_id
+        data_type: varchar
+      - name: opened_at_utc
+        data_type: timestamp
+      - name: opened_date_utc
+        data_type: date
+      - name: first_response_at_utc
+        data_type: timestamp
+      - name: resolved_at_utc
+        data_type: timestamp
+      - name: normalized_issue_type
+        data_type: varchar
+      - name: raw_issue_type
+        data_type: varchar
+      - name: ticket_status
+        data_type: varchar
+      - name: resolution_type
+        data_type: varchar
+      - name: satisfaction_score
+        data_type: integer
+      - name: concession_minor
+        data_type: integer
+      - name: concession_major
+        data_type: double
+      - name: currency
+        data_type: varchar
+      - name: first_response_minutes
+        data_type: bigint
+      - name: resolution_minutes
+        data_type: bigint
+      - name: first_response_sla_status
+        data_type: varchar
+      - name: resolution_sla_status
+        data_type: varchar
+      - name: order_status
+        data_type: varchar
+      - name: channel
+        data_type: varchar
+      - name: order_total_usd
+        data_type: double
+      - name: net_revenue_usd
+        data_type: double
+      - name: estimated_gross_margin_usd
+        data_type: double
+      - name: refund_event_count
+        data_type: integer
+      - name: has_failed_payment
+        data_type: boolean
+      - name: revenue_quality_status
+        data_type: varchar
+      - name: met_first_response_sla
+        data_type: boolean
+      - name: met_resolution_sla
+        data_type: boolean
+      - name: updated_at_utc
+        data_type: timestamp
+
+  - name: fct_customer_contact_threads
+    description: Public ticket contact-thread fact.
+    config:
+      group: experience
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: contact_thread_key
+        data_type: varchar
+        data_tests: [not_null, unique]
+      - name: support_ticket_id
+        data_type: varchar
+      - name: first_contact_at_utc
+        data_type: timestamp
+      - name: most_recent_contact_at_utc
+        data_type: timestamp
+      - name: contact_event_count
+        data_type: integer
+      - name: total_message_count
+        data_type: integer
+      - name: inbound_contact_count
+        data_type: integer
+      - name: outbound_contact_count
+        data_type: integer
+      - name: contact_channels
+        data_type: varchar
+      - name: handling_roles
+        data_type: varchar
+      - name: updated_at_utc
+        data_type: timestamp
+
+  - name: fct_experiment_outcomes
+    description: Public exposure-level experiment outcomes over a seven-day conversion window.
+    config:
+      group: experience
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: experiment_outcome_key
+        data_type: varchar
+        data_tests: [not_null, unique]
+      - name: exposure_id
+        data_type: varchar
+      - name: customer_id
+        data_type: varchar
+      - name: experiment_id
+        data_type: varchar
+      - name: variant_id
+        data_type: varchar
+      - name: exposed_at_utc
+        data_type: timestamp
+      - name: exposed_date_utc
+        data_type: date
+      - name: surface
+        data_type: varchar
+      - name: assignment_reason
+        data_type: varchar
+      - name: order_count_7d
+        data_type: integer
+      - name: completed_order_count_7d
+        data_type: integer
+      - name: first_ordered_at_utc_after_exposure
+        data_type: timestamp
+      - name: net_revenue_usd_7d
+        data_type: double
+      - name: estimated_margin_usd_7d
+        data_type: double
+      - name: converted_7d
+        data_type: boolean
+      - name: updated_at_utc
+        data_type: timestamp
+
+  - name: fct_menu_price_test_results
+    description: Public price-test fact at product-store-test grain.
+    config:
+      group: experience
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: menu_price_test_result_key
+        data_type: varchar
+        data_tests: [not_null, unique]
+      - name: price_test_id
+        data_type: varchar
+      - name: product_id
+        data_type: varchar
+      - name: product_name
+        data_type: varchar
+      - name: category
+        data_type: varchar
+      - name: product_family
+        data_type: varchar
+      - name: store_id
+        data_type: varchar
+      - name: experiment_id
+        data_type: varchar
+      - name: variant_id
+        data_type: varchar
+      - name: effective_from_utc
+        data_type: timestamp
+      - name: effective_to_utc
+        data_type: timestamp
+      - name: list_price_minor
+        data_type: integer
+      - name: list_price_major
+        data_type: double
+      - name: currency
+        data_type: varchar
+      - name: observed_order_count
+        data_type: integer
+      - name: observed_item_quantity
+        data_type: integer
+      - name: observed_item_total_major
+        data_type: double
+      - name: observed_average_item_price_major
+        data_type: double
+      - name: updated_at_utc
+        data_type: timestamp
+
+  - name: dim_experiment_variants
+    description: Public experiment-variant dimension.
+    config:
+      group: experience
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: experiment_variant_key
+        data_type: varchar
+        data_tests: [not_null, unique]
+      - name: experiment_id
+        data_type: varchar
+      - name: variant_id
+        data_type: varchar
+      - name: first_exposed_at_utc
+        data_type: timestamp
+      - name: most_recent_exposed_at_utc
+        data_type: timestamp
+      - name: exposure_count
+        data_type: integer
+      - name: price_test_count
+        data_type: integer
+      - name: surfaces
+        data_type: varchar
+

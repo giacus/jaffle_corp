@@ -1,0 +1,5 @@
+store_id,legacy_hours_blob,effective_from
+store_101,mon=08-20;tue=08-20;wed=08-20;thu=08-22;fri=08-23,2025-01-01
+store_202,mon=07-19;tue=07-19;wed=07-19;thu=07-21;fri=07-22,2025-01-01
+store_303,mon=10-23;tue=10-23;wed=10-23;thu=10-23;fri=10-24,2025-01-01
+store_404,mon=09-21;tue=09-21;wed=09-21;thu=09-21;fri=09-22,2025-01-01

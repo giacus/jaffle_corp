@@ -1,0 +1,51 @@
+version: 2
+
+models:
+  - name: stg_kitchen_events
+    config:
+      group: store_ops
+    columns:
+      - name: kitchen_event_id
+        data_tests: [not_null, unique]
+      - name: kitchen_event_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["received", "prep_started", "ready", "served", "unknown"]
+
+  - name: stg_store_shift_plans
+    config:
+      group: store_ops
+    columns:
+      - name: shift_plan_id
+        data_tests: [not_null, unique]
+      - name: planned_minutes
+        data_tests:
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: ">= 0"
+
+  - name: stg_quality_checks
+    config:
+      group: store_ops
+    columns:
+      - name: quality_check_id
+        data_tests: [not_null, unique]
+      - name: check_result
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["pass", "review", "fail"]
+
+  - name: stg_service_incidents
+    config:
+      group: store_ops
+    columns:
+      - name: incident_id
+        data_tests: [not_null, unique]
+      - name: severity
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["low", "medium", "high"]
+

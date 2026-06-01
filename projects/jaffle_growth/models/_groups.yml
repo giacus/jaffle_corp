@@ -1,0 +1,6 @@
+groups:
+  - name: growth
+    owner:
+      name: Jaffle Growth Guild
+      email: growth@jaffle.example
+

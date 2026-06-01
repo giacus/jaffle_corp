@@ -1,0 +1,9 @@
+forecast_id,model_run_id,store_id,product_id,forecast_date_utc,forecasted_units,planned_price_minor,scenario_name,model_version,created_at_utc,updated_at_utc
+pdf_001,run_base_20260101,store_101,prod_100,2026-01-02,4,650,base,v0.4,2026-01-01 02:00:00,2026-01-01 02:05:00
+pdf_002,run_base_20260101,store_101,prod_400,2026-01-02,5,350,base,v0.4,2026-01-01 02:00:00,2026-01-01 02:05:00
+pdf_003,run_base_20260101,store_202,prod_200,2026-01-02,3,780,base,v0.4,2026-01-01 02:00:00,2026-01-01 02:05:00
+pdf_004,run_base_20260101,store_303,prod_300,2026-01-03,6,920,base,v0.4,2026-01-01 02:00:00,2026-01-01 02:05:00
+pdf_005,run_base_20260101,store_303,prod_400,2026-01-03,2,350,base,v0.4,2026-01-01 02:00:00,2026-01-01 02:05:00
+pdf_006,run_base_20260101,store_404,prod_100,2026-01-05,5,650,base,v0.4,2026-01-01 02:00:00,2026-01-01 02:05:00
+pdf_007,run_base_20260101,store_404,prod_400,2026-01-05,3,350,base,v0.4,2026-01-01 02:00:00,2026-01-01 02:05:00
+pdf_008,run_stretch_20260101,store_404,prod_100,2026-01-05,7,650,stretch,v0.4,2026-01-01 02:15:00,2026-01-01 02:20:00

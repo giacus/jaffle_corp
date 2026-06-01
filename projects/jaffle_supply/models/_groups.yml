@@ -1,0 +1,6 @@
+groups:
+  - name: supply
+    owner:
+      name: Jaffle Supply Guild
+      email: supply@jaffle.example
+

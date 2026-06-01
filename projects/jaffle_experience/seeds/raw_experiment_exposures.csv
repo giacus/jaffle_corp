@@ -1,0 +1,6 @@
+exposure_id,customer_id,experiment_id,variant_id,exposed_at_utc,surface,assignment_reason,updated_at_utc
+exp_001,cust_001,exp_crisp_copy,control,2026-01-02 07:30:00,home,rebalanced,2026-01-02 08:00:00
+exp_002,cust_002,exp_crisp_copy,extra_crunch,2026-01-02 16:00:00,kiosk,random,2026-01-02 16:30:00
+exp_003,cust_003,exp_pickle_attach,control,2026-01-03 02:30:00,home,random,2026-01-03 03:00:00
+exp_004,cust_004,exp_pickle_attach,pickle_prompt,2026-01-04 11:30:00,checkout,random,2026-01-04 12:00:00
+exp_005,cust_001,exp_crisp_copy,extra_crunch,2026-01-05 18:30:00,home,holdout_refresh,2026-01-05 19:00:00

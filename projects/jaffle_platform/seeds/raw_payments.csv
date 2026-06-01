@@ -1,0 +1,6 @@
+payment_id,order_id,payment_status,payment_method,authorized_at_utc,captured_at_utc,amount_minor,currency,processor_region,updated_at_utc
+pay_001,ord_9001,captured,card,2026-01-02 08:15:30,2026-01-02 08:16:00,1666,GBP,eu-west,2026-01-02 09:00:00
+pay_002,ord_9002,settled,wallet,2026-01-02 17:30:20,2026-01-02 17:31:10,881,CAD,na-east,2026-01-02 18:00:00
+pay_003,ord_9003,captured,card,2026-01-03 03:45:20,2026-01-03 03:46:00,1364,SGD,ap-south,2026-01-03 06:00:00
+pay_004,ord_9004,declined,card,2026-01-04 12:10:15,,0,EUR,eu-west,2026-01-04 12:30:00
+pay_005,ord_9005,captured,gift_card,2026-01-05 19:40:20,2026-01-05 19:41:30,1932,EUR,eu-west,2026-01-05 20:15:00

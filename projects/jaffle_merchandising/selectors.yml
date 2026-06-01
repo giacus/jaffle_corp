@@ -1,0 +1,15 @@
+selectors:
+  - name: merchandising_public_surface
+    description: Marts and semantic nodes for the merchandising learning surface.
+    definition:
+      union:
+        - method: path
+          value: models/marts
+        - method: path
+          value: models/semantic
+
+  - name: product_store_grains
+    description: Models built at product-store-hour or product-store-day grains.
+    definition:
+      method: tag
+      value: product_store_grain

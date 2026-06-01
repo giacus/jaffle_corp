@@ -1,0 +1,4 @@
+incident_id,store_id,opened_at_utc,resolved_at_utc,incident_type,severity,affected_orders,notes_code,updated_at_utc
+inc_001,store_303,2026-01-03 03:55:00,2026-01-03 04:20:00,press_temperature,medium,1,check_press,2026-01-03 06:00:00
+inc_002,store_404,2026-01-04 12:05:00,2026-01-04 12:25:00,payment_terminal,high,1,swap_terminal,2026-01-04 12:30:00
+inc_003,store_404,2026-01-05 19:50:00,2026-01-05 20:05:00,ingredient_hold,low,1,review_pickles,2026-01-05 20:15:00

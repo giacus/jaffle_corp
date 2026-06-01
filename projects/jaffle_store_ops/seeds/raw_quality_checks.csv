@@ -1,0 +1,6 @@
+quality_check_id,store_id,order_id,product_id,check_type,check_result,measured_value,expected_min,expected_max,checked_at_utc,updated_at_utc
+qc_001,store_101,ord_9001,prod_100,temperature,pass,72,65,80,2026-01-02 08:25:00,2026-01-02 09:00:00
+qc_002,store_202,ord_9002,prod_200,seal,pass,1,1,1,2026-01-02 17:44:00,2026-01-02 18:00:00
+qc_003,store_303,ord_9003,prod_300,temperature,fail,61,65,80,2026-01-03 04:05:00,2026-01-03 06:00:00
+qc_004,store_404,ord_9005,prod_100,temperature,pass,70,65,80,2026-01-05 19:59:00,2026-01-05 20:15:00
+qc_005,store_404,ord_9005,prod_400,portion,review,118,80,110,2026-01-05 20:00:00,2026-01-05 20:15:00

@@ -1,0 +1,6 @@
+substitution_rule_id,store_id,unavailable_product_id,substitute_product_id,priority_rank,effective_from_utc,effective_to_utc,reason_code
+sub_001,store_101,prod_400,prod_100,1,2026-01-01 00:00:00,,supply_gap
+sub_002,store_202,prod_200,prod_100,1,2026-01-01 00:00:00,,menu_balance
+sub_003,store_303,prod_400,prod_300,1,2026-01-01 00:00:00,,side_gap
+sub_004,store_404,prod_300,prod_100,2,2026-01-01 00:00:00,,seasonal_gap
+sub_005,store_404,prod_400,prod_300,1,2026-01-01 00:00:00,,side_gap

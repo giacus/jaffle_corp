@@ -1,0 +1,5 @@
+groups:
+  - name: merchandising
+    owner:
+      name: Jaffle Merchandising Guild
+      email: merchandising@jaffle.example

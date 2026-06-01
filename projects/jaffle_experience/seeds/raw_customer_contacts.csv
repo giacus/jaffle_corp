@@ -1,0 +1,8 @@
+contact_event_id,support_ticket_id,contact_channel,contact_direction,contact_at_utc,message_count,handled_by_role,updated_at_utc
+contact_001,ticket_001,chat,inbound,2026-01-02 08:24:00,2,guest_care,2026-01-02 09:00:00
+contact_002,ticket_001,chat,outbound,2026-01-02 08:28:00,1,guest_care,2026-01-02 09:00:00
+contact_003,ticket_002,email,inbound,2026-01-03 04:30:00,1,store_lead,2026-01-03 06:00:00
+contact_004,ticket_002,email,outbound,2026-01-03 04:42:00,1,store_lead,2026-01-03 06:00:00
+contact_005,ticket_004,chat,inbound,2026-01-05 20:05:00,3,guest_care,2026-01-05 21:30:00
+contact_006,ticket_004,chat,outbound,2026-01-05 20:20:00,2,guest_care,2026-01-05 21:30:00
+contact_007,ticket_005,chat,inbound,2026-01-06 10:00:00,1,guest_care,2026-01-06 10:15:00

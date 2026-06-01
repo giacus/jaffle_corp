@@ -1,0 +1,16 @@
+version: 2
+
+exposures:
+  - name: store_ops_morning_review
+    type: dashboard
+    maturity: medium
+    url: https://example.test/jaffle-corp/store-ops
+    description: Fictional operating review dashboard for demo lineage.
+    depends_on:
+      - ref('fct_store_day_operations')
+      - ref('fct_order_service_times')
+      - ref('fct_quality_events')
+    owner:
+      name: Jaffle Store Ops Guild
+      email: store-ops@jaffle.example
+
