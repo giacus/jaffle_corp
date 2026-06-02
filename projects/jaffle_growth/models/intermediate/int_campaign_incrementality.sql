@@ -27,12 +27,11 @@ select
     coalesce(experiment_rollups.conversion_count, 0) as nearby_conversion_count,
     coalesce(experiment_rollups.experiment_net_revenue_usd_7d, 0) as nearby_experiment_net_revenue_usd_7d,
     campaign_performance.attributed_net_revenue_usd
-        - (coalesce(experiment_rollups.experiment_net_revenue_usd_7d, 0) * 0.25)
+    - (coalesce(experiment_rollups.experiment_net_revenue_usd_7d, 0) * 0.25)
         as heuristic_incremental_revenue_usd,
     campaign_performance.attributed_margin_usd
-        - (campaign_performance.estimated_campaign_cost_usd * 0.5)
+    - (campaign_performance.estimated_campaign_cost_usd * 0.5)
         as heuristic_incremental_margin_usd
 from campaign_performance
 left join experiment_rollups
     on campaign_performance.event_date_utc = experiment_rollups.exposed_date_utc
-

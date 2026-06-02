@@ -29,4 +29,3 @@ inner join orders on order_items.order_id = orders.order_id
 inner join recipe_components on order_items.product_id = recipe_components.product_id
 where orders.is_completed_order
 group by 1, 2, 3, 4
-

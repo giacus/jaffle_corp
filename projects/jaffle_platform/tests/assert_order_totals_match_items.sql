@@ -26,4 +26,3 @@ left join item_totals on order_totals.order_id = item_totals.order_id
 where
     order_totals.subtotal_minor <> coalesce(item_totals.item_subtotal_minor, 0)
     or abs(order_totals.tax_minor - coalesce(item_totals.item_tax_minor, 0)) > 1
-

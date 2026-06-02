@@ -43,4 +43,3 @@ select
 from promo_events
 left join orders on promo_events.order_id = orders.order_id
 left join revenue on promo_events.order_id = revenue.order_id
-

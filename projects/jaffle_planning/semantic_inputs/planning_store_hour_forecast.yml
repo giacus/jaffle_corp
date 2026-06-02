@@ -1,13 +1,13 @@
 name: planning_store_hour_forecast
 grain: store_hour
 owner: planning
-description: Example MetricFlow query spec for store-hour forecast accuracy.
+description: Executable MetricFlow query spec for store-hour forecast accuracy.
 semantic_model: store_hour_forecast_accuracy
 time_dimension: forecast_hour
 dimensions:
-  - location__store_id
-  - scenario_name
-  - forecast_accuracy_band
+  - location
+  - store_hour_forecast__scenario_name
+  - store_hour_forecast__forecast_accuracy_band
 metrics:
   - forecasted_orders
   - actual_orders_for_forecast

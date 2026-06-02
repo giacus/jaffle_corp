@@ -14,4 +14,3 @@ select
     measured_value < expected_min or measured_value > expected_max or check_result <> 'pass' as has_quality_exception,
     updated_at_utc
 from {{ ref('stg_quality_checks') }}
-

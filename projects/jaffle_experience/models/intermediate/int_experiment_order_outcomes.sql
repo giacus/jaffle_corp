@@ -32,9 +32,10 @@ exposure_orders as (
         revenue.estimated_gross_margin_usd
     from exposures
     left join orders
-        on exposures.customer_id = orders.customer_id
-        and orders.ordered_at_utc >= exposures.exposed_at_utc
-        and orders.ordered_at_utc < exposures.exposed_at_utc + interval '7 days'
+        on
+            exposures.customer_id = orders.customer_id
+            and orders.ordered_at_utc >= exposures.exposed_at_utc
+            and orders.ordered_at_utc < exposures.exposed_at_utc + interval '7 days'
     left join revenue on orders.order_id = revenue.order_id
 )
 
@@ -56,4 +57,3 @@ select
 from exposures
 left join exposure_orders on exposures.exposure_id = exposure_orders.exposure_id
 group by 1, 2, 3, 4, 5, 6, 7, 8, 14
-

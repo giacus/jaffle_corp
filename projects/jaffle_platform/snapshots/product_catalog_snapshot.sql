@@ -21,4 +21,3 @@
     from {{ ref('stg_products') }}
 
 {% endsnapshot %}
-

@@ -23,4 +23,3 @@ select
     is_late_receipt,
     updated_at_utc
 from {{ ref('int_purchase_order_receipts') }}
-

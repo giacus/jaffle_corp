@@ -27,11 +27,11 @@ select
     coalesce(purchase_order_costs.lowest_unit_cost_usd, 0) as lowest_unit_cost_usd,
     coalesce(purchase_order_costs.highest_unit_cost_usd, 0) as highest_unit_cost_usd,
     recipe_components.quantity_per_item
-        * (1 + recipe_components.waste_factor)
-        * coalesce(purchase_order_costs.average_unit_cost_usd, 0) as expected_component_cost_usd,
+    * (1 + recipe_components.waste_factor)
+    * coalesce(purchase_order_costs.average_unit_cost_usd, 0) as expected_component_cost_usd,
     recipe_components.updated_at_utc
 from recipe_components
 left join purchase_order_costs
-    on recipe_components.component_id = purchase_order_costs.component_id
-    and recipe_components.unit = purchase_order_costs.unit
-
+    on
+        recipe_components.component_id = purchase_order_costs.component_id
+        and recipe_components.unit = purchase_order_costs.unit

@@ -10,7 +10,7 @@ The business is still fictional and food-focused: customers buy jaffles from sto
 - Mesh-style project dependencies through `dependencies.yml`.
 - Local package fallbacks so contributors can parse and build examples without a dbt platform account.
 - Public model contracts on project interfaces.
-- Semantic Layer and MetricFlow definitions for simple, derived, ratio, cumulative, and conversion metrics.
+- Executable Semantic Layer and MetricFlow specs for simple, derived, ratio, cumulative, and conversion metrics.
 - Legacy models, inconsistent source conventions, time-window macros, and selectors that mimic production sprawl.
 - Supply, support, experimentation, quality, store operations, merchandising, planning, snapshots, analyses, exposures, and singular tests.
 - Multiple grains beyond order and order item: store-hour, product-store-hour, product-store-day, product-pair-day, store-product-day, component-store-week, scenario-store-day, customer-day, and store-day.
@@ -39,6 +39,12 @@ Install dbt with the DuckDB adapter. Use Python 3.11 or 3.12; Python 3.14 is not
 python3.11 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
+```
+
+To validate the full repo exactly the way CI does:
+
+```bash
+scripts/validate_repo.sh
 ```
 
 Install dependencies and seed the local DuckDB source tables:
@@ -83,6 +89,18 @@ dbt build --project-dir projects/jaffle_planning --profiles-dir .
 dbt build --project-dir projects/jaffle_legacy --profiles-dir .
 ```
 
+Execute every semantic input spec against the local build:
+
+```bash
+python scripts/run_semantic_inputs.py
+```
+
+Lint SQL across the multi-project repo:
+
+```bash
+scripts/lint_sql_projects.sh
+```
+
 The committed `profiles.yml` uses a local ignored DuckDB file named `jaffle_corp.duckdb`, so there are no credentials to configure.
 
 Run project builds sequentially when using the local DuckDB profile. DuckDB allows one writer per database file, so parallel project builds can conflict on the demo database lock.
@@ -118,6 +136,7 @@ The public models are intentionally narrow:
 - `jaffle_finance.fct_order_margin_waterfall`
 - `jaffle_finance.fct_store_day_revenue_quality`
 - `jaffle_finance.fct_component_cost_variance`
+- `jaffle_finance.dim_finance_controls`
 - `jaffle_experience.fct_support_tickets`
 - `jaffle_experience.fct_customer_contact_threads`
 - `jaffle_experience.fct_experiment_outcomes`
@@ -154,11 +173,16 @@ This repo is intended to be played with. Good contributions add realistic dbt co
 Before opening a pull request:
 
 ```bash
-PROHIBITED_PATTERN='<pipe-separated-private-terms>' scripts/check_sanitization.sh
-dbt parse --project-dir projects/jaffle_platform --profiles-dir .
+scripts/validate_repo.sh
 ```
 
-For full validation, run the project builds sequentially in the order shown in the quickstart.
+If you need to scan for additional private-domain terms before publishing, pass them explicitly:
+
+```bash
+PROHIBITED_PATTERN='<pipe-separated-private-terms>' scripts/check_sanitization.sh
+```
+
+The sanitization script ignores the command line that defines `PROHIBITED_PATTERN`, so copied examples do not self-match.
 
 Reference material used for structure:
 

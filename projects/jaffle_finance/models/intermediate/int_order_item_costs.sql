@@ -31,7 +31,6 @@ select
     {{ jaffle_shared.minor_units_to_major_units('items.estimated_supply_cost_minor') }}
         as estimated_supply_cost_major,
     {{ jaffle_shared.minor_units_to_major_units('items.estimated_supply_cost_minor') }}
-        * orders.usd_per_order_currency_unit as estimated_supply_cost_usd
+    * orders.usd_per_order_currency_unit as estimated_supply_cost_usd
 from items
 left join orders on items.order_id = orders.order_id
-

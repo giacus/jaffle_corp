@@ -21,11 +21,25 @@ tasks:
       - for: { var: PROJECTS }
         cmd: dbt parse --project-dir {{ .ITEM }} --profiles-dir .
 
+  lint:
+    deps: [deps]
+    cmds:
+      - scripts/lint_sql_projects.sh
+
   build:
     deps: [deps, seed]
     cmds:
       - for: { var: PROJECTS }
         cmd: dbt build --project-dir {{ .ITEM }} --profiles-dir .
+
+  semantic:
+    deps: [build]
+    cmds:
+      - python scripts/run_semantic_inputs.py
+
+  validate:
+    cmds:
+      - scripts/validate_repo.sh
 
   build-platform:
     deps: [deps, seed]

@@ -1,7 +1,7 @@
 name: finance_margin_day
 grain: store_day
 owner: finance
-description: Lightweight example spec for a store-day margin mart.
+description: Executable SQL spec for a store-day margin mart.
 inputs:
   - ref: fct_order_margin_waterfall
     time_column: recognized_date
@@ -15,4 +15,3 @@ measures:
   - net_revenue_usd
   - recipe_margin_usd
   - recipe_cost_variance_usd
-

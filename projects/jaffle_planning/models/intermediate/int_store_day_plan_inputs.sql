@@ -24,7 +24,7 @@ operations as (
         ready_target_rate,
         quality_exception_count,
         incident_count
-    from {{ ref('fct_store_day_operations') }}
+    from {{ ref('jaffle_store_ops', 'fct_store_day_operations') }}
 ),
 
 pnl as (
@@ -33,7 +33,7 @@ pnl as (
         recognized_date,
         net_revenue_usd,
         estimated_gross_margin_usd
-    from {{ ref('fct_daily_store_pnl') }}
+    from {{ ref('jaffle_finance', 'fct_daily_store_pnl') }}
 )
 
 select
@@ -59,11 +59,14 @@ select
     pnl.estimated_gross_margin_usd
 from calendar
 left join store_hour_forecasts
-    on calendar.store_id = store_hour_forecasts.store_id
-    and calendar.calendar_date_utc = store_hour_forecasts.forecast_date_utc
+    on
+        calendar.store_id = store_hour_forecasts.store_id
+        and calendar.calendar_date_utc = store_hour_forecasts.forecast_date_utc
 left join operations
-    on calendar.store_id = operations.store_id
-    and calendar.calendar_date_utc = operations.operating_date
+    on
+        calendar.store_id = operations.store_id
+        and calendar.calendar_date_utc = operations.operating_date
 left join pnl
-    on calendar.store_id = pnl.store_id
-    and calendar.calendar_date_utc = pnl.recognized_date
+    on
+        calendar.store_id = pnl.store_id
+        and calendar.calendar_date_utc = pnl.recognized_date

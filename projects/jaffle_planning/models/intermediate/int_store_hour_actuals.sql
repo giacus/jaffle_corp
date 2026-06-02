@@ -6,7 +6,7 @@ select
     sum(orders.order_total_usd) as actual_order_total_usd,
     avg(service.received_to_ready_minutes) as average_received_to_ready_minutes,
     cast(sum(case when service.met_ready_target then 1 else 0 end) as integer) as ready_inside_target_count
-from {{ ref('fct_orders') }} as orders
-left join {{ ref('fct_order_service_times') }} as service
+from {{ ref('jaffle_platform', 'fct_orders') }} as orders
+left join {{ ref('jaffle_store_ops', 'fct_order_service_times') }} as service
     on orders.order_id = service.order_id
 group by 1, 2

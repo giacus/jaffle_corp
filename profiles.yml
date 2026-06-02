@@ -3,11 +3,11 @@ jaffle_corp:
   outputs:
     dev:
       type: duckdb
-      path: jaffle_corp.duckdb
+      path: "{{ env_var('JAFFLE_CORP_DUCKDB_PATH', 'jaffle_corp.duckdb') }}"
       threads: 4
       schema: dev
     ci:
       type: duckdb
-      path: jaffle_corp_ci.duckdb
+      path: "{{ env_var('JAFFLE_CORP_DUCKDB_PATH', 'jaffle_corp_ci.duckdb') }}"
       threads: 4
       schema: ci

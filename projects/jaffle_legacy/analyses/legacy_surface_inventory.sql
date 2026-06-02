@@ -12,4 +12,3 @@ select
     'legacy_refund_reason_bridge_v0' as legacy_model,
     count(*) as record_count
 from {{ ref('legacy_refund_reason_bridge_v0') }}
-

@@ -33,7 +33,7 @@ This repo includes realistic friction points:
 - Legacy source columns that require normalization before they are usable.
 - Snapshots, analyses, exposures, semantic specs, and singular tests as operational surface area.
 
-The merchandising and planning domains intentionally add protected surfaces and lightly documented corners. They are designed to stay fast locally while giving students realistic lineage, ownership, testing, and MetricFlow questions to resolve.
+The merchandising and planning domains intentionally add protected surfaces and lightly documented corners. They are designed to stay fast locally while giving students realistic lineage, ownership, testing, and executable MetricFlow questions to resolve.
 
 ## Non-Goals
 

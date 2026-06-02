@@ -11,4 +11,3 @@ select
     cast(introduced_at as timestamp) as introduced_at,
     cast(updated_at_utc as timestamp) as updated_at_utc
 from {{ source('jaffle_app', 'raw_products') }}
-

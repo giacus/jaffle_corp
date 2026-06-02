@@ -37,4 +37,3 @@ select
     shifts.updated_at_utc
 from shifts
 left join locations on shifts.store_id = locations.store_id
-

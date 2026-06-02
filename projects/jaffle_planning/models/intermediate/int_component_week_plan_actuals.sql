@@ -11,12 +11,17 @@ actuals as (
         sum(expected_used_quantity) as actual_used_quantity,
         sum(observed_waste_quantity) as actual_waste_quantity,
         sum(received_cost_usd) as actual_received_cost_usd
-    from {{ ref('fct_inventory_daily') }}
+    from {{ ref('jaffle_supply', 'fct_inventory_daily') }}
     group by 1, 2, 3
 ),
 
 components as (
-    select component_id, component_name, component_family, recipe_unit from {{ ref('dim_components') }}
+    select
+        component_id,
+        component_name,
+        component_family,
+        recipe_unit
+    from {{ ref('jaffle_supply', 'dim_components') }}
 )
 
 select
@@ -41,7 +46,8 @@ select
     plans.updated_at_utc
 from plans
 left join actuals
-    on plans.store_id = actuals.store_id
-    and plans.component_id = actuals.component_id
-    and plans.plan_week_start_utc = actuals.actual_week_start_utc
+    on
+        plans.store_id = actuals.store_id
+        and plans.component_id = actuals.component_id
+        and plans.plan_week_start_utc = actuals.actual_week_start_utc
 left join components on plans.component_id = components.component_id

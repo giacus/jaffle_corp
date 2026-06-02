@@ -34,4 +34,3 @@ select
     legacy_order_number,
     updated_at_utc
 from {{ ref('int_orders_enriched') }}
-

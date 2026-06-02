@@ -1,5 +1,5 @@
 name: mart_campaign_day_growth
-description: Example generator input for a MetricFlow-backed campaign-day mart.
+description: Executable MetricFlow query spec for a campaign-day growth mart.
 semantic_model: campaign_performance
 time_dimension: campaign_date
 grain: day
@@ -12,4 +12,3 @@ metrics:
 materialization:
   type: incremental
   owner: growth@jaffle.example
-

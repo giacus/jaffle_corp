@@ -9,4 +9,3 @@ select
     cast(waste_factor as double) as waste_factor,
     cast(updated_at_utc as timestamp) as updated_at_utc
 from {{ source('jaffle_supply_app', 'raw_recipe_components') }}
-

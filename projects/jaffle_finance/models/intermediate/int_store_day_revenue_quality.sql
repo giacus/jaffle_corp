@@ -32,4 +32,3 @@ select
         else 'clean'
     end as store_day_revenue_quality_status
 from store_day
-

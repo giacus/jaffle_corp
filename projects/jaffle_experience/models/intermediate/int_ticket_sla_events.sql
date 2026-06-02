@@ -57,4 +57,3 @@ select
 from tickets
 left join orders on tickets.order_id = orders.order_id
 left join revenue on tickets.order_id = revenue.order_id
-

@@ -23,20 +23,20 @@ select
     rules.reason_code,
     availability.product_store_day_status,
     availability.outage_minutes,
-    case
-        when availability.product_store_day_status in ('blocked', 'constrained') then true
-        else false
-    end as rule_was_needed,
-    case when substitute_item.product_id is not null then true else false end as substitute_is_published
+    coalesce(availability.product_store_day_status in ('blocked', 'constrained'), false) as rule_was_needed,
+    coalesce(substitute_item.product_id is not null, false) as substitute_is_published
 from rules
 left join availability
-    on rules.store_id = availability.store_id
-    and rules.unavailable_product_id = availability.product_id
-    and cast(availability.available_date_utc as timestamp) >= rules.effective_from_utc
-    and cast(availability.available_date_utc as timestamp) < coalesce(rules.effective_to_utc, cast('2999-12-31' as timestamp))
+    on
+        rules.store_id = availability.store_id
+        and rules.unavailable_product_id = availability.product_id
+        and cast(availability.available_date_utc as timestamp) >= rules.effective_from_utc
+        and cast(availability.available_date_utc as timestamp) < coalesce(rules.effective_to_utc, cast('2999-12-31' as timestamp))
 left join menu_items as unavailable_item
-    on rules.store_id = unavailable_item.store_id
-    and rules.unavailable_product_id = unavailable_item.product_id
+    on
+        rules.store_id = unavailable_item.store_id
+        and rules.unavailable_product_id = unavailable_item.product_id
 left join menu_items as substitute_item
-    on rules.store_id = substitute_item.store_id
-    and rules.substitute_product_id = substitute_item.product_id
+    on
+        rules.store_id = substitute_item.store_id
+        and rules.substitute_product_id = substitute_item.product_id

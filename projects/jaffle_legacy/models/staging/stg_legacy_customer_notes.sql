@@ -9,4 +9,3 @@ select
     end as contact_flag,
     concat(customer_id, '|', lifecycle_stage, '|', loyalty_region) as old_customer_note_blob
 from {{ ref('jaffle_platform', 'dim_customers') }}
-

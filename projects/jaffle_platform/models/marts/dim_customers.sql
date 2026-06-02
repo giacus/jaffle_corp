@@ -27,4 +27,3 @@ select
     end as lifecycle_stage
 from customers
 left join orders on customers.customer_id = orders.customer_id
-

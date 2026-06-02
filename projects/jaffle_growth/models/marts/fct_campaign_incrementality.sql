@@ -18,4 +18,3 @@ select
     {{ jaffle_shared.safe_divide('heuristic_incremental_revenue_usd', 'estimated_campaign_cost_usd') }}
         as heuristic_incremental_roas
 from {{ ref('int_campaign_incrementality') }}
-

@@ -8,4 +8,3 @@ select
 from {{ ref('fct_order_margin_waterfall') }}
 group by 1, 2
 order by 1, 2
-

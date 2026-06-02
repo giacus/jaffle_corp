@@ -3,11 +3,11 @@ with publications as (
 ),
 
 products as (
-    select * from {{ ref('dim_products') }}
+    select * from {{ ref('jaffle_platform', 'dim_products') }}
 ),
 
 locations as (
-    select * from {{ ref('dim_locations') }}
+    select * from {{ ref('jaffle_platform', 'dim_locations') }}
 )
 
 select

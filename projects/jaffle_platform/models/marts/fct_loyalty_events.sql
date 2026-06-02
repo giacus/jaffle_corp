@@ -10,4 +10,3 @@ select
     program_tier,
     updated_at_utc
 from {{ ref('stg_loyalty_events') }}
-

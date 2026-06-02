@@ -11,4 +11,3 @@ select
     component_count,
     component_families
 from {{ ref('int_order_component_cost_bridge') }}
-

@@ -14,4 +14,3 @@ select
     products.product_family as item_family
 from {{ ref('jaffle_platform', 'dim_locations') }} as locations
 cross join {{ ref('jaffle_platform', 'dim_products') }} as products
-

@@ -36,4 +36,3 @@ select
     contacts.updated_at_utc
 from contacts
 left join ticket_bounds on contacts.support_ticket_id = ticket_bounds.support_ticket_id
-

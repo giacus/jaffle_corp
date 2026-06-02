@@ -26,7 +26,8 @@ select
     adjustments.updated_at_utc
 from adjustments
 left join menu_windows
-    on adjustments.store_id = menu_windows.store_id
-    and adjustments.product_id = menu_windows.product_id
-    and adjustments.effective_from_utc >= menu_windows.published_at_utc
-    and adjustments.effective_from_utc < menu_windows.effective_to_utc
+    on
+        adjustments.store_id = menu_windows.store_id
+        and adjustments.product_id = menu_windows.product_id
+        and adjustments.effective_from_utc >= menu_windows.published_at_utc
+        and adjustments.effective_from_utc < menu_windows.effective_to_utc

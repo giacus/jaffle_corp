@@ -18,9 +18,8 @@ select
         else 'healthy'
     end as supply_risk_status,
     estimated_closing_quantity < 0
-        or estimated_closing_quantity < expected_used_quantity
-        or observed_waste_quantity > expected_used_quantity
-        or has_count_review
-        or has_late_receipt as has_supply_risk
+    or estimated_closing_quantity < expected_used_quantity
+    or observed_waste_quantity > expected_used_quantity
+    or has_count_review
+    or has_late_receipt as has_supply_risk
 from {{ ref('int_inventory_daily_balance') }}
-

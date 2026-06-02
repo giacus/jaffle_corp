@@ -10,4 +10,3 @@ select
     primary_supplier_name,
     updated_at_utc
 from {{ ref('int_component_catalog') }}
-

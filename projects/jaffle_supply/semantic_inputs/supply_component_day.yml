@@ -1,7 +1,7 @@
 name: supply_component_day
 grain: store_component_day
 owner: supply
-description: Lightweight example spec for generating a component-day mart from public supply facts.
+description: Executable SQL spec for generating a component-day mart from public supply facts.
 inputs:
   - ref: fct_inventory_daily
     time_column: balance_date_utc
@@ -15,4 +15,3 @@ measures:
   - counted_quantity
   - estimated_closing_quantity
   - observed_waste_quantity
-

@@ -8,4 +8,3 @@ select
     incident_count
 from {{ ref('fct_store_day_operations') }}
 order by operating_date, store_id
-

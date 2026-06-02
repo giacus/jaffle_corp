@@ -12,4 +12,3 @@ select
     cast(processor_region as varchar) as processor_region,
     cast(updated_at_utc as timestamp) as updated_at_utc
 from {{ source('jaffle_app', 'raw_payments') }}
-

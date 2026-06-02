@@ -13,4 +13,3 @@ select
     expected_component_cost_usd,
     updated_at_utc
 from {{ ref('int_recipe_component_costs') }}
-

@@ -20,4 +20,3 @@ select
     cast(legacy_order_number as varchar) as legacy_order_number,
     cast(updated_at_utc as timestamp) as updated_at_utc
 from {{ source('jaffle_app', 'raw_orders') }}
-

@@ -10,4 +10,3 @@ select
     cast(source_version as varchar) as source_version,
     cast(updated_at_utc as timestamp) as updated_at_utc
 from {{ source('jaffle_supply_app', 'raw_inventory_counts') }}
-

@@ -14,4 +14,3 @@ select
     ) }} as conversion_rate
 from {{ ref('jaffle_experience', 'fct_experiment_outcomes') }}
 group by 1, 2, 3, 4
-

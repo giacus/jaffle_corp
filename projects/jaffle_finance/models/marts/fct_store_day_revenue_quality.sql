@@ -16,4 +16,3 @@ select
     revenue_exception_rate,
     store_day_revenue_quality_status
 from {{ ref('int_store_day_revenue_quality') }}
-

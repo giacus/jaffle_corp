@@ -9,8 +9,8 @@ actuals as (
         {{ jaffle_shared.week_start('orders.ordered_date_utc') }} as ordered_week_start_utc,
         sum(items.quantity) as actual_units,
         sum(items.item_total_major) as actual_item_revenue_usd
-    from {{ ref('fct_order_items') }} as items
-    inner join {{ ref('fct_orders') }} as orders
+    from {{ ref('jaffle_platform', 'fct_order_items') }} as items
+    inner join {{ ref('jaffle_platform', 'fct_orders') }} as orders
         on items.order_id = orders.order_id
     where orders.is_completed_order
     group by 1, 2, 3
@@ -44,9 +44,11 @@ select
     margin_baseline.average_expected_margin_rate
 from goals
 left join actuals
-    on goals.store_id = actuals.store_id
-    and goals.product_family = actuals.product_family
-    and goals.goal_week_start_utc = actuals.ordered_week_start_utc
+    on
+        goals.store_id = actuals.store_id
+        and goals.product_family = actuals.product_family
+        and goals.goal_week_start_utc = actuals.ordered_week_start_utc
 left join margin_baseline
-    on goals.store_id = margin_baseline.store_id
-    and goals.product_family = margin_baseline.product_family
+    on
+        goals.store_id = margin_baseline.store_id
+        and goals.product_family = margin_baseline.product_family

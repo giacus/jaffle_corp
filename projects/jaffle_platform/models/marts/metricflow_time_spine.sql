@@ -12,4 +12,3 @@ with recursive dates as (
 
 select date_day
 from dates
-

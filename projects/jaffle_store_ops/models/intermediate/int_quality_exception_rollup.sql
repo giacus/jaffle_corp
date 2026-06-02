@@ -25,4 +25,3 @@ select
 from checks
 left join products on checks.product_id = products.product_id
 group by 1, 2, 3, 4, 5
-

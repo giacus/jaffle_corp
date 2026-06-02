@@ -82,18 +82,22 @@ select
     coalesce(incidents.incident_minutes, 0) as incident_minutes
 from finance_store_day
 left join timing
-    on finance_store_day.store_id = timing.store_id
-    and finance_store_day.recognized_date = timing.operating_date
+    on
+        finance_store_day.store_id = timing.store_id
+        and finance_store_day.recognized_date = timing.operating_date
 left join shift_capacity
-    on finance_store_day.store_id = shift_capacity.store_id
-    and finance_store_day.recognized_date = shift_capacity.operating_date
+    on
+        finance_store_day.store_id = shift_capacity.store_id
+        and finance_store_day.recognized_date = shift_capacity.operating_date
 left join quality
-    on finance_store_day.store_id = quality.store_id
-    and finance_store_day.recognized_date = quality.operating_date
+    on
+        finance_store_day.store_id = quality.store_id
+        and finance_store_day.recognized_date = quality.operating_date
 left join supply
-    on finance_store_day.store_id = supply.store_id
-    and finance_store_day.recognized_date = supply.operating_date
+    on
+        finance_store_day.store_id = supply.store_id
+        and finance_store_day.recognized_date = supply.operating_date
 left join incidents
-    on finance_store_day.store_id = incidents.store_id
-    and finance_store_day.recognized_date = incidents.operating_date
-
+    on
+        finance_store_day.store_id = incidents.store_id
+        and finance_store_day.recognized_date = incidents.operating_date

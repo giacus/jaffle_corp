@@ -12,4 +12,3 @@ select
     cast(sum(case when has_refund_flag = 'Y' then 1 else 0 end) as integer) as refund_orders_cnt
 from {{ ref('stg_legacy_order_headers') }}
 group by 1, 2, 3, 4
-

@@ -24,4 +24,3 @@ select
     revenue.net_revenue_usd as net_amt_usd
 from revenue
 left join tickets on revenue.order_id = tickets.order_id
-

@@ -11,4 +11,3 @@ select
     cast(is_dark_kitchen as boolean) as is_dark_kitchen,
     cast(updated_at_utc as timestamp) as updated_at_utc
 from {{ source('jaffle_app', 'raw_stores') }}
-

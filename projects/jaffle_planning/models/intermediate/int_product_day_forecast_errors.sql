@@ -7,7 +7,11 @@ actuals as (
 ),
 
 products as (
-    select product_id, product_family, category from {{ ref('dim_products') }}
+    select
+        product_id,
+        product_family,
+        category
+    from {{ ref('jaffle_platform', 'dim_products') }}
 )
 
 select
@@ -33,7 +37,8 @@ select
     forecasts.updated_at_utc
 from forecasts
 left join actuals
-    on forecasts.store_id = actuals.store_id
-    and forecasts.product_id = actuals.product_id
-    and forecasts.forecast_date_utc = actuals.actual_date_utc
+    on
+        forecasts.store_id = actuals.store_id
+        and forecasts.product_id = actuals.product_id
+        and forecasts.forecast_date_utc = actuals.actual_date_utc
 left join products on forecasts.product_id = products.product_id

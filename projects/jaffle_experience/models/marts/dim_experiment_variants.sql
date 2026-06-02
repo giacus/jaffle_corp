@@ -17,7 +17,7 @@ select
     string_agg(distinct exposures.surface, ', ' order by exposures.surface) as surfaces
 from exposures
 left join price_tests
-    on exposures.experiment_id = price_tests.experiment_id
-    and exposures.variant_id = price_tests.variant_id
+    on
+        exposures.experiment_id = price_tests.experiment_id
+        and exposures.variant_id = price_tests.variant_id
 group by 1, 2, 3
-

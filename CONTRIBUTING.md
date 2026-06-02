@@ -27,15 +27,10 @@ python3.11 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
 
-dbt deps --project-dir projects/jaffle_platform --profiles-dir .
-dbt seed --project-dir projects/jaffle_platform --profiles-dir .
-dbt build --project-dir projects/jaffle_platform --profiles-dir .
-dbt build --project-dir projects/jaffle_finance --profiles-dir .
-dbt build --project-dir projects/jaffle_growth --profiles-dir .
-dbt build --project-dir projects/jaffle_legacy --profiles-dir .
+scripts/validate_repo.sh
 ```
 
-Run builds sequentially with the local DuckDB profile.
+The validation script installs dbt project dependencies, lints SQL project-by-project, invokes the sanitization guard, seeds local DuckDB sources, builds every project sequentially, and executes the semantic input specs. Run builds sequentially with the local DuckDB profile.
 
 ## Sanitization Check
 
@@ -44,3 +39,5 @@ Set `PROHIBITED_PATTERN` to any private-domain terms you want to block before pu
 ```bash
 PROHIBITED_PATTERN='private_term_one|private_term_two' scripts/check_sanitization.sh
 ```
+
+The script ignores the command line that defines `PROHIBITED_PATTERN`, so copied examples do not self-match.

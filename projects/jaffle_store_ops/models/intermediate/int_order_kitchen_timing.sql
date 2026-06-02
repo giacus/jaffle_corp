@@ -51,4 +51,3 @@ select
         as ready_to_served_minutes
 from event_pivot
 left join orders on event_pivot.order_id = orders.order_id
-

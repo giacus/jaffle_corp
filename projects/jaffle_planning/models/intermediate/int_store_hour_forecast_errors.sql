@@ -26,13 +26,11 @@ select
     {{ jaffle_shared.forecast_error('coalesce(actuals.actual_order_count, 0)', 'forecasts.forecasted_order_count') }} as forecast_error_orders,
     {{ jaffle_shared.absolute_forecast_error('coalesce(actuals.actual_order_count, 0)', 'forecasts.forecasted_order_count') }} as absolute_forecast_error_orders,
     {{ jaffle_shared.safe_divide(jaffle_shared.absolute_forecast_error('coalesce(actuals.actual_order_count, 0)', 'forecasts.forecasted_order_count'), 'nullif(actuals.actual_order_count, 0)') }} as absolute_percentage_error_orders,
-    case
-        when coalesce(actuals.actual_order_count, 0) between forecasts.lower_bound_orders and forecasts.upper_bound_orders then true
-        else false
-    end as actual_inside_prediction_interval,
+    coalesce(coalesce(actuals.actual_order_count, 0) between forecasts.lower_bound_orders and forecasts.upper_bound_orders, false) as actual_inside_prediction_interval,
     forecasts.created_at_utc,
     forecasts.updated_at_utc
 from forecasts
 left join actuals
-    on forecasts.store_id = actuals.store_id
-    and forecasts.forecast_hour_utc = actuals.actual_hour_utc
+    on
+        forecasts.store_id = actuals.store_id
+        and forecasts.forecast_hour_utc = actuals.actual_hour_utc

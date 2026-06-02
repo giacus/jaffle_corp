@@ -32,9 +32,10 @@ select
     availability.updated_at_utc
 from availability
 left join menu_windows
-    on availability.store_id = menu_windows.store_id
-    and availability.product_id = menu_windows.product_id
-    and cast(availability.available_date_utc + availability.hour_local * interval '1 hour' as timestamp)
+    on
+        availability.store_id = menu_windows.store_id
+        and availability.product_id = menu_windows.product_id
+        and cast(availability.available_date_utc + availability.hour_local * interval '1 hour' as timestamp)
         >= menu_windows.published_at_utc
-    and cast(availability.available_date_utc + availability.hour_local * interval '1 hour' as timestamp)
+        and cast(availability.available_date_utc + availability.hour_local * interval '1 hour' as timestamp)
         < menu_windows.effective_to_utc

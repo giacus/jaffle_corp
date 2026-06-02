@@ -38,4 +38,3 @@ select
 from customers
 left join orders on customers.cust = orders.customer_id
 left join tickets on customers.cust = tickets.customer_id
-

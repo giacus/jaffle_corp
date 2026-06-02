@@ -19,4 +19,3 @@ select
     {{ jaffle_shared.safe_divide('observed_item_total_major', 'observed_item_quantity') }} as observed_average_item_price_major,
     updated_at_utc
 from {{ ref('int_menu_price_test_windows') }}
-

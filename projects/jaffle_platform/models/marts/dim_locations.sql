@@ -14,4 +14,3 @@ select
 from {{ ref('stg_stores') }} as stores
 left join {{ ref('stg_store_hours_legacy') }} as legacy
     on stores.store_id = legacy.store_id
-

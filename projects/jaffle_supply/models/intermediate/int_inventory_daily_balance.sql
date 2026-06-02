@@ -49,13 +49,29 @@ waste as (
 ),
 
 component_days as (
-    select store_id, component_id, balance_date_utc from counts
+    select
+        store_id,
+        component_id,
+        balance_date_utc
+    from counts
     union
-    select store_id, component_id, balance_date_utc from usage
+    select
+        store_id,
+        component_id,
+        balance_date_utc
+    from usage
     union
-    select store_id, component_id, balance_date_utc from receipts
+    select
+        store_id,
+        component_id,
+        balance_date_utc
+    from receipts
     union
-    select store_id, component_id, balance_date_utc from waste
+    select
+        store_id,
+        component_id,
+        balance_date_utc
+    from waste
 )
 
 select
@@ -73,24 +89,27 @@ select
     coalesce(counts.has_count_review, false) as has_count_review,
     coalesce(receipts.has_late_receipt, false) as has_late_receipt,
     coalesce(counts.counted_quantity, 0)
-        + coalesce(receipts.received_quantity, 0)
-        - coalesce(usage.expected_used_quantity, 0)
-        - coalesce(waste.observed_waste_quantity, 0) as estimated_closing_quantity
+    + coalesce(receipts.received_quantity, 0)
+    - coalesce(usage.expected_used_quantity, 0)
+    - coalesce(waste.observed_waste_quantity, 0) as estimated_closing_quantity
 from component_days
 left join counts
-    on component_days.store_id = counts.store_id
-    and component_days.component_id = counts.component_id
-    and component_days.balance_date_utc = counts.balance_date_utc
+    on
+        component_days.store_id = counts.store_id
+        and component_days.component_id = counts.component_id
+        and component_days.balance_date_utc = counts.balance_date_utc
 left join usage
-    on component_days.store_id = usage.store_id
-    and component_days.component_id = usage.component_id
-    and component_days.balance_date_utc = usage.balance_date_utc
+    on
+        component_days.store_id = usage.store_id
+        and component_days.component_id = usage.component_id
+        and component_days.balance_date_utc = usage.balance_date_utc
 left join receipts
-    on component_days.store_id = receipts.store_id
-    and component_days.component_id = receipts.component_id
-    and component_days.balance_date_utc = receipts.balance_date_utc
+    on
+        component_days.store_id = receipts.store_id
+        and component_days.component_id = receipts.component_id
+        and component_days.balance_date_utc = receipts.balance_date_utc
 left join waste
-    on component_days.store_id = waste.store_id
-    and component_days.component_id = waste.component_id
-    and component_days.balance_date_utc = waste.balance_date_utc
-
+    on
+        component_days.store_id = waste.store_id
+        and component_days.component_id = waste.component_id
+        and component_days.balance_date_utc = waste.balance_date_utc

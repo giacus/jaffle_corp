@@ -1,7 +1,7 @@
 name: growth_customer_value
 grain: customer
 owner: growth
-description: Lightweight example spec for a customer value segmentation mart.
+description: Executable SQL spec for a customer value segmentation mart.
 inputs:
   - ref: fct_customer_value_segments
     join_key: customer_id
@@ -16,4 +16,3 @@ measures:
   - lifetime_net_revenue_usd
   - lifetime_recipe_margin_usd
   - projected_points_balance
-

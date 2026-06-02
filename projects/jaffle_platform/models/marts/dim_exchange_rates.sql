@@ -4,4 +4,3 @@ select
     rate_date,
     usd_rate
 from {{ ref('stg_fx_rates') }}
-

@@ -25,4 +25,3 @@ select
     refund_event_count,
     revenue_quality_status
 from {{ ref('int_order_margin_waterfall') }}
-

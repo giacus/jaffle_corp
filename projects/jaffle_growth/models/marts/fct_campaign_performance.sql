@@ -14,9 +14,9 @@ select
         as attributed_margin_usd,
     case
         when sum(coalesce(estimated_cost_usd, 0)) = 0 then null
-        else sum(case when is_attributed_order then coalesce(net_revenue_usd, 0) else 0 end)
+        else
+            sum(case when is_attributed_order then coalesce(net_revenue_usd, 0) else 0 end)
             / sum(coalesce(estimated_cost_usd, 0))
     end as estimated_roas
 from {{ ref('int_campaign_touchpoints') }}
 group by 1, 2, 3, 4
-

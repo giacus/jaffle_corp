@@ -32,4 +32,3 @@ select
     resolution_sla_status = 'within_target' as met_resolution_sla,
     updated_at_utc
 from {{ ref('int_ticket_sla_events') }}
-

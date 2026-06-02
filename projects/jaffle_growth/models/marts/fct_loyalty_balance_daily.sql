@@ -8,4 +8,3 @@ select
     loyalty_event_count,
     loyalty_balance_status
 from {{ ref('int_loyalty_balance_projection') }}
-

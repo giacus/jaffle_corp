@@ -9,4 +9,3 @@ select
     cast(program_tier as varchar) as program_tier,
     cast(updated_at_utc as timestamp) as updated_at_utc
 from {{ source('jaffle_app', 'raw_loyalty_events') }}
-

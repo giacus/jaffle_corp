@@ -1,10 +1,10 @@
 name: mart_store_day_finance
-description: Example generator input for a MetricFlow-backed store-day finance mart.
+description: Executable MetricFlow query spec for a store-day finance mart.
 semantic_model: order_revenue
 time_dimension: recognized_date
 grain: day
 dimensions:
-  - location__store_id
+  - location
   - order__country_code
 metrics:
   - net_revenue_usd
@@ -13,4 +13,3 @@ metrics:
 materialization:
   type: table
   owner: finance@jaffle.example
-

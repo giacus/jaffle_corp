@@ -15,4 +15,3 @@ select
     end as has_refund_flag,
     updated_at_utc as load_ts
 from {{ ref('jaffle_platform', 'fct_orders') }}
-

@@ -1,7 +1,7 @@
 name: experience_ticket_day
 grain: support_ticket_day
 owner: experience
-description: Lightweight example spec for a day-grain support mart.
+description: Executable SQL spec for a day-grain support mart.
 inputs:
   - ref: fct_support_tickets
     time_column: opened_date_utc
@@ -15,4 +15,3 @@ measures:
   - support_ticket_count
   - concession_major
   - contact_event_count
-

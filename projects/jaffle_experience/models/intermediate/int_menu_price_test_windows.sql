@@ -46,9 +46,9 @@ select
 from price_tests
 left join products on price_tests.product_id = products.product_id
 left join order_items
-    on price_tests.product_id = order_items.product_id
-    and price_tests.store_id = order_items.store_id
-    and order_items.ordered_at_utc >= price_tests.effective_from_utc
-    and order_items.ordered_at_utc < price_tests.effective_to_utc
+    on
+        price_tests.product_id = order_items.product_id
+        and price_tests.store_id = order_items.store_id
+        and order_items.ordered_at_utc >= price_tests.effective_from_utc
+        and order_items.ordered_at_utc < price_tests.effective_to_utc
 group by 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17
-

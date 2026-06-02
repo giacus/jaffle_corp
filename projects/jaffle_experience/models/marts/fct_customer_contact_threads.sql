@@ -12,4 +12,3 @@ select
     max(updated_at_utc) as updated_at_utc
 from {{ ref('int_customer_contact_sequences') }}
 group by 1, 2
-

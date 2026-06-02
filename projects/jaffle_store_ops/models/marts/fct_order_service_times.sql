@@ -20,4 +20,3 @@ select
     {{ jaffle_shared.bucket_minutes('received_to_ready_minutes') }} as received_to_ready_bucket,
     received_to_ready_minutes <= {{ var('kitchen_ready_target_minutes', 12) }} as met_ready_target
 from {{ ref('int_order_kitchen_timing') }}
-

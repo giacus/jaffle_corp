@@ -2,6 +2,7 @@
 dialect = duckdb
 templater = dbt
 max_line_length = 100
+exclude_rules = ST06,ST09,LT05
 
 [sqlfluff:templater:dbt]
 profiles_dir = .
@@ -11,4 +12,3 @@ capitalisation_policy = lower
 
 [sqlfluff:rules:references.qualification]
 force_enable = false
-

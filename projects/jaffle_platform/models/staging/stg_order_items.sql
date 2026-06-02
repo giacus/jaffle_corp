@@ -13,4 +13,3 @@ select
     cast(customization_count as integer) as customization_count,
     cast(updated_at_utc as timestamp) as updated_at_utc
 from {{ source('jaffle_app', 'raw_order_items') }}
-

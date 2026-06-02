@@ -63,4 +63,3 @@ from customers
 left join finance on customers.customer_id = finance.customer_id
 left join support on customers.customer_id = support.customer_id
 left join experiments on customers.customer_id = experiments.customer_id
-

@@ -73,7 +73,8 @@ select
 from orders
 left join stores on orders.store_id = stores.store_id
 left join fx_rates
-    on orders.currency = fx_rates.currency
-    and orders.ordered_date_utc = fx_rates.rate_date
+    on
+        orders.currency = fx_rates.currency
+        and orders.ordered_date_utc = fx_rates.rate_date
 left join payments on orders.order_id = payments.order_id
 left join refunds on orders.order_id = refunds.order_id

@@ -7,4 +7,3 @@ select
 from {{ ref('fct_customer_value_segments') }}
 group by 1, 2
 order by 1, 2
-

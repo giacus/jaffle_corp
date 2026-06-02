@@ -30,4 +30,3 @@ select
     end as needs_currency_review
 from headers
 left join items on headers.modern_order_id = items.order_id
-

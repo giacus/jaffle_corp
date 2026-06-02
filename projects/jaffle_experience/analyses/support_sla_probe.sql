@@ -7,4 +7,3 @@ select
 from {{ ref('fct_support_tickets') }}
 group by 1, 2
 order by 1, 2
-

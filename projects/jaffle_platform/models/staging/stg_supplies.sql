@@ -11,4 +11,3 @@ select
     cast(replenishment_mode as varchar) as replenishment_mode,
     cast(updated_at_utc as timestamp) as updated_at_utc
 from {{ source('jaffle_app', 'raw_supplies') }}
-

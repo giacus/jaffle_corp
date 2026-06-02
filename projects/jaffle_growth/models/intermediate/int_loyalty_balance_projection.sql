@@ -34,4 +34,3 @@ select
         else 'standard'
     end as loyalty_balance_status
 from daily_events
-

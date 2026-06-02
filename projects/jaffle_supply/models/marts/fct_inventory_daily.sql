@@ -15,4 +15,3 @@ select
     has_count_review,
     has_late_receipt
 from {{ ref('int_inventory_daily_balance') }}
-

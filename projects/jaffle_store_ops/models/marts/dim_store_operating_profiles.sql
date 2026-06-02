@@ -28,4 +28,3 @@ select
     shifts.observed_role_mix_codes
 from locations
 left join shifts on locations.store_id = shifts.store_id
-

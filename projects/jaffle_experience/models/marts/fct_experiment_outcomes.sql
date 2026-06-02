@@ -16,4 +16,3 @@ select
     completed_order_count_7d > 0 as converted_7d,
     updated_at_utc
 from {{ ref('int_experiment_order_outcomes') }}
-

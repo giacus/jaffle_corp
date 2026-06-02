@@ -21,4 +21,3 @@ from recipe_components
 left join purchase_orders
     on recipe_components.component_id = purchase_orders.component_id
 group by 1
-

@@ -11,4 +11,3 @@ select
     {{ jaffle_shared.minutes_between('opened_at_utc', 'resolved_at_utc') }} as incident_minutes,
     cast(updated_at_utc as timestamp) as updated_at_utc
 from {{ source('jaffle_store_ops_app', 'raw_service_incidents') }}
-

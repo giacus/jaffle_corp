@@ -34,8 +34,8 @@ select
         as service_fee_major,
     coalesce(costs.estimated_supply_cost_usd, 0) as estimated_supply_cost_usd,
     payment_allocations.captured_amount_usd
-        - payment_allocations.refunded_amount_usd
-        - coalesce(costs.estimated_supply_cost_usd, 0) as estimated_gross_margin_usd,
+    - payment_allocations.refunded_amount_usd
+    - coalesce(costs.estimated_supply_cost_usd, 0) as estimated_gross_margin_usd,
     coalesce(costs.order_item_count, 0) as order_item_count,
     coalesce(costs.total_item_quantity, 0) as total_item_quantity,
     payment_allocations.payment_attempt_count,
@@ -43,4 +43,3 @@ select
     payment_allocations.revenue_quality_status
 from payment_allocations
 left join costs on payment_allocations.order_id = costs.order_id
-

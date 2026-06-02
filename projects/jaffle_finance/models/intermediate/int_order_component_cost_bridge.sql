@@ -22,4 +22,3 @@ select
 from order_items
 left join component_costs on order_items.product_id = component_costs.product_id
 group by 1, 2, 3, 4, 5, 6, 7
-

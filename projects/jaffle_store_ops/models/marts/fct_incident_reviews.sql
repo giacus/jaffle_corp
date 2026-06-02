@@ -14,4 +14,3 @@ select
     severity = 'high' or affected_orders > 1 as is_high_attention,
     updated_at_utc
 from {{ ref('stg_service_incidents') }}
-

@@ -12,4 +12,3 @@ select
     estimated_margin_usd_7d,
     conversion_rate
 from {{ ref('int_experiment_conversion_rollup') }}
-

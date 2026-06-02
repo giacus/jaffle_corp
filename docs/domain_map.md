@@ -72,7 +72,7 @@
 - Operating calendars
 - Capacity scenario windows
 - Planning exception rollups
-- MetricFlow query input examples
+- Executable MetricFlow query specs
 
 ## Legacy
 

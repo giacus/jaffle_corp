@@ -10,4 +10,3 @@ select
     cast(initiated_by as varchar) as initiated_by,
     cast(updated_at_utc as timestamp) as updated_at_utc
 from {{ source('jaffle_app', 'raw_refunds') }}
-

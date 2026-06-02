@@ -1,7 +1,7 @@
 name: store_ops_day
 grain: store_day
 owner: store_ops
-description: Lightweight example spec for a store-day operations mart.
+description: Executable SQL spec for a store-day operations mart.
 inputs:
   - ref: fct_store_day_operations
     time_column: operating_date
@@ -16,4 +16,3 @@ measures:
   - ready_inside_target_count
   - quality_exception_count
   - incident_count
-

@@ -17,4 +17,3 @@ select
     value_band,
     care_profile
 from {{ ref('int_customer_value_bands') }}
-

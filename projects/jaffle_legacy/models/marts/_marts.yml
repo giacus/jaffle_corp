@@ -73,7 +73,7 @@ models:
       - name: legacy_menu_mix_key
         data_tests: [not_null, unique]
       - name: business_dt
-      - name: family
+      - name: product_family
       - name: cat
       - name: orders_cnt
       - name: items_qty

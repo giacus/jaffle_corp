@@ -21,4 +21,3 @@ select
         else date_diff('day', cast(first_seen_at as date), cast(first_ordered_at_utc as date))
     end as days_to_first_order
 from {{ ref('int_customer_lifecycle_events') }}
-

@@ -11,4 +11,3 @@ select
     cast(operator_initials as varchar) as operator_initials,
     cast(updated_at_utc as timestamp) as updated_at_utc
 from {{ source('jaffle_store_ops_app', 'raw_kitchen_events') }}
-

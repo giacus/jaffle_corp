@@ -49,4 +49,3 @@ select
         else 'pending'
     end as revenue_quality_status
 from order_ratios
-

@@ -40,8 +40,8 @@ select
     purchase_orders.updated_at_utc
 from purchase_orders
 left join exchange_rates
-    on purchase_orders.currency = exchange_rates.currency
-    and cast(purchase_orders.received_at_utc as date) = exchange_rates.rate_date
+    on
+        purchase_orders.currency = exchange_rates.currency
+        and cast(purchase_orders.received_at_utc as date) = exchange_rates.rate_date
 left join locations
     on purchase_orders.store_id = locations.store_id
-

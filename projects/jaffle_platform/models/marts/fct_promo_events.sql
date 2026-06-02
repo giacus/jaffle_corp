@@ -13,4 +13,3 @@ select
     currency,
     updated_at_utc
 from {{ ref('stg_promo_events') }}
-
