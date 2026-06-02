@@ -18,7 +18,13 @@ The goal is realistic complexity, not maximum complexity. Contributions should m
 - Do not add real company data, internal system names, real schemas, warehouse names, customer names, personal emails, or private business entities.
 - Keep seed data small and synthetic.
 - Avoid copying SQL from private repositories.
+- Avoid copying source files, generated data, screenshots, images, or docs from upstream Jaffle Shop repositories unless the license or permission is clear and attribution is preserved.
+- Do not use dbt Labs logos, trademarks, screenshots, or branding as if this project were official or endorsed.
 - Prefer narrow, understandable examples over broad rewrites.
+
+## Attribution
+
+This project is inspired by dbt Labs' [`jaffle-shop`](https://github.com/dbt-labs/jaffle-shop), but it is independently authored and not affiliated with dbt Labs. See [ATTRIBUTION.md](ATTRIBUTION.md) before adding material based on upstream Jaffle Shop examples.
 
 ## Local Validation
 

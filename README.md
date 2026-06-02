@@ -4,6 +4,8 @@
 
 The business is still fictional and food-focused: customers buy jaffles from stores, orders contain items, products require supplies, payments settle in multiple currencies, refunds happen, campaigns create attribution arguments, and legacy tables refuse to disappear. The project is intentionally more realistic than a tidy tutorial while remaining safe for open-source use.
 
+This repo is inspired by dbt Labs' [jaffle-shop](https://github.com/dbt-labs/jaffle-shop), but it is not a fork and is not affiliated with or endorsed by dbt Labs. See [ATTRIBUTION.md](ATTRIBUTION.md) for the relationship, contribution, and license boundaries.
+
 ## What This Repo Demonstrates
 
 - A multi-project dbt monorepo with domain boundaries.
@@ -183,6 +185,8 @@ See [TODO.md](TODO.md) for a deliberately incomplete list of starter fixes. The 
 
 See [docs/open_source_sanitization.md](docs/open_source_sanitization.md) for the sanitization rules used while creating this repo.
 
+See [ATTRIBUTION.md](ATTRIBUTION.md) before copying or adapting any upstream Jaffle Shop material. Keep inspiration, attribution, and license scope explicit in the same change.
+
 ## Contributing
 
 This repo is intended to be played with. Good contributions add realistic dbt complexity while keeping the business fictional, small enough to run locally, and understandable from the docs.
@@ -201,7 +205,7 @@ PROHIBITED_PATTERN='<pipe-separated-private-terms>' scripts/check_sanitization.s
 
 The sanitization script ignores the command line that defines `PROHIBITED_PATTERN`, so copied examples do not self-match.
 
-Reference material used for structure:
+Reference material used for structure and context:
 
 - [dbt-labs/jaffle-shop](https://github.com/dbt-labs/jaffle-shop)
 - [dbt project dependencies docs](https://docs.getdbt.com/docs/mesh/govern/project-dependencies)
