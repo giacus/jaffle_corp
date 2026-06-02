@@ -2,6 +2,20 @@
 
 Run these from a built local checkout after installing `requirements.txt`, running `dbt deps`, seeding the source projects, and building the dbt projects in README order.
 
+The Semantic Layer files are intentionally compact:
+
+- `models/semantic_models.yml` contains semantic models.
+- `models/metrics.yml` contains metrics.
+- Add `models/saved_queries.yml` only when you want to version a reusable query.
+
+No Python wrapper is required. Use MetricFlow directly and inspect what is available before querying:
+
+```bash
+DBT_PROFILES_DIR=../.. mf list metrics
+DBT_PROFILES_DIR=../.. mf list dimensions --metrics <metric_name>
+DBT_PROFILES_DIR=../.. mf list entities --metrics <metric_name>
+```
+
 Use the repo-root DuckDB file explicitly so `mf` opens the same database that dbt built:
 
 ```bash

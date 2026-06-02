@@ -1,0 +1,47 @@
+version: 2
+
+metrics:
+  - name: support_ticket_count
+    description: Count of support tickets.
+    type: simple
+    label: Support Ticket Count
+    type_params:
+      measure: support_ticket_count
+
+  - name: first_response_sla_met_count
+    description: Count of tickets with first response inside target.
+    type: simple
+    label: First Response SLA Met Count
+    type_params:
+      measure: first_response_sla_met_count
+
+  - name: first_response_sla_rate
+    description: Share of tickets with first response inside target.
+    type: ratio
+    label: First Response SLA Rate
+    type_params:
+      numerator: first_response_sla_met_count
+      denominator: support_ticket_count
+
+  - name: experiment_exposure_count
+    description: Count of experiment exposures.
+    type: simple
+    label: Experiment Exposure Count
+    type_params:
+      measure: experiment_exposure_count
+
+  - name: experiment_conversion_count
+    description: Count of exposures that completed an order within seven days.
+    type: simple
+    label: Experiment Conversion Count
+    type_params:
+      measure: experiment_conversion_count
+
+  - name: experiment_conversion_rate
+    description: Share of exposures with a completed order within seven days.
+    type: ratio
+    label: Experiment Conversion Rate
+    type_params:
+      numerator: experiment_conversion_count
+      denominator: experiment_exposure_count
+

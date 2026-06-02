@@ -10,7 +10,7 @@ The business is still fictional and food-focused: customers buy jaffles from sto
 - Mesh-style project dependencies through `dependencies.yml`.
 - Local package fallbacks so contributors can parse and build examples without a dbt platform account.
 - Public model contracts on project interfaces.
-- Semantic Layer definitions with direct MetricFlow commands for simple, derived, ratio, cumulative, and conversion metrics.
+- Compact Semantic Layer definitions with direct MetricFlow commands for simple, derived, ratio, cumulative, and conversion metrics.
 - Legacy models, inconsistent source conventions, time-window macros, and selectors that mimic production sprawl.
 - Supply, support, experimentation, quality, store operations, merchandising, planning, snapshots, analyses, exposures, and singular tests.
 - Multiple grains beyond order and order item: store-hour, product-store-hour, product-store-day, product-pair-day, store-product-day, component-store-week, scenario-store-day, customer-day, and store-day.
@@ -103,6 +103,14 @@ DBT_PROFILES_DIR=../.. mf query \
 ```
 
 See [docs/metricflow.md](docs/metricflow.md) for the full set of domain MetricFlow commands.
+
+Semantic models and metrics are defined as plain dbt/MetricFlow YAML in each domain project:
+
+- `models/semantic_models.yml` defines entities, measures, dimensions, and default time dimensions.
+- `models/metrics.yml` defines the curated metrics built on those measures.
+- `models/saved_queries.yml` is intentionally not pre-filled; add one when a repeated query is worth versioning.
+
+There are no Python helper scripts for the Semantic Layer. Use `dbt` and `mf` directly so the examples stay close to the tools students will use in real projects.
 
 Lint SQL across the multi-project repo:
 

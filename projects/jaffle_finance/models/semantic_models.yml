@@ -37,7 +37,7 @@ semantic_models:
       - name: gross_revenue_usd
         expr: gross_revenue_usd
         agg: sum
-      - name: net_revenue_usd
+      - name: sum_net_revenue_usd
         expr: net_revenue_usd
         agg: sum
       - name: refunded_amount_usd
@@ -90,63 +90,3 @@ semantic_models:
       - name: margin_waterfall_order_count
         expr: 1
         agg: sum
-
-metrics:
-  - name: net_revenue_usd
-    description: Net revenue after refunds in USD.
-    type: simple
-    label: Net Revenue USD
-    type_params:
-      measure: net_revenue_usd
-
-  - name: estimated_gross_margin_usd
-    description: Net revenue less estimated supply cost.
-    type: simple
-    label: Estimated Gross Margin USD
-    type_params:
-      measure: estimated_gross_margin_usd
-
-  - name: finance_order_count
-    description: Count of finance orders.
-    type: simple
-    label: Finance Order Count
-    type_params:
-      measure: finance_order_count
-
-  - name: refunded_finance_order_count
-    description: Count of finance orders with refund events.
-    type: simple
-    label: Refunded Finance Order Count
-    type_params:
-      measure: refunded_finance_order_count
-
-  - name: refund_rate
-    description: Share of finance orders with at least one refund event.
-    type: ratio
-    label: Refund Rate
-    type_params:
-      numerator: refunded_finance_order_count
-      denominator: finance_order_count
-
-  - name: cumulative_net_revenue_usd_28d
-    description: Rolling 28-day net revenue.
-    type: cumulative
-    label: Cumulative Net Revenue USD 28D
-    type_params:
-      measure: net_revenue_usd
-      cumulative_type_params:
-        window: 28 days
-
-  - name: recipe_margin_usd
-    description: Net revenue less recipe-derived component cost.
-    type: simple
-    label: Recipe Margin USD
-    type_params:
-      measure: recipe_margin_usd
-
-  - name: recipe_cost_variance_usd
-    description: Difference between recipe-derived and platform-estimated component cost.
-    type: simple
-    label: Recipe Cost Variance USD
-    type_params:
-      measure: recipe_cost_variance_usd

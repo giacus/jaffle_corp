@@ -72,7 +72,7 @@
 - Operating calendars
 - Capacity scenario windows
 - Planning exception rollups
-- Direct MetricFlow query commands
+- MetricFlow metric definitions and direct query commands
 
 ## Legacy
 

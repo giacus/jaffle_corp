@@ -1,0 +1,69 @@
+version: 2
+
+metrics:
+  - name: merchandising_available_hours
+    description: Count of product-store hours with available status.
+    type: simple
+    label: Merchandising Available Hours
+    type_params:
+      measure: merchandising_available_hour_count
+
+  - name: merchandising_observed_hours
+    description: Count of observed product-store hours.
+    type: simple
+    label: Merchandising Observed Hours
+    type_params:
+      measure: merchandising_observed_hour_count
+
+  - name: merchandising_availability_rate
+    description: Share of observed product-store hours that were available.
+    type: ratio
+    label: Merchandising Availability Rate
+    type_params:
+      numerator: merchandising_available_hours
+      denominator: merchandising_observed_hours
+
+  - name: merchandising_outage_minutes
+    description: Sum of unavailable or constrained menu minutes.
+    type: simple
+    label: Merchandising Outage Minutes
+    type_params:
+      measure: merchandising_outage_minutes
+
+  - name: menu_actual_units
+    description: Units sold against weekly menu goals.
+    type: simple
+    label: Menu Actual Units
+    type_params:
+      measure: sum_menu_actual_units
+
+  - name: menu_target_units
+    description: Target units for weekly menu goals.
+    type: simple
+    label: Menu Target Units
+    type_params:
+      measure: menu_target_units
+
+  - name: menu_unit_attainment_rate
+    description: Actual units divided by target units.
+    type: ratio
+    label: Menu Unit Attainment Rate
+    type_params:
+      numerator: menu_actual_units
+      denominator: menu_target_units
+
+  - name: basket_pair_orders
+    description: Orders that contained a product pair.
+    type: simple
+    label: Basket Pair Orders
+    type_params:
+      measure: basket_pair_order_count
+
+  - name: cumulative_menu_actual_units_4w
+    description: Four-week cumulative menu actual units.
+    type: cumulative
+    label: Cumulative Menu Actual Units 4W
+    type_params:
+      measure: sum_menu_actual_units
+      cumulative_type_params:
+        window: 4 weeks

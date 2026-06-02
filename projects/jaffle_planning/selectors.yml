@@ -1,12 +1,14 @@
 selectors:
   - name: planning_metricflow_surface
-    description: Planning marts and semantic nodes.
+    description: Planning marts and MetricFlow resources.
     definition:
       union:
         - method: path
           value: models/marts
         - method: path
-          value: models/semantic
+          value: models/semantic_models.yml
+        - method: path
+          value: models/metrics.yml
 
   - name: forecast_accuracy_models
     description: Forecast-vs-actual mart models.

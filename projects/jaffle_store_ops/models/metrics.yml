@@ -1,48 +1,5 @@
 version: 2
 
-semantic_models:
-  - name: store_day_operations
-    description: Store operations semantic model for day-grain operating health.
-    model: ref('fct_store_day_operations')
-    defaults:
-      agg_time_dimension: operating_date
-    entities:
-      - name: store_day_operations
-        type: primary
-        expr: store_day_operations_key
-      - name: location
-        type: foreign
-        expr: store_id
-    dimensions:
-      - name: operating_date
-        type: time
-        expr: operating_date
-        type_params:
-          time_granularity: day
-      - name: store_day_status
-        type: categorical
-      - name: country_code
-        type: categorical
-    measures:
-      - name: store_ops_day_count
-        expr: 1
-        agg: sum
-      - name: store_ops_order_count
-        expr: order_count
-        agg: sum
-      - name: store_ops_ready_inside_target_count
-        expr: ready_inside_target_count
-        agg: sum
-      - name: store_ops_order_timing_count
-        expr: order_timing_count
-        agg: sum
-      - name: store_ops_quality_exception_count
-        expr: quality_exception_count
-        agg: sum
-      - name: store_ops_incident_count
-        expr: incident_count
-        agg: sum
-
 metrics:
   - name: store_ops_order_count
     description: Store operations order count.
