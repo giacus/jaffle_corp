@@ -30,7 +30,7 @@ python -m pip install -r requirements.txt
 scripts/validate_repo.sh
 ```
 
-The validation script installs dbt project dependencies, lints SQL project-by-project, invokes the sanitization guard, seeds local DuckDB sources, builds every project sequentially, and executes the semantic input specs. Run builds sequentially with the local DuckDB profile.
+The validation script installs dbt project dependencies, lints SQL project-by-project, invokes the sanitization guard, seeds local DuckDB sources, builds every project sequentially, and runs direct MetricFlow CLI queries. Run builds sequentially with the local DuckDB profile.
 
 ## Sanitization Check
 

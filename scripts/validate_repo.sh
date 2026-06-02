@@ -41,4 +41,59 @@ for project in "${PROJECTS[@]}"; do
   dbt build --project-dir "$project" --profiles-dir .
 done
 
-python scripts/run_semantic_inputs.py
+run_metricflow_validate() {
+  local project="$1"
+  (
+    cd "$project"
+    DBT_PROFILES_DIR="$ROOT_DIR" mf validate-configs --skip-dw
+  )
+}
+
+run_metricflow_query() {
+  local project="$1"
+  local metrics="$2"
+  local group_by="$3"
+  (
+    cd "$project"
+    DBT_PROFILES_DIR="$ROOT_DIR" mf query \
+      --metrics "$metrics" \
+      --group-by "$group_by" \
+      --limit 20 \
+      --quiet
+  )
+}
+
+run_metricflow_validate projects/jaffle_finance
+run_metricflow_validate projects/jaffle_growth
+run_metricflow_validate projects/jaffle_merchandising
+run_metricflow_validate projects/jaffle_planning
+
+run_metricflow_query \
+  projects/jaffle_finance \
+  "net_revenue_usd,estimated_gross_margin_usd,refund_rate" \
+  "metric_time,location,order__country_code"
+
+run_metricflow_query \
+  projects/jaffle_growth \
+  "attributed_net_revenue_usd,campaign_roas" \
+  "metric_time,campaign_performance__campaign_id,campaign_performance__channel"
+
+run_metricflow_query \
+  projects/jaffle_merchandising \
+  "merchandising_observed_hours,merchandising_available_hours,merchandising_availability_rate,merchandising_outage_minutes" \
+  "metric_time,product,location,product_store_hour__availability_status,product_store_hour__product_family"
+
+run_metricflow_query \
+  projects/jaffle_merchandising \
+  "menu_actual_units,menu_target_units,menu_unit_attainment_rate,cumulative_menu_actual_units_4w" \
+  "metric_time,location,menu_goal__product_family,menu_goal__unit_goal_status"
+
+run_metricflow_query \
+  projects/jaffle_planning \
+  "planned_component_usage,actual_component_usage" \
+  "metric_time,location,component,component_week_plan__scenario_name,component_week_plan__usage_variance_status"
+
+run_metricflow_query \
+  projects/jaffle_planning \
+  "forecasted_orders,actual_orders_for_forecast,absolute_order_forecast_error,forecast_interval_hit_rate" \
+  "metric_time,location,store_hour_forecast__scenario_name,store_hour_forecast__forecast_accuracy_band"

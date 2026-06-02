@@ -10,7 +10,7 @@ The business is still fictional and food-focused: customers buy jaffles from sto
 - Mesh-style project dependencies through `dependencies.yml`.
 - Local package fallbacks so contributors can parse and build examples without a dbt platform account.
 - Public model contracts on project interfaces.
-- Executable Semantic Layer and MetricFlow specs for simple, derived, ratio, cumulative, and conversion metrics.
+- Semantic Layer definitions with direct MetricFlow commands for simple, derived, ratio, cumulative, and conversion metrics.
 - Legacy models, inconsistent source conventions, time-window macros, and selectors that mimic production sprawl.
 - Supply, support, experimentation, quality, store operations, merchandising, planning, snapshots, analyses, exposures, and singular tests.
 - Multiple grains beyond order and order item: store-hour, product-store-hour, product-store-day, product-pair-day, store-product-day, component-store-week, scenario-store-day, customer-day, and store-day.
@@ -89,11 +89,20 @@ dbt build --project-dir projects/jaffle_planning --profiles-dir .
 dbt build --project-dir projects/jaffle_legacy --profiles-dir .
 ```
 
-Execute every semantic input spec against the local build:
+Run MetricFlow directly against the local build:
 
 ```bash
-python scripts/run_semantic_inputs.py
+export JAFFLE_CORP_DUCKDB_PATH="$PWD/jaffle_corp.duckdb"
+
+cd projects/jaffle_finance
+DBT_PROFILES_DIR=../.. mf validate-configs --skip-dw
+DBT_PROFILES_DIR=../.. mf query \
+  --metrics net_revenue_usd,estimated_gross_margin_usd,refund_rate \
+  --group-by metric_time,location,order__country_code \
+  --limit 20
 ```
+
+See [docs/metricflow.md](docs/metricflow.md) for the full set of domain MetricFlow commands.
 
 Lint SQL across the multi-project repo:
 
