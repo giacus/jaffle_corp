@@ -72,7 +72,6 @@
 - Operating calendars
 - Capacity scenario windows
 - Planning exception rollups
-- MetricFlow metric definitions and direct query commands
 
 ## Legacy
 
@@ -82,3 +81,8 @@
 - Old order status mappings
 - Mixed currency calculations
 - Tables with confusing names kept for migration exercises
+
+## Semantic Layer
+
+- MetricFlow semantic models and metrics in finance, growth, merchandising, and planning
+- Direct `mf` commands for validating configs, listing metrics, and querying local DuckDB results
