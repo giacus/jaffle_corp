@@ -1,4 +1,4 @@
-# Exercise TODOs
+# Exercises
 
 This list is intentionally incomplete. The repo is meant to feel like a realistic analytics codebase, so students should discover additional issues through parsing, building, reading lineage, and writing tests.
 
@@ -13,6 +13,6 @@ This list is intentionally incomplete. The repo is meant to feel like a realisti
 - Convert at least one legacy-style surface into a clean public model with a contract.
 - Add a test that catches overlapping capacity scenario windows by store.
 
-## Instructor Notes
+## Notes
 
 Do not treat this file as the full answer key. It names a few low-friction exercises so students can get started, while leaving enough ambiguity for code review, lineage inspection, and semantic-model debugging practice.

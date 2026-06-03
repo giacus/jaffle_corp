@@ -1,209 +1,207 @@
 # jaffle-corp
 
-`jaffle-corp` is a deliberately overgrown dbt demo for teams that have outgrown the classic Jaffle Shop example.
+Welcome to `jaffle-corp`, a dbt Core playground for people who know the classic
+Jaffle Shop shape and want something closer to the messiness of a real analytics
+engineering codebase.
 
-The business is still fictional and food-focused: customers buy jaffles from stores, orders contain items, products require supplies, payments settle in multiple currencies, refunds happen, campaigns create attribution arguments, and legacy tables refuse to disappear. The project is intentionally more realistic than a tidy tutorial while remaining safe for open-source use.
+You will work with a fictional food-retail company that sells jaffles through
+stores. The data is synthetic, the domain is safe for public use, and the repo
+is designed to run locally with dbt Core and DuckDB. No warehouse credentials,
+dbt Cloud account, or private metadata service is required.
 
-This repo is inspired by dbt Labs' [jaffle-shop](https://github.com/dbt-labs/jaffle-shop), but it is not a fork and is not affiliated with or endorsed by dbt Labs. See [ATTRIBUTION.md](ATTRIBUTION.md) for the relationship, contribution, and license boundaries.
+This repo is inspired by dbt Labs' [jaffle-shop](https://github.com/dbt-labs/jaffle-shop),
+but it is not a fork and is not affiliated with or endorsed by dbt Labs. See
+[ATTRIBUTION.md](ATTRIBUTION.md) for the relationship, contribution, and license
+boundaries.
 
-## What This Repo Demonstrates
+## Table of Contents
 
-- A multi-project dbt monorepo with domain boundaries.
-- Mesh-style project dependencies through `dependencies.yml`.
-- Local package fallbacks so contributors can parse and build examples without a dbt platform account.
-- Public model contracts on project interfaces.
-- Compact Semantic Layer definitions with direct MetricFlow commands for simple, derived, ratio, cumulative, and conversion metrics.
-- Legacy models, inconsistent source conventions, time-window macros, and selectors that mimic production sprawl.
-- Supply, support, experimentation, quality, store operations, merchandising, planning, snapshots, analyses, exposures, and singular tests.
-- Multiple grains beyond order and order item: store-hour, product-store-hour, product-store-day, product-pair-day, store-product-day, component-store-week, scenario-store-day, customer-day, and store-day.
-- Synthetic seed data only. No real company data, names, warehouse identifiers, or proprietary business entities are included.
+1. [What You Will Build](#what-you-will-build)
+2. [Prerequisites](#prerequisites)
+3. [Set Up dbt Core](#set-up-dbt-core)
+4. [Build the Project](#build-the-project)
+5. [Explore the Project](#explore-the-project)
+6. [Run MetricFlow](#run-metricflow)
+7. [Going Further](#going-further)
+8. [Contributing](#contributing)
 
-## Project Map
+## What You Will Build
 
-| Project | Purpose | Depends On |
-| --- | --- | --- |
-| `jaffle_shared` | Shared macros and schema behavior. | None |
-| `jaffle_platform` | Raw ingestion, staging, conformed dimensions, order facts, and public interfaces. | `jaffle_shared` |
-| `jaffle_supply` | Recipes, purchase orders, inventory counts, component costs, and supply risk. | `jaffle_platform`, `jaffle_shared` |
-| `jaffle_finance` | Payments, refunds, FX normalization, revenue recognition, margin, and finance controls. | `jaffle_platform`, `jaffle_supply`, `jaffle_shared` |
-| `jaffle_experience` | Support tickets, contact threads, menu price tests, and experiment outcomes. | `jaffle_platform`, `jaffle_finance`, `jaffle_shared` |
-| `jaffle_growth` | Loyalty, promo attribution, customer lifecycle, experiment conversion, and value segments. | `jaffle_platform`, `jaffle_finance`, `jaffle_experience`, `jaffle_shared` |
-| `jaffle_store_ops` | Kitchen timing, shifts, quality checks, incidents, and store-day operations. | `jaffle_platform`, `jaffle_supply`, `jaffle_finance`, `jaffle_shared` |
-| `jaffle_merchandising` | Menu publications, product-store availability, price adjustments, menu goals, product pairings, and substitutions. | `jaffle_platform`, `jaffle_supply`, `jaffle_shared` |
-| `jaffle_planning` | Forecast accuracy, capacity scenarios, operating calendars, and component-week plans. | `jaffle_platform`, `jaffle_supply`, `jaffle_finance`, `jaffle_store_ops`, `jaffle_shared` |
-| `jaffle_legacy` | Intentional legacy patterns kept as a migration playground. | `jaffle_platform`, `jaffle_finance`, `jaffle_experience`, `jaffle_shared` |
+The repo is organized as a small dbt monorepo with several domain projects:
 
-## Quickstart
+- `jaffle_platform` cleans source data and exposes core customer, order, product,
+  store, payment, and refund interfaces.
+- `jaffle_supply`, `jaffle_finance`, `jaffle_experience`, `jaffle_growth`,
+  `jaffle_store_ops`, `jaffle_merchandising`, and `jaffle_planning` build on
+  those interfaces from different business perspectives.
+- `jaffle_legacy` keeps intentionally awkward models around as a migration and
+  refactoring playground.
+- `jaffle_shared` contains shared macros and schema behavior.
 
-Install dbt with the DuckDB adapter. Use Python 3.11 or 3.12; Python 3.14 is not yet supported by the current dbt dependency stack.
+The point is not to memorize every model. The point is to practice navigating
+domain boundaries, project dependencies, public contracts, protected models,
+semantic models, selectors, tests, analyses, snapshots, and legacy debt in a
+repo that still runs on a laptop.
+
+For a fuller map, see [docs/domain_map.md](docs/domain_map.md) and
+[docs/architecture.md](docs/architecture.md).
+
+## Prerequisites
+
+You need:
+
+- Python 3.11 or 3.12.
+- Git and a terminal.
+- Enough local disk space for a small DuckDB database.
+
+Python 3.14 is not yet supported by the current dbt dependency stack used here.
+
+## Set Up dbt Core
+
+Create a virtual environment and install the pinned local toolchain:
 
 ```bash
 python3.11 -m venv .venv
 source .venv/bin/activate
+python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 
-To validate the full repo exactly the way CI does:
+Check that dbt is available:
+
+```bash
+dbt --version
+```
+
+The committed [profiles.yml](profiles.yml) points dbt at an ignored local DuckDB
+file named `jaffle_corp.duckdb`. You do not need to create a private profile or
+configure credentials for the default local workflow.
+
+## Build the Project
+
+The fastest way to check the whole repo is:
 
 ```bash
 scripts/validate_repo.sh
 ```
 
-Install dependencies and seed the local DuckDB source tables:
+That command installs project dependencies, lints SQL, seeds local DuckDB source
+tables, builds each dbt project in dependency order, and runs a few direct
+MetricFlow queries.
+
+If you want to move more slowly, start with the platform project:
 
 ```bash
 dbt deps --project-dir projects/jaffle_platform --profiles-dir .
 dbt seed --project-dir projects/jaffle_platform --profiles-dir .
-
-dbt deps --project-dir projects/jaffle_supply --profiles-dir .
-dbt seed --project-dir projects/jaffle_supply --profiles-dir .
-
-dbt deps --project-dir projects/jaffle_finance --profiles-dir .
-
-dbt deps --project-dir projects/jaffle_experience --profiles-dir .
-dbt seed --project-dir projects/jaffle_experience --profiles-dir .
-
-dbt deps --project-dir projects/jaffle_growth --profiles-dir .
-
-dbt deps --project-dir projects/jaffle_store_ops --profiles-dir .
-dbt seed --project-dir projects/jaffle_store_ops --profiles-dir .
-
-dbt deps --project-dir projects/jaffle_merchandising --profiles-dir .
-dbt seed --project-dir projects/jaffle_merchandising --profiles-dir .
-
-dbt deps --project-dir projects/jaffle_planning --profiles-dir .
-dbt seed --project-dir projects/jaffle_planning --profiles-dir .
-
-dbt deps --project-dir projects/jaffle_legacy --profiles-dir .
+dbt build --project-dir projects/jaffle_platform --profiles-dir .
 ```
 
-Build the projects sequentially:
+Then build downstream projects in the order shown by
+[scripts/validate_repo.sh](scripts/validate_repo.sh). The order matters because
+the local DuckDB setup is standing in for a shared warehouse. Run the projects
+sequentially; DuckDB allows one writer per database file.
+
+## Explore the Project
+
+Try a few dbt Core commands from the repo root:
 
 ```bash
-dbt build --project-dir projects/jaffle_platform --profiles-dir .
-dbt build --project-dir projects/jaffle_supply --profiles-dir .
-dbt build --project-dir projects/jaffle_finance --profiles-dir .
-dbt build --project-dir projects/jaffle_experience --profiles-dir .
-dbt build --project-dir projects/jaffle_growth --profiles-dir .
-dbt build --project-dir projects/jaffle_store_ops --profiles-dir .
-dbt build --project-dir projects/jaffle_merchandising --profiles-dir .
-dbt build --project-dir projects/jaffle_planning --profiles-dir .
-dbt build --project-dir projects/jaffle_legacy --profiles-dir .
+dbt ls --project-dir projects/jaffle_platform --profiles-dir . --select fct_orders
+dbt ls --project-dir projects/jaffle_finance --profiles-dir . --select access:public --resource-type model
+dbt build --project-dir projects/jaffle_finance --profiles-dir . --select fct_order_revenue+
 ```
 
-Run MetricFlow directly against the local build:
+Generate dbt docs for a project:
+
+```bash
+dbt docs generate --project-dir projects/jaffle_platform --profiles-dir .
+dbt docs serve --project-dir projects/jaffle_platform --profiles-dir .
+```
+
+Then inspect how the public interfaces, protected implementation models, tests,
+and sources are presented.
+
+The repo intentionally includes a few rough edges. See
+[EXERCISES.md](EXERCISES.md) for starter exercises, but do not treat it as an
+answer key. Finding additional modeling, testing, semantic, and ownership issues
+is part of the exercise.
+
+## Run MetricFlow
+
+Build the repo first, then point MetricFlow at the same DuckDB file:
 
 ```bash
 export JAFFLE_CORP_DUCKDB_PATH="$PWD/jaffle_corp.duckdb"
+```
 
+Inspect available metrics directly:
+
+```bash
 cd projects/jaffle_finance
 DBT_PROFILES_DIR=../.. mf validate-configs --skip-dw
+DBT_PROFILES_DIR=../.. mf list metrics
+```
+
+Run a query:
+
+```bash
 DBT_PROFILES_DIR=../.. mf query \
   --metrics net_revenue_usd,estimated_gross_margin_usd,refund_rate \
   --group-by metric_time,location,order__country_code \
   --limit 20
 ```
 
-See [docs/metricflow.md](docs/metricflow.md) for the full set of domain MetricFlow commands.
+Semantic Layer files are plain dbt/MetricFlow YAML:
 
-Semantic models and metrics are defined as plain dbt/MetricFlow YAML in each domain project:
+- `models/semantic_models.yml` defines entities, measures, dimensions, and time.
+- `models/metrics.yml` defines curated metrics.
+- `models/saved_queries.yml` is not pre-filled; add one when a repeated query is
+  worth versioning.
 
-- `models/semantic_models.yml` defines entities, measures, dimensions, and default time dimensions.
-- `models/metrics.yml` defines the curated metrics built on those measures.
-- `models/saved_queries.yml` is intentionally not pre-filled; add one when a repeated query is worth versioning.
+There are no Python helper scripts for the Semantic Layer. Use `dbt` and `mf`
+directly so the examples stay close to the tools students will use in real
+projects.
 
-There are no Python helper scripts for the Semantic Layer. Use `dbt` and `mf` directly so the examples stay close to the tools students will use in real projects.
+For more MetricFlow examples, see [docs/metricflow.md](docs/metricflow.md).
 
-Lint SQL across the multi-project repo:
+## Going Further
 
-```bash
-scripts/lint_sql_projects.sh
-```
+Good next steps:
 
-The committed `profiles.yml` uses a local ignored DuckDB file named `jaffle_corp.duckdb`, so there are no credentials to configure.
+- Compare public and protected models in a downstream project.
+- Trace how a metric moves from a mart model into `models/semantic_models.yml`
+  and `models/metrics.yml`.
+- Add a test to a public model contract.
+- Refactor one legacy model without changing its external behavior.
+- Decide whether a merchandising or planning model should become public,
+  protected, or private.
 
-Run project builds sequentially when using the local DuckDB profile. DuckDB allows one writer per database file, so parallel project builds can conflict on the demo database lock.
+Useful docs:
 
-## Mesh Notes
+- [docs/architecture.md](docs/architecture.md)
+- [docs/domain_map.md](docs/domain_map.md)
+- [docs/metricflow.md](docs/metricflow.md)
 
-Each consumer project contains:
+### dbt Cloud
 
-- `dependencies.yml` for the intended dbt Mesh relationship.
-- `packages.yml` local path dependencies for open-source local parsing and end-to-end demos.
-
-In a hosted mesh environment, the project dependencies are the interface boundary. The local package fallback exists because public contributors will not have your account-level metadata service.
-
-## Data Contract Philosophy
-
-The public models are intentionally narrow:
-
-- `jaffle_platform.fct_orders`
-- `jaffle_platform.fct_order_items`
-- `jaffle_platform.fct_promo_events`
-- `jaffle_platform.fct_loyalty_events`
-- `jaffle_platform.dim_exchange_rates`
-- `jaffle_platform.dim_customers`
-- `jaffle_platform.dim_locations`
-- `jaffle_platform.dim_products`
-- `jaffle_supply.dim_components`
-- `jaffle_supply.fct_purchase_orders`
-- `jaffle_supply.fct_product_component_costs`
-- `jaffle_supply.fct_inventory_daily`
-- `jaffle_supply.fct_supply_risk_daily`
-- `jaffle_finance.fct_order_revenue`
-- `jaffle_finance.fct_daily_store_pnl`
-- `jaffle_finance.fct_order_margin_waterfall`
-- `jaffle_finance.fct_store_day_revenue_quality`
-- `jaffle_finance.fct_component_cost_variance`
-- `jaffle_finance.dim_finance_controls`
-- `jaffle_experience.fct_support_tickets`
-- `jaffle_experience.fct_customer_contact_threads`
-- `jaffle_experience.fct_experiment_outcomes`
-- `jaffle_experience.fct_menu_price_test_results`
-- `jaffle_experience.dim_experiment_variants`
-- `jaffle_growth.fct_customer_lifecycle`
-- `jaffle_growth.fct_campaign_performance`
-- `jaffle_growth.fct_customer_value_segments`
-- `jaffle_growth.fct_loyalty_balance_daily`
-- `jaffle_growth.fct_experiment_conversion`
-- `jaffle_growth.fct_campaign_incrementality`
-- `jaffle_store_ops.fct_order_service_times`
-- `jaffle_store_ops.fct_store_day_operations`
-- `jaffle_store_ops.fct_quality_events`
-- `jaffle_store_ops.fct_incident_reviews`
-- `jaffle_store_ops.dim_store_operating_profiles`
-
-Everything else is treated as protected implementation detail unless explicitly configured otherwise.
-
-The merchandising and planning projects deliberately contain more protected/internal surfaces so students can practice deciding what should become public, contracted, or deleted.
-
-## Student Exercises
-
-See [TODO.md](TODO.md) for a deliberately incomplete list of starter fixes. The list is not an answer key; finding additional modeling, testing, semantic, and ownership issues is part of the exercise.
-
-## Repository Hygiene
-
-See [docs/open_source_sanitization.md](docs/open_source_sanitization.md) for the sanitization rules used while creating this repo.
-
-See [ATTRIBUTION.md](ATTRIBUTION.md) before copying or adapting any upstream Jaffle Shop material. Keep inspiration, attribution, and license scope explicit in the same change.
+This project is deliberately focused on dbt Core. You can adapt it for dbt Cloud
+or a hosted mesh environment, but that is not the default path. The local
+`packages.yml` fallbacks exist so the repo can parse and build without account
+level project metadata; hosted dbt Mesh setups can use the committed
+`dependencies.yml` files as the intended interface boundary.
 
 ## Contributing
 
-This repo is intended to be played with. Good contributions add realistic dbt complexity while keeping the business fictional, small enough to run locally, and understandable from the docs.
+This repo is intended to be played with. Good contributions add realistic dbt
+complexity while keeping the business fictional, small enough to run locally,
+and understandable from the docs.
 
 Before opening a pull request:
 
 ```bash
 scripts/validate_repo.sh
 ```
-
-If you need to scan for additional private-domain terms before publishing, pass them explicitly:
-
-```bash
-PROHIBITED_PATTERN='<pipe-separated-private-terms>' scripts/check_sanitization.sh
-```
-
-The sanitization script ignores the command line that defines `PROHIBITED_PATTERN`, so copied examples do not self-match.
 
 Reference material used for structure and context:
 

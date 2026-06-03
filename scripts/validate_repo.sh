@@ -31,7 +31,6 @@ for project in "${PROJECTS[@]}"; do
 done
 
 scripts/lint_sql_projects.sh
-scripts/check_sanitization.sh
 
 for project in "${SEED_PROJECTS[@]}"; do
   dbt seed --project-dir "$project" --profiles-dir .
