@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: fct_supply_risk_daily
+    description: "{{ doc('jaffle_supply__fct_supply_risk_daily') }}"
+    config:
+      group: supply
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: supply_risk_daily_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: store_id
+        data_type: varchar
+      - name: component_id
+        data_type: varchar
+      - name: balance_date_utc
+        data_type: date
+      - name: unit
+        data_type: varchar
+      - name: counted_quantity
+        data_type: double
+      - name: estimated_closing_quantity
+        data_type: double
+      - name: expected_used_quantity
+        data_type: double
+      - name: observed_waste_quantity
+        data_type: double
+      - name: has_count_review
+        data_type: boolean
+      - name: has_late_receipt
+        data_type: boolean
+      - name: supply_risk_status
+        data_type: varchar
+      - name: has_supply_risk
+        data_type: boolean

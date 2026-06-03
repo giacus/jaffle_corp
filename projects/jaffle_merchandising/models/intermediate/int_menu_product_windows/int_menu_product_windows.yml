@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_menu_product_windows
+    description: "{{ doc('jaffle_merchandising__int_menu_product_windows') }}"

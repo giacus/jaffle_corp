@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: dim_finance_controls
+    description: "{{ doc('jaffle_finance__dim_finance_controls') }}"
+    config:
+      group: finance
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: control_id
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: control_name
+        data_type: varchar
+      - name: control_area
+        data_type: varchar
+      - name: expected_frequency
+        data_type: varchar
+      - name: severity
+        data_type: varchar
+      - name: owner_group
+        data_type: varchar

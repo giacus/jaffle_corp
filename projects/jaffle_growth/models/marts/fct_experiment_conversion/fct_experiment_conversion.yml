@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: fct_experiment_conversion
+    description: "{{ doc('jaffle_growth__fct_experiment_conversion') }}"
+    config:
+      group: growth
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: experiment_conversion_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: experiment_id
+        data_type: varchar
+      - name: variant_id
+        data_type: varchar
+      - name: exposed_date_utc
+        data_type: date
+      - name: surface
+        data_type: varchar
+      - name: exposure_count
+        data_type: bigint
+      - name: conversion_count
+        data_type: hugeint
+      - name: order_count_7d
+        data_type: hugeint
+      - name: net_revenue_usd_7d
+        data_type: double
+      - name: estimated_margin_usd_7d
+        data_type: double
+      - name: conversion_rate
+        data_type: double

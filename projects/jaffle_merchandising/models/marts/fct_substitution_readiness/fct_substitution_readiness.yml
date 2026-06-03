@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: fct_substitution_readiness
+    description: "{{ doc('jaffle_merchandising__fct_substitution_readiness') }}"
+    config:
+      group: merchandising
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: substitution_coverage_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: substitution_rule_id
+        data_type: varchar
+      - name: store_id
+        data_type: varchar
+      - name: available_date_utc
+        data_type: date
+      - name: unavailable_product_id
+        data_type: varchar
+      - name: unavailable_product_name
+        data_type: varchar
+      - name: substitute_product_id
+        data_type: varchar
+      - name: substitute_product_name
+        data_type: varchar
+      - name: priority_rank
+        data_type: integer
+      - name: reason_code
+        data_type: varchar
+      - name: product_store_day_status
+        data_type: varchar
+      - name: outage_minutes
+        data_type: hugeint
+      - name: rule_was_needed
+        data_type: boolean
+      - name: substitute_is_published
+        data_type: boolean
+      - name: substitution_readiness_status
+        data_type: varchar

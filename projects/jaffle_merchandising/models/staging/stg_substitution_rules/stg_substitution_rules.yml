@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: stg_substitution_rules
+    config:
+      group: merchandising
+    columns:
+      - name: substitution_rule_id
+        data_tests:
+          - not_null
+          - unique
+    description: "{{ doc('jaffle_merchandising__stg_substitution_rules') }}"

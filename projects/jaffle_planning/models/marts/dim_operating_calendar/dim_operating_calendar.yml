@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: dim_operating_calendar
+    description: "{{ doc('jaffle_planning__dim_operating_calendar') }}"
+    config:
+      group: planning
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: calendar_id
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: store_id
+        data_type: varchar
+      - name: calendar_date_utc
+        data_type: date
+      - name: day_type
+        data_type: varchar
+      - name: expected_open_minutes
+        data_type: integer
+      - name: local_holiday_name
+        data_type: varchar
+      - name: menu_focus
+        data_type: varchar
+      - name: updated_at_utc
+        data_type: timestamp

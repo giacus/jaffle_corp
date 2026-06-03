@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: stg_customers
+    config:
+      group: platform
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - unique
+      - name: email_domain
+        data_tests:
+          - not_null
+    description: "{{ doc('jaffle_platform__stg_customers') }}"

@@ -1,0 +1,50 @@
+version: 2
+
+models:
+  - name: fct_product_store_day_availability
+    description: "{{ doc('jaffle_merchandising__fct_product_store_day_availability') }}"
+    config:
+      group: merchandising
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: product_store_day_availability_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: store_id
+        data_type: varchar
+      - name: product_id
+        data_type: varchar
+      - name: available_date_utc
+        data_type: date
+      - name: product_family
+        data_type: varchar
+      - name: menu_section
+        data_type: varchar
+      - name: menu_surface
+        data_type: varchar
+      - name: country_code
+        data_type: varchar
+      - name: city
+        data_type: varchar
+      - name: observed_hour_count
+        data_type: integer
+      - name: available_hour_count
+        data_type: integer
+      - name: constrained_hour_count
+        data_type: integer
+      - name: unavailable_hour_count
+        data_type: integer
+      - name: outage_minutes
+        data_type: integer
+      - name: average_observed_on_hand_units
+        data_type: double
+      - name: average_expected_menu_units
+        data_type: double
+      - name: availability_rate
+        data_type: double
+      - name: product_store_day_status
+        data_type: varchar

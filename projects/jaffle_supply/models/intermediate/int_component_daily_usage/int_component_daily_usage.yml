@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_component_daily_usage
+    description: "{{ doc('jaffle_supply__int_component_daily_usage') }}"

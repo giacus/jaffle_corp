@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: stg_product_availability
+    config:
+      group: merchandising
+    columns:
+      - name: availability_id
+        data_tests:
+          - not_null
+          - unique
+      - name: availability_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - available
+                  - limited
+                  - unavailable
+                  - unknown
+    description: "{{ doc('jaffle_merchandising__stg_product_availability') }}"

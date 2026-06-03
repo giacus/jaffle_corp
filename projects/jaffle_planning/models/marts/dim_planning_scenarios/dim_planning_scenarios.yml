@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: dim_planning_scenarios
+    description: "{{ doc('jaffle_planning__dim_planning_scenarios') }}"
+    config:
+      group: planning
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: capacity_scenario_window_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: scenario_id
+        data_type: varchar
+      - name: store_id
+        data_type: varchar
+      - name: scenario_name
+        data_type: varchar
+      - name: effective_from_utc
+        data_type: timestamp
+      - name: effective_to_utc
+        data_type: timestamp
+      - name: target_orders_per_hour
+        data_type: double
+      - name: target_ready_minutes
+        data_type: double
+      - name: target_team_hours
+        data_type: double
+      - name: updated_at_utc
+        data_type: timestamp

@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: legacy_daily_store_rollup
+    description: "{{ doc('jaffle_legacy__legacy_daily_store_rollup') }}"
+    config:
+      meta:
+        migration_owner: analytics-modernization@jaffle.example
+        replacement_target: jaffle_finance.fct_daily_store_pnl
+    columns:
+      - name: legacy_store_day_key
+        data_tests:
+          - not_null
+          - unique
+      - name: shop
+      - name: business_dt
+      - name: money_kind
+      - name: orders_cnt
+      - name: gross_amt
+      - name: refund_amt
+      - name: net_amt
+      - name: good_orders_cnt
+      - name: bad_orders_cnt
+      - name: refund_orders_cnt

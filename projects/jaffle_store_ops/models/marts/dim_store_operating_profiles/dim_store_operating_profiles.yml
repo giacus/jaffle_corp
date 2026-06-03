@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: dim_store_operating_profiles
+    description: "{{ doc('jaffle_store_ops__dim_store_operating_profiles') }}"
+    config:
+      group: store_ops
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: store_id
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: store_name
+        data_type: varchar
+      - name: country_code
+        data_type: varchar
+      - name: city
+        data_type: varchar
+      - name: timezone_name
+        data_type: varchar
+      - name: operating_currency
+        data_type: varchar
+      - name: franchise_owner
+        data_type: varchar
+      - name: is_dark_kitchen
+        data_type: boolean
+      - name: daypart_count
+        data_type: bigint
+      - name: average_shift_adherence_ratio
+        data_type: double
+      - name: peak_team_member_count
+        data_type: integer
+      - name: observed_role_mix_codes
+        data_type: varchar

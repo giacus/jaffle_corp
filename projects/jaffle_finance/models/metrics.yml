@@ -37,15 +37,6 @@ metrics:
       numerator: refunded_finance_order_count
       denominator: finance_order_count
 
-  - name: cumulative_net_revenue_usd_28d
-    description: Rolling 28-day net revenue.
-    type: cumulative
-    label: Cumulative Net Revenue USD 28D
-    type_params:
-      measure: sum_net_revenue_usd
-      cumulative_type_params:
-        window: 28 days
-
   - name: recipe_margin_usd
     description: Net revenue less recipe-derived component cost.
     type: simple

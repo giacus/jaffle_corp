@@ -1,0 +1,52 @@
+version: 2
+
+models:
+  - name: fct_menu_price_test_results
+    description: "{{ doc('jaffle_experience__fct_menu_price_test_results') }}"
+    config:
+      group: experience
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: menu_price_test_result_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: price_test_id
+        data_type: varchar
+      - name: product_id
+        data_type: varchar
+      - name: product_name
+        data_type: varchar
+      - name: category
+        data_type: varchar
+      - name: product_family
+        data_type: varchar
+      - name: store_id
+        data_type: varchar
+      - name: experiment_id
+        data_type: varchar
+      - name: variant_id
+        data_type: varchar
+      - name: effective_from_utc
+        data_type: timestamp
+      - name: effective_to_utc
+        data_type: timestamp
+      - name: list_price_minor
+        data_type: integer
+      - name: list_price_major
+        data_type: double
+      - name: currency
+        data_type: varchar
+      - name: observed_order_count
+        data_type: integer
+      - name: observed_item_quantity
+        data_type: integer
+      - name: observed_item_total_major
+        data_type: double
+      - name: observed_average_item_price_major
+        data_type: double
+      - name: updated_at_utc
+        data_type: timestamp

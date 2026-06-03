@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: stg_products
+    config:
+      group: merchandising
+    columns:
+      - name: product_id
+        data_tests:
+          - not_null
+          - unique
+      - name: sku
+        data_tests:
+          - not_null
+          - unique
+    description: "{{ doc('jaffle_platform__stg_products') }}"

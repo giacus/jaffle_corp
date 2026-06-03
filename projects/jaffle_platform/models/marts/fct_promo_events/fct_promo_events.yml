@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: fct_promo_events
+    description: "{{ doc('jaffle_platform__fct_promo_events') }}"
+    config:
+      group: platform
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: promo_event_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: promo_event_id
+        data_type: varchar
+      - name: customer_id
+        data_type: varchar
+      - name: order_id
+        data_type: varchar
+      - name: campaign_id
+        data_type: varchar
+      - name: event_type
+        data_type: varchar
+      - name: event_at_utc
+        data_type: timestamp
+      - name: event_date_utc
+        data_type: date
+      - name: channel
+        data_type: varchar
+      - name: cost_minor
+        data_type: integer
+      - name: cost_major
+        data_type: double
+      - name: currency
+        data_type: varchar
+      - name: updated_at_utc
+        data_type: timestamp

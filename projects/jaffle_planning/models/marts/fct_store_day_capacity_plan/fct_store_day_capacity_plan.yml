@@ -1,0 +1,60 @@
+version: 2
+
+models:
+  - name: fct_store_day_capacity_plan
+    description: "{{ doc('jaffle_planning__fct_store_day_capacity_plan') }}"
+    config:
+      group: planning
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: store_day_capacity_plan_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: calendar_id
+        data_type: varchar
+      - name: store_id
+        data_type: varchar
+      - name: calendar_date_utc
+        data_type: date
+      - name: scenario_name
+        data_type: varchar
+      - name: day_type
+        data_type: varchar
+      - name: expected_open_minutes
+        data_type: integer
+      - name: local_holiday_name
+        data_type: varchar
+      - name: menu_focus
+        data_type: varchar
+      - name: forecasted_order_count
+        data_type: double
+      - name: actual_order_count
+        data_type: hugeint
+      - name: absolute_forecast_error_orders
+        data_type: double
+      - name: inside_interval_hour_count
+        data_type: hugeint
+      - name: forecast_hour_count
+        data_type: bigint
+      - name: operations_order_count
+        data_type: integer
+      - name: ready_target_rate
+        data_type: double
+      - name: quality_exception_count
+        data_type: hugeint
+      - name: incident_count
+        data_type: integer
+      - name: net_revenue_usd
+        data_type: double
+      - name: estimated_gross_margin_usd
+        data_type: double
+      - name: forecasted_orders_per_open_hour
+        data_type: double
+      - name: actual_orders_per_open_hour
+        data_type: double
+      - name: prediction_interval_hit_rate
+        data_type: double

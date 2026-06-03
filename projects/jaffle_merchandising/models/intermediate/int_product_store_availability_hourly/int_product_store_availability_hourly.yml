@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_product_store_availability_hourly
+    description: "{{ doc('jaffle_merchandising__int_product_store_availability_hourly') }}"

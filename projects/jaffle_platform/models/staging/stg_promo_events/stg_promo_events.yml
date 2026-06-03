@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: stg_promo_events
+    description: "{{ doc('jaffle_platform__stg_promo_events') }}"

@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: fct_loyalty_balance_daily
+    description: "{{ doc('jaffle_growth__fct_loyalty_balance_daily') }}"
+    config:
+      group: growth
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: loyalty_balance_daily_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_id
+        data_type: varchar
+      - name: event_date_utc
+        data_type: date
+      - name: points_delta
+        data_type: hugeint
+      - name: projected_points_balance
+        data_type: hugeint
+      - name: latest_program_tier
+        data_type: varchar
+      - name: loyalty_event_count
+        data_type: bigint
+      - name: loyalty_balance_status
+        data_type: varchar

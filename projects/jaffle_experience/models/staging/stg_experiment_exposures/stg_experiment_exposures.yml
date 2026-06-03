@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: stg_experiment_exposures
+    config:
+      group: experience
+    columns:
+      - name: exposure_id
+        data_tests:
+          - not_null
+          - unique
+      - name: experiment_id
+        data_tests:
+          - not_null
+    description: "{{ doc('jaffle_experience__stg_experiment_exposures') }}"

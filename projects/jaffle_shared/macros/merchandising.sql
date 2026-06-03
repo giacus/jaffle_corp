@@ -11,7 +11,7 @@
     case
         when {{ status_expr }} = 'unavailable' then 'blocked'
         when {{ observed_units_expr }} is null then 'missing_observation'
-        when {{ observed_units_expr }} < {{ expected_units_expr }} * 0.50 then 'thin'
+        when {{ observed_units_expr }} < {{ expected_units_expr }} * {{ var('availability_thin_threshold', 0.50) }} then 'thin'
         when {{ observed_units_expr }} < {{ expected_units_expr }} then 'watch'
         else 'healthy'
     end

@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_experiment_conversion_rollup
+    description: "{{ doc('jaffle_growth__int_experiment_conversion_rollup') }}"

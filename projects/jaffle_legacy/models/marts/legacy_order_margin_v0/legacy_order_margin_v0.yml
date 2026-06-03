@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: legacy_order_margin_v0
+    description: "{{ doc('jaffle_legacy__legacy_order_margin_v0') }}"
+    config:
+      meta:
+        migration_owner: analytics-modernization@jaffle.example
+        replacement_target: jaffle_finance.fct_order_revenue
+    columns:
+      - name: order_no
+        data_tests:
+          - not_null
+      - name: modern_order_id
+      - name: cust
+      - name: shop
+      - name: business_dt
+      - name: old_status_bucket
+      - name: money_kind
+      - name: gross_amt
+      - name: net_amt
+      - name: approximate_supply_cost_major
+      - name: margin_guess_major
+      - name: needs_currency_review

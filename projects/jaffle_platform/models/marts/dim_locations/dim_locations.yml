@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: dim_locations
+    description: "{{ doc('jaffle_platform__dim_locations') }}"
+    config:
+      group: platform
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: store_id
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: store_name
+        data_type: varchar
+      - name: country_code
+        data_type: varchar
+      - name: city
+        data_type: varchar
+      - name: opened_at
+        data_type: timestamp
+      - name: timezone_name
+        data_type: varchar
+      - name: operating_currency
+        data_type: varchar
+      - name: tax_jurisdiction
+        data_type: varchar
+      - name: franchise_owner
+        data_type: varchar
+      - name: is_dark_kitchen
+        data_type: boolean
+      - name: legacy_hours_blob
+        data_type: varchar
+      - name: legacy_hours_effective_from
+        data_type: date

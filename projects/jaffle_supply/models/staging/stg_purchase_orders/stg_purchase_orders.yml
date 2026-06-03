@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: stg_purchase_orders
+    config:
+      group: supply
+    columns:
+      - name: purchase_order_id
+        data_tests:
+          - not_null
+          - unique
+      - name: purchase_order_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - received
+                  - partially_received
+                  - open
+                  - cancelled
+                  - unknown
+    description: "{{ doc('jaffle_supply__stg_purchase_orders') }}"

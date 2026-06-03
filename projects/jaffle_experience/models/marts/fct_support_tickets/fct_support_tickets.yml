@@ -1,0 +1,78 @@
+version: 2
+
+models:
+  - name: fct_support_tickets
+    description: "{{ doc('jaffle_experience__fct_support_tickets') }}"
+    config:
+      group: experience
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: support_ticket_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: support_ticket_id
+        data_type: varchar
+      - name: customer_id
+        data_type: varchar
+      - name: order_id
+        data_type: varchar
+      - name: store_id
+        data_type: varchar
+      - name: opened_at_utc
+        data_type: timestamp
+      - name: opened_date_utc
+        data_type: date
+      - name: first_response_at_utc
+        data_type: timestamp
+      - name: resolved_at_utc
+        data_type: timestamp
+      - name: normalized_issue_type
+        data_type: varchar
+      - name: raw_issue_type
+        data_type: varchar
+      - name: ticket_status
+        data_type: varchar
+      - name: resolution_type
+        data_type: varchar
+      - name: satisfaction_score
+        data_type: integer
+      - name: concession_minor
+        data_type: integer
+      - name: concession_major
+        data_type: double
+      - name: currency
+        data_type: varchar
+      - name: first_response_minutes
+        data_type: bigint
+      - name: resolution_minutes
+        data_type: bigint
+      - name: first_response_sla_status
+        data_type: varchar
+      - name: resolution_sla_status
+        data_type: varchar
+      - name: order_status
+        data_type: varchar
+      - name: channel
+        data_type: varchar
+      - name: order_total_usd
+        data_type: double
+      - name: net_revenue_usd
+        data_type: double
+      - name: estimated_gross_margin_usd
+        data_type: double
+      - name: refund_event_count
+        data_type: integer
+      - name: has_failed_payment
+        data_type: boolean
+      - name: revenue_quality_status
+        data_type: varchar
+      - name: met_first_response_sla
+        data_type: boolean
+      - name: met_resolution_sla
+        data_type: boolean
+      - name: updated_at_utc
+        data_type: timestamp

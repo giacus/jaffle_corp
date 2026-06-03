@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: fct_daily_store_pnl
+    description: "{{ doc('jaffle_finance__fct_daily_store_pnl') }}"
+    config:
+      group: finance
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: store_pnl_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: store_id
+        data_type: varchar
+      - name: recognized_date
+        data_type: date
+      - name: country_code
+        data_type: varchar
+      - name: city
+        data_type: varchar
+      - name: franchise_owner
+        data_type: varchar
+      - name: order_count
+        data_type: integer
+      - name: gross_revenue_usd
+        data_type: double
+      - name: net_revenue_usd
+        data_type: double
+      - name: refunded_amount_usd
+        data_type: double
+      - name: estimated_supply_cost_usd
+        data_type: double
+      - name: estimated_gross_margin_usd
+        data_type: double
+      - name: order_item_count
+        data_type: integer
+      - name: total_item_quantity
+        data_type: integer
+      - name: payment_risk_order_count
+        data_type: integer

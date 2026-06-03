@@ -1,0 +1,58 @@
+version: 2
+
+models:
+  - name: dim_menu_items
+    description: "{{ doc('jaffle_merchandising__dim_menu_items') }}"
+    config:
+      group: merchandising
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: menu_product_window_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: publication_id
+        data_type: varchar
+      - name: store_id
+        data_type: varchar
+      - name: country_code
+        data_type: varchar
+      - name: city
+        data_type: varchar
+      - name: product_id
+        data_type: varchar
+      - name: sku
+        data_type: varchar
+      - name: product_name
+        data_type: varchar
+      - name: category
+        data_type: varchar
+      - name: product_family
+        data_type: varchar
+      - name: published_at_utc
+        data_type: timestamp
+      - name: retired_at_utc
+        data_type: timestamp
+      - name: menu_section
+        data_type: varchar
+      - name: display_rank
+        data_type: integer
+      - name: is_featured
+        data_type: boolean
+      - name: published_price_minor
+        data_type: integer
+      - name: currency
+        data_type: varchar
+      - name: menu_surface
+        data_type: varchar
+      - name: menu_price_band
+        data_type: varchar
+      - name: is_limited_time
+        data_type: boolean
+      - name: has_perishable_supply
+        data_type: boolean
+      - name: updated_at_utc
+        data_type: timestamp

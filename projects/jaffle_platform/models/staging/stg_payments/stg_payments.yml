@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: stg_payments
+    config:
+      group: platform
+    columns:
+      - name: payment_id
+        data_tests:
+          - not_null
+          - unique
+      - name: payment_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - captured
+                  - authorized
+                  - failed
+                  - refunded
+                  - unknown
+    description: "{{ doc('jaffle_platform__stg_payments') }}"

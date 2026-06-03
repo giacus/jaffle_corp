@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_order_items_enriched
+    description: "{{ doc('jaffle_platform__int_order_items_enriched') }}"

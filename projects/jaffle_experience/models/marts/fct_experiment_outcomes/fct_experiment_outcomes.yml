@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: fct_experiment_outcomes
+    description: "{{ doc('jaffle_experience__fct_experiment_outcomes') }}"
+    config:
+      group: experience
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: experiment_outcome_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: exposure_id
+        data_type: varchar
+      - name: customer_id
+        data_type: varchar
+      - name: experiment_id
+        data_type: varchar
+      - name: variant_id
+        data_type: varchar
+      - name: exposed_at_utc
+        data_type: timestamp
+      - name: exposed_date_utc
+        data_type: date
+      - name: surface
+        data_type: varchar
+      - name: assignment_reason
+        data_type: varchar
+      - name: order_count_7d
+        data_type: integer
+      - name: completed_order_count_7d
+        data_type: integer
+      - name: first_ordered_at_utc_after_exposure
+        data_type: timestamp
+      - name: net_revenue_usd_7d
+        data_type: double
+      - name: estimated_margin_usd_7d
+        data_type: double
+      - name: converted_7d
+        data_type: boolean
+      - name: updated_at_utc
+        data_type: timestamp

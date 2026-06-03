@@ -58,12 +58,3 @@ metrics:
     label: Basket Pair Orders
     type_params:
       measure: basket_pair_order_count
-
-  - name: cumulative_menu_actual_units_4w
-    description: Four-week cumulative menu actual units.
-    type: cumulative
-    label: Cumulative Menu Actual Units 4W
-    type_params:
-      measure: sum_menu_actual_units
-      cumulative_type_params:
-        window: 4 weeks

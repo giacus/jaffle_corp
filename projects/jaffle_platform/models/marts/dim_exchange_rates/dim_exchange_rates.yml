@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: dim_exchange_rates
+    description: "{{ doc('jaffle_platform__dim_exchange_rates') }}"
+    config:
+      group: platform
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: exchange_rate_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: currency
+        data_type: varchar
+      - name: rate_date
+        data_type: date
+      - name: usd_rate
+        data_type: double

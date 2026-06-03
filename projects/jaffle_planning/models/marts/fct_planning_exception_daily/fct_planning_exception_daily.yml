@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: fct_planning_exception_daily
+    description: "{{ doc('jaffle_planning__fct_planning_exception_daily') }}"
+    config:
+      group: planning
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: planning_exception_daily_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: store_id
+        data_type: varchar
+      - name: exception_date_utc
+        data_type: date
+      - name: scenario_name
+        data_type: varchar
+      - name: exception_family
+        data_type: varchar
+      - name: exception_count
+        data_type: integer
+      - name: exception_status
+        data_type: varchar

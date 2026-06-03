@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: stg_store_shift_plans
+    config:
+      group: store_ops
+    columns:
+      - name: shift_plan_id
+        data_tests:
+          - not_null
+          - unique
+      - name: planned_minutes
+        data_tests:
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: '>= 0'
+    description: "{{ doc('jaffle_store_ops__stg_store_shift_plans') }}"

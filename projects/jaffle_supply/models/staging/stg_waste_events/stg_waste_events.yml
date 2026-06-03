@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: stg_waste_events
+    config:
+      group: supply
+    columns:
+      - name: waste_event_id
+        data_tests:
+          - not_null
+          - unique
+      - name: wasted_quantity
+        data_tests:
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: '>= 0'
+    description: "{{ doc('jaffle_supply__stg_waste_events') }}"

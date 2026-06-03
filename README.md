@@ -47,6 +47,9 @@ The repo is organized as a small dbt monorepo with several domain projects:
   those interfaces from different business perspectives.
 - `jaffle_legacy` keeps intentionally awkward models around as a migration and
   refactoring playground.
+- `jaffle_reliability` is a downstream extension fixture that consumes public
+  finance, merchandising, and planning contracts without reaching into protected
+  internals.
 - `jaffle_shared` contains shared macros and schema behavior.
 
 The point is not to memorize every model. The point is to practice navigating
@@ -54,8 +57,7 @@ domain boundaries, project dependencies, public contracts, protected models,
 semantic models, selectors, tests, analyses, snapshots, and legacy debt in a
 repo that still runs on a laptop.
 
-For a fuller map, see [docs/domain_map.md](docs/domain_map.md) and
-[docs/architecture.md](docs/architecture.md).
+For a fuller map, see [docs/architecture.md](docs/architecture.md).
 
 ## How This Compares to Jaffle Shop
 
@@ -136,6 +138,18 @@ tables, build the platform models, run tests, and list the public platform
 interfaces. That is enough to start exploring without understanding every domain
 yet.
 
+Model files use a model-local folder convention:
+
+```text
+models/<layer>/<model_name>/<model_name>.sql
+models/<layer>/<model_name>/<model_name>.yml
+models/<layer>/<model_name>/<model_name>.md
+```
+
+The SQL, contract/tests, and docs block for a model sit beside each other. Shared
+files such as sources, groups, exposures, semantic models, and metrics stay at
+the layer or project level.
+
 ## Build the Project
 
 The fastest way to check the whole repo is:
@@ -144,10 +158,10 @@ The fastest way to check the whole repo is:
 scripts/validate_repo.sh
 ```
 
-That command installs project dependencies, lints SQL, seeds local DuckDB source
-tables, builds each dbt project in dependency order, and runs a few direct
-MetricFlow queries. On a typical laptop it should take a couple of minutes, not
-hours.
+That command cleans ignored dbt artifacts, recreates the default local DuckDB
+database, installs project dependencies, lints SQL, seeds source tables, builds
+each dbt project in dependency order, and runs a few direct MetricFlow queries.
+On a typical laptop it should take a couple of minutes, not hours.
 
 If you want to move more slowly, start with the platform project:
 
@@ -176,16 +190,22 @@ projects/jaffle_planning
 projects/jaffle_legacy
 ```
 
+The downstream extension fixture builds after the core projects:
+
+```text
+projects/jaffle_reliability
+```
+
 Generated files are ignored by Git. Expect local `target/`, `dbt_packages/`,
 `logs/`, and `jaffle_corp.duckdb` artifacts after running dbt. To clean dbt
 artifacts, run:
 
 ```bash
-dbt clean --project-dir projects/jaffle_platform --profiles-dir .
+rm -rf projects/jaffle_platform/target projects/jaffle_platform/dbt_packages
 ```
 
-Repeat `dbt clean` for other projects when needed, or use `task clean` if you
-already have the optional [Task](https://taskfile.dev/) runner installed.
+Repeat that for other projects when needed, or use `task clean` if you already
+have the optional [Task](https://taskfile.dev/) runner installed.
 
 ## Explore the Project
 
@@ -195,6 +215,7 @@ Try a few dbt Core commands from the repo root:
 dbt ls --project-dir projects/jaffle_platform --profiles-dir . --select fct_orders
 dbt ls --project-dir projects/jaffle_finance --profiles-dir . --select access:public --resource-type model
 dbt build --project-dir projects/jaffle_finance --profiles-dir . --select +fct_order_revenue
+dbt build --project-dir projects/jaffle_reliability --profiles-dir . --select jaffle_reliability
 ```
 
 Generate dbt docs for a project:
@@ -231,14 +252,15 @@ Inspect available metrics directly:
 
 ```bash
 cd projects/jaffle_finance
-DBT_PROFILES_DIR=../.. mf validate-configs --skip-dw
-DBT_PROFILES_DIR=../.. mf list metrics
+export DBT_PROFILES_DIR=../..
+mf validate-configs --skip-dw
+mf list metrics
 ```
 
 Run a query:
 
 ```bash
-DBT_PROFILES_DIR=../.. mf query \
+mf query \
   --metrics net_revenue_usd,estimated_gross_margin_usd,refund_rate \
   --group-by metric_time,location,order__country_code \
   --limit 20
@@ -265,15 +287,19 @@ Good next steps after your first successful build:
 - Trace how a metric moves from a mart model into `models/semantic_models.yml`
   and `models/metrics.yml`.
 - Add a test to a public model contract.
+- Build a new model in `projects/jaffle_reliability` using only public upstream
+  refs.
+- Add a new downstream extension project that depends on the same public
+  contracts as `jaffle_reliability`.
 - Refactor one legacy model without changing its external behavior.
-- Decide whether a merchandising or planning model should become public,
-  protected, or private.
+- Propose a new public interface only after you can name the downstream use case,
+  model grain, contract, and validation query.
 
 Useful docs:
 
 - [docs/architecture.md](docs/architecture.md)
 - [docs/course_path.md](docs/course_path.md)
-- [docs/domain_map.md](docs/domain_map.md)
+- [docs/extension_authoring.md](docs/extension_authoring.md)
 - [docs/metricflow.md](docs/metricflow.md)
 
 Small glossary:

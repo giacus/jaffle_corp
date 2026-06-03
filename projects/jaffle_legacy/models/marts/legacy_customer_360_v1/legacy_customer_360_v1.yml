@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: legacy_customer_360_v1
+    description: "{{ doc('jaffle_legacy__legacy_customer_360_v1') }}"
+    config:
+      meta:
+        migration_owner: analytics-modernization@jaffle.example
+        replacement_target: jaffle_growth.fct_customer_value_segments
+    columns:
+      - name: cust
+        data_tests:
+          - not_null
+          - unique
+      - name: cust_name
+      - name: region_hint
+      - name: old_lifecycle_bucket
+      - name: contact_flag
+      - name: order_cnt
+      - name: gross_amt
+      - name: refund_cnt
+      - name: ticket_cnt
+      - name: make_good_amt
+      - name: last_business_dt
+      - name: old_customer_note_blob

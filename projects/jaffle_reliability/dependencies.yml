@@ -1,0 +1,4 @@
+projects:
+  - name: jaffle_finance
+  - name: jaffle_merchandising
+  - name: jaffle_planning

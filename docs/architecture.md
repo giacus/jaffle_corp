@@ -1,6 +1,7 @@
 # Architecture
 
-`jaffle-corp` is organized as a small dbt mesh.
+`jaffle-corp` is organized as a small dbt mesh plus a downstream extension
+fixture.
 
 The `jaffle_platform` project owns raw source cleanup, conformed dimensions, and stable order-level interfaces. Downstream projects consume those interfaces instead of reaching into staging tables.
 
@@ -20,12 +21,72 @@ The `jaffle_planning` project owns store-hour forecasts, store-product-day forec
 
 The `jaffle_legacy` project intentionally demonstrates migration debt: inconsistent naming, mixed grains, hand-rolled currency logic, and deprecated marts.
 
+The `jaffle_reliability` project is a downstream extension fixture. It consumes
+public contracted marts from finance, merchandising, and planning without
+depending on their staging or intermediate models.
+
+## Domain Map
+
+Platform:
+
+- Customers, stores, products, supplies, orders, order items, payments, and
+  refunds.
+
+Finance:
+
+- Captured payments, refunds, FX-normalized revenue, recipe-derived margin,
+  component cost variance, controls, and daily store profit and loss.
+
+Supply:
+
+- Recipe components, purchase orders, receipts, inventory counts, waste events,
+  and component-day risk classification.
+
+Experience:
+
+- Support tickets, contact threads, menu price tests, experiment exposures, and
+  seven-day experiment outcomes.
+
+Growth:
+
+- Campaign events, loyalty events, lifecycle, campaign performance, experiment
+  conversion, customer value, acquisition, and repeat-purchase metrics.
+
+Store Ops:
+
+- Kitchen timing, shifts, quality checks, incidents, and store-day operating
+  health.
+
+Merchandising:
+
+- Menu publication windows, product availability, temporary price adjustments,
+  product-pair affinity, substitution readiness, menu goals, and menu margin
+  baselines.
+
+Planning:
+
+- Store-hour forecasts, store-product-day forecasts, component-week plan
+  variance, capacity planning, operating calendars, capacity scenario windows,
+  and planning exception rollups.
+
+Reliability Extension:
+
+- Downstream public-contract consumption, store-day revenue quality plus
+  availability, capacity-plan context, and extension-safe tests.
+
+Legacy:
+
+- Deprecated daily store rollups, customer rollups, menu mix reports, old order
+  status mappings, mixed currency calculations, and intentionally confusing
+  tables for migration exercises.
+
 ## Intentional Friction
 
 This repo includes realistic friction points:
 
 - Cross-project refs and local package fallbacks.
-- Public models with contracts and protected implementation models.
+- Public models with contracts, protected implementation models, and one
+  downstream extension that proves the contracts are usable.
 - Multiple metric grains: order, item, customer, store-day, campaign-day, store-hour, product-store-hour, product-store-day, store-product-day, product-pair-day, component-store-week, and scenario-store-day.
 - Component, recipe-component, store-component-day, support-ticket, contact-thread, exposure, quality-event, menu-window, forecast, and planning-exception grains.
 - Currencies normalized through daily FX rates.
@@ -33,7 +94,11 @@ This repo includes realistic friction points:
 - Legacy source columns that require normalization before they are usable.
 - Snapshots, analyses, exposures, semantic models, MetricFlow queries, and singular tests as operational surface area.
 
-The merchandising and planning domains intentionally add protected surfaces and lightly documented corners. They are designed to stay fast locally while giving students realistic lineage, ownership, testing, and direct MetricFlow questions to resolve.
+The merchandising and planning domains now expose contracted public marts across
+product availability, menu margin, forecast accuracy, capacity planning, and
+plan variance. The reliability extension is intentionally small so students can
+inspect whether those public interfaces are sufficient before they add another
+downstream dependency or change an upstream contract.
 
 ## Non-Goals
 

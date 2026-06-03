@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: legacy_refund_reason_bridge_v0
+    description: "{{ doc('jaffle_legacy__legacy_refund_reason_bridge_v0') }}"
+    config:
+      meta:
+        migration_owner: analytics-modernization@jaffle.example
+        replacement_target: jaffle_experience.fct_support_tickets
+    columns:
+      - name: old_refund_bridge_key
+        data_tests:
+          - not_null
+          - unique
+      - name: order_no
+      - name: business_dt
+      - name: money_status
+      - name: old_reason
+      - name: old_resolution
+      - name: refund_amt_usd
+      - name: make_good_amt
+      - name: net_amt_usd

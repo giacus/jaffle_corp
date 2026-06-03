@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: stg_kitchen_events
+    config:
+      group: store_ops
+    columns:
+      - name: kitchen_event_id
+        data_tests:
+          - not_null
+          - unique
+      - name: kitchen_event_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - received
+                  - prep_started
+                  - ready
+                  - served
+                  - unknown
+    description: "{{ doc('jaffle_store_ops__stg_kitchen_events') }}"

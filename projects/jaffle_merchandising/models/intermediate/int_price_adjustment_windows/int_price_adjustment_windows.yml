@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_price_adjustment_windows
+    description: "{{ doc('jaffle_merchandising__int_price_adjustment_windows') }}"

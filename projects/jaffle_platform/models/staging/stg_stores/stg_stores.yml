@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: stg_stores
+    config:
+      group: platform
+    columns:
+      - name: store_id
+        data_tests:
+          - not_null
+          - unique
+      - name: operating_currency
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - GBP
+                  - CAD
+                  - SGD
+                  - EUR
+                  - USD
+    description: "{{ doc('jaffle_platform__stg_stores') }}"

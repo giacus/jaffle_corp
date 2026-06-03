@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: stg_operating_calendar
+    config:
+      group: planning
+    columns:
+      - name: calendar_id
+        data_tests:
+          - not_null
+          - unique
+    description: "{{ doc('jaffle_planning__stg_operating_calendar') }}"

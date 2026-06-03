@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_order_kitchen_timing
+    description: "{{ doc('jaffle_store_ops__int_order_kitchen_timing') }}"

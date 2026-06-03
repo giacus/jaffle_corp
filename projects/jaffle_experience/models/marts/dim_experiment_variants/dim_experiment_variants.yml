@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: dim_experiment_variants
+    description: "{{ doc('jaffle_experience__dim_experiment_variants') }}"
+    config:
+      group: experience
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: experiment_variant_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: experiment_id
+        data_type: varchar
+      - name: variant_id
+        data_type: varchar
+      - name: first_exposed_at_utc
+        data_type: timestamp
+      - name: most_recent_exposed_at_utc
+        data_type: timestamp
+      - name: exposure_count
+        data_type: integer
+      - name: price_test_count
+        data_type: integer
+      - name: surfaces
+        data_type: varchar

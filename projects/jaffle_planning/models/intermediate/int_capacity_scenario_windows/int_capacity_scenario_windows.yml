@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_capacity_scenario_windows
+    description: "{{ doc('jaffle_planning__int_capacity_scenario_windows') }}"

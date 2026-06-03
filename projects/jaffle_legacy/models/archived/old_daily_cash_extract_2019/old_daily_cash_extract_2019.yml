@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: old_daily_cash_extract_2019
+    description: "{{ doc('jaffle_legacy__old_daily_cash_extract_2019') }}"

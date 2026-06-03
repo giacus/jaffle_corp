@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: fct_quality_events
+    description: "{{ doc('jaffle_store_ops__fct_quality_events') }}"
+    config:
+      group: store_ops
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: quality_event_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: quality_check_id
+        data_type: varchar
+      - name: store_id
+        data_type: varchar
+      - name: order_id
+        data_type: varchar
+      - name: product_id
+        data_type: varchar
+      - name: check_type
+        data_type: varchar
+      - name: check_result
+        data_type: varchar
+      - name: measured_value
+        data_type: double
+      - name: expected_min
+        data_type: double
+      - name: expected_max
+        data_type: double
+      - name: checked_at_utc
+        data_type: timestamp
+      - name: checked_date_utc
+        data_type: date
+      - name: has_quality_exception
+        data_type: boolean
+      - name: updated_at_utc
+        data_type: timestamp

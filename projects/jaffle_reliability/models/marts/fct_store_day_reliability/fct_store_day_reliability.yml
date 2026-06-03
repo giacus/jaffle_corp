@@ -1,0 +1,78 @@
+version: 2
+
+models:
+  - name: fct_store_day_reliability
+    description: "{{ doc('jaffle_reliability__fct_store_day_reliability') }}"
+    config:
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: store_day_reliability_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: store_id
+        data_type: varchar
+      - name: reliability_date
+        data_type: date
+      - name: scenario_name
+        data_type: varchar
+      - name: order_count
+        data_type: integer
+      - name: net_revenue_usd
+        data_type: double
+      - name: recipe_margin_rate
+        data_type: double
+      - name: refund_order_rate
+        data_type: double
+      - name: revenue_exception_rate
+        data_type: double
+      - name: store_day_revenue_quality_status
+        data_type: varchar
+      - name: observed_product_count
+        data_type: integer
+      - name: observed_hour_count
+        data_type: integer
+      - name: available_hour_count
+        data_type: integer
+      - name: constrained_hour_count
+        data_type: integer
+      - name: unavailable_hour_count
+        data_type: integer
+      - name: outage_minutes
+        data_type: integer
+      - name: average_product_availability_rate
+        data_type: double
+      - name: product_availability_status
+        data_type: varchar
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - unobserved
+                  - availability_risk
+                  - availability_watch
+                  - availability_stable
+      - name: forecasted_order_count
+        data_type: double
+      - name: actual_order_count
+        data_type: integer
+      - name: prediction_interval_hit_rate
+        data_type: double
+      - name: ready_target_rate
+        data_type: double
+      - name: reliability_score
+        data_type: double
+      - name: reliability_status
+        data_type: varchar
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - critical
+                  - watch
+                  - stable
+      - name: needs_reliability_review
+        data_type: boolean

@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_customer_contact_sequences
+    description: "{{ doc('jaffle_experience__int_customer_contact_sequences') }}"

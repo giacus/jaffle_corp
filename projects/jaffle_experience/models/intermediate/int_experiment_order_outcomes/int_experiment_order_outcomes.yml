@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_experiment_order_outcomes
+    description: "{{ doc('jaffle_experience__int_experiment_order_outcomes') }}"

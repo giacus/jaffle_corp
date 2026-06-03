@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_store_hour_forecast_errors
+    description: "{{ doc('jaffle_planning__int_store_hour_forecast_errors') }}"

@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: stg_orders
+    config:
+      group: platform
+    columns:
+      - name: order_id
+        data_tests:
+          - not_null
+          - unique
+      - name: order_status
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - placed
+                  - completed
+                  - cancelled
+                  - refunded
+                  - unknown
+    description: "{{ doc('jaffle_platform__stg_orders') }}"

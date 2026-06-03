@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: stg_menu_publications
+    config:
+      group: merchandising
+    columns:
+      - name: publication_id
+        data_tests:
+          - not_null
+          - unique
+      - name: published_price_minor
+        data_tests:
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: '>= 0'
+    description: "{{ doc('jaffle_merchandising__stg_menu_publications') }}"

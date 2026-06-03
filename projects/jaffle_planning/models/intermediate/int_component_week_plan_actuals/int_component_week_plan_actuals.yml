@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_component_week_plan_actuals
+    description: "{{ doc('jaffle_planning__int_component_week_plan_actuals') }}"

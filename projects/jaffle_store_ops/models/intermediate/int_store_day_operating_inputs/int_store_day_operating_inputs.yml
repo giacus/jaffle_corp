@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_store_day_operating_inputs
+    description: "{{ doc('jaffle_store_ops__int_store_day_operating_inputs') }}"

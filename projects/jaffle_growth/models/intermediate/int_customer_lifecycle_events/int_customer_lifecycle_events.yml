@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_customer_lifecycle_events
+    description: "{{ doc('jaffle_growth__int_customer_lifecycle_events') }}"

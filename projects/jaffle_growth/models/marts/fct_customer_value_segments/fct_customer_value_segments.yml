@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: fct_customer_value_segments
+    description: "{{ doc('jaffle_growth__fct_customer_value_segments') }}"
+    config:
+      group: growth
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: customer_value_segment_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_id
+        data_type: varchar
+      - name: customer_name
+        data_type: varchar
+      - name: loyalty_region
+        data_type: varchar
+      - name: lifecycle_stage
+        data_type: varchar
+      - name: marketing_consent
+        data_type: boolean
+      - name: finance_order_count
+        data_type: bigint
+      - name: lifetime_net_revenue_usd
+        data_type: double
+      - name: lifetime_recipe_margin_usd
+        data_type: double
+      - name: most_recent_recognized_date
+        data_type: date
+      - name: support_ticket_count
+        data_type: bigint
+      - name: first_response_sla_met_count
+        data_type: hugeint
+      - name: concession_major
+        data_type: double
+      - name: exposure_count
+        data_type: bigint
+      - name: converted_exposure_count
+        data_type: hugeint
+      - name: value_band
+        data_type: varchar
+      - name: care_profile
+        data_type: varchar

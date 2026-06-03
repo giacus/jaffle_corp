@@ -1,0 +1,70 @@
+version: 2
+
+models:
+  - name: fct_store_day_operations
+    description: "{{ doc('jaffle_store_ops__fct_store_day_operations') }}"
+    config:
+      group: store_ops
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: store_day_operations_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: store_id
+        data_type: varchar
+      - name: operating_date
+        data_type: date
+      - name: country_code
+        data_type: varchar
+      - name: city
+        data_type: varchar
+      - name: franchise_owner
+        data_type: varchar
+      - name: order_count
+        data_type: integer
+      - name: net_revenue_usd
+        data_type: double
+      - name: estimated_gross_margin_usd
+        data_type: double
+      - name: order_timing_count
+        data_type: integer
+      - name: average_received_to_ready_minutes
+        data_type: double
+      - name: ready_inside_target_count
+        data_type: integer
+      - name: ready_target_rate
+        data_type: double
+      - name: planned_minutes
+        data_type: hugeint
+      - name: actual_minutes
+        data_type: hugeint
+      - name: peak_team_member_count
+        data_type: integer
+      - name: orders_per_actual_minute
+        data_type: double
+      - name: shift_exception_count
+        data_type: hugeint
+      - name: quality_check_count
+        data_type: hugeint
+      - name: quality_exception_count
+        data_type: hugeint
+      - name: quality_exception_rate
+        data_type: double
+      - name: component_day_count
+        data_type: integer
+      - name: supply_risk_component_count
+        data_type: integer
+      - name: supply_risk_component_rate
+        data_type: double
+      - name: incident_count
+        data_type: integer
+      - name: affected_order_count
+        data_type: hugeint
+      - name: incident_minutes
+        data_type: hugeint
+      - name: store_day_status
+        data_type: varchar

@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: fct_basket_pair_affinity
+    description: "{{ doc('jaffle_merchandising__fct_basket_pair_affinity') }}"
+    config:
+      group: merchandising
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: basket_pair_affinity_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: anchor_product_id
+        data_type: varchar
+      - name: paired_product_id
+        data_type: varchar
+      - name: ordered_date_utc
+        data_type: date
+      - name: pairing_id
+        data_type: varchar
+      - name: pairing_reason
+        data_type: varchar
+      - name: pairing_rank
+        data_type: integer
+      - name: is_curated_pair
+        data_type: boolean
+      - name: paired_order_count
+        data_type: bigint
+      - name: paired_item_total_major
+        data_type: double

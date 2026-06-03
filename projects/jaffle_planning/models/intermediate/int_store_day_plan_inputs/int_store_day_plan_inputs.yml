@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_store_day_plan_inputs
+    description: "{{ doc('jaffle_planning__int_store_day_plan_inputs') }}"

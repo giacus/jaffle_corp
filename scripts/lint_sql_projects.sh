@@ -12,15 +12,25 @@ project_dirs=()
 
 if [[ "$#" -gt 0 ]]; then
   for file in "$@"; do
-    [[ "$file" == projects/*/*.sql || "$file" == projects/*/*/*.sql || "$file" == projects/*/*/*/*.sql ]] || continue
-    project="${file#projects/}"
-    project="projects/${project%%/*}"
+    case "$file" in
+      projects/*/*.sql|projects/*/**/*.sql|extensions/*/*.sql|extensions/*/**/*.sql)
+        project_root="${file%%/*}"
+        project_rest="${file#*/}"
+        project="$project_root/${project_rest%%/*}"
+        ;;
+      *)
+        continue
+        ;;
+    esac
     project_dirs+=("$project")
   done
 else
-  while IFS= read -r -d '' project_file; do
-    project_dirs+=("$(dirname "$project_file")")
-  done < <(find "$ROOT_DIR/projects" -mindepth 2 -maxdepth 2 -name dbt_project.yml -print0)
+  for source_root in "$ROOT_DIR/projects" "$ROOT_DIR/extensions"; do
+    [[ -d "$source_root" ]] || continue
+    while IFS= read -r -d '' project_file; do
+      project_dirs+=("$(dirname "$project_file")")
+    done < <(find "$source_root" -mindepth 2 -maxdepth 2 -name dbt_project.yml -print0)
+  done
 fi
 
 if [[ "${#project_dirs[@]}" -eq 0 ]]; then
@@ -46,7 +56,7 @@ for project in "${unique_projects[@]}"; do
   if [[ "$#" -gt 0 ]]; then
     for file in "$@"; do
       case "$file" in
-        "$project"/*.sql|"$project"/*/*.sql|"$project"/*/*/*.sql|"$project"/*/*/*/*.sql)
+        "$project"/*.sql|"$project"/**/*.sql)
           args+=("${file#"$project/"}")
           ;;
       esac

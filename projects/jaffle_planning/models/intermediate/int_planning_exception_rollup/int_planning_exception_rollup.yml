@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_planning_exception_rollup
+    description: "{{ doc('jaffle_planning__int_planning_exception_rollup') }}"

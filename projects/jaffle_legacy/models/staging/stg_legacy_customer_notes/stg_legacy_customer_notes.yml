@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: stg_legacy_customer_notes
+    description: "{{ doc('jaffle_legacy__stg_legacy_customer_notes') }}"

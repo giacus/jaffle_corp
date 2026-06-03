@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: "{{ doc('jaffle_platform__dim_customers') }}"
+    config:
+      group: platform
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: customer_id
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_name
+        data_type: varchar
+      - name: email_domain
+        data_type: varchar
+      - name: loyalty_region
+        data_type: varchar
+      - name: first_seen_at
+        data_type: timestamp
+      - name: default_currency
+        data_type: varchar
+      - name: marketing_consent
+        data_type: boolean
+      - name: first_ordered_at_utc
+        data_type: timestamp
+      - name: most_recent_ordered_at_utc
+        data_type: timestamp
+      - name: lifetime_order_count
+        data_type: integer
+      - name: lifetime_completed_order_count
+        data_type: integer
+      - name: lifetime_order_value_usd
+        data_type: double
+      - name: lifetime_refunded_order_count
+        data_type: integer
+      - name: lifecycle_stage
+        data_type: varchar

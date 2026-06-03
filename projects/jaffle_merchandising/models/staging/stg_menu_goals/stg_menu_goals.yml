@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: stg_menu_goals
+    config:
+      group: merchandising
+    columns:
+      - name: goal_id
+        data_tests:
+          - not_null
+          - unique
+      - name: owner_role
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - menu_lead
+                  - store_lead
+                  - analyst
+    description: "{{ doc('jaffle_merchandising__stg_menu_goals') }}"

@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: fct_product_component_costs
+    description: "{{ doc('jaffle_supply__fct_product_component_costs') }}"
+    config:
+      group: supply
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: product_component_cost_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: product_id
+        data_type: varchar
+      - name: component_id
+        data_type: varchar
+      - name: component_name
+        data_type: varchar
+      - name: component_family
+        data_type: varchar
+      - name: unit
+        data_type: varchar
+      - name: quantity_per_item
+        data_type: double
+      - name: waste_factor
+        data_type: double
+      - name: average_unit_cost_usd
+        data_type: double
+      - name: lowest_unit_cost_usd
+        data_type: double
+      - name: highest_unit_cost_usd
+        data_type: double
+      - name: expected_component_cost_usd
+        data_type: double
+      - name: updated_at_utc
+        data_type: timestamp

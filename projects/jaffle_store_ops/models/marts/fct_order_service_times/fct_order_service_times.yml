@@ -1,0 +1,54 @@
+version: 2
+
+models:
+  - name: fct_order_service_times
+    description: "{{ doc('jaffle_store_ops__fct_order_service_times') }}"
+    config:
+      group: store_ops
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: order_service_time_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: order_id
+        data_type: varchar
+      - name: store_id
+        data_type: varchar
+      - name: customer_id
+        data_type: varchar
+      - name: ordered_at_utc
+        data_type: timestamp
+      - name: ordered_date_utc
+        data_type: date
+      - name: order_status
+        data_type: varchar
+      - name: is_completed_order
+        data_type: boolean
+      - name: kitchen_received_at_utc
+        data_type: timestamp
+      - name: prep_started_at_utc
+        data_type: timestamp
+      - name: ready_at_utc
+        data_type: timestamp
+      - name: served_at_utc
+        data_type: timestamp
+      - name: event_date_utc
+        data_type: date
+      - name: stations_seen
+        data_type: varchar
+      - name: kitchen_event_count
+        data_type: integer
+      - name: received_to_ready_minutes
+        data_type: bigint
+      - name: prep_to_ready_minutes
+        data_type: bigint
+      - name: ready_to_served_minutes
+        data_type: bigint
+      - name: received_to_ready_bucket
+        data_type: varchar
+      - name: met_ready_target
+        data_type: boolean

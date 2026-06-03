@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: stg_price_adjustments
+    config:
+      group: merchandising
+    columns:
+      - name: price_adjustment_id
+        data_tests:
+          - not_null
+          - unique
+      - name: adjustment_reason
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - side_hour
+                  - morning_bundle
+                  - seasonal_test
+                  - case_test
+                  - stock_balance
+      - name: approved_by_role
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - menu_lead
+                  - store_lead
+                  - analyst
+    description: "{{ doc('jaffle_merchandising__stg_price_adjustments') }}"

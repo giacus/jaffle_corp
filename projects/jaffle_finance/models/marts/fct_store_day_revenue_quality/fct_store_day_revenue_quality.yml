@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: fct_store_day_revenue_quality
+    description: "{{ doc('jaffle_finance__fct_store_day_revenue_quality') }}"
+    config:
+      group: finance
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: store_day_revenue_quality_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: store_id
+        data_type: varchar
+      - name: recognized_date
+        data_type: date
+      - name: country_code
+        data_type: varchar
+      - name: city
+        data_type: varchar
+      - name: order_count
+        data_type: integer
+      - name: net_revenue_usd
+        data_type: double
+      - name: recipe_margin_usd
+        data_type: double
+      - name: recipe_cost_variance_usd
+        data_type: double
+      - name: refund_order_count
+        data_type: integer
+      - name: revenue_exception_order_count
+        data_type: integer
+      - name: negative_margin_order_count
+        data_type: integer
+      - name: recipe_margin_rate
+        data_type: double
+      - name: refund_order_rate
+        data_type: double
+      - name: revenue_exception_rate
+        data_type: double
+      - name: store_day_revenue_quality_status
+        data_type: varchar

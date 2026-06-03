@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: stg_support_tickets
+    config:
+      group: experience
+    columns:
+      - name: support_ticket_id
+        data_tests:
+          - not_null
+          - unique
+      - name: normalized_issue_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - cold_food
+                  - late_pickup
+                  - missing_item
+                  - wrong_item
+                  - payment_question
+                  - account_help
+                  - other
+    description: "{{ doc('jaffle_experience__stg_support_tickets') }}"

@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: stg_capacity_scenarios
+    config:
+      group: planning
+    columns:
+      - name: scenario_id
+        data_tests:
+          - not_null
+          - unique
+      - name: scenario_name
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - base
+                  - stretch
+    description: "{{ doc('jaffle_planning__stg_capacity_scenarios') }}"

@@ -30,30 +30,32 @@ revenue without reading every model in the repo.
 
 ## Modeling And Tests
 
-- Add a scenario-aware key to
-  `jaffle_planning.fct_product_day_forecast_accuracy`. The current model hints
-  at the problem but does not enforce uniqueness.
-- Add a test that catches overlapping capacity scenario windows by store.
-- Add accepted-value tests for scenario names, owner roles, and adjustment
-  reasons.
-- Tighten currency naming in
-  `jaffle_merchandising.fct_menu_margin_baseline`; it mixes local prices with
-  USD recipe costs.
+- Add a new model to `projects/jaffle_reliability` that uses only public refs
+  from upstream projects. Pick a clear grain before you write SQL.
+- Add a singular test that catches overlapping merchandising price adjustment
+  windows for the same product, store, and effective timestamp.
+- Add a negative fixture row to a seed on a short-lived branch, prove an existing
+  test fails, then remove the row and prove the project passes again.
+- Extend the reliability score with one more public upstream signal and update
+  its contract without changing the model grain.
 
 ## Contracts And Ownership
 
 - Compare public and protected models in `jaffle_finance` or
   `jaffle_store_ops`. Write down which models feel safe for another project to
   depend on.
-- Add model contracts to the most important merchandising and planning marts
-  once you decide which surfaces should be public.
+- Inspect the merchandising and planning public contracts. Write down one
+  contract change that would be backward-compatible and one that would be
+  breaking for `jaffle_reliability`.
+- Add a second downstream extension project that depends on public marts from at
+  least two domains.
 - Convert at least one legacy-style surface into a clean public model with a
   contract.
 
 ## Macros And Configuration
 
-- Replace the hard-coded merchandising availability threshold in
-  `jaffle_shared.availability_health` with a project variable.
+- Add a project variable that changes a threshold in one mart, then prove the
+  behavior with a focused model build and one query.
 - Find one repeated expression that is realistic enough to become a shared
   macro, then add tests or examples around the change.
 

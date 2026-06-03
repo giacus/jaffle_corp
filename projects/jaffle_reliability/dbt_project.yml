@@ -1,0 +1,30 @@
+name: jaffle_reliability
+version: "0.1.0"
+config-version: 2
+
+profile: jaffle_corp
+require-dbt-version: ">=1.8.0,<2.0.0"
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: target
+clean-targets:
+  - target
+  - dbt_packages
+
+models:
+  jaffle_reliability:
+    +materialized: view
+    +post-hook: "{{ jaffle_shared.audit_noop() }}"
+    +meta:
+      domain: reliability
+      source_system: downstream_extension_fixture
+    marts:
+      +schema: mart_reliability
+      +materialized: table
+      +tags: ["mart", "reliability", "extension"]

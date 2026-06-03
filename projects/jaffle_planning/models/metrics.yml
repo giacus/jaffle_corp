@@ -93,12 +93,3 @@ metrics:
     label: Store Day Actual Orders
     type_params:
       measure: sum_store_day_actual_orders
-
-  - name: cumulative_store_day_actual_orders_7d
-    description: Seven-day cumulative actual orders for store-day plans.
-    type: cumulative
-    label: Cumulative Store Day Actual Orders 7D
-    type_params:
-      measure: sum_store_day_actual_orders
-      cumulative_type_params:
-        window: 7 days

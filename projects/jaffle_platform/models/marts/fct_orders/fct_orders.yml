@@ -1,0 +1,85 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: "{{ doc('jaffle_platform__fct_orders') }}"
+    config:
+      group: platform
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: order_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: order_id
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_id
+        data_type: varchar
+      - name: store_id
+        data_type: varchar
+      - name: ordered_at_utc
+        data_type: timestamp
+      - name: ordered_date_utc
+        data_type: date
+      - name: order_status
+        data_type: varchar
+      - name: channel
+        data_type: varchar
+      - name: currency
+        data_type: varchar
+      - name: country_code
+        data_type: varchar
+      - name: city
+        data_type: varchar
+      - name: timezone_name
+        data_type: varchar
+      - name: tax_jurisdiction
+        data_type: varchar
+      - name: franchise_owner
+        data_type: varchar
+      - name: is_dark_kitchen
+        data_type: boolean
+      - name: subtotal_minor
+        data_type: integer
+      - name: tax_minor
+        data_type: integer
+      - name: discount_minor
+        data_type: integer
+      - name: service_fee_minor
+        data_type: integer
+      - name: loyalty_points_redeemed
+        data_type: integer
+      - name: order_total_minor
+        data_type: integer
+      - name: order_total_major
+        data_type: double
+      - name: order_total_usd
+        data_type: double
+      - name: captured_amount_minor
+        data_type: integer
+      - name: captured_amount_major
+        data_type: double
+      - name: refunded_amount_minor
+        data_type: integer
+      - name: refunded_amount_major
+        data_type: double
+      - name: payment_attempt_count
+        data_type: integer
+      - name: refund_event_count
+        data_type: integer
+      - name: has_failed_payment
+        data_type: boolean
+      - name: is_completed_order
+        data_type: boolean
+      - name: is_cancelled_order
+        data_type: boolean
+      - name: legacy_order_number
+        data_type: varchar
+      - name: updated_at_utc
+        data_type: timestamp

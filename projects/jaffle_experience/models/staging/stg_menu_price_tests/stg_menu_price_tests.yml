@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: stg_menu_price_tests
+    config:
+      group: experience
+    columns:
+      - name: price_test_id
+        data_tests:
+          - not_null
+          - unique
+      - name: product_id
+        data_tests:
+          - not_null
+    description: "{{ doc('jaffle_experience__stg_menu_price_tests') }}"

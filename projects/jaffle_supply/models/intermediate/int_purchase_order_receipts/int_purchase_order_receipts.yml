@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_purchase_order_receipts
+    description: "{{ doc('jaffle_supply__int_purchase_order_receipts') }}"

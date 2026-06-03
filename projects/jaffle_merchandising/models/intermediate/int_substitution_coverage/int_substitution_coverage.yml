@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_substitution_coverage
+    description: "{{ doc('jaffle_merchandising__int_substitution_coverage') }}"

@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: stg_recipe_components
+    config:
+      group: supply
+    columns:
+      - name: recipe_component_key
+        data_tests:
+          - not_null
+          - unique
+      - name: product_id
+        data_tests:
+          - not_null
+      - name: component_id
+        data_tests:
+          - not_null
+    description: "{{ doc('jaffle_supply__stg_recipe_components') }}"

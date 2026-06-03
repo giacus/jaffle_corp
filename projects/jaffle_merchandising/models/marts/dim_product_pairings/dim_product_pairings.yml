@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: dim_product_pairings
+    description: "{{ doc('jaffle_merchandising__dim_product_pairings') }}"
+    config:
+      group: merchandising
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: pairing_id
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: anchor_product_id
+        data_type: varchar
+      - name: paired_product_id
+        data_type: varchar
+      - name: pairing_reason
+        data_type: varchar
+      - name: effective_from_utc
+        data_type: timestamp
+      - name: effective_to_utc
+        data_type: timestamp
+      - name: pairing_rank
+        data_type: integer

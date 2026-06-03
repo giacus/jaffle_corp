@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: fct_campaign_performance
+    description: "{{ doc('jaffle_growth__fct_campaign_performance') }}"
+    config:
+      group: growth
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: campaign_performance_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: campaign_id
+        data_type: varchar
+      - name: event_date_utc
+        data_type: date
+      - name: channel
+        data_type: varchar
+      - name: touchpoint_count
+        data_type: integer
+      - name: click_count
+        data_type: integer
+      - name: redemption_count
+        data_type: integer
+      - name: attributed_order_count
+        data_type: integer
+      - name: estimated_campaign_cost_usd
+        data_type: double
+      - name: attributed_net_revenue_usd
+        data_type: double
+      - name: attributed_margin_usd
+        data_type: double
+      - name: estimated_roas
+        data_type: double

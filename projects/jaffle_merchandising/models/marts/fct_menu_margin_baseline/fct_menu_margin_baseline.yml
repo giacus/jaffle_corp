@@ -1,0 +1,54 @@
+version: 2
+
+models:
+  - name: fct_menu_margin_baseline
+    description: "{{ doc('jaffle_merchandising__fct_menu_margin_baseline') }}"
+    config:
+      group: merchandising
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: menu_item_margin_baseline_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: publication_id
+        data_type: varchar
+      - name: store_id
+        data_type: varchar
+      - name: product_id
+        data_type: varchar
+      - name: product_name
+        data_type: varchar
+      - name: product_family
+        data_type: varchar
+      - name: country_code
+        data_type: varchar
+      - name: currency
+        data_type: varchar
+      - name: published_price_minor
+        data_type: integer
+      - name: published_price_major
+        data_type: double
+      - name: published_price_usd
+        data_type: double
+      - name: usd_rate
+        data_type: double
+      - name: expected_recipe_cost_usd
+        data_type: double
+      - name: expected_recipe_margin_usd
+        data_type: double
+      - name: expected_recipe_margin_rate
+        data_type: double
+      - name: needs_cost_review
+        data_type: boolean
+      - name: menu_price_band
+        data_type: varchar
+      - name: published_at_utc
+        data_type: timestamp
+      - name: retired_at_utc
+        data_type: timestamp
+      - name: updated_at_utc
+        data_type: timestamp

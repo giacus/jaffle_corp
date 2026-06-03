@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: metricflow_time_spine_hourly
+    time_spine:
+      standard_granularity_column: date_hour
+    config:
+      group: platform
+      meta:
+        metricflow_time_spine: true
+    columns:
+      - name: date_hour
+        data_type: timestamp
+        granularity: hour
+        data_tests:
+          - not_null
+          - unique
+    description: "{{ doc('jaffle_platform__metricflow_time_spine_hourly') }}"

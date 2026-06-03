@@ -1,0 +1,56 @@
+version: 2
+
+models:
+  - name: fct_order_items
+    description: "{{ doc('jaffle_platform__fct_order_items') }}"
+    config:
+      group: platform
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: order_item_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: order_item_id
+        data_type: varchar
+      - name: order_id
+        data_type: varchar
+      - name: ordered_date_utc
+        data_type: date
+      - name: product_id
+        data_type: varchar
+      - name: sku
+        data_type: varchar
+      - name: product_name
+        data_type: varchar
+      - name: category
+        data_type: varchar
+      - name: product_family
+        data_type: varchar
+      - name: quantity
+        data_type: integer
+      - name: item_subtotal_minor
+        data_type: integer
+      - name: item_discount_minor
+        data_type: integer
+      - name: item_tax_minor
+        data_type: integer
+      - name: item_total_minor
+        data_type: integer
+      - name: item_total_major
+        data_type: double
+      - name: customization_count
+        data_type: integer
+      - name: unit_cost_minor
+        data_type: integer
+      - name: supply_currency
+        data_type: varchar
+      - name: has_perishable_supply
+        data_type: boolean
+      - name: max_lead_time_days
+        data_type: integer
+      - name: estimated_supply_cost_minor
+        data_type: integer

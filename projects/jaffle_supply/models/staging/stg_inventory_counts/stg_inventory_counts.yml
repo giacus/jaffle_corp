@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: stg_inventory_counts
+    config:
+      group: supply
+    columns:
+      - name: inventory_count_id
+        data_tests:
+          - not_null
+          - unique
+      - name: count_quality
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - ok
+                  - review
+    description: "{{ doc('jaffle_supply__stg_inventory_counts') }}"

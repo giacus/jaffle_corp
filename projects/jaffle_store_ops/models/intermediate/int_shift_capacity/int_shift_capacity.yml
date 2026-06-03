@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_shift_capacity
+    description: "{{ doc('jaffle_store_ops__int_shift_capacity') }}"

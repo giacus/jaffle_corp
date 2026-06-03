@@ -1,0 +1,50 @@
+version: 2
+
+models:
+  - name: fct_customer_lifecycle
+    description: "{{ doc('jaffle_growth__fct_customer_lifecycle') }}"
+    config:
+      group: growth
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: customer_lifecycle_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_id
+        data_type: varchar
+      - name: customer_name
+        data_type: varchar
+      - name: email_domain
+        data_type: varchar
+      - name: loyalty_region
+        data_type: varchar
+      - name: first_seen_at
+        data_type: timestamp
+      - name: default_currency
+        data_type: varchar
+      - name: marketing_consent
+        data_type: boolean
+      - name: first_ordered_at_utc
+        data_type: timestamp
+      - name: most_recent_ordered_at_utc
+        data_type: timestamp
+      - name: order_count
+        data_type: integer
+      - name: completed_order_count
+        data_type: integer
+      - name: lifetime_net_revenue_usd
+        data_type: double
+      - name: lifetime_margin_usd
+        data_type: double
+      - name: net_loyalty_points
+        data_type: integer
+      - name: latest_program_tier
+        data_type: varchar
+      - name: lifecycle_stage
+        data_type: varchar
+      - name: days_to_first_order
+        data_type: bigint

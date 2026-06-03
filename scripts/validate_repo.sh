@@ -3,7 +3,8 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
-export JAFFLE_CORP_DUCKDB_PATH="${JAFFLE_CORP_DUCKDB_PATH:-$ROOT_DIR/jaffle_corp.duckdb}"
+DEFAULT_DUCKDB_PATH="$ROOT_DIR/jaffle_corp.duckdb"
+export JAFFLE_CORP_DUCKDB_PATH="${JAFFLE_CORP_DUCKDB_PATH:-$DEFAULT_DUCKDB_PATH}"
 
 PROJECTS=(
   projects/jaffle_platform
@@ -17,6 +18,10 @@ PROJECTS=(
   projects/jaffle_legacy
 )
 
+EXTENSION_PROJECTS=(
+  projects/jaffle_reliability
+)
+
 SEED_PROJECTS=(
   projects/jaffle_platform
   projects/jaffle_supply
@@ -26,7 +31,17 @@ SEED_PROJECTS=(
   projects/jaffle_planning
 )
 
-for project in "${PROJECTS[@]}"; do
+ALL_PROJECTS=("${PROJECTS[@]}" "${EXTENSION_PROJECTS[@]}")
+
+if [[ "$JAFFLE_CORP_DUCKDB_PATH" == "$DEFAULT_DUCKDB_PATH" ]]; then
+  rm -f "$JAFFLE_CORP_DUCKDB_PATH" "$JAFFLE_CORP_DUCKDB_PATH.wal"
+fi
+
+for project in "${ALL_PROJECTS[@]}"; do
+  rm -rf "$project/target" "$project/dbt_packages"
+done
+
+for project in "${ALL_PROJECTS[@]}"; do
   dbt deps --project-dir "$project" --profiles-dir .
 done
 
@@ -38,6 +53,10 @@ done
 
 for project in "${PROJECTS[@]}"; do
   dbt build --project-dir "$project" --profiles-dir .
+done
+
+for project in "${EXTENSION_PROJECTS[@]}"; do
+  dbt build --project-dir "$project" --profiles-dir . --select jaffle_reliability
 done
 
 run_metricflow_validate() {
@@ -84,7 +103,7 @@ run_metricflow_query \
 
 run_metricflow_query \
   projects/jaffle_merchandising \
-  "menu_actual_units,menu_target_units,menu_unit_attainment_rate,cumulative_menu_actual_units_4w" \
+  "menu_actual_units,menu_target_units,menu_unit_attainment_rate" \
   "metric_time,location,menu_goal__product_family,menu_goal__unit_goal_status"
 
 run_metricflow_query \

@@ -1,0 +1,42 @@
+version: 2
+
+models:
+  - name: dim_products
+    description: "{{ doc('jaffle_platform__dim_products') }}"
+    config:
+      group: merchandising
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: product_id
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: sku
+        data_type: varchar
+      - name: product_name
+        data_type: varchar
+      - name: category
+        data_type: varchar
+      - name: product_family
+        data_type: varchar
+      - name: list_price_minor
+        data_type: integer
+      - name: list_price_usd
+        data_type: double
+      - name: catalog_currency
+        data_type: varchar
+      - name: is_limited_time
+        data_type: boolean
+      - name: introduced_at
+        data_type: timestamp
+      - name: supply_option_count
+        data_type: integer
+      - name: lowest_unit_cost_major
+        data_type: double
+      - name: longest_lead_time_days
+        data_type: integer
+      - name: has_perishable_supply
+        data_type: boolean

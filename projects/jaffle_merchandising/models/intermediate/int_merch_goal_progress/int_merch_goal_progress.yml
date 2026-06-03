@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_merch_goal_progress
+    description: "{{ doc('jaffle_merchandising__int_merch_goal_progress') }}"

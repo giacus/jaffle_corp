@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: fct_customer_contact_threads
+    description: "{{ doc('jaffle_experience__fct_customer_contact_threads') }}"
+    config:
+      group: experience
+      access: public
+      contract:
+        enforced: true
+    columns:
+      - name: contact_thread_key
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: support_ticket_id
+        data_type: varchar
+      - name: first_contact_at_utc
+        data_type: timestamp
+      - name: most_recent_contact_at_utc
+        data_type: timestamp
+      - name: contact_event_count
+        data_type: integer
+      - name: total_message_count
+        data_type: integer
+      - name: inbound_contact_count
+        data_type: integer
+      - name: outbound_contact_count
+        data_type: integer
+      - name: contact_channels
+        data_type: varchar
+      - name: handling_roles
+        data_type: varchar
+      - name: updated_at_utc
+        data_type: timestamp

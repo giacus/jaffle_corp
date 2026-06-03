@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: stg_customer_contacts
+    config:
+      group: experience
+    columns:
+      - name: contact_event_id
+        data_tests:
+          - not_null
+          - unique
+      - name: contact_direction
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - inbound
+                  - outbound
+    description: "{{ doc('jaffle_experience__stg_customer_contacts') }}"

@@ -1,0 +1,22 @@
+select
+    menu_item_margin_baseline_key,
+    publication_id,
+    store_id,
+    product_id,
+    product_name,
+    product_family,
+    country_code,
+    currency,
+    published_price_minor,
+    published_price_major,
+    published_price_usd,
+    usd_rate,
+    expected_recipe_cost_usd,
+    expected_recipe_margin_usd,
+    expected_recipe_margin_rate,
+    needs_cost_review,
+    menu_price_band,
+    published_at_utc,
+    retired_at_utc,
+    updated_at_utc
+from {{ ref('int_menu_item_margin_baseline') }}
