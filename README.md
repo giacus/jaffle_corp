@@ -1,94 +1,38 @@
 # jaffle-corp
 
-Welcome to `jaffle-corp`, a dbt Core playground for people who want to practice
-on something more realistic than a tidy first tutorial.
+`jaffle-corp` is a local dbt Core playground for analytics engineers who want a
+fixture that feels larger than a first tutorial, but still runs on a laptop.
 
-If the classic Jaffle Shop is a friendly first dbt project, `jaffle-corp` is the
-next practice fixture: still fictional, still approachable, but large enough to
-show the modeling, ownership, testing, and semantic-layer questions that appear
-once a dbt project starts serving more than one team.
+The company is fictional. The data is synthetic. The modeling problems are meant
+to feel familiar: shared platform models, domain marts, public contracts,
+protected implementation details, semantic models, downstream dependencies, and a
+little legacy debt.
 
-You will work with a fictional food-retail company that sells jaffles through
-stores. The data is synthetic, the domain is safe for public use, and the repo
-is designed to run locally with dbt Core and DuckDB. No warehouse credentials,
-dbt Cloud account, or private metadata service is required.
+> [!NOTE]
+> This is not the best place to learn your first `ref`, source, or generic test.
+> Start here when you already know the dbt basics and want to practice project
+> design, code review, refactoring, contracts, and extension work.
 
-This repo is inspired by dbt Labs' [jaffle-shop](https://github.com/dbt-labs/jaffle-shop),
-but it is not a fork and is not affiliated with or endorsed by dbt Labs. See
-[ATTRIBUTION.md](ATTRIBUTION.md) for the relationship, contribution, and license
+This project is inspired by dbt Labs'
+[jaffle-shop](https://github.com/dbt-labs/jaffle-shop), but it is not a fork and
+is not affiliated with or endorsed by dbt Labs. See
+[ATTRIBUTION.md](ATTRIBUTION.md) for attribution, contribution, and license
 boundaries.
 
-Use this repo when you want a general, executable fixture for dbt Core training,
-code review practice, and analytics-engineering design discussion. Do not use it
-as your very first dbt lesson; the repo assumes you are ready to read models,
-run dbt commands, and reason about project structure.
+Ready to go? The default path below uses dbt Core, DuckDB, and the committed
+local profile. No warehouse credentials or dbt Cloud account are required.
 
 ## Table of Contents
 
-1. [What You Will Build](#what-you-will-build)
-2. [How This Compares to Jaffle Shop](#how-this-compares-to-jaffle-shop)
-3. [Prerequisites](#prerequisites)
-4. [Set Up dbt Core](#set-up-dbt-core)
-5. [First 10 Minutes](#first-10-minutes)
-6. [Build the Project](#build-the-project)
-7. [Explore the Project](#explore-the-project)
-8. [Run MetricFlow](#run-metricflow)
-9. [Going Further](#going-further)
-10. [Contributing](#contributing)
-
-## What You Will Build
-
-The repo is organized as a small dbt monorepo with several domain projects:
-
-- `jaffle_platform` cleans source data and exposes core customer, order, product,
-  store, payment, and refund interfaces.
-- `jaffle_supply`, `jaffle_finance`, `jaffle_experience`, `jaffle_growth`,
-  `jaffle_store_ops`, `jaffle_merchandising`, and `jaffle_planning` build on
-  those interfaces from different business perspectives.
-- `jaffle_legacy` keeps intentionally awkward models around as a migration and
-  refactoring playground.
-- `jaffle_reliability` is a downstream extension fixture that consumes public
-  finance, merchandising, and planning contracts without reaching into protected
-  internals.
-- `jaffle_shared` contains shared macros and schema behavior.
-
-The point is not to memorize every model. The point is to practice navigating
-domain boundaries, project dependencies, public contracts, protected models,
-semantic models, selectors, tests, analyses, snapshots, and legacy debt in a
-repo that still runs on a laptop.
-
-For a fuller map, see [docs/architecture.md](docs/architecture.md).
-
-## How This Compares to Jaffle Shop
-
-dbt Labs' [jaffle-shop](https://github.com/dbt-labs/jaffle-shop) is an official
-sandbox for learning dbt through a small fictional restaurant. Its current README
-is especially useful for dbt Cloud and warehouse onboarding.
-
-`jaffle-corp` keeps the familiar fictional food-retail setting, but changes the
-learning goal:
-
-| If you want to... | Start with... |
-| --- | --- |
-| Learn the first dbt concepts: models, refs, sources, tests, seeds, and docs. | `jaffle-shop` or another beginner dbt tutorial. |
-| Practice dbt Core locally without a cloud warehouse. | `jaffle-corp`. |
-| See how a project feels after multiple teams, marts, grains, and ownership boundaries appear. | `jaffle-corp`. |
-| Work through public/protected models, contracts, selectors, legacy debt, and semantic models. | `jaffle-corp`. |
-| Learn dbt Cloud environment and job setup. | `jaffle-shop` or the official dbt Cloud docs. |
-
-This repo is not a replacement for a first dbt lesson. It is a realistic fixture
-for the next step: reading lineage, making scoped changes, deciding what should
-be public, and validating a multi-project dbt Core repo end to end.
-
-Another way to think about the difference:
-
-| Dimension | `jaffle-shop` | `jaffle-corp` |
-| --- | --- | --- |
-| Default workflow | Guided setup around dbt Cloud and a warehouse. | Local dbt Core commands with DuckDB. |
-| Project shape | Compact single-project sandbox. | Multi-project monorepo with domain ownership. |
-| Learning style | Follow a setup guide and learn core dbt workflows. | Inspect, change, test, and review realistic patterns. |
-| Modeling surface | Beginner-friendly marts and source data. | Public/protected models, contracts, multiple grains, legacy marts, and semantic models. |
-| Best fit | First dbt project or dbt Cloud onboarding. | Intermediate training, workshops, interviews, and fixture-based practice. |
+1. [Prerequisites](#prerequisites)
+2. [Set Up the Local Toolchain](#set-up-the-local-toolchain)
+3. [Build Your First Project](#build-your-first-project)
+4. [Build the Whole Fixture](#build-the-whole-fixture)
+5. [Explore the Repo](#explore-the-repo)
+6. [Work on Downstream Extensions](#work-on-downstream-extensions)
+7. [Run MetricFlow](#run-metricflow)
+8. [Going Further](#going-further)
+9. [Contributing](#contributing)
 
 ## Prerequisites
 
@@ -100,9 +44,15 @@ You need:
 
 Python 3.14 is not yet supported by the current dbt dependency stack used here.
 
-## Set Up dbt Core
+Optional:
 
-Create a virtual environment and install the pinned local toolchain:
+- [Task](https://taskfile.dev/) if you want short commands like `task validate`.
+- A dbt Cloud or dbt Mesh environment if you want to adapt the fixture outside
+  the local DuckDB workflow.
+
+## Set Up the Local Toolchain
+
+Create a virtual environment and install the pinned dependencies:
 
 ```bash
 python3.11 -m venv .venv
@@ -111,72 +61,79 @@ python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 
-Check that dbt is available:
+Check that dbt is installed:
 
 ```bash
 dbt --version
 ```
 
 The committed [profiles.yml](profiles.yml) points dbt at an ignored local DuckDB
-file named `jaffle_corp.duckdb`. You do not need to create a private profile or
-configure credentials for the default local workflow.
+file named `jaffle_corp.duckdb`. You do not need to create private credentials
+for the default local workflow.
 
-## First 10 Minutes
+### Checkpoint
 
-Start with one project before building the whole repo:
+At this point:
+
+- Your virtual environment is active.
+- `dbt --version` prints dbt Core and the DuckDB adapter.
+- You are still at the repository root.
+
+## Build Your First Project
+
+Start with the platform project. It loads the shared raw seeds and builds the
+core customer, order, product, store, payment, and refund interfaces that other
+projects consume.
 
 ```bash
 dbt debug --project-dir projects/jaffle_platform --profiles-dir .
 dbt deps --project-dir projects/jaffle_platform --profiles-dir .
 dbt seed --project-dir projects/jaffle_platform --profiles-dir .
 dbt build --project-dir projects/jaffle_platform --profiles-dir .
-dbt ls --project-dir projects/jaffle_platform --profiles-dir . --select access:public --resource-type model
 ```
 
-You should see dbt connect to the local DuckDB profile, load synthetic source
-tables, build the platform models, run tests, and list the public platform
-interfaces. That is enough to start exploring without understanding every domain
-yet.
+Now list the public platform models:
 
-Model files use a model-local folder convention:
-
-```text
-models/<layer>/<model_name>/<model_name>.sql
-models/<layer>/<model_name>/<model_name>.yml
-models/<layer>/<model_name>/<model_name>.md
+```bash
+dbt ls \
+  --project-dir projects/jaffle_platform \
+  --profiles-dir . \
+  --select access:public \
+  --resource-type model
 ```
 
-The SQL, contract/tests, and docs block for a model sit beside each other. Shared
-files such as sources, groups, exposures, semantic models, and metrics stay at
-the layer or project level.
+### Checkpoint
 
-## Build the Project
+You should now have:
 
-The fastest way to check the whole repo is:
+- A local `jaffle_corp.duckdb` file.
+- Seed tables loaded into the local raw schema.
+- Platform models and tests passing.
+- A short list of public models that downstream projects are allowed to depend
+  on.
+
+## Build the Whole Fixture
+
+The full validation script is the easiest way to check that the fixture is
+healthy:
 
 ```bash
 scripts/validate_repo.sh
 ```
+That script:
 
-That command cleans ignored dbt artifacts, recreates the default local DuckDB
-database, installs project dependencies, lints SQL, seeds source tables, builds
-each dbt project in dependency order, and runs a few direct MetricFlow queries.
-On a typical laptop it should take a couple of minutes, not hours.
+- Cleans ignored dbt artifacts for each project.
+- Recreates the default local DuckDB database.
+- Runs `dbt deps` for the core and extension projects.
+- Lints SQL with SQLFluff.
+- Seeds source data.
+- Builds every core project in dependency order.
+- Builds the downstream `jaffle_reliability` extension fixture.
+- Runs MetricFlow semantic validation and representative metric queries.
 
-If you want to move more slowly, start with the platform project:
+On a typical laptop, this should take a few minutes, not hours.
 
-```bash
-dbt deps --project-dir projects/jaffle_platform --profiles-dir .
-dbt seed --project-dir projects/jaffle_platform --profiles-dir .
-dbt build --project-dir projects/jaffle_platform --profiles-dir .
-```
-
-Then build downstream projects in the order shown by
-[scripts/validate_repo.sh](scripts/validate_repo.sh). The order matters because
-the local DuckDB setup is standing in for a shared warehouse. Run the projects
-sequentially; DuckDB allows one writer per database file.
-
-The project order is:
+If you prefer to run the build manually, keep the projects in this order:
 
 ```text
 projects/jaffle_platform
@@ -188,110 +145,146 @@ projects/jaffle_store_ops
 projects/jaffle_merchandising
 projects/jaffle_planning
 projects/jaffle_legacy
-```
-
-The downstream extension fixture builds after the core projects:
-
-```text
 projects/jaffle_reliability
 ```
 
-Generated files are ignored by Git. Expect local `target/`, `dbt_packages/`,
-`logs/`, and `jaffle_corp.duckdb` artifacts after running dbt. To clean dbt
-artifacts, run:
+The order matters because this local setup uses one DuckDB file as the shared
+warehouse stand-in. Run project builds sequentially; DuckDB allows one writer per
+database file.
+
+With Task installed, the equivalent command is:
 
 ```bash
-rm -rf projects/jaffle_platform/target projects/jaffle_platform/dbt_packages
+task validate
 ```
 
-Repeat that for other projects when needed, or use `task clean` if you already
-have the optional [Task](https://taskfile.dev/) runner installed.
+### Checkpoint
 
-## Explore the Project
+After a successful full validation:
 
-Try a few dbt Core commands from the repo root:
+- Core projects build and test successfully.
+- The extension project builds against public upstream contracts.
+- MetricFlow validates semantic configs with zero errors.
+- `target/`, `dbt_packages/`, `logs/`, and `jaffle_corp.duckdb` exist locally
+  and remain ignored by Git.
+
+## Explore the Repo
+
+The repo is a small dbt monorepo:
+
+| Project | Purpose |
+| --- | --- |
+| `jaffle_platform` | Shared source cleaning and core public interfaces. |
+| `jaffle_supply` | Inventory, purchasing, component cost, and supply risk models. |
+| `jaffle_finance` | Revenue, refunds, margins, store P&L, and finance quality models. |
+| `jaffle_experience` | Support, contacts, experiments, and customer experience models. |
+| `jaffle_growth` | Campaign attribution and growth performance models. |
+| `jaffle_store_ops` | Store operations, kitchen, service, and shift-plan models. |
+| `jaffle_merchandising` | Menu publication, availability, pairings, and merchandising goals. |
+| `jaffle_planning` | Forecast, capacity, and component planning scenarios. |
+| `jaffle_legacy` | Intentionally awkward models for migration and refactoring practice. |
+| `jaffle_shared` | Shared macros and schema behavior. |
+| `jaffle_reliability` | Downstream extension fixture that consumes public contracts. |
+
+For a fuller map, read [docs/architecture.md](docs/architecture.md).
+
+Try these from the repo root:
 
 ```bash
-dbt ls --project-dir projects/jaffle_platform --profiles-dir . --select fct_orders
 dbt ls --project-dir projects/jaffle_finance --profiles-dir . --select access:public --resource-type model
 dbt build --project-dir projects/jaffle_finance --profiles-dir . --select +fct_order_revenue
-dbt build --project-dir projects/jaffle_reliability --profiles-dir . --select jaffle_reliability
-```
-
-Generate dbt docs for a project:
-
-```bash
 dbt docs generate --project-dir projects/jaffle_platform --profiles-dir .
 dbt docs serve --project-dir projects/jaffle_platform --profiles-dir .
 ```
 
-Then inspect how the public interfaces, protected implementation models, tests,
-and sources are presented.
+Model files use a model-local folder convention:
 
-The repo intentionally includes a few rough edges. See
-[EXERCISES.md](EXERCISES.md) for starter exercises, but do not treat it as an
-answer key. Finding additional modeling, testing, semantic, and ownership issues
-is part of the exercise.
+```text
+models/<layer>/<model_name>/<model_name>.sql
+models/<layer>/<model_name>/<model_name>.yml
+models/<layer>/<model_name>/<model_name>.md
+```
 
-If you want a more structured training sequence, follow
-[docs/course_path.md](docs/course_path.md).
+The SQL, model contract/tests, and docs block for a model live together. Shared
+files such as sources, groups, exposures, semantic models, and metrics stay at
+the layer or project level.
+
+## Work on Downstream Extensions
+
+`projects/jaffle_reliability` exists to prove that this repo can serve as a
+fixture for downstream projects.
+
+It depends on public models from finance, merchandising, and planning. It should
+not reach into protected intermediate models. Use it as the pattern for your own
+extension project:
+
+```bash
+dbt build \
+  --project-dir projects/jaffle_reliability \
+  --profiles-dir . \
+  --select jaffle_reliability
+```
+
+When adding another extension, start by answering four questions:
+
+1. Which public upstream models does it consume?
+2. What grain does the new model expose?
+3. Which columns form the contract?
+4. Which tests prove the extension is safe to build downstream?
+
+See [docs/extension_authoring.md](docs/extension_authoring.md) for the full
+authoring pattern.
 
 ## Run MetricFlow
 
 MetricFlow is optional on your first pass. Use it after a successful dbt build
-when you want to explore how metrics are defined and queried from the same local
-project files.
+when you want to inspect semantic models and metrics.
 
-Build the repo first, then point MetricFlow at the same DuckDB file:
+First, point MetricFlow at the same DuckDB file that dbt built:
 
 ```bash
 export JAFFLE_CORP_DUCKDB_PATH="$PWD/jaffle_corp.duckdb"
 ```
 
-Inspect available metrics directly:
+Then run MetricFlow from the dbt project that owns the metrics:
 
 ```bash
 cd projects/jaffle_finance
 export DBT_PROFILES_DIR=../..
 mf validate-configs --skip-dw
 mf list metrics
-```
-
-Run a query:
-
-```bash
 mf query \
   --metrics net_revenue_usd,estimated_gross_margin_usd,refund_rate \
   --group-by metric_time,location,order__country_code \
   --limit 20
+cd ../..
 ```
+
+`DBT_PROFILES_DIR` is required for direct `mf` commands because MetricFlow reads
+the active dbt project, while this repo keeps the shared `profiles.yml` at the
+repository root.
 
 Semantic Layer files are plain dbt/MetricFlow YAML:
 
 - `models/semantic_models.yml` defines entities, measures, dimensions, and time.
 - `models/metrics.yml` defines curated metrics.
-- `models/saved_queries.yml` is not pre-filled; add one when a repeated query is
+- `models/saved_queries.yml` is intentionally absent until a repeated query is
   worth versioning.
 
-There are no Python helper scripts for the Semantic Layer. Use `dbt` and `mf`
-directly so the examples stay close to the tools students will use in real
-projects.
-
-For more MetricFlow examples, see [docs/metricflow.md](docs/metricflow.md).
+For more examples, see [docs/metricflow.md](docs/metricflow.md).
 
 ## Going Further
 
-Good next steps after your first successful build:
+Once the fixture builds, use it as a practice environment:
 
+- Work through [EXERCISES.md](EXERCISES.md).
+- Follow the structured path in [docs/course_path.md](docs/course_path.md).
 - Compare public and protected models in a downstream project.
-- Trace how a metric moves from a mart model into `models/semantic_models.yml`
-  and `models/metrics.yml`.
+- Trace one metric from a mart model into `semantic_models.yml` and
+  `metrics.yml`.
 - Add a test to a public model contract.
-- Build a new model in `projects/jaffle_reliability` using only public upstream
-  refs.
-- Add a new downstream extension project that depends on the same public
-  contracts as `jaffle_reliability`.
-- Refactor one legacy model without changing its external behavior.
+- Build a new extension project that consumes only public upstream models.
+- Refactor a legacy model without changing its external behavior.
 - Propose a new public interface only after you can name the downstream use case,
   model grain, contract, and validation query.
 
@@ -314,17 +307,18 @@ Small glossary:
   measures, and time.
 - `metric`: a curated calculation built on semantic-model measures.
 
-### dbt Cloud
+### dbt Cloud and Mesh
 
-This project is deliberately focused on dbt Core. You can adapt it for dbt Cloud
-or a hosted mesh environment, but that is not the default path. The local
-`packages.yml` fallbacks exist so the repo can parse and build without account
-level project metadata; hosted dbt Mesh setups can use the committed
-`dependencies.yml` files as the intended interface boundary.
+The default workflow is deliberately local. You can adapt the repo for dbt Cloud
+or a hosted mesh environment, but that is not required to learn from it.
+
+The committed `dependencies.yml` files show the intended project-dependency
+boundaries. The local `packages.yml` fallbacks keep those same projects runnable
+with dbt Core when account-level project metadata is not available.
 
 ## Contributing
 
-This repo is intended to be played with. Good contributions add realistic dbt
+This repo is meant to be played with. Good contributions add realistic dbt
 complexity while keeping the business fictional, small enough to run locally,
 and understandable from the docs.
 
@@ -333,10 +327,3 @@ Before opening a pull request:
 ```bash
 scripts/validate_repo.sh
 ```
-
-Reference material used for structure and context:
-
-- [dbt-labs/jaffle-shop](https://github.com/dbt-labs/jaffle-shop)
-- [dbt project dependencies docs](https://docs.getdbt.com/docs/mesh/govern/project-dependencies)
-- [dbt model access docs](https://docs.getdbt.com/reference/resource-configs/access)
-- [dbt Semantic Layer docs](https://docs.getdbt.com/docs/build/semantic-models)
