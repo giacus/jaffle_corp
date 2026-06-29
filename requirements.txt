@@ -3,5 +3,5 @@ dbt-duckdb==1.10.1
 dbt-metricflow==0.13.0
 duckdb==1.5.4
 sqlfluff==3.5.0
-sqlfluff-templater-dbt==3.5.0
+sqlfluff-templater-dbt==4.2.2
 pre-commit==4.6.0
