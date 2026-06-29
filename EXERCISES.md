@@ -13,10 +13,10 @@ on what you want to practice. For a sequenced workshop-style journey, use
 Goal: learn how the repo is shaped before changing code.
 
 ```bash
-dbt ls --project-dir projects/jaffle_platform --profiles-dir . --select access:public --resource-type model
-dbt deps --project-dir projects/jaffle_finance --profiles-dir .
-dbt ls --project-dir projects/jaffle_finance --profiles-dir . --select +fct_order_revenue
-dbt build --project-dir projects/jaffle_finance --profiles-dir . --select +fct_order_revenue
+dbt ls --project-dir projects/jaffle_platform --select access:public --resource-type model
+dbt deps --project-dir projects/jaffle_finance
+dbt ls --project-dir projects/jaffle_finance --select +fct_order_revenue
+dbt build --project-dir projects/jaffle_finance --select +fct_order_revenue
 ```
 
 Then open the finance mart YAML and answer:

@@ -30,10 +30,36 @@ This project is inspired by dbt Labs' [`jaffle-shop`](https://github.com/dbt-lab
 
 ```bash
 python3.11 -m venv .venv
+bash scripts/install_venv_hook.sh
 source .venv/bin/activate
+python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 
 scripts/validate_repo.sh
 ```
 
 The validation script installs dbt project dependencies, lints SQL project-by-project, seeds local DuckDB sources, builds every project sequentially, and runs direct MetricFlow CLI queries. Run builds sequentially with the local DuckDB profile.
+
+## Safe Change Process
+
+Use pull requests for all changes that should land on the default branch.
+
+1. Create a branch from `master`.
+2. Make the smallest coherent change.
+3. Run `scripts/validate_repo.sh` locally.
+4. Open a pull request and fill out the checklist.
+5. Wait for the `validate` GitHub Actions check to pass.
+6. Merge only after CI is green and the PR has had a reasonable review.
+
+The default branch is `master`. It should be protected in GitHub settings so
+direct pushes, force pushes, deletions, and merges with failing CI are blocked.
+If the repository is renamed to use `main`, apply the same protection to `main`.
+
+Recommended branch protection for the default branch:
+
+- Require a pull request before merging.
+- Require the `validate` status check to pass.
+- Require branches to be up to date before merging.
+- Block force pushes and branch deletion.
+- Include administrators unless there is an explicit emergency-maintenance
+  reason not to.
