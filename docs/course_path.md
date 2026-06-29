@@ -16,13 +16,19 @@ Suggested formats:
 
 Goal: build one project and understand the local workflow.
 
+Start from the repo root and activate the local environment:
+
+```bash
+source .venv/bin/activate
+```
+
 Start here:
 
 ```bash
-dbt debug --project-dir projects/jaffle_platform --profiles-dir .
-dbt deps --project-dir projects/jaffle_platform --profiles-dir .
-dbt seed --project-dir projects/jaffle_platform --profiles-dir .
-dbt build --project-dir projects/jaffle_platform --profiles-dir .
+dbt debug --project-dir projects/jaffle_platform
+dbt deps --project-dir projects/jaffle_platform
+dbt seed --project-dir projects/jaffle_platform
+dbt build --project-dir projects/jaffle_platform
 ```
 
 Inspect:
@@ -52,9 +58,9 @@ Inspect:
 Commands:
 
 ```bash
-dbt deps --project-dir projects/jaffle_finance --profiles-dir .
-dbt ls --project-dir projects/jaffle_finance --profiles-dir . --select +fct_order_revenue
-dbt build --project-dir projects/jaffle_finance --profiles-dir . --select +fct_order_revenue
+dbt deps --project-dir projects/jaffle_finance
+dbt ls --project-dir projects/jaffle_finance --select +fct_order_revenue
+dbt build --project-dir projects/jaffle_finance --select +fct_order_revenue
 ```
 
 You are done when you can describe the grain of `fct_order_revenue`, its tests,
@@ -134,9 +140,8 @@ Inspect:
 Commands:
 
 ```bash
-export JAFFLE_CORP_DUCKDB_PATH="$PWD/jaffle_corp.duckdb"
+source .venv/bin/activate
 cd projects/jaffle_finance
-export DBT_PROFILES_DIR=../..
 mf validate-configs --skip-dw
 mf list metrics
 mf query \

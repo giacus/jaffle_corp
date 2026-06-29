@@ -35,6 +35,10 @@ ALL_PROJECTS=("${PROJECTS[@]}" "${EXTENSION_PROJECTS[@]}")
 
 if [[ "$JAFFLE_CORP_DUCKDB_PATH" == "$DEFAULT_DUCKDB_PATH" ]]; then
   rm -f "$JAFFLE_CORP_DUCKDB_PATH" "$JAFFLE_CORP_DUCKDB_PATH.wal"
+  find "$ROOT_DIR/projects" \
+    \( -name "*.duckdb" -o -name "*.duckdb.wal" \) \
+    -type f \
+    -delete
 fi
 
 for project in "${ALL_PROJECTS[@]}"; do

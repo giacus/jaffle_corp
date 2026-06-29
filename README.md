@@ -52,13 +52,26 @@ Optional:
 
 ## Set Up the Local Toolchain
 
-Create a virtual environment and install the pinned dependencies:
+From the repository root, create a virtual environment and install the pinned
+dependencies:
 
 ```bash
 python3.11 -m venv .venv
+bash scripts/install_venv_hook.sh
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
+```
+
+The hook makes `source .venv/bin/activate` load the repo-local dbt environment
+as well as Python. After activation, you can run dbt from the repo root or from
+inside any `projects/<project>` folder.
+
+If you use another Python environment manager and do not want to patch
+`.venv/bin/activate`, source the dbt environment directly in each shell:
+
+```bash
+source scripts/env.sh
 ```
 
 Check that dbt is installed:
@@ -68,14 +81,97 @@ dbt --version
 ```
 
 The committed [profiles.yml](profiles.yml) points dbt at an ignored local DuckDB
-file named `jaffle_corp.duckdb`. You do not need to create private credentials
-for the default local workflow.
+file named `jaffle_corp.duckdb`. `scripts/env.sh` sets `DBT_PROFILES_DIR` and
+`JAFFLE_CORP_DUCKDB_PATH` to absolute repo-root paths, so dbt keeps using the
+same profile and database even after you `cd` into a project folder.
+
+You do not need to create private credentials for the default local workflow.
+
+### Command Styles
+
+After activating the patched venv, both command styles work:
+
+```bash
+# From the repo root
+dbt compile --project-dir projects/jaffle_platform
+
+# From inside a dbt project
+cd projects/jaffle_platform
+dbt compile
+cd ../..
+```
+
+If you skip the venv hook and do not source `scripts/env.sh`, `--profiles-dir`
+must include a path:
+
+```bash
+# From the repo root
+dbt compile --project-dir projects/jaffle_platform --profiles-dir .
+
+# From inside a dbt project
+cd projects/jaffle_platform
+dbt compile --profiles-dir ../..
+cd ../..
+```
+
+`jaffle_shared` is a macro package. Once dbt finds the profile, `dbt compile`
+there can legitimately print `Nothing to do`.
+
+### Troubleshooting
+
+If dbt cannot find the profile:
+
+```text
+Runtime Error
+  Could not find profile named 'jaffle_corp'
+```
+
+activate the patched venv again:
+
+```bash
+source .venv/bin/activate
+```
+
+Then confirm the profile path:
+
+```bash
+echo "$DBT_PROFILES_DIR"
+```
+
+It should print the repository root. If you are not using the venv hook, either
+source `scripts/env.sh` or pass the correct `--profiles-dir` path explicitly.
+
+If dbt says:
+
+```text
+Error: Option '--profiles-dir' requires an argument.
+```
+
+the flag is incomplete. Use `--profiles-dir .` from the repo root or
+`--profiles-dir ../..` from inside a project folder.
+
+If DuckDB reports a lock on `jaffle_corp.duckdb`, another dbt, MetricFlow, or
+docs process is still using the local database. Stop that process and rerun the
+command. In local development, run dbt commands sequentially.
+
+### Automation Notes
+
+For agents and scripts:
+
+- Start every shell with `source .venv/bin/activate`.
+- Prefer `scripts/validate_repo.sh` for a full fixture health check.
+- Run project builds sequentially; the local DuckDB file allows one writer at a
+  time.
+- Do not set per-project profile paths unless intentionally overriding the
+  default local setup.
 
 ### Checkpoint
 
 At this point:
 
 - Your virtual environment is active.
+- `DBT_PROFILES_DIR` points at the repository root.
+- `JAFFLE_CORP_DUCKDB_PATH` points at the root `jaffle_corp.duckdb` file.
 - `dbt --version` prints dbt Core and the DuckDB adapter.
 - You are still at the repository root.
 
@@ -86,10 +182,10 @@ core customer, order, product, store, payment, and refund interfaces that other
 projects consume.
 
 ```bash
-dbt debug --project-dir projects/jaffle_platform --profiles-dir .
-dbt deps --project-dir projects/jaffle_platform --profiles-dir .
-dbt seed --project-dir projects/jaffle_platform --profiles-dir .
-dbt build --project-dir projects/jaffle_platform --profiles-dir .
+dbt debug --project-dir projects/jaffle_platform
+dbt deps --project-dir projects/jaffle_platform
+dbt seed --project-dir projects/jaffle_platform
+dbt build --project-dir projects/jaffle_platform
 ```
 
 Now list the public platform models:
@@ -97,7 +193,6 @@ Now list the public platform models:
 ```bash
 dbt ls \
   --project-dir projects/jaffle_platform \
-  --profiles-dir . \
   --select access:public \
   --resource-type model
 ```
@@ -120,6 +215,7 @@ healthy:
 ```bash
 scripts/validate_repo.sh
 ```
+
 That script:
 
 - Cleans ignored dbt artifacts for each project.
@@ -191,10 +287,10 @@ For a fuller map, read [docs/architecture.md](docs/architecture.md).
 Try these from the repo root:
 
 ```bash
-dbt ls --project-dir projects/jaffle_finance --profiles-dir . --select access:public --resource-type model
-dbt build --project-dir projects/jaffle_finance --profiles-dir . --select +fct_order_revenue
-dbt docs generate --project-dir projects/jaffle_platform --profiles-dir .
-dbt docs serve --project-dir projects/jaffle_platform --profiles-dir .
+dbt ls --project-dir projects/jaffle_finance --select access:public --resource-type model
+dbt build --project-dir projects/jaffle_finance --select +fct_order_revenue
+dbt docs generate --project-dir projects/jaffle_platform
+dbt docs serve --project-dir projects/jaffle_platform
 ```
 
 Model files use a model-local folder convention:
@@ -221,7 +317,6 @@ extension project:
 ```bash
 dbt build \
   --project-dir projects/jaffle_reliability \
-  --profiles-dir . \
   --select jaffle_reliability
 ```
 
@@ -240,17 +335,16 @@ authoring pattern.
 MetricFlow is optional on your first pass. Use it after a successful dbt build
 when you want to inspect semantic models and metrics.
 
-First, point MetricFlow at the same DuckDB file that dbt built:
+If this is a new shell, activate the patched venv first:
 
 ```bash
-export JAFFLE_CORP_DUCKDB_PATH="$PWD/jaffle_corp.duckdb"
+source .venv/bin/activate
 ```
 
 Then run MetricFlow from the dbt project that owns the metrics:
 
 ```bash
 cd projects/jaffle_finance
-export DBT_PROFILES_DIR=../..
 mf validate-configs --skip-dw
 mf list metrics
 mf query \
@@ -262,7 +356,7 @@ cd ../..
 
 `DBT_PROFILES_DIR` is required for direct `mf` commands because MetricFlow reads
 the active dbt project, while this repo keeps the shared `profiles.yml` at the
-repository root.
+repository root. `scripts/env.sh` sets it for you.
 
 Semantic Layer files are plain dbt/MetricFlow YAML:
 
@@ -327,3 +421,8 @@ Before opening a pull request:
 ```bash
 scripts/validate_repo.sh
 ```
+
+The GitHub Actions `validate` check runs the same fixture validation on pull
+requests and default-branch pushes. Keep changes on feature branches and merge
+through a pull request; the default branch should stay protected from direct
+pushes.

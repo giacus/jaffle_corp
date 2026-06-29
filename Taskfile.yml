@@ -99,6 +99,8 @@ tasks:
 
   clean:
     cmds:
+      - rm -f jaffle_corp.duckdb jaffle_corp.duckdb.wal
+      - find projects \( -name "*.duckdb" -o -name "*.duckdb.wal" \) -type f -delete
       - for: { var: PROJECTS }
         cmd: rm -rf {{ .ITEM }}/target {{ .ITEM }}/dbt_packages
       - for: { var: EXTENSION_PROJECTS }

@@ -1,6 +1,8 @@
 # MetricFlow Commands
 
-Run these from a built local checkout after installing `requirements.txt`, running `dbt deps`, seeding the source projects, and building the dbt projects in README order.
+Run these from a built local checkout after installing `requirements.txt`,
+activating the patched `.venv`, running `dbt deps`, seeding the source projects,
+and building the dbt projects in README order.
 
 The Semantic Layer files are intentionally compact:
 
@@ -8,13 +10,12 @@ The Semantic Layer files are intentionally compact:
 - `models/metrics.yml` contains metrics.
 - Add `models/saved_queries.yml` only when you want to version a reusable query.
 
-No Python wrapper is required. Set the repo-root DuckDB path once, then run
+No Python wrapper is required. Activate the local environment once, then run
 MetricFlow from the dbt project that owns the metrics you want to inspect:
 
 ```bash
-export JAFFLE_CORP_DUCKDB_PATH="$PWD/jaffle_corp.duckdb"
+source .venv/bin/activate
 cd projects/jaffle_finance
-export DBT_PROFILES_DIR=../..
 mf list metrics
 mf list dimensions --metrics <metric_name>
 mf list entities --metrics <metric_name>
@@ -23,12 +24,12 @@ cd ../..
 
 `DBT_PROFILES_DIR` is required here because MetricFlow reads the active dbt
 project, but the shared `profiles.yml` lives at the repository root.
+The venv hook loads `scripts/env.sh`, which sets it to the absolute repo path.
 
 ## Finance
 
 ```bash
 cd projects/jaffle_finance
-export DBT_PROFILES_DIR=../..
 mf validate-configs --skip-dw
 mf query \
   --metrics net_revenue_usd,estimated_gross_margin_usd,refund_rate \
@@ -41,7 +42,6 @@ cd ../..
 
 ```bash
 cd projects/jaffle_growth
-export DBT_PROFILES_DIR=../..
 mf validate-configs --skip-dw
 mf query \
   --metrics attributed_net_revenue_usd,campaign_roas \
@@ -54,7 +54,6 @@ cd ../..
 
 ```bash
 cd projects/jaffle_merchandising
-export DBT_PROFILES_DIR=../..
 mf validate-configs --skip-dw
 mf query \
   --metrics merchandising_observed_hours,merchandising_available_hours,merchandising_availability_rate,merchandising_outage_minutes \
@@ -71,7 +70,6 @@ cd ../..
 
 ```bash
 cd projects/jaffle_planning
-export DBT_PROFILES_DIR=../..
 mf validate-configs --skip-dw
 mf query \
   --metrics planned_component_usage,actual_component_usage \

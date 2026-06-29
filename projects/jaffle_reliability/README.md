@@ -15,8 +15,8 @@ scripts/validate_repo.sh
 Then iterate on only the extension after the upstream projects have been built:
 
 ```bash
-dbt deps --project-dir projects/jaffle_reliability --profiles-dir .
-dbt build --project-dir projects/jaffle_reliability --profiles-dir . --select jaffle_reliability
+dbt deps --project-dir projects/jaffle_reliability
+dbt build --project-dir projects/jaffle_reliability --select jaffle_reliability
 ```
 
 The extension currently joins:
