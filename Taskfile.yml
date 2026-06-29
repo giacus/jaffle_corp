@@ -6,6 +6,10 @@ vars:
   SEED_PROJECTS: "projects/jaffle_platform projects/jaffle_supply projects/jaffle_experience projects/jaffle_store_ops projects/jaffle_merchandising projects/jaffle_planning"
 
 tasks:
+  setup:
+    cmds:
+      - scripts/bootstrap.sh
+
   deps:
     cmds:
       - for: { var: PROJECTS }

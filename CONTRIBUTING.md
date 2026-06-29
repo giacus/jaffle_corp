@@ -29,16 +29,18 @@ This project is inspired by dbt Labs' [`jaffle-shop`](https://github.com/dbt-lab
 ## Local Validation
 
 ```bash
-python3.11 -m venv .venv
-bash scripts/install_venv_hook.sh
-source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
+scripts/bootstrap.sh
 
 scripts/validate_repo.sh
 ```
 
-The validation script installs dbt project dependencies, lints SQL project-by-project, seeds local DuckDB sources, builds every project sequentially, and runs direct MetricFlow CLI queries. Run builds sequentially with the local DuckDB profile.
+The bootstrap script creates or repairs `.venv`, installs dependencies, installs
+the activation hook, installs dbt packages where needed, and verifies that
+`dbt compile` can find the repo-local profile from inside every discovered dbt
+project. The validation script installs dbt project dependencies, lints SQL
+project-by-project, seeds local DuckDB sources, builds every project
+sequentially, and runs direct MetricFlow CLI queries. Run builds sequentially
+with the local DuckDB profile.
 
 ## Safe Change Process
 

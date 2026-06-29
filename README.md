@@ -52,8 +52,33 @@ Optional:
 
 ## Set Up the Local Toolchain
 
-From the repository root, create a virtual environment and install the pinned
-dependencies:
+From the repository root, run the bootstrap script:
+
+```bash
+scripts/bootstrap.sh
+```
+
+This creates or reuses `.venv`, installs the activation hook, installs pinned
+dependencies, runs `dbt deps` where needed, and verifies that `dbt compile`
+works from inside every discovered `projects/*` dbt project.
+
+If you use [Task](https://taskfile.dev/), the same setup is available as:
+
+```bash
+task setup
+```
+
+After bootstrap, activate the venv in each new shell:
+
+```bash
+source .venv/bin/activate
+```
+
+The hook makes `source .venv/bin/activate` load the repo-local dbt environment
+as well as Python. After activation, you can run dbt from the repo root or from
+inside any `projects/<project>` folder.
+
+If you prefer the manual setup path, run:
 
 ```bash
 python3.11 -m venv .venv
@@ -61,11 +86,16 @@ bash scripts/install_venv_hook.sh
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
+for project in projects/*; do
+  if [ -f "$project/dbt_project.yml" ]; then
+    (
+      cd "$project"
+      [ ! -f packages.yml ] || dbt deps
+      dbt compile
+    )
+  fi
+done
 ```
-
-The hook makes `source .venv/bin/activate` load the repo-local dbt environment
-as well as Python. After activation, you can run dbt from the repo root or from
-inside any `projects/<project>` folder.
 
 If you use another Python environment manager and do not want to patch
 `.venv/bin/activate`, source the dbt environment directly in each shell:
