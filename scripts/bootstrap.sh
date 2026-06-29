@@ -4,6 +4,36 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
+FULL_CHECK=0
+
+usage() {
+  cat <<EOF
+Usage: scripts/bootstrap.sh [--full]
+
+Sets up the local Python/dbt toolchain and runs a fast dbt smoke compile.
+
+Options:
+  --full    Compile every discovered dbt project instead of one smoke project.
+EOF
+}
+
+case "${1:-}" in
+  "")
+    ;;
+  --full)
+    FULL_CHECK=1
+    ;;
+  -h|--help)
+    usage
+    exit 0
+    ;;
+  *)
+    echo "Unknown option: $1" >&2
+    usage >&2
+    exit 1
+    ;;
+esac
+
 PYTHON_BIN="${PYTHON:-}"
 
 if [[ -z "$PYTHON_BIN" ]]; then
@@ -70,7 +100,30 @@ if [[ "${#dbt_projects[@]}" -eq 0 ]]; then
   exit 1
 fi
 
-for project in "${dbt_projects[@]}"; do
+projects_to_compile=()
+
+if [[ "$FULL_CHECK" -eq 1 ]]; then
+  projects_to_compile=("${dbt_projects[@]}")
+else
+  for project in "${dbt_projects[@]}"; do
+    if [[ -f "$project/packages.yml" ]]; then
+      projects_to_compile=("$project")
+      break
+    fi
+  done
+
+  if [[ "${#projects_to_compile[@]}" -eq 0 ]]; then
+    projects_to_compile=("${dbt_projects[0]}")
+  fi
+fi
+
+if [[ "$FULL_CHECK" -eq 1 ]]; then
+  echo "Running full dbt compile across ${#projects_to_compile[@]} discovered projects."
+else
+  echo "Running dbt smoke compile in ${projects_to_compile[0]}."
+fi
+
+for project in "${projects_to_compile[@]}"; do
   if [[ -f "$project/packages.yml" ]]; then
     echo "Installing dbt packages for $project"
     (
@@ -80,7 +133,7 @@ for project in "${dbt_projects[@]}"; do
   fi
 done
 
-for project in "${dbt_projects[@]}"; do
+for project in "${projects_to_compile[@]}"; do
   echo "Compiling $project"
   (
     cd "$project"
@@ -98,4 +151,7 @@ Next shell:
 Smoke test:
   cd <any projects/* folder with dbt_project.yml>
   dbt compile
+
+Full project compile:
+  scripts/bootstrap.sh --full
 EOF

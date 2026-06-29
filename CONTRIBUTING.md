@@ -36,9 +36,10 @@ scripts/validate_repo.sh
 
 The bootstrap script creates or repairs `.venv`, installs dependencies, installs
 the activation hook, installs dbt packages where needed, and verifies that
-`dbt compile` can find the repo-local profile from inside every discovered dbt
-project. The validation script installs dbt project dependencies, lints SQL
-project-by-project, seeds local DuckDB sources, builds every project
+`dbt compile` can find the repo-local profile from inside a discovered dbt
+project. Use `scripts/bootstrap.sh --full` to compile every discovered dbt
+project during setup. The validation script installs dbt project dependencies,
+lints SQL project-by-project, seeds local DuckDB sources, builds every project
 sequentially, and runs direct MetricFlow CLI queries. Run builds sequentially
 with the local DuckDB profile.
 

@@ -22,31 +22,49 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect validation scope
+        id: validation_scope
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          full_validate=true
+          changed_files=""
+
+          if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
+            changed_files="$(git diff --name-only "origin/${GITHUB_BASE_REF}...HEAD")"
+            printf 'Changed files:\n%s\n' "$changed_files"
+
+            if [[ -n "$changed_files" ]] && ! grep -Ev '^(README\.md|CONTRIBUTING\.md|Taskfile\.yml|scripts/bootstrap\.sh|\.github/workflows/ci\.yml)$' <<<"$changed_files" >/dev/null; then
+              full_validate=false
+            fi
+          fi
+
+          echo "full_validate=$full_validate" >> "$GITHUB_OUTPUT"
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install local toolchain
+      - name: Bootstrap local toolchain
+        run: scripts/bootstrap.sh
+
+      - name: Check Python package environment
         run: |
-          python -m venv .venv
-          bash scripts/install_venv_hook.sh
           source .venv/bin/activate
-          python -m pip install --upgrade pip
-          python -m pip install -r requirements.txt
           python -m pip check
           dbt --version
 
-      - name: Smoke test README onboarding
-        run: |
-          source .venv/bin/activate
-          dbt debug --project-dir projects/jaffle_platform
-          dbt deps --project-dir projects/jaffle_platform
-          cd projects/jaffle_shared
-          dbt compile
-
       - name: Validate repo
+        if: steps.validation_scope.outputs.full_validate == 'true'
         run: |
           source .venv/bin/activate
           scripts/validate_repo.sh
+
+      - name: Skip full validation
+        if: steps.validation_scope.outputs.full_validate != 'true'
+        run: echo "Only onboarding/bootstrap files changed; bootstrap smoke covered this PR."

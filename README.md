@@ -60,7 +60,13 @@ scripts/bootstrap.sh
 
 This creates or reuses `.venv`, installs the activation hook, installs pinned
 dependencies, runs `dbt deps` where needed, and verifies that `dbt compile`
-works from inside every discovered `projects/*` dbt project.
+works from inside a discovered `projects/*` dbt project.
+
+To compile every discovered dbt project during setup, run:
+
+```bash
+scripts/bootstrap.sh --full
+```
 
 If you use [Task](https://taskfile.dev/), the same setup is available as:
 
@@ -86,15 +92,10 @@ bash scripts/install_venv_hook.sh
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
-for project in projects/*; do
-  if [ -f "$project/dbt_project.yml" ]; then
-    (
-      cd "$project"
-      [ ! -f packages.yml ] || dbt deps
-      dbt compile
-    )
-  fi
-done
+smoke_project="$(find projects -mindepth 2 -maxdepth 2 -name dbt_project.yml -print | sed 's#/dbt_project.yml$##' | sort | head -n 1)"
+cd "$smoke_project"
+[ ! -f packages.yml ] || dbt deps
+dbt compile
 ```
 
 If you use another Python environment manager and do not want to patch

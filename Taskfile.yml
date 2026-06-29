@@ -10,6 +10,10 @@ tasks:
     cmds:
       - scripts/bootstrap.sh
 
+  setup-full:
+    cmds:
+      - scripts/bootstrap.sh --full
+
   deps:
     cmds:
       - for: { var: PROJECTS }
