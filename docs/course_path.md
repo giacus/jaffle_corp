@@ -136,7 +136,6 @@ Commands:
 ```bash
 export JAFFLE_CORP_DUCKDB_PATH="$PWD/jaffle_corp.duckdb"
 cd projects/jaffle_finance
-export DBT_PROFILES_DIR=../..
 mf validate-configs --skip-dw
 mf list metrics
 mf query \

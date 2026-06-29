@@ -48,8 +48,10 @@ scripts/validate_repo.sh
 Iterate on only the extension after upstream projects have been built:
 
 ```bash
-dbt deps --project-dir projects/jaffle_reliability --profiles-dir .
-dbt build --project-dir projects/jaffle_reliability --profiles-dir . --select jaffle_reliability
+cd projects/jaffle_reliability
+dbt deps
+dbt build --select jaffle_reliability
+cd ../..
 ```
 
 ## Public Interfaces To Start From

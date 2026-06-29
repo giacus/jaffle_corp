@@ -3,6 +3,8 @@ jaffle_corp:
   outputs:
     dev:
       type: duckdb
+      # Root-level commands write to the repo-local DuckDB file by default.
+      # Project-local profiles use ../../jaffle_corp.duckdb for the same file.
       path: "{{ env_var('JAFFLE_CORP_DUCKDB_PATH', 'jaffle_corp.duckdb') }}"
       threads: 4
       schema: dev

@@ -27,12 +27,13 @@ local profile. No warehouse credentials or dbt Cloud account are required.
 1. [Prerequisites](#prerequisites)
 2. [Set Up the Local Toolchain](#set-up-the-local-toolchain)
 3. [Build Your First Project](#build-your-first-project)
-4. [Build the Whole Fixture](#build-the-whole-fixture)
-5. [Explore the Repo](#explore-the-repo)
-6. [Work on Downstream Extensions](#work-on-downstream-extensions)
-7. [Run MetricFlow](#run-metricflow)
-8. [Going Further](#going-further)
-9. [Contributing](#contributing)
+4. [Work From a Project Directory](#work-from-a-project-directory)
+5. [Build the Whole Fixture](#build-the-whole-fixture)
+6. [Explore the Repo](#explore-the-repo)
+7. [Work on Downstream Extensions](#work-on-downstream-extensions)
+8. [Run MetricFlow](#run-metricflow)
+9. [Going Further](#going-further)
+10. [Contributing](#contributing)
 
 ## Prerequisites
 
@@ -43,6 +44,12 @@ You need:
 - Enough local disk space for a small DuckDB database.
 
 Python 3.14 is not yet supported by the current dbt dependency stack used here.
+This repo also pins Python `3.11.9` in [.python-version](.python-version), so if
+you use `pyenv` make sure that exact version is installed first:
+
+```bash
+pyenv install 3.11.9
+```
 
 Optional:
 
@@ -55,7 +62,7 @@ Optional:
 Create a virtual environment and install the pinned dependencies:
 
 ```bash
-python3.11 -m venv .venv
+python -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
@@ -67,9 +74,15 @@ Check that dbt is installed:
 dbt --version
 ```
 
-The committed [profiles.yml](profiles.yml) points dbt at an ignored local DuckDB
-file named `jaffle_corp.duckdb`. You do not need to create private credentials
-for the default local workflow.
+The committed root [profiles.yml](profiles.yml) points dbt at an ignored local
+DuckDB file named `jaffle_corp.duckdb`. Each project directory also includes a
+small `profiles.yml`, so plain `dbt ...` commands work after you `cd` into a
+project. You do not need to create private credentials for the default local
+workflow.
+
+DuckDB is embedded: the default target writes tables and views into the local
+`jaffle_corp.duckdb` file at the repo root. Set `JAFFLE_CORP_DUCKDB_PATH` if you
+want dbt to write to a different DuckDB file.
 
 ### Checkpoint
 
@@ -111,6 +124,27 @@ You should now have:
 - Platform models and tests passing.
 - A short list of public models that downstream projects are allowed to depend
   on.
+
+## Work From a Project Directory
+
+Once the platform project has been built, you can work from a domain project
+directory without passing `--project-dir` or `--profiles-dir` each time:
+
+```bash
+cd projects/jaffle_supply
+dbt deps
+dbt compile
+dbt seed
+dbt build
+cd ../..
+```
+
+`dbt compile` writes compiled SQL into the project's ignored `target/`
+directory. `dbt seed` and `dbt build` write seed tables, views, and mart tables
+into the shared local DuckDB file.
+
+Run project builds sequentially when they use the same DuckDB file. DuckDB is a
+local embedded database and allows one writer per database file.
 
 ## Build the Whole Fixture
 
@@ -250,7 +284,6 @@ Then run MetricFlow from the dbt project that owns the metrics:
 
 ```bash
 cd projects/jaffle_finance
-export DBT_PROFILES_DIR=../..
 mf validate-configs --skip-dw
 mf list metrics
 mf query \
@@ -260,9 +293,8 @@ mf query \
 cd ../..
 ```
 
-`DBT_PROFILES_DIR` is required for direct `mf` commands because MetricFlow reads
-the active dbt project, while this repo keeps the shared `profiles.yml` at the
-repository root.
+The project-local `profiles.yml` keeps direct `mf` commands pointed at the same
+repo-root DuckDB file that dbt uses.
 
 Semantic Layer files are plain dbt/MetricFlow YAML:
 

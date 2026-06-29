@@ -1,0 +1,14 @@
+# Allows plain `dbt ...` commands from this project directory.
+jaffle_corp:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "{{ env_var('JAFFLE_CORP_DUCKDB_PATH', '../../jaffle_corp.duckdb') }}"
+      threads: 4
+      schema: dev
+    ci:
+      type: duckdb
+      path: "{{ env_var('JAFFLE_CORP_DUCKDB_PATH', '../../jaffle_corp_ci.duckdb') }}"
+      threads: 4
+      schema: ci

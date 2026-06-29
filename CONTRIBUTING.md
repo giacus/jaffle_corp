@@ -29,11 +29,30 @@ This project is inspired by dbt Labs' [`jaffle-shop`](https://github.com/dbt-lab
 ## Local Validation
 
 ```bash
-python3.11 -m venv .venv
+python -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
 
 scripts/validate_repo.sh
 ```
 
+If you use `pyenv`, install the pinned interpreter once before running the
+commands above:
+
+```bash
+pyenv install 3.11.9
+```
+
 The validation script installs dbt project dependencies, lints SQL project-by-project, seeds local DuckDB sources, builds every project sequentially, and runs direct MetricFlow CLI queries. Run builds sequentially with the local DuckDB profile.
+
+For project-level work, run dbt from inside a project directory:
+
+```bash
+cd projects/jaffle_supply
+dbt deps
+dbt compile
+dbt build
+```
+
+Each project has a local `profiles.yml` that writes to the repo-root
+`jaffle_corp.duckdb` file by default.
