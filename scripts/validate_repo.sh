@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 cd "$ROOT_DIR"
 DEFAULT_DUCKDB_PATH="$ROOT_DIR/jaffle_corp.duckdb"
 export JAFFLE_CORP_DUCKDB_PATH="${JAFFLE_CORP_DUCKDB_PATH:-$DEFAULT_DUCKDB_PATH}"
