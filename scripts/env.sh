@@ -23,7 +23,7 @@ else
   _jaffle_corp_env_file="$0"
 fi
 
-_jaffle_corp_root="$(cd "$(dirname "$_jaffle_corp_env_file")/.." && pwd)"
+_jaffle_corp_root="$(cd "$(dirname "$_jaffle_corp_env_file")/.." && pwd -P)"
 if [ ! -f "$_jaffle_corp_root/profiles.yml" ]; then
   echo "Could not find profiles.yml next to scripts/env.sh." >&2
   return 1 2>/dev/null || exit 1
