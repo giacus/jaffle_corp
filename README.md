@@ -22,17 +22,47 @@ boundaries.
 Ready to go? The default path below uses dbt Core, DuckDB, and the committed
 local profile. No warehouse credentials or dbt Cloud account are required.
 
+## Shortest Beginner Route
+
+This repo is intentionally too large to understand file by file. On your first
+visit, stay at the repository root and use this path:
+
+```bash
+scripts/bootstrap.sh
+source .venv/bin/activate
+dbt seed --project-dir projects/jaffle_platform
+dbt build --project-dir projects/jaffle_platform --exclude resource_type:seed
+scripts/generate_manifest.sh
+```
+
+That gives you one working domain and a complete project index without asking
+you to understand all the other domains first. The generated, git-ignored
+`target/manifest.json` contains resources from every local dbt project.
+
+Then explore in this order:
+
+1. `jaffle_platform` for sources, staging, and stable public models.
+2. `jaffle_finance` for a realistic downstream domain.
+3. `jaffle_reliability` for a small cross-project extension.
+4. `jaffle_legacy` only when you want intentional migration debt.
+
+Use [docs/course_path.md](docs/course_path.md) for a guided route or
+[EXERCISES.md](EXERCISES.md) for individual labs. You do not need to read every
+project before changing one.
+
 ## Table of Contents
 
-1. [Prerequisites](#prerequisites)
-2. [Set Up the Local Toolchain](#set-up-the-local-toolchain)
-3. [Build Your First Project](#build-your-first-project)
-4. [Build the Whole Fixture](#build-the-whole-fixture)
-5. [Explore the Repo](#explore-the-repo)
-6. [Work on Downstream Extensions](#work-on-downstream-extensions)
-7. [Run MetricFlow](#run-metricflow)
-8. [Going Further](#going-further)
-9. [Contributing](#contributing)
+1. [Shortest Beginner Route](#shortest-beginner-route)
+2. [Prerequisites](#prerequisites)
+3. [Set Up the Local Toolchain](#set-up-the-local-toolchain)
+4. [Build Your First Project](#build-your-first-project)
+5. [Build the Whole Fixture](#build-the-whole-fixture)
+6. [Read the Whole Project from One Manifest](#read-the-whole-project-from-one-manifest)
+7. [Explore the Repo](#explore-the-repo)
+8. [Work on Downstream Extensions](#work-on-downstream-extensions)
+9. [Run MetricFlow](#run-metricflow)
+10. [Going Further](#going-further)
+11. [Contributing](#contributing)
 
 ## Prerequisites
 
@@ -43,10 +73,14 @@ You need:
 - Enough local disk space for a small DuckDB database.
 
 Python 3.14 is not yet supported by the current dbt dependency stack used here.
+The repo pins known-compatible versions, so notices about newer dbt or package
+versions are informational; do not upgrade them individually during setup.
 
 Optional:
 
 - [Task](https://taskfile.dev/) if you want short commands like `task validate`.
+- `jq` if you want the short manifest queries shown below; Python works as a
+  fallback.
 - A dbt Cloud or dbt Mesh environment if you want to adapt the fixture outside
   the local DuckDB workflow.
 
@@ -60,9 +94,10 @@ scripts/bootstrap.sh
 
 This creates or reuses `.venv`, installs the activation hook, installs pinned
 dependencies, runs `dbt deps` where needed, and verifies that `dbt compile`
-works from inside a discovered `projects/*` dbt project.
+works for `jaffle_platform`, the project used by the beginner route.
 
-To compile every discovered dbt project during setup, run:
+To compile every runnable dbt project and generate the full-project manifest
+during setup, run:
 
 ```bash
 scripts/bootstrap.sh --full
@@ -92,10 +127,8 @@ bash scripts/install_venv_hook.sh
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
-smoke_project="$(find projects -mindepth 2 -maxdepth 2 -name dbt_project.yml -print | sed 's#/dbt_project.yml$##' | sort | head -n 1)"
-cd "$smoke_project"
-[ ! -f packages.yml ] || dbt deps
-dbt compile
+dbt deps --project-dir projects/jaffle_platform --profiles-dir .
+dbt compile --project-dir projects/jaffle_platform --profiles-dir .
 ```
 
 If you use another Python environment manager and do not want to patch
@@ -216,8 +249,12 @@ projects consume.
 dbt debug --project-dir projects/jaffle_platform
 dbt deps --project-dir projects/jaffle_platform
 dbt seed --project-dir projects/jaffle_platform
-dbt build --project-dir projects/jaffle_platform
+dbt build --project-dir projects/jaffle_platform --exclude resource_type:seed
 ```
+
+The explicit seed step matters in a new database: staging models read the raw
+tables through `source()`, so dbt does not infer a seed-to-model dependency. The
+build excludes seeds because they have already been loaded.
 
 Now list the public platform models:
 
@@ -257,6 +294,7 @@ That script:
 - Builds every core project in dependency order.
 - Builds the downstream `jaffle_reliability` extension fixture.
 - Runs MetricFlow semantic validation and representative metric queries.
+- Regenerates one full-project manifest at `target/manifest.json`.
 
 On a typical laptop, this should take a few minutes, not hours.
 
@@ -292,12 +330,51 @@ After a successful full validation:
 - Core projects build and test successfully.
 - The extension project builds against public upstream contracts.
 - MetricFlow validates semantic configs with zero errors.
+- `target/manifest.json` indexes resources from every local project.
 - `target/`, `dbt_packages/`, `logs/`, and `jaffle_corp.duckdb` exist locally
   and remain ignored by Git.
 
+## Read the Whole Project from One Manifest
+
+Normal dbt commands create one manifest per project. For a monorepo-wide view,
+`jaffle_catalog` imports every local project as a package and emits one genuine
+dbt artifact from the repository root:
+
+```bash
+scripts/generate_manifest.sh
+```
+
+The result is:
+
+```text
+target/manifest.json
+```
+
+The manifest includes models, seeds, snapshots, tests, sources, exposures,
+metrics, semantic models, macros, lineage, config, and file paths across the
+fixture. It is generated output and is intentionally not committed.
+
+If `jq` is installed, these are useful first queries:
+
+```bash
+# Resource counts
+jq '{nodes: (.nodes | length), sources: (.sources | length), metrics: (.metrics | length), semantic_models: (.semantic_models | length)}' target/manifest.json
+
+# Project packages represented by executable nodes
+jq -r '[.nodes[].package_name] | unique[]' target/manifest.json
+
+# Public models and their source files
+jq -r '.nodes | to_entries[] | select(.value.resource_type == "model" and .value.config.access == "public") | [.key, .value.original_file_path] | @tsv' target/manifest.json
+```
+
+With Task installed, `task manifest` runs the same command. See
+[`projects/jaffle_catalog/README.md`](projects/jaffle_catalog/README.md) for the
+catalog project's boundary and extension notes.
+
 ## Explore the Repo
 
-The repo is a small dbt monorepo:
+The repo is an intentionally broad dbt monorepo that remains small enough to run
+locally. Follow one domain lane at a time:
 
 | Project | Purpose |
 | --- | --- |
@@ -312,6 +389,19 @@ The repo is a small dbt monorepo:
 | `jaffle_legacy` | Intentionally awkward models for migration and refactoring practice. |
 | `jaffle_shared` | Shared macros and schema behavior. |
 | `jaffle_reliability` | Downstream extension fixture that consumes public contracts. |
+| `jaffle_catalog` | Tooling-only umbrella that emits the full-project manifest. |
+
+Use this edit map when you know the kind of change but not the folder:
+
+| You want to change | Start in |
+| --- | --- |
+| Synthetic input data | The owning project's `seeds/` folder |
+| Source cleanup or naming | `models/staging/` |
+| Reusable transformation logic | `models/intermediate/` |
+| A consumer-facing dataset or contract | `models/marts/` and its model-local YAML |
+| Cross-row business behavior | The project's `tests/` folder |
+| A semantic measure or metric | `models/semantic_models.yml` or `models/metrics.yml` |
+| A cross-domain use case | `jaffle_reliability` or another extension project |
 
 For a fuller map, read [docs/architecture.md](docs/architecture.md).
 

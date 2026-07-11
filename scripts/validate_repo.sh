@@ -33,6 +33,15 @@ SEED_PROJECTS=(
 
 ALL_PROJECTS=("${PROJECTS[@]}" "${EXTENSION_PROJECTS[@]}")
 
+rm -rf "$ROOT_DIR/target" "$ROOT_DIR/logs"
+find "$ROOT_DIR/projects" \
+  -mindepth 2 \
+  -maxdepth 2 \
+  -type d \
+  \( -name target -o -name dbt_packages -o -name logs \) \
+  -prune \
+  -exec rm -rf {} +
+
 if [[ "$JAFFLE_CORP_DUCKDB_PATH" == "$DEFAULT_DUCKDB_PATH" ]]; then
   rm -f "$JAFFLE_CORP_DUCKDB_PATH" "$JAFFLE_CORP_DUCKDB_PATH.wal"
   find "$ROOT_DIR/projects" \
@@ -56,11 +65,18 @@ for project in "${SEED_PROJECTS[@]}"; do
 done
 
 for project in "${PROJECTS[@]}"; do
-  dbt build --project-dir "$project" --profiles-dir .
+  dbt build \
+    --project-dir "$project" \
+    --profiles-dir . \
+    --exclude resource_type:seed
 done
 
 for project in "${EXTENSION_PROJECTS[@]}"; do
-  dbt build --project-dir "$project" --profiles-dir . --select jaffle_reliability
+  dbt build \
+    --project-dir "$project" \
+    --profiles-dir . \
+    --select jaffle_reliability \
+    --exclude resource_type:seed
 done
 
 run_metricflow_validate() {
@@ -119,3 +135,5 @@ run_metricflow_query \
   projects/jaffle_planning \
   "forecasted_orders,actual_orders_for_forecast,absolute_order_forecast_error,forecast_interval_hit_rate" \
   "metric_time,location,store_hour_forecast__scenario_name,store_hour_forecast__forecast_accuracy_band"
+
+scripts/generate_manifest.sh

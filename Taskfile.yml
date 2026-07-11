@@ -34,6 +34,10 @@ tasks:
       - for: { var: EXTENSION_PROJECTS }
         cmd: dbt parse --project-dir {{ .ITEM }} --profiles-dir .
 
+  manifest:
+    cmds:
+      - scripts/generate_manifest.sh
+
   lint:
     deps: [deps]
     cmds:
@@ -43,9 +47,9 @@ tasks:
     deps: [deps, seed]
     cmds:
       - for: { var: PROJECTS }
-        cmd: dbt build --project-dir {{ .ITEM }} --profiles-dir .
+        cmd: dbt build --project-dir {{ .ITEM }} --profiles-dir . --exclude resource_type:seed
       - for: { var: EXTENSION_PROJECTS }
-        cmd: dbt build --project-dir {{ .ITEM }} --profiles-dir . --select jaffle_reliability
+        cmd: dbt build --project-dir {{ .ITEM }} --profiles-dir . --select jaffle_reliability --exclude resource_type:seed
 
   semantic:
     deps: [build]
@@ -86,30 +90,28 @@ tasks:
   build-platform:
     deps: [deps, seed]
     cmds:
-      - dbt build --project-dir projects/jaffle_platform --profiles-dir .
+      - dbt build --project-dir projects/jaffle_platform --profiles-dir . --exclude resource_type:seed
 
   build-public-stack:
     deps: [deps, seed]
     cmds:
-      - dbt build --project-dir projects/jaffle_platform --profiles-dir .
-      - dbt build --project-dir projects/jaffle_supply --profiles-dir .
-      - dbt build --project-dir projects/jaffle_finance --profiles-dir .
-      - dbt build --project-dir projects/jaffle_experience --profiles-dir .
-      - dbt build --project-dir projects/jaffle_growth --profiles-dir .
-      - dbt build --project-dir projects/jaffle_store_ops --profiles-dir .
-      - dbt build --project-dir projects/jaffle_merchandising --profiles-dir .
-      - dbt build --project-dir projects/jaffle_planning --profiles-dir .
+      - dbt build --project-dir projects/jaffle_platform --profiles-dir . --exclude resource_type:seed
+      - dbt build --project-dir projects/jaffle_supply --profiles-dir . --exclude resource_type:seed
+      - dbt build --project-dir projects/jaffle_finance --profiles-dir . --exclude resource_type:seed
+      - dbt build --project-dir projects/jaffle_experience --profiles-dir . --exclude resource_type:seed
+      - dbt build --project-dir projects/jaffle_growth --profiles-dir . --exclude resource_type:seed
+      - dbt build --project-dir projects/jaffle_store_ops --profiles-dir . --exclude resource_type:seed
+      - dbt build --project-dir projects/jaffle_merchandising --profiles-dir . --exclude resource_type:seed
+      - dbt build --project-dir projects/jaffle_planning --profiles-dir . --exclude resource_type:seed
 
   build-extension:
     deps: [build-public-stack]
     cmds:
-      - dbt build --project-dir projects/jaffle_reliability --profiles-dir . --select jaffle_reliability
+      - dbt build --project-dir projects/jaffle_reliability --profiles-dir . --select jaffle_reliability --exclude resource_type:seed
 
   clean:
     cmds:
       - rm -f jaffle_corp.duckdb jaffle_corp.duckdb.wal
+      - rm -rf target logs
+      - find projects -mindepth 2 -maxdepth 2 -type d \( -name target -o -name dbt_packages -o -name logs \) -prune -exec rm -rf {} +
       - find projects \( -name "*.duckdb" -o -name "*.duckdb.wal" \) -type f -delete
-      - for: { var: PROJECTS }
-        cmd: rm -rf {{ .ITEM }}/target {{ .ITEM }}/dbt_packages
-      - for: { var: EXTENSION_PROJECTS }
-        cmd: rm -rf {{ .ITEM }}/target {{ .ITEM }}/dbt_packages

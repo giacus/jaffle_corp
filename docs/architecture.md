@@ -25,6 +25,46 @@ The `jaffle_reliability` project is a downstream extension fixture. It consumes
 public contracted marts from finance, merchandising, and planning without
 depending on their staging or intermediate models.
 
+The `jaffle_catalog` project is tooling-only. It imports every project as a dbt
+package so `scripts/generate_manifest.sh` can emit one full-repo
+`target/manifest.json`; it must not own business models.
+
+## Dependency Shape
+
+Arrows show the main business-data dependency shape. Ubiquitous shared-macro
+package edges and catalog-only packaging edges are omitted:
+
+```mermaid
+flowchart LR
+    shared["shared macros"] --> platform["platform"]
+    platform --> supply["supply"]
+    platform --> finance["finance"]
+    supply --> finance
+    platform --> experience["experience"]
+    finance --> experience
+    platform --> growth["growth"]
+    finance --> growth
+    experience --> growth
+    platform --> storeops["store ops"]
+    supply --> storeops
+    finance --> storeops
+    platform --> merchandising["merchandising"]
+    supply --> merchandising
+    platform --> planning["planning"]
+    supply --> planning
+    finance --> planning
+    storeops --> planning
+    platform --> legacy["legacy"]
+    finance --> legacy
+    experience --> legacy
+    finance --> reliability["reliability extension"]
+    merchandising --> reliability
+    planning --> reliability
+```
+
+`jaffle_catalog` observes all of these projects to create the combined manifest;
+business projects do not depend on it.
+
 ## Domain Map
 
 Platform:

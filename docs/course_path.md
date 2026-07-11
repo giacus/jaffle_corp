@@ -3,14 +3,28 @@
 Use this path when you want `jaffle-corp` to behave like a structured dbt Core
 training fixture instead of a repo to wander through.
 
-The modules are ordered from orientation to advanced practice. Each module can
-stand alone, but the sequence works well for a workshop or self-study plan.
+The modules are ordered from orientation to advanced practice. The sequence is
+the smoothest self-study path.
 
 Suggested formats:
 
 - 60-minute tour: modules 1, 2, and the concept map.
 - Half-day workshop: modules 1 through 4.
 - Multi-day practice: all modules plus the capstone.
+
+## Preflight
+
+Before starting a module in a fresh clone, run:
+
+```bash
+scripts/bootstrap.sh
+source .venv/bin/activate
+dbt seed --project-dir projects/jaffle_platform
+dbt build --project-dir projects/jaffle_platform --exclude resource_type:seed
+```
+
+If you start at module 3 or later instead of following the sequence, first run
+`scripts/validate_repo.sh` to create a complete baseline.
 
 ## 1. Orientation
 
@@ -28,7 +42,7 @@ Start here:
 dbt debug --project-dir projects/jaffle_platform
 dbt deps --project-dir projects/jaffle_platform
 dbt seed --project-dir projects/jaffle_platform
-dbt build --project-dir projects/jaffle_platform
+dbt build --project-dir projects/jaffle_platform --exclude resource_type:seed
 ```
 
 Inspect:
@@ -59,12 +73,16 @@ Commands:
 
 ```bash
 dbt deps --project-dir projects/jaffle_finance
-dbt ls --project-dir projects/jaffle_finance --select +fct_order_revenue
+dbt ls --project-dir projects/jaffle_finance \
+  --select +fct_order_revenue \
+  --resource-type model
 dbt build --project-dir projects/jaffle_finance --select +fct_order_revenue
 ```
 
 You are done when you can describe the grain of `fct_order_revenue`, its tests,
 and the upstream public models it relies on.
+
+The command-by-command version is [Lab 1 in the exercise catalog](../EXERCISES.md#lab-1-trace-recognized-revenue).
 
 ## 3. Interfaces And Contracts
 
@@ -108,6 +126,10 @@ Practice:
 You are done when a future contributor would understand what behavior your test
 protects.
 
+Use [Lab 2](../EXERCISES.md#lab-2-prove-a-test-can-fail) for a guided failure or
+[Lab 4](../EXERCISES.md#lab-4-protect-a-price-window-invariant) for the interval
+test.
+
 ## 5. Legacy Migration
 
 Goal: improve a messy model without losing its external behavior.
@@ -120,12 +142,16 @@ Inspect:
 
 Practice:
 
-- Pick one legacy mart.
-- Identify naming, grain, or currency problems.
+- Start with `legacy_daily_store_rollup` and its declared exposure.
+- Capture baseline row counts and representative totals before changing SQL.
+- Add a characterization test for the behavior the consumer relies on.
 - Build a cleaner replacement or adapter model.
-- Add tests that prove the expected behavior.
+- Compare the result with the baseline and document the compatibility boundary.
 
 You are done when you can explain what stayed compatible and what became cleaner.
+
+See [Lab 7](../EXERCISES.md#lab-7-refactor-a-legacy-interface-safely) for the full
+feedback loop.
 
 ## 6. Semantic Layer And MetricFlow
 
@@ -148,6 +174,7 @@ mf query \
   --metrics net_revenue_usd,estimated_gross_margin_usd,refund_rate \
   --group-by metric_time,location,order__country_code \
   --limit 20
+cd ../..
 ```
 
 You are done when you can explain the model grain, measure, metric, dimensions,
@@ -159,10 +186,10 @@ Goal: make a realistic cross-domain change.
 
 Example prompt:
 
-> The merchandising team wants to understand whether limited product
-> availability is hurting store-day revenue quality. Add a small, tested model or
-> analysis in the reliability extension that connects merchandising availability
-> with finance revenue quality.
+> Store operations and customer experience want to know whether orders that miss
+> the kitchen ready target generate more support demand, worse SLA outcomes, or
+> lower satisfaction. Add a tested downstream model using the public order
+> service-time and support-ticket interfaces.
 
 Expected work:
 
@@ -172,9 +199,14 @@ Expected work:
 - Add tests for the new grain.
 - Decide whether the output should be public or protected.
 - Run the relevant downstream builds.
+- Register any new extension project in validation, the full catalog, and the
+  architecture docs.
 
 You are done when the change is understandable from dbt lineage and does not
 break `scripts/validate_repo.sh`.
+
+Use [Lab 8](../EXERCISES.md#lab-8-cross-domain-support-capstone) for concrete
+inputs and completion criteria.
 
 ## Concept Map
 
@@ -198,3 +230,4 @@ break `scripts/validate_repo.sh`.
 | Metrics | `projects/*/models/metrics.yml` |
 | Legacy anti-patterns | `projects/jaffle_legacy` |
 | End-to-end validation | `scripts/validate_repo.sh` |
+| Full-project dbt artifact | `target/manifest.json` from `scripts/generate_manifest.sh` |
