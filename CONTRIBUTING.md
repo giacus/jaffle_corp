@@ -30,18 +30,20 @@ This project is inspired by dbt Labs' [`jaffle-shop`](https://github.com/dbt-lab
 
 ```bash
 scripts/bootstrap.sh
-
+source .venv/bin/activate
 scripts/validate_repo.sh
 ```
 
 The bootstrap script creates or repairs `.venv`, installs dependencies, installs
 the activation hook, installs dbt packages where needed, and verifies that
-`dbt compile` can find the repo-local profile from inside a discovered dbt
-project. Use `scripts/bootstrap.sh --full` to compile every discovered dbt
-project during setup. The validation script installs dbt project dependencies,
-lints SQL project-by-project, seeds local DuckDB sources, builds every project
-sequentially, and runs direct MetricFlow CLI queries. Run builds sequentially
-with the local DuckDB profile.
+`dbt compile` can find the repo-local profile for `jaffle_platform`. Use
+`scripts/bootstrap.sh --full` to compile every runnable dbt project
+and generate the full manifest during setup. The validation script installs dbt
+project dependencies, lints SQL project-by-project, seeds local DuckDB sources,
+builds every project sequentially, and runs direct MetricFlow CLI queries. Run
+builds sequentially with the local DuckDB profile. It finishes by regenerating
+the complete git-ignored `target/manifest.json`; use
+`scripts/generate_manifest.sh` when you only need that artifact.
 
 ## Safe Change Process
 

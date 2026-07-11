@@ -1,0 +1,19 @@
+name: jaffle_catalog
+version: "0.1.0"
+config-version: 2
+
+profile: jaffle_corp
+require-dbt-version: ">=1.8.0,<2.0.0"
+
+# This project owns no models. It imports every runnable project so dbt can emit
+# one manifest for the complete fixture.
+model-paths: ["models"]
+macro-paths: ["macros"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - target
+  - dbt_packages
