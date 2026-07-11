@@ -1,74 +1,37 @@
-# Exercises
+# Exercise Catalog
 
-These exercises are intentionally incomplete. The repo is meant to feel like a
-realistic analytics codebase, so you should discover additional issues through
-parsing, building, reading lineage, and writing tests.
+The structured course and the exercise catalog now use the same task files.
+Follow them in order from [docs/course_path.md](docs/course_path.md), or choose a
+single task below by skill and difficulty.
 
-Start by running the platform project from the README. Then choose a path based
-on what you want to practice. For a sequenced workshop-style journey, use
-[docs/course_path.md](docs/course_path.md).
+## Guided
 
-## First Tour
+- [Get the project running](docs/course/01-get-running.md): setup, platform, and repo landmarks.
+- [Trace recognized revenue](docs/course/02-trace-revenue.md): lineage, selection, tests, and ownership.
+- [Navigate the full manifest](docs/course/03-navigate-manifest.md): artifacts, access, contracts, and graph links.
+- [Prove a test can fail](docs/course/04-prove-test-failure.md): controlled fixture failure and recovery.
 
-Goal: learn how the repo is shaped before changing code.
+## Intermediate
 
-```bash
-dbt ls --project-dir projects/jaffle_platform --select access:public --resource-type model
-dbt deps --project-dir projects/jaffle_finance
-dbt ls --project-dir projects/jaffle_finance --select +fct_order_revenue
-dbt build --project-dir projects/jaffle_finance --select +fct_order_revenue
-```
+- [Protect a price-window invariant](docs/course/05-add-behavior-test.md): interval logic and singular tests.
+- [Review a contract change](docs/course/06-review-contract-change.md): compatibility and blast-radius analysis.
+- [Observe snapshot history](docs/course/07-observe-snapshot-history.md): timestamp snapshots and SCD history.
+- [Query the semantic layer](docs/course/08-query-semantic-layer.md): measures, metrics, dimensions, and MetricFlow.
 
-Then open the finance mart YAML and answer:
+## Advanced
 
-- Which upstream public models does finance depend on?
-- Which finance models are public interfaces?
-- Which tests protect `fct_order_revenue`?
+- [Refactor a legacy interface](docs/course/09-refactor-legacy-interface.md): characterization and compatibility.
+- [Build a cross-domain capstone](docs/course/10-cross-domain-capstone.md): grain, dependencies, contracts, and tests.
 
-Done means you can explain the lineage from orders and order items to finance
-revenue without reading every model in the repo.
+## Stretch Ideas
 
-## Modeling And Tests
+- Add a variable-controlled threshold and prove both branches.
+- Extract a repeated business expression into `jaffle_shared` with tests that
+  justify the abstraction.
+- Add MetricFlow coverage for substitution readiness or planning exceptions.
+- Add a saved query only after naming a repeated consumer.
+- Explore a dbt unit test, an incremental model with a full-refresh comparison,
+  or a state-based selection workflow.
 
-- Add a new model to `projects/jaffle_reliability` that uses only public refs
-  from upstream projects. Pick a clear grain before you write SQL.
-- Add a singular test that catches overlapping merchandising price adjustment
-  windows for the same product, store, and effective timestamp.
-- Add a negative fixture row to a seed on a short-lived branch, prove an existing
-  test fails, then remove the row and prove the project passes again.
-- Extend the reliability score with one more public upstream signal and update
-  its contract without changing the model grain.
-
-## Contracts And Ownership
-
-- Compare public and protected models in `jaffle_finance` or
-  `jaffle_store_ops`. Write down which models feel safe for another project to
-  depend on.
-- Inspect the merchandising and planning public contracts. Write down one
-  contract change that would be backward-compatible and one that would be
-  breaking for `jaffle_reliability`.
-- Add a second downstream extension project that depends on public marts from at
-  least two domains.
-- Convert at least one legacy-style surface into a clean public model with a
-  contract.
-
-## Macros And Configuration
-
-- Add a project variable that changes a threshold in one mart, then prove the
-  behavior with a focused model build and one query.
-- Find one repeated expression that is realistic enough to become a shared
-  macro, then add tests or examples around the change.
-
-## Semantic Layer
-
-- Trace one finance metric from `models/metrics.yml` to its measure in
-  `models/semantic_models.yml` and then to the mart model.
-- Extend MetricFlow coverage for substitution readiness or planning exceptions.
-- Add a `models/saved_queries.yml` file only if you can describe who would reuse
-  the query and why.
-
-## Notes For Instructors
-
-Do not treat this file as a full answer key. It names low-friction exercises so
-students can get started, while leaving enough ambiguity for code review, lineage
-inspection, and semantic-model debugging practice.
+These tasks provide expected observations, not an answer key. A green command is
+only part of completion; explain grain, ownership, and validation choices too.

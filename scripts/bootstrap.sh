@@ -13,7 +13,7 @@ Usage: scripts/bootstrap.sh [--full]
 Sets up the local Python/dbt toolchain and runs a fast dbt smoke compile.
 
 Options:
-  --full    Compile every discovered dbt project instead of one smoke project.
+  --full    Compile every runnable project and generate the full-project manifest.
 EOF
 }
 
@@ -90,7 +90,9 @@ dbt_projects=()
 while IFS= read -r project; do
   dbt_projects+=("$project")
 done < <(
-  find projects -mindepth 2 -maxdepth 2 -name dbt_project.yml -print \
+  find projects -mindepth 2 -maxdepth 2 -name dbt_project.yml \
+    ! -path 'projects/jaffle_catalog/dbt_project.yml' \
+    -print \
     | sed 's#/dbt_project.yml$##' \
     | sort
 )
@@ -105,7 +107,17 @@ projects_to_compile=()
 if [[ "$FULL_CHECK" -eq 1 ]]; then
   projects_to_compile=("${dbt_projects[@]}")
 else
+  preferred_smoke_project="projects/jaffle_platform"
+
+  if [[ -f "$preferred_smoke_project/dbt_project.yml" ]]; then
+    projects_to_compile=("$preferred_smoke_project")
+  fi
+
   for project in "${dbt_projects[@]}"; do
+    if [[ "${#projects_to_compile[@]}" -gt 0 ]]; then
+      break
+    fi
+
     if [[ -f "$project/packages.yml" ]]; then
       projects_to_compile=("$project")
       break
@@ -140,6 +152,10 @@ for project in "${projects_to_compile[@]}"; do
     dbt compile
   )
 done
+
+if [[ "$FULL_CHECK" -eq 1 ]]; then
+  scripts/generate_manifest.sh
+fi
 
 cat <<EOF
 
