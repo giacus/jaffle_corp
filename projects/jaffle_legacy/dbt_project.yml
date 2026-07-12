@@ -28,10 +28,6 @@ models:
     +meta:
       domain: legacy
       migration_status: needs_rewrite
-    staging:
-      +schema: stg_legacy
-      +tags: ["legacy", "staging"]
-      +access: protected
     marts:
       +schema: legacy
       +tags: ["legacy", "deprecated"]

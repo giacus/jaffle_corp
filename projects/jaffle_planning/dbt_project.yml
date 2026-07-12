@@ -29,11 +29,6 @@ models:
     +meta:
       domain: planning
       source_system: synthetic_jaffle_corp
-    staging:
-      +schema: stg_planning
-      +materialized: view
-      +tags: ["staging", "planning"]
-      +access: protected
     intermediate:
       +schema: int_planning
       +materialized: ephemeral
@@ -43,7 +38,3 @@ models:
       +schema: mart_planning
       +materialized: table
       +tags: ["mart", "planning"]
-seeds:
-  jaffle_planning:
-    +schema: raw
-    +quote_columns: false

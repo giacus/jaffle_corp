@@ -30,11 +30,6 @@ models:
     +meta:
       domain: experience
       source_system: synthetic_jaffle_corp
-    staging:
-      +schema: stg_experience
-      +materialized: view
-      +tags: ["staging", "experience"]
-      +access: protected
     intermediate:
       +schema: int_experience
       +materialized: ephemeral
@@ -44,9 +39,4 @@ models:
       +schema: mart_experience
       +materialized: table
       +tags: ["mart", "experience"]
-
-seeds:
-  jaffle_experience:
-    +schema: raw
-    +quote_columns: false
 

@@ -29,11 +29,6 @@ models:
     +meta:
       domain: supply
       source_system: synthetic_jaffle_corp
-    staging:
-      +schema: stg_supply
-      +materialized: view
-      +tags: ["staging", "supply"]
-      +access: protected
     intermediate:
       +schema: int_supply
       +materialized: ephemeral
@@ -43,9 +38,4 @@ models:
       +schema: mart_supply
       +materialized: table
       +tags: ["mart", "supply"]
-
-seeds:
-  jaffle_supply:
-    +schema: raw
-    +quote_columns: false
 

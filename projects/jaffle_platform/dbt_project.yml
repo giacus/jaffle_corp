@@ -29,11 +29,6 @@ models:
     +meta:
       domain: platform
       source_system: synthetic_jaffle_corp
-    staging:
-      +schema: stg
-      +materialized: view
-      +tags: ["staging"]
-      +access: protected
     intermediate:
       +schema: int
       +materialized: ephemeral
@@ -43,7 +38,3 @@ models:
       +schema: mart
       +materialized: table
       +tags: ["mart"]
-seeds:
-  jaffle_platform:
-    +schema: raw
-    +quote_columns: false

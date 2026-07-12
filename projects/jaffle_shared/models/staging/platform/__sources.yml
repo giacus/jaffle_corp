@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: jaffle_app
     schema: "{{ target.schema }}_raw"
-    description: Synthetic source tables for the jaffle-corp platform project.
+    description: Synthetic source tables for the core jaffle application.
     freshness:
       warn_after: {count: 24, period: hour}
       error_after: {count: 72, period: hour}

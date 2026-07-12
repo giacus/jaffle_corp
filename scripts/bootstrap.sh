@@ -92,6 +92,7 @@ while IFS= read -r project; do
 done < <(
   find projects -mindepth 2 -maxdepth 2 -name dbt_project.yml \
     ! -path 'projects/jaffle_catalog/dbt_project.yml' \
+    ! -path 'projects/jaffle_shared/dbt_project.yml' \
     -print \
     | sed 's#/dbt_project.yml$##' \
     | sort

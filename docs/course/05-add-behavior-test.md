@@ -13,7 +13,7 @@
 
 Inspect:
 
-- `projects/jaffle_merchandising/models/staging/stg_price_adjustments`
+- `projects/jaffle_shared/models/staging/merchandising/stg_price_adjustments`
 - `projects/jaffle_merchandising/models/marts/fct_price_adjustment_windows`
 - `projects/jaffle_merchandising/tests`
 
