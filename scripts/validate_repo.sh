@@ -22,16 +22,10 @@ EXTENSION_PROJECTS=(
   projects/jaffle_reliability
 )
 
-SEED_PROJECTS=(
-  projects/jaffle_platform
-  projects/jaffle_supply
-  projects/jaffle_experience
-  projects/jaffle_store_ops
-  projects/jaffle_merchandising
-  projects/jaffle_planning
-)
+SEED_PROJECT="projects/jaffle_platform"
 
 ALL_PROJECTS=("${PROJECTS[@]}" "${EXTENSION_PROJECTS[@]}")
+DEPENDENCY_PROJECTS=(projects/jaffle_shared "${ALL_PROJECTS[@]}")
 
 rm -rf "$ROOT_DIR/target" "$ROOT_DIR/logs"
 find "$ROOT_DIR/projects" \
@@ -50,19 +44,19 @@ if [[ "$JAFFLE_CORP_DUCKDB_PATH" == "$DEFAULT_DUCKDB_PATH" ]]; then
     -delete
 fi
 
-for project in "${ALL_PROJECTS[@]}"; do
+for project in "${DEPENDENCY_PROJECTS[@]}"; do
   rm -rf "$project/target" "$project/dbt_packages"
 done
 
-for project in "${ALL_PROJECTS[@]}"; do
+for project in "${DEPENDENCY_PROJECTS[@]}"; do
   dbt deps --project-dir "$project" --profiles-dir .
 done
 
 scripts/lint_sql_projects.sh
 
-for project in "${SEED_PROJECTS[@]}"; do
-  dbt seed --project-dir "$project" --profiles-dir .
-done
+# jaffle_shared owns every raw fixture seed. Seeding through one importing
+# project loads the complete raw layer once without repeating it per domain.
+dbt seed --project-dir "$SEED_PROJECT" --profiles-dir .
 
 for project in "${PROJECTS[@]}"; do
   dbt build \

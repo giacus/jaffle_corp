@@ -29,11 +29,6 @@ models:
     +meta:
       domain: merchandising
       source_system: synthetic_jaffle_corp
-    staging:
-      +schema: stg_merchandising
-      +materialized: view
-      +tags: ["staging", "merchandising"]
-      +access: protected
     intermediate:
       +schema: int_merchandising
       +materialized: ephemeral
@@ -43,7 +38,3 @@ models:
       +schema: mart_merchandising
       +materialized: table
       +tags: ["mart", "merchandising"]
-seeds:
-  jaffle_merchandising:
-    +schema: raw
-    +quote_columns: false

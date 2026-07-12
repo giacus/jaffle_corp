@@ -29,11 +29,6 @@ models:
     +meta:
       domain: store_ops
       source_system: synthetic_jaffle_corp
-    staging:
-      +schema: stg_store_ops
-      +materialized: view
-      +tags: ["staging", "store_ops"]
-      +access: protected
     intermediate:
       +schema: int_store_ops
       +materialized: ephemeral
@@ -43,9 +38,4 @@ models:
       +schema: mart_store_ops
       +materialized: table
       +tags: ["mart", "store_ops"]
-
-seeds:
-  jaffle_store_ops:
-    +schema: raw
-    +quote_columns: false
 

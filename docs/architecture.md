@@ -3,7 +3,13 @@
 `jaffle-corp` is organized as a small dbt mesh plus a downstream extension
 fixture.
 
-The `jaffle_platform` project owns raw source cleanup, conformed dimensions, and stable order-level interfaces. Downstream projects consume those interfaces instead of reaching into staging tables.
+The `jaffle_shared` project owns the complete ingestion boundary: raw fixture
+seeds, source definitions, and domain-organized staging models. It also owns
+cross-project macros and schema behavior.
+
+The `jaffle_platform` project owns conformed dimensions and stable order-level
+interfaces. Downstream projects consume those interfaces instead of reaching
+into shared staging tables.
 
 The `jaffle_supply` project owns recipe components, purchase orders, inventory counts, waste events, component costs, and supply-risk classification.
 
@@ -31,30 +37,36 @@ package so `scripts/generate_manifest.sh` can emit one full-repo
 
 ## Dependency Shape
 
-Arrows show the main business-data dependency shape. Ubiquitous shared-macro
-package edges and catalog-only packaging edges are omitted:
+Arrows show the main business-data dependency shape. Catalog-only packaging
+edges are omitted:
 
 ```mermaid
 flowchart LR
-    shared["shared macros"] --> platform["platform"]
+    shared["shared ingestion and staging"] --> platform["platform"]
+    shared --> supply["supply"]
+    shared --> experience["experience"]
+    shared --> storeops["store ops"]
+    shared --> merchandising["merchandising"]
+    shared --> planning["planning"]
+    shared --> legacy["legacy"]
     platform --> supply["supply"]
     platform --> finance["finance"]
     supply --> finance
-    platform --> experience["experience"]
+    platform --> experience
     finance --> experience
     platform --> growth["growth"]
     finance --> growth
     experience --> growth
-    platform --> storeops["store ops"]
+    platform --> storeops
     supply --> storeops
     finance --> storeops
-    platform --> merchandising["merchandising"]
+    platform --> merchandising
     supply --> merchandising
-    platform --> planning["planning"]
+    platform --> planning
     supply --> planning
     finance --> planning
     storeops --> planning
-    platform --> legacy["legacy"]
+    platform --> legacy
     finance --> legacy
     experience --> legacy
     finance --> reliability["reliability extension"]

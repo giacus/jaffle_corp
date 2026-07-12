@@ -41,10 +41,11 @@ you to understand all the other domains first. The generated, git-ignored
 
 Then explore in this order:
 
-1. `jaffle_platform` for sources, staging, and stable public models.
-2. `jaffle_finance` for a realistic downstream domain.
-3. `jaffle_reliability` for a small cross-project extension.
-4. `jaffle_legacy` only when you want intentional migration debt.
+1. `jaffle_shared` for raw fixtures, source definitions, and staging models.
+2. `jaffle_platform` for stable public models built from that shared foundation.
+3. `jaffle_finance` for a realistic downstream domain.
+4. `jaffle_reliability` for a small cross-project extension.
+5. `jaffle_legacy` only when you want intentional migration debt.
 
 Use [docs/course_path.md](docs/course_path.md) for a guided route or
 [EXERCISES.md](EXERCISES.md) for individual labs. You do not need to read every
@@ -178,8 +179,10 @@ dbt compile --profiles-dir ../..
 cd ../..
 ```
 
-`jaffle_shared` is a macro package. Once dbt finds the profile, `dbt compile`
-there can legitimately print `Nothing to do`.
+`jaffle_shared` is the centralized ingestion and staging package. It owns all
+raw fixture seeds, source definitions, staging models, and shared macros. Run it
+through an importing domain project, such as `jaffle_platform`, so cross-project
+legacy compatibility models can resolve their public upstream refs.
 
 ### Troubleshooting
 
@@ -241,9 +244,9 @@ At this point:
 
 ## Build Your First Project
 
-Start with the platform project. It loads the shared raw seeds and builds the
-core customer, order, product, store, payment, and refund interfaces that other
-projects consume.
+Start with the platform project. It imports `jaffle_shared`, loads the complete
+raw fixture layer, and builds the core customer, order, product, store, payment,
+and refund interfaces that other projects consume.
 
 ```bash
 dbt debug --project-dir projects/jaffle_platform
@@ -378,7 +381,7 @@ locally. Follow one domain lane at a time:
 
 | Project | Purpose |
 | --- | --- |
-| `jaffle_platform` | Shared source cleaning and core public interfaces. |
+| `jaffle_platform` | Conformed dimensions and core public interfaces. |
 | `jaffle_supply` | Inventory, purchasing, component cost, and supply risk models. |
 | `jaffle_finance` | Revenue, refunds, margins, store P&L, and finance quality models. |
 | `jaffle_experience` | Support, contacts, experiments, and customer experience models. |
@@ -387,7 +390,7 @@ locally. Follow one domain lane at a time:
 | `jaffle_merchandising` | Menu publication, availability, pairings, and merchandising goals. |
 | `jaffle_planning` | Forecast, capacity, and component planning scenarios. |
 | `jaffle_legacy` | Intentionally awkward models for migration and refactoring practice. |
-| `jaffle_shared` | Shared macros and schema behavior. |
+| `jaffle_shared` | All raw fixtures, source definitions, staging models, shared macros, and schema behavior. |
 | `jaffle_reliability` | Downstream extension fixture that consumes public contracts. |
 | `jaffle_catalog` | Tooling-only umbrella that emits the full-project manifest. |
 
@@ -395,8 +398,8 @@ Use this edit map when you know the kind of change but not the folder:
 
 | You want to change | Start in |
 | --- | --- |
-| Synthetic input data | The owning project's `seeds/` folder |
-| Source cleanup or naming | `models/staging/` |
+| Synthetic input data | `projects/jaffle_shared/seeds/<domain>/` |
+| Source cleanup or naming | `projects/jaffle_shared/models/staging/<domain>/` |
 | Reusable transformation logic | `models/intermediate/` |
 | A consumer-facing dataset or contract | `models/marts/` and its model-local YAML |
 | Cross-row business behavior | The project's `tests/` folder |

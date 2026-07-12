@@ -1,7 +1,7 @@
 # MetricFlow Commands
 
 Run these from a built local checkout after installing `requirements.txt`,
-activating the patched `.venv`, running `dbt deps`, seeding the source projects,
+activating the patched `.venv`, running `dbt deps`, seeding the shared raw layer,
 and building the dbt projects in README order.
 
 The Semantic Layer files are intentionally compact:

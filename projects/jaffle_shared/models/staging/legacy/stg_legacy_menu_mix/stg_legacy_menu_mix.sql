@@ -7,4 +7,4 @@ select
     item_total_major as item_amt,
     estimated_supply_cost_minor as supply_minor_guess,
     ordered_date_utc as business_dt
-from {{ ref('jaffle_platform', 'fct_order_items') }}
+from {{ jaffle_shared.legacy_platform_relation('fct_order_items') }}

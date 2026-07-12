@@ -12,7 +12,7 @@
 ## Inspect
 
 - `projects/jaffle_platform/snapshots/customer_profile_snapshot.sql`
-- `projects/jaffle_platform/seeds/raw_customers.csv`
+- `projects/jaffle_shared/seeds/platform/raw_customers.csv`
 
 ## Create Two Versions
 

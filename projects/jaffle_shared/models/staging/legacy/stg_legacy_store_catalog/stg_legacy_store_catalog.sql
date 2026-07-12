@@ -12,5 +12,5 @@ select
     products.product_id as item,
     products.sku as item_sku,
     products.product_family as item_family
-from {{ ref('jaffle_platform', 'dim_locations') }} as locations
-cross join {{ ref('jaffle_platform', 'dim_products') }} as products
+from {{ jaffle_shared.legacy_platform_relation('dim_locations') }} as locations
+cross join {{ jaffle_shared.legacy_platform_relation('dim_products') }} as products

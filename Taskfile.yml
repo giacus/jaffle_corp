@@ -3,7 +3,7 @@ version: "3"
 vars:
   PROJECTS: "projects/jaffle_platform projects/jaffle_supply projects/jaffle_finance projects/jaffle_experience projects/jaffle_growth projects/jaffle_store_ops projects/jaffle_merchandising projects/jaffle_planning projects/jaffle_legacy"
   EXTENSION_PROJECTS: "projects/jaffle_reliability"
-  SEED_PROJECTS: "projects/jaffle_platform projects/jaffle_supply projects/jaffle_experience projects/jaffle_store_ops projects/jaffle_merchandising projects/jaffle_planning"
+  SEED_PROJECT: "projects/jaffle_platform"
 
 tasks:
   setup:
@@ -16,6 +16,7 @@ tasks:
 
   deps:
     cmds:
+      - dbt deps --project-dir projects/jaffle_shared --profiles-dir .
       - for: { var: PROJECTS }
         cmd: dbt deps --project-dir {{ .ITEM }} --profiles-dir .
       - for: { var: EXTENSION_PROJECTS }
@@ -23,8 +24,7 @@ tasks:
 
   seed:
     cmds:
-      - for: { var: SEED_PROJECTS }
-        cmd: dbt seed --project-dir {{ .ITEM }} --profiles-dir .
+      - dbt seed --project-dir {{ .SEED_PROJECT }} --profiles-dir .
 
   parse:
     deps: [deps]

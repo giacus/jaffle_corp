@@ -1,0 +1,25 @@
+groups:
+  - name: platform
+    owner:
+      name: Jaffle Platform Guild
+      email: platform@jaffle.example
+  - name: supply
+    owner:
+      name: Jaffle Supply Guild
+      email: supply@jaffle.example
+  - name: experience
+    owner:
+      name: Jaffle Experience Guild
+      email: experience@jaffle.example
+  - name: store_ops
+    owner:
+      name: Jaffle Store Ops Guild
+      email: store-ops@jaffle.example
+  - name: merchandising
+    owner:
+      name: Jaffle Merchandising Guild
+      email: merchandising@jaffle.example
+  - name: planning
+    owner:
+      name: Jaffle Planning Guild
+      email: planning@jaffle.example

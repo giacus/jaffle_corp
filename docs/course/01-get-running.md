@@ -30,10 +30,11 @@ dbt cannot infer that those source tables come from local seeds.
 Open these in order:
 
 1. `profiles.yml` — the shared DuckDB connection.
-2. `projects/jaffle_platform/dbt_project.yml` — project configuration.
-3. `projects/jaffle_platform/seeds` — synthetic raw data.
-4. `projects/jaffle_platform/models/staging` — source cleanup.
-5. `projects/jaffle_platform/models/marts` — stable interfaces.
+2. `projects/jaffle_shared/dbt_project.yml` — centralized staging configuration.
+3. `projects/jaffle_shared/seeds/platform` — synthetic core raw data.
+4. `projects/jaffle_shared/models/staging/platform` — core source cleanup.
+5. `projects/jaffle_platform/dbt_project.yml` — platform project configuration.
+6. `projects/jaffle_platform/models/marts` — stable interfaces.
 
 Then list the public platform models:
 

@@ -52,7 +52,8 @@ Use this map when a task introduces an unfamiliar surface:
 | Local package fallback | `projects/*/packages.yml` |
 | Intended project dependencies | `projects/*/dependencies.yml` |
 | Domain ownership | `docs/architecture.md` |
-| Staging and intermediate models | `projects/*/models/staging` and `models/intermediate` |
+| Staging models | `projects/jaffle_shared/models/staging/<domain>` |
+| Intermediate models | `projects/*/models/intermediate` |
 | Public marts and contracts | `projects/*/models/marts/<model>/<model>.yml` |
 | Singular tests | `projects/*/tests` |
 | Snapshots | `projects/jaffle_platform/snapshots` |
