@@ -3,3 +3,47 @@ version: 2
 models:
   - name: int_experiment_order_outcomes
     description: "{{ doc('jaffle_experience__int_experiment_order_outcomes') }}"
+
+    columns:
+      - name: exposure_id
+        description: "{{ doc('shared__stg_experiment_exposures__exposure_id') }}"
+        data_type: varchar
+      - name: customer_id
+        description: "{{ doc('shared__stg_experiment_exposures__customer_id') }}"
+        data_type: varchar
+      - name: experiment_id
+        description: "{{ doc('shared__stg_experiment_exposures__experiment_id') }}"
+        data_type: varchar
+      - name: variant_id
+        description: "{{ doc('shared__stg_experiment_exposures__variant_id') }}"
+        data_type: varchar
+      - name: exposed_at_utc
+        description: "{{ doc('shared__stg_experiment_exposures__exposed_at_utc') }}"
+        data_type: timestamp
+      - name: exposed_date_utc
+        description: "{{ doc('shared__stg_experiment_exposures__exposed_date_utc') }}"
+        data_type: date
+      - name: surface
+        description: "{{ doc('shared__stg_experiment_exposures__surface') }}"
+        data_type: varchar
+      - name: assignment_reason
+        description: "{{ doc('shared__stg_experiment_exposures__assignment_reason') }}"
+        data_type: varchar
+      - name: order_count_7d
+        description: "{{ doc('experience__int_experiment_order_outcomes__order_count_7d') }}"
+        data_type: integer
+      - name: completed_order_count_7d
+        description: "{{ doc('experience__int_experiment_order_outcomes__completed_order_count_7d') }}"
+        data_type: integer
+      - name: first_ordered_at_utc_after_exposure
+        description: "{{ doc('experience__int_experiment_order_outcomes__first_ordered_at_utc_after_exposure') }}"
+        data_type: timestamp
+      - name: net_revenue_usd_7d
+        description: "{{ doc('experience__int_experiment_order_outcomes__net_revenue_usd_7d') }}"
+        data_type: double
+      - name: estimated_margin_usd_7d
+        description: "{{ doc('experience__int_experiment_order_outcomes__estimated_margin_usd_7d') }}"
+        data_type: double
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_experiment_exposures__updated_at_utc') }}"
+        data_type: timestamp

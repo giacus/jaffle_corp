@@ -10,39 +10,56 @@ models:
         enforced: true
     columns:
       - name: customer_value_segment_key
+        description: "{{ doc('growth__fct_customer_value_segments__customer_value_segment_key') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: customer_id
+        description: "{{ doc('shared__stg_customers__customer_id') }}"
         data_type: varchar
       - name: customer_name
+        description: "{{ doc('shared__stg_customers__customer_name') }}"
         data_type: varchar
       - name: loyalty_region
+        description: "{{ doc('shared__stg_customers__loyalty_region') }}"
         data_type: varchar
       - name: lifecycle_stage
+        description: "{{ doc('platform__dim_customers__lifecycle_stage') }}"
         data_type: varchar
       - name: marketing_consent
+        description: "{{ doc('shared__stg_customers__marketing_consent') }}"
         data_type: boolean
       - name: finance_order_count
+        description: "{{ doc('growth__int_customer_value_bands__finance_order_count') }}"
         data_type: bigint
       - name: lifetime_net_revenue_usd
+        description: "{{ doc('growth__int_customer_value_bands__lifetime_net_revenue_usd') }}"
         data_type: double
       - name: lifetime_recipe_margin_usd
+        description: "{{ doc('growth__int_customer_value_bands__lifetime_recipe_margin_usd') }}"
         data_type: double
       - name: most_recent_recognized_date
+        description: "{{ doc('growth__int_customer_value_bands__most_recent_recognized_date') }}"
         data_type: date
       - name: support_ticket_count
+        description: "{{ doc('growth__int_customer_value_bands__support_ticket_count') }}"
         data_type: bigint
       - name: first_response_sla_met_count
+        description: "{{ doc('growth__int_customer_value_bands__first_response_sla_met_count') }}"
         data_type: hugeint
       - name: concession_major
+        description: "{{ doc('growth__int_customer_value_bands__concession_major') }}"
         data_type: double
       - name: exposure_count
+        description: "{{ doc('growth__int_customer_value_bands__exposure_count') }}"
         data_type: bigint
       - name: converted_exposure_count
+        description: "{{ doc('growth__int_customer_value_bands__converted_exposure_count') }}"
         data_type: hugeint
       - name: value_band
+        description: "{{ doc('growth__int_customer_value_bands__value_band') }}"
         data_type: varchar
       - name: care_profile
+        description: "{{ doc('growth__int_customer_value_bands__care_profile') }}"
         data_type: varchar

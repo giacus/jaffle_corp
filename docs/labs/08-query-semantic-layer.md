@@ -1,12 +1,12 @@
-# Task 8: Query the Semantic Layer
+# Lab 8: Query the Semantic Layer
 
-[Course path](../course_path.md) · Previous: [Observe snapshot history](07-observe-snapshot-history.md) · Next: [Refactor a legacy interface](09-refactor-legacy-interface.md)
+[Labs](../labs.md) · Previous: [Observe snapshot history](07-observe-snapshot-history.md) · Next: [Refactor a legacy interface](09-refactor-legacy-interface.md)
 
 ## At a Glance
 
 - **Level:** intermediate
 - **Time:** 30–45 minutes
-- **Requires:** Task 1 complete
+- **Requires:** Lab 1 complete
 - **You will:** trace a metric from a mart into a MetricFlow result.
 
 ## Build the Required Domain
@@ -47,4 +47,4 @@ cd ../..
 You are done when you can connect model grain, measure, metric, dimensions, and
 query output without treating MetricFlow as a black box.
 
-Continue to [Task 9: Refactor a legacy interface](09-refactor-legacy-interface.md).
+Continue to [Lab 9: Refactor a legacy interface](09-refactor-legacy-interface.md).

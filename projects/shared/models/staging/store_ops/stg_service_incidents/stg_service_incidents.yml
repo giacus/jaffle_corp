@@ -6,10 +6,29 @@ models:
       group: store_ops
     columns:
       - name: incident_id
+        description: "{{ doc('shared__stg_service_incidents__incident_id') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
+      - name: store_id
+        description: "{{ doc('shared__stg_service_incidents__store_id') }}"
+        data_type: varchar
+      - name: opened_at_utc
+        description: "{{ doc('shared__stg_service_incidents__opened_at_utc') }}"
+        data_type: timestamp
+      - name: resolved_at_utc
+        description: "{{ doc('shared__stg_service_incidents__resolved_at_utc') }}"
+        data_type: timestamp
+      - name: opened_date_utc
+        description: "{{ doc('shared__stg_service_incidents__opened_date_utc') }}"
+        data_type: date
+      - name: incident_type
+        description: "{{ doc('shared__stg_service_incidents__incident_type') }}"
+        data_type: varchar
       - name: severity
+        description: "{{ doc('shared__stg_service_incidents__severity') }}"
+        data_type: varchar
         data_tests:
           - accepted_values:
               arguments:
@@ -17,4 +36,16 @@ models:
                   - low
                   - medium
                   - high
+      - name: affected_orders
+        description: "{{ doc('shared__stg_service_incidents__affected_orders') }}"
+        data_type: integer
+      - name: notes_code
+        description: "{{ doc('shared__stg_service_incidents__notes_code') }}"
+        data_type: varchar
+      - name: incident_minutes
+        description: "{{ doc('shared__stg_service_incidents__incident_minutes') }}"
+        data_type: bigint
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_service_incidents__updated_at_utc') }}"
+        data_type: timestamp
     description: "{{ doc('jaffle_store_ops__stg_service_incidents') }}"

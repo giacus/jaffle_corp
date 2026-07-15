@@ -6,10 +6,35 @@ models:
       group: experience
     columns:
       - name: exposure_id
+        description: "{{ doc('shared__stg_experiment_exposures__exposure_id') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
+      - name: customer_id
+        description: "{{ doc('shared__stg_experiment_exposures__customer_id') }}"
+        data_type: varchar
       - name: experiment_id
+        description: "{{ doc('shared__stg_experiment_exposures__experiment_id') }}"
+        data_type: varchar
         data_tests:
           - not_null
+      - name: variant_id
+        description: "{{ doc('shared__stg_experiment_exposures__variant_id') }}"
+        data_type: varchar
+      - name: exposed_at_utc
+        description: "{{ doc('shared__stg_experiment_exposures__exposed_at_utc') }}"
+        data_type: timestamp
+      - name: exposed_date_utc
+        description: "{{ doc('shared__stg_experiment_exposures__exposed_date_utc') }}"
+        data_type: date
+      - name: surface
+        description: "{{ doc('shared__stg_experiment_exposures__surface') }}"
+        data_type: varchar
+      - name: assignment_reason
+        description: "{{ doc('shared__stg_experiment_exposures__assignment_reason') }}"
+        data_type: varchar
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_experiment_exposures__updated_at_utc') }}"
+        data_type: timestamp
     description: "{{ doc('jaffle_experience__stg_experiment_exposures') }}"

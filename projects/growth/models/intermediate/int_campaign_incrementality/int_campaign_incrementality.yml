@@ -3,3 +3,50 @@ version: 2
 models:
   - name: int_campaign_incrementality
     description: "{{ doc('jaffle_growth__int_campaign_incrementality') }}"
+
+    columns:
+      - name: campaign_id
+        description: "{{ doc('shared__stg_promo_events__campaign_id') }}"
+        data_type: varchar
+      - name: event_date_utc
+        description: "{{ doc('shared__stg_promo_events__event_date_utc') }}"
+        data_type: date
+      - name: channel
+        description: "{{ doc('shared__stg_promo_events__channel') }}"
+        data_type: varchar
+      - name: touchpoint_count
+        description: "{{ doc('growth__fct_campaign_performance__touchpoint_count') }}"
+        data_type: integer
+      - name: click_count
+        description: "{{ doc('growth__fct_campaign_performance__click_count') }}"
+        data_type: integer
+      - name: redemption_count
+        description: "{{ doc('growth__fct_campaign_performance__redemption_count') }}"
+        data_type: integer
+      - name: attributed_order_count
+        description: "{{ doc('growth__fct_campaign_performance__attributed_order_count') }}"
+        data_type: integer
+      - name: estimated_campaign_cost_usd
+        description: "{{ doc('growth__fct_campaign_performance__estimated_campaign_cost_usd') }}"
+        data_type: double
+      - name: attributed_net_revenue_usd
+        description: "{{ doc('growth__fct_campaign_performance__attributed_net_revenue_usd') }}"
+        data_type: double
+      - name: attributed_margin_usd
+        description: "{{ doc('growth__fct_campaign_performance__attributed_margin_usd') }}"
+        data_type: double
+      - name: nearby_exposure_count
+        description: "{{ doc('growth__int_campaign_incrementality__nearby_exposure_count') }}"
+        data_type: hugeint
+      - name: nearby_conversion_count
+        description: "{{ doc('growth__int_campaign_incrementality__nearby_conversion_count') }}"
+        data_type: hugeint
+      - name: nearby_experiment_net_revenue_usd_7d
+        description: "{{ doc('growth__int_campaign_incrementality__nearby_experiment_net_revenue_usd_7d') }}"
+        data_type: double
+      - name: heuristic_incremental_revenue_usd
+        description: "{{ doc('growth__int_campaign_incrementality__heuristic_incremental_revenue_usd') }}"
+        data_type: double
+      - name: heuristic_incremental_margin_usd
+        description: "{{ doc('growth__int_campaign_incrementality__heuristic_incremental_margin_usd') }}"
+        data_type: double

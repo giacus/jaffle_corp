@@ -1,12 +1,12 @@
-# Task 9: Refactor a Legacy Interface
+# Lab 9: Refactor a Legacy Interface
 
-[Course path](../course_path.md) · Previous: [Query the semantic layer](08-query-semantic-layer.md) · Next: [Cross-domain capstone](10-cross-domain-capstone.md)
+[Labs](../labs.md) · Previous: [Query the semantic layer](08-query-semantic-layer.md) · Next: [Cross-domain capstone](10-cross-domain-capstone.md)
 
 ## At a Glance
 
 - **Level:** advanced
 - **Time:** 60–90 minutes
-- **Requires:** tasks 1–8, or a successful `scripts/validate_repo.sh`
+- **Requires:** labs 1–8, or a successful `scripts/validate_repo.sh`
 - **You will:** improve an awkward model without losing relied-on behavior.
 
 ## Establish the Baseline
@@ -41,4 +41,4 @@ Rerun the focused build and select your characterization test by name.
 You are done when the before/after evidence is explicit, the compatibility test
 passes, and you can explain which awkward behavior was intentionally preserved.
 
-Continue to [Task 10: Build a cross-domain capstone](10-cross-domain-capstone.md).
+Continue to [Lab 10: Build a cross-domain capstone](10-cross-domain-capstone.md).

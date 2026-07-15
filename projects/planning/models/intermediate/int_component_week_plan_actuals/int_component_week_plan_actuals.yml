@@ -3,3 +3,62 @@ version: 2
 models:
   - name: int_component_week_plan_actuals
     description: "{{ doc('jaffle_planning__int_component_week_plan_actuals') }}"
+
+    columns:
+      - name: component_week_plan_variance_key
+        description: "{{ doc('planning__int_component_week_plan_actuals__component_week_plan_variance_key') }}"
+        data_type: varchar
+      - name: plan_id
+        description: "{{ doc('shared__stg_component_week_plans__plan_id') }}"
+        data_type: varchar
+      - name: store_id
+        description: "{{ doc('shared__stg_component_week_plans__store_id') }}"
+        data_type: varchar
+      - name: component_id
+        description: "{{ doc('shared__stg_component_week_plans__component_id') }}"
+        data_type: varchar
+      - name: component_name
+        description: "{{ doc('supply__int_component_catalog__component_name') }}"
+        data_type: varchar
+      - name: component_family
+        description: "{{ doc('supply__int_component_catalog__component_family') }}"
+        data_type: varchar
+      - name: recipe_unit
+        description: "{{ doc('supply__int_component_catalog__recipe_unit') }}"
+        data_type: varchar
+      - name: plan_week_start_utc
+        description: "{{ doc('shared__stg_component_week_plans__plan_week_start_utc') }}"
+        data_type: date
+      - name: scenario_name
+        description: "{{ doc('shared__stg_component_week_plans__scenario_name') }}"
+        data_type: varchar
+      - name: planned_receipt_quantity
+        description: "{{ doc('shared__stg_component_week_plans__planned_receipt_quantity') }}"
+        data_type: double
+      - name: planned_usage_quantity
+        description: "{{ doc('shared__stg_component_week_plans__planned_usage_quantity') }}"
+        data_type: double
+      - name: planned_waste_quantity
+        description: "{{ doc('shared__stg_component_week_plans__planned_waste_quantity') }}"
+        data_type: double
+      - name: actual_received_quantity
+        description: "{{ doc('planning__int_component_week_plan_actuals__actual_received_quantity') }}"
+        data_type: double
+      - name: actual_used_quantity
+        description: "{{ doc('planning__int_component_week_plan_actuals__actual_used_quantity') }}"
+        data_type: double
+      - name: actual_waste_quantity
+        description: "{{ doc('planning__int_component_week_plan_actuals__actual_waste_quantity') }}"
+        data_type: double
+      - name: actual_received_cost_usd
+        description: "{{ doc('planning__int_component_week_plan_actuals__actual_received_cost_usd') }}"
+        data_type: double
+      - name: usage_quantity_variance
+        description: "{{ doc('planning__int_component_week_plan_actuals__usage_quantity_variance') }}"
+        data_type: double
+      - name: usage_variance_status
+        description: "{{ doc('planning__int_component_week_plan_actuals__usage_variance_status') }}"
+        data_type: varchar
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_component_week_plans__updated_at_utc') }}"
+        data_type: timestamp

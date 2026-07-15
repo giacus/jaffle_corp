@@ -3,3 +3,47 @@ version: 2
 models:
   - name: int_inventory_daily_balance
     description: "{{ doc('jaffle_supply__int_inventory_daily_balance') }}"
+
+    columns:
+      - name: store_id
+        description: "{{ doc('supply__int_inventory_daily_balance__store_id') }}"
+        data_type: varchar
+      - name: component_id
+        description: "{{ doc('supply__int_inventory_daily_balance__component_id') }}"
+        data_type: varchar
+      - name: balance_date_utc
+        description: "{{ doc('supply__int_inventory_daily_balance__balance_date_utc') }}"
+        data_type: date
+      - name: unit
+        description: "{{ doc('supply__int_inventory_daily_balance__unit') }}"
+        data_type: varchar
+      - name: counted_quantity
+        description: "{{ doc('supply__int_inventory_daily_balance__counted_quantity') }}"
+        data_type: double
+      - name: received_quantity
+        description: "{{ doc('supply__int_inventory_daily_balance__received_quantity') }}"
+        data_type: double
+      - name: expected_used_quantity
+        description: "{{ doc('supply__int_inventory_daily_balance__expected_used_quantity') }}"
+        data_type: double
+      - name: expected_recipe_waste_quantity
+        description: "{{ doc('supply__int_inventory_daily_balance__expected_recipe_waste_quantity') }}"
+        data_type: double
+      - name: observed_waste_quantity
+        description: "{{ doc('supply__int_inventory_daily_balance__observed_waste_quantity') }}"
+        data_type: double
+      - name: waste_event_count
+        description: "{{ doc('supply__int_inventory_daily_balance__waste_event_count') }}"
+        data_type: integer
+      - name: received_cost_usd
+        description: "{{ doc('supply__int_inventory_daily_balance__received_cost_usd') }}"
+        data_type: double
+      - name: has_count_review
+        description: "{{ doc('supply__int_inventory_daily_balance__has_count_review') }}"
+        data_type: boolean
+      - name: has_late_receipt
+        description: "{{ doc('supply__int_inventory_daily_balance__has_late_receipt') }}"
+        data_type: boolean
+      - name: estimated_closing_quantity
+        description: "{{ doc('supply__int_inventory_daily_balance__estimated_closing_quantity') }}"
+        data_type: double

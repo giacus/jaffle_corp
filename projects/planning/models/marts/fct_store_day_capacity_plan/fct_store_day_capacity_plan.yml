@@ -10,51 +10,74 @@ models:
         enforced: true
     columns:
       - name: store_day_capacity_plan_key
+        description: "{{ doc('planning__int_store_day_plan_inputs__store_day_capacity_plan_key') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: calendar_id
+        description: "{{ doc('shared__stg_operating_calendar__calendar_id') }}"
         data_type: varchar
       - name: store_id
+        description: "{{ doc('shared__stg_operating_calendar__store_id') }}"
         data_type: varchar
       - name: calendar_date_utc
+        description: "{{ doc('shared__stg_operating_calendar__calendar_date_utc') }}"
         data_type: date
       - name: scenario_name
+        description: "{{ doc('planning__int_store_day_plan_inputs__scenario_name') }}"
         data_type: varchar
       - name: day_type
+        description: "{{ doc('shared__stg_operating_calendar__day_type') }}"
         data_type: varchar
       - name: expected_open_minutes
+        description: "{{ doc('shared__stg_operating_calendar__expected_open_minutes') }}"
         data_type: integer
       - name: local_holiday_name
+        description: "{{ doc('shared__stg_operating_calendar__local_holiday_name') }}"
         data_type: varchar
       - name: menu_focus
+        description: "{{ doc('shared__stg_operating_calendar__menu_focus') }}"
         data_type: varchar
       - name: forecasted_order_count
+        description: "{{ doc('planning__int_store_day_plan_inputs__forecasted_order_count') }}"
         data_type: double
       - name: actual_order_count
+        description: "{{ doc('planning__int_store_day_plan_inputs__actual_order_count') }}"
         data_type: hugeint
       - name: absolute_forecast_error_orders
+        description: "{{ doc('planning__int_store_day_plan_inputs__absolute_forecast_error_orders') }}"
         data_type: double
       - name: inside_interval_hour_count
+        description: "{{ doc('planning__int_store_day_plan_inputs__inside_interval_hour_count') }}"
         data_type: hugeint
       - name: forecast_hour_count
+        description: "{{ doc('planning__int_store_day_plan_inputs__forecast_hour_count') }}"
         data_type: bigint
       - name: operations_order_count
+        description: "{{ doc('planning__int_store_day_plan_inputs__operations_order_count') }}"
         data_type: integer
       - name: ready_target_rate
+        description: "{{ doc('store_ops__fct_store_day_operations__ready_target_rate') }}"
         data_type: double
       - name: quality_exception_count
+        description: "{{ doc('store_ops__int_store_day_operating_inputs__quality_exception_count') }}"
         data_type: hugeint
       - name: incident_count
+        description: "{{ doc('store_ops__int_store_day_operating_inputs__incident_count') }}"
         data_type: integer
       - name: net_revenue_usd
+        description: "{{ doc('finance__fct_daily_store_pnl__net_revenue_usd') }}"
         data_type: double
       - name: estimated_gross_margin_usd
+        description: "{{ doc('finance__fct_daily_store_pnl__estimated_gross_margin_usd') }}"
         data_type: double
       - name: forecasted_orders_per_open_hour
+        description: "{{ doc('planning__fct_store_day_capacity_plan__forecasted_orders_per_open_hour') }}"
         data_type: double
       - name: actual_orders_per_open_hour
+        description: "{{ doc('planning__fct_store_day_capacity_plan__actual_orders_per_open_hour') }}"
         data_type: double
       - name: prediction_interval_hit_rate
+        description: "{{ doc('planning__fct_store_day_capacity_plan__prediction_interval_hit_rate') }}"
         data_type: double

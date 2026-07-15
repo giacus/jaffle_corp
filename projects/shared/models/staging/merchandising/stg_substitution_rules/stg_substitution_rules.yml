@@ -6,7 +6,30 @@ models:
       group: merchandising
     columns:
       - name: substitution_rule_id
+        description: "{{ doc('shared__stg_substitution_rules__substitution_rule_id') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
+      - name: store_id
+        description: "{{ doc('shared__stg_substitution_rules__store_id') }}"
+        data_type: varchar
+      - name: unavailable_product_id
+        description: "{{ doc('shared__stg_substitution_rules__unavailable_product_id') }}"
+        data_type: varchar
+      - name: substitute_product_id
+        description: "{{ doc('shared__stg_substitution_rules__substitute_product_id') }}"
+        data_type: varchar
+      - name: priority_rank
+        description: "{{ doc('shared__stg_substitution_rules__priority_rank') }}"
+        data_type: integer
+      - name: effective_from_utc
+        description: "{{ doc('shared__stg_substitution_rules__effective_from_utc') }}"
+        data_type: timestamp
+      - name: effective_to_utc
+        description: "{{ doc('shared__stg_substitution_rules__effective_to_utc') }}"
+        data_type: timestamp
+      - name: reason_code
+        description: "{{ doc('shared__stg_substitution_rules__reason_code') }}"
+        data_type: varchar
     description: "{{ doc('jaffle_merchandising__stg_substitution_rules') }}"

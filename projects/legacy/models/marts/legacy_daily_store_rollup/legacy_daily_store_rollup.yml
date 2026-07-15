@@ -9,16 +9,38 @@ models:
         replacement_target: jaffle_finance.fct_daily_store_pnl
     columns:
       - name: legacy_store_day_key
+        description: "{{ doc('legacy__legacy_daily_store_rollup__legacy_store_day_key') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: shop
+        description: "{{ doc('legacy__int_legacy_order_headers__shop') }}"
+        data_type: varchar
       - name: business_dt
+        description: "{{ doc('legacy__int_legacy_order_headers__business_dt') }}"
+        data_type: date
       - name: money_kind
+        description: "{{ doc('legacy__int_legacy_order_headers__money_kind') }}"
+        data_type: varchar
       - name: orders_cnt
+        description: "{{ doc('legacy__legacy_daily_store_rollup__orders_cnt') }}"
+        data_type: integer
       - name: gross_amt
+        description: "{{ doc('legacy__legacy_daily_store_rollup__gross_amt') }}"
+        data_type: double
       - name: refund_amt
+        description: "{{ doc('legacy__legacy_daily_store_rollup__refund_amt') }}"
+        data_type: double
       - name: net_amt
+        description: "{{ doc('legacy__legacy_daily_store_rollup__net_amt') }}"
+        data_type: double
       - name: good_orders_cnt
+        description: "{{ doc('legacy__legacy_daily_store_rollup__good_orders_cnt') }}"
+        data_type: integer
       - name: bad_orders_cnt
+        description: "{{ doc('legacy__legacy_daily_store_rollup__bad_orders_cnt') }}"
+        data_type: integer
       - name: refund_orders_cnt
+        description: "{{ doc('legacy__legacy_daily_store_rollup__refund_orders_cnt') }}"
+        data_type: integer

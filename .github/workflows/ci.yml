@@ -16,55 +16,154 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  validate:
+  scope:
+    name: classify changes
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    outputs:
+      base_sha: ${{ steps.scope.outputs.base_sha }}
+      dbt_changed: ${{ steps.scope.outputs.dbt_changed }}
+      full_validate: ${{ steps.scope.outputs.full_validate }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
-      - name: Detect validation scope
-        id: validation_scope
-        shell: bash
-        run: |
-          set -euo pipefail
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
 
-          full_validate=true
-          changed_files=""
+      - name: Classify changed files
+        id: scope
+        env:
+          EVENT_BEFORE: ${{ github.event.before }}
+        run: python scripts/ci_scope.py
 
-          if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
-            changed_files="$(git diff --name-only "origin/${GITHUB_BASE_REF}...HEAD")"
-            printf 'Changed files:\n%s\n' "$changed_files"
-
-            if [[ -n "$changed_files" ]] && ! grep -Ev '^(README\.md|CONTRIBUTING\.md|Taskfile\.yml|scripts/bootstrap\.sh|\.github/workflows/ci\.yml)$' <<<"$changed_files" >/dev/null; then
-              full_validate=false
-            fi
-          fi
-
-          echo "full_validate=$full_validate" >> "$GITHUB_OUTPUT"
+  markdown:
+    name: markdown links and style
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
 
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
+      - name: Check Markdown
+        run: python scripts/check_markdown.py
+
+  static:
+    name: shell, Python, and YAML
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install YAML parser
+        run: python -m pip install PyYAML==6.0.3
+
+      - name: Check YAML
+        run: python scripts/check_yaml.py
+
+      - name: Check shell and Python syntax
+        run: |
+          bash -n scripts/*.sh
+          python -m py_compile scripts/*.py
+
+  dbt_targeted:
+    name: targeted dbt parse and lint
+    needs: scope
+    if: needs.scope.outputs.dbt_changed == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.lock.txt
+
       - name: Bootstrap local toolchain
         run: scripts/bootstrap.sh
 
-      - name: Check Python package environment
+      - name: Parse affected projects and lint changed SQL
+        run: |
+          source .venv/bin/activate
+          scripts/validate_changed.sh "${{ needs.scope.outputs.base_sha }}"
+
+  full_validation:
+    name: full dbt and MetricFlow validation
+    needs: [scope, markdown, static, dbt_targeted]
+    if: >-
+      always() &&
+      needs.scope.outputs.full_validate == 'true' &&
+      needs.markdown.result == 'success' &&
+      needs.static.result == 'success' &&
+      (needs.dbt_targeted.result == 'success' || needs.dbt_targeted.result == 'skipped')
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.lock.txt
+
+      - name: Bootstrap local toolchain
+        run: scripts/bootstrap.sh
+
+      - name: Check locked Python environment
         run: |
           source .venv/bin/activate
           python -m pip check
           dbt --version
 
-      - name: Validate repo
-        if: steps.validation_scope.outputs.full_validate == 'true'
+      - name: Validate complete fixture
         run: |
           source .venv/bin/activate
           scripts/validate_repo.sh
 
-      - name: Skip full validation
-        if: steps.validation_scope.outputs.full_validate != 'true'
-        run: echo "Only onboarding/bootstrap files changed; bootstrap smoke covered this PR."
+  validate:
+    name: validate
+    needs: [scope, markdown, static, dbt_targeted, full_validation]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require every applicable validation layer
+        env:
+          SCOPE_RESULT: ${{ needs.scope.result }}
+          MARKDOWN_RESULT: ${{ needs.markdown.result }}
+          STATIC_RESULT: ${{ needs.static.result }}
+          TARGETED_RESULT: ${{ needs.dbt_targeted.result }}
+          FULL_RESULT: ${{ needs.full_validation.result }}
+        run: |
+          for result in \
+            "$SCOPE_RESULT" \
+            "$MARKDOWN_RESULT" \
+            "$STATIC_RESULT" \
+            "$TARGETED_RESULT" \
+            "$FULL_RESULT"
+          do
+            case "$result" in
+              success|skipped) ;;
+              *) echo "Validation layer ended with: $result" >&2; exit 1 ;;
+            esac
+          done

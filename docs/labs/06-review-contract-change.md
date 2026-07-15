@@ -1,12 +1,12 @@
-# Task 6: Review a Contract Change
+# Lab 6: Review a Contract Change
 
-[Course path](../course_path.md) · Previous: [Add a behavior test](05-add-behavior-test.md) · Next: [Observe snapshot history](07-observe-snapshot-history.md)
+[Labs](../labs.md) · Previous: [Add a behavior test](05-add-behavior-test.md) · Next: [Observe snapshot history](07-observe-snapshot-history.md)
 
 ## At a Glance
 
 - **Level:** intermediate
 - **Time:** 30–45 minutes
-- **Requires:** the local environment from Task 1
+- **Requires:** the local environment from Lab 1
 - **You will:** assess compatibility and blast radius before changing code.
 
 ## Prepare
@@ -30,7 +30,7 @@ Create a short local design note containing:
 - a migration plan for the breaking change;
 - the focused dbt commands that would validate it.
 
-Do not implement the breaking change. This task is about making the decision
+Do not implement the breaking change. This lab is about making the decision
 before making the diff.
 
 ## Checkpoint
@@ -38,4 +38,4 @@ before making the diff.
 You are done when another engineer could turn your note into a safe pull request
 without rediscovering the model's consumers or contract.
 
-Continue to [Task 7: Observe snapshot history](07-observe-snapshot-history.md).
+Continue to [Lab 7: Observe snapshot history](07-observe-snapshot-history.md).

@@ -9,14 +9,32 @@ models:
         replacement_target: jaffle_experience.fct_support_tickets
     columns:
       - name: old_refund_bridge_key
+        description: "{{ doc('legacy__legacy_refund_reason_bridge_v0__old_refund_bridge_key') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: order_no
+        description: "{{ doc('legacy__legacy_refund_reason_bridge_v0__order_no') }}"
+        data_type: varchar
       - name: business_dt
+        description: "{{ doc('legacy__legacy_refund_reason_bridge_v0__business_dt') }}"
+        data_type: date
       - name: money_status
+        description: "{{ doc('legacy__legacy_refund_reason_bridge_v0__money_status') }}"
+        data_type: varchar
       - name: old_reason
+        description: "{{ doc('legacy__legacy_refund_reason_bridge_v0__old_reason') }}"
+        data_type: varchar
       - name: old_resolution
+        description: "{{ doc('legacy__legacy_refund_reason_bridge_v0__old_resolution') }}"
+        data_type: varchar
       - name: refund_amt_usd
+        description: "{{ doc('legacy__legacy_refund_reason_bridge_v0__refund_amt_usd') }}"
+        data_type: double
       - name: make_good_amt
+        description: "{{ doc('legacy__legacy_refund_reason_bridge_v0__make_good_amt') }}"
+        data_type: double
       - name: net_amt_usd
+        description: "{{ doc('legacy__legacy_refund_reason_bridge_v0__net_amt_usd') }}"
+        data_type: double

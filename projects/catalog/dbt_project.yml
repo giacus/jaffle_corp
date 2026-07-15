@@ -3,7 +3,7 @@ version: "0.1.0"
 config-version: 2
 
 profile: jaffle_corp
-require-dbt-version: ">=1.8.0,<2.0.0"
+require-dbt-version: "=1.11.12"
 
 # This project owns no models. It imports every runnable project so dbt can emit
 # one manifest for the complete fixture.

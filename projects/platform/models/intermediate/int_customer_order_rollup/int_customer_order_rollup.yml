@@ -3,3 +3,26 @@ version: 2
 models:
   - name: int_customer_order_rollup
     description: "{{ doc('jaffle_platform__int_customer_order_rollup') }}"
+
+    columns:
+      - name: customer_id
+        description: "{{ doc('shared__stg_orders__customer_id') }}"
+        data_type: varchar
+      - name: first_ordered_at_utc
+        description: "{{ doc('platform__int_customer_order_rollup__first_ordered_at_utc') }}"
+        data_type: timestamp
+      - name: most_recent_ordered_at_utc
+        description: "{{ doc('platform__int_customer_order_rollup__most_recent_ordered_at_utc') }}"
+        data_type: timestamp
+      - name: lifetime_order_count
+        description: "{{ doc('platform__int_customer_order_rollup__lifetime_order_count') }}"
+        data_type: integer
+      - name: lifetime_completed_order_count
+        description: "{{ doc('platform__int_customer_order_rollup__lifetime_completed_order_count') }}"
+        data_type: integer
+      - name: lifetime_order_value_usd
+        description: "{{ doc('platform__int_customer_order_rollup__lifetime_order_value_usd') }}"
+        data_type: double
+      - name: lifetime_refunded_order_count
+        description: "{{ doc('platform__int_customer_order_rollup__lifetime_refunded_order_count') }}"
+        data_type: integer

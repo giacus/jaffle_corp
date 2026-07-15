@@ -10,27 +10,38 @@ models:
         enforced: true
     columns:
       - name: contact_thread_key
+        description: "{{ doc('experience__fct_customer_contact_threads__contact_thread_key') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: support_ticket_id
+        description: "{{ doc('shared__stg_customer_contacts__support_ticket_id') }}"
         data_type: varchar
       - name: first_contact_at_utc
+        description: "{{ doc('experience__fct_customer_contact_threads__first_contact_at_utc') }}"
         data_type: timestamp
       - name: most_recent_contact_at_utc
+        description: "{{ doc('experience__fct_customer_contact_threads__most_recent_contact_at_utc') }}"
         data_type: timestamp
       - name: contact_event_count
+        description: "{{ doc('experience__fct_customer_contact_threads__contact_event_count') }}"
         data_type: integer
       - name: total_message_count
+        description: "{{ doc('experience__fct_customer_contact_threads__total_message_count') }}"
         data_type: integer
       - name: inbound_contact_count
+        description: "{{ doc('experience__fct_customer_contact_threads__inbound_contact_count') }}"
         data_type: integer
       - name: outbound_contact_count
+        description: "{{ doc('experience__fct_customer_contact_threads__outbound_contact_count') }}"
         data_type: integer
       - name: contact_channels
+        description: "{{ doc('experience__fct_customer_contact_threads__contact_channels') }}"
         data_type: varchar
       - name: handling_roles
+        description: "{{ doc('experience__fct_customer_contact_threads__handling_roles') }}"
         data_type: varchar
       - name: updated_at_utc
+        description: "{{ doc('experience__fct_customer_contact_threads__updated_at_utc') }}"
         data_type: timestamp

@@ -3,3 +3,116 @@ version: 2
 models:
   - name: int_orders_enriched
     description: "{{ doc('jaffle_platform__int_orders_enriched') }}"
+
+    columns:
+      - name: order_id
+        description: "{{ doc('shared__stg_orders__order_id') }}"
+        data_type: varchar
+      - name: customer_id
+        description: "{{ doc('shared__stg_orders__customer_id') }}"
+        data_type: varchar
+      - name: store_id
+        description: "{{ doc('shared__stg_orders__store_id') }}"
+        data_type: varchar
+      - name: store_name
+        description: "{{ doc('shared__stg_stores__store_name') }}"
+        data_type: varchar
+      - name: country_code
+        description: "{{ doc('shared__stg_stores__country_code') }}"
+        data_type: varchar
+      - name: city
+        description: "{{ doc('shared__stg_stores__city') }}"
+        data_type: varchar
+      - name: timezone_name
+        description: "{{ doc('shared__stg_stores__timezone_name') }}"
+        data_type: varchar
+      - name: operating_currency
+        description: "{{ doc('shared__stg_stores__operating_currency') }}"
+        data_type: varchar
+      - name: tax_jurisdiction
+        description: "{{ doc('shared__stg_stores__tax_jurisdiction') }}"
+        data_type: varchar
+      - name: franchise_owner
+        description: "{{ doc('shared__stg_stores__franchise_owner') }}"
+        data_type: varchar
+      - name: is_dark_kitchen
+        description: "{{ doc('shared__stg_stores__is_dark_kitchen') }}"
+        data_type: boolean
+      - name: ordered_at_utc
+        description: "{{ doc('shared__stg_orders__ordered_at_utc') }}"
+        data_type: timestamp
+      - name: ordered_date_utc
+        description: "{{ doc('shared__stg_orders__ordered_date_utc') }}"
+        data_type: date
+      - name: order_status
+        description: "{{ doc('shared__stg_orders__order_status') }}"
+        data_type: varchar
+      - name: raw_order_status
+        description: "{{ doc('shared__stg_orders__raw_order_status') }}"
+        data_type: varchar
+      - name: channel
+        description: "{{ doc('shared__stg_orders__channel') }}"
+        data_type: varchar
+      - name: currency
+        description: "{{ doc('shared__stg_orders__currency') }}"
+        data_type: varchar
+      - name: subtotal_minor
+        description: "{{ doc('shared__stg_orders__subtotal_minor') }}"
+        data_type: integer
+      - name: tax_minor
+        description: "{{ doc('shared__stg_orders__tax_minor') }}"
+        data_type: integer
+      - name: discount_minor
+        description: "{{ doc('shared__stg_orders__discount_minor') }}"
+        data_type: integer
+      - name: service_fee_minor
+        description: "{{ doc('shared__stg_orders__service_fee_minor') }}"
+        data_type: integer
+      - name: loyalty_points_redeemed
+        description: "{{ doc('shared__stg_orders__loyalty_points_redeemed') }}"
+        data_type: integer
+      - name: order_total_minor
+        description: "{{ doc('shared__stg_orders__order_total_minor') }}"
+        data_type: integer
+      - name: order_total_major
+        description: "{{ doc('shared__stg_orders__order_total_major') }}"
+        data_type: double
+      - name: usd_rate
+        description: "{{ doc('shared__stg_fx_rates__usd_rate') }}"
+        data_type: double
+      - name: order_total_usd
+        description: "{{ doc('platform__int_orders_enriched__order_total_usd') }}"
+        data_type: double
+      - name: captured_amount_minor
+        description: "{{ doc('platform__int_orders_enriched__captured_amount_minor') }}"
+        data_type: integer
+      - name: captured_amount_major
+        description: "{{ doc('platform__int_orders_enriched__captured_amount_major') }}"
+        data_type: double
+      - name: refunded_amount_minor
+        description: "{{ doc('platform__int_orders_enriched__refunded_amount_minor') }}"
+        data_type: integer
+      - name: refunded_amount_major
+        description: "{{ doc('platform__int_orders_enriched__refunded_amount_major') }}"
+        data_type: double
+      - name: payment_attempt_count
+        description: "{{ doc('platform__int_orders_enriched__payment_attempt_count') }}"
+        data_type: integer
+      - name: refund_event_count
+        description: "{{ doc('platform__int_orders_enriched__refund_event_count') }}"
+        data_type: integer
+      - name: has_failed_payment
+        description: "{{ doc('platform__int_orders_enriched__has_failed_payment') }}"
+        data_type: boolean
+      - name: is_completed_order
+        description: "{{ doc('platform__int_orders_enriched__is_completed_order') }}"
+        data_type: boolean
+      - name: is_cancelled_order
+        description: "{{ doc('platform__int_orders_enriched__is_cancelled_order') }}"
+        data_type: boolean
+      - name: legacy_order_number
+        description: "{{ doc('shared__stg_orders__legacy_order_number') }}"
+        data_type: varchar
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_orders__updated_at_utc') }}"
+        data_type: timestamp

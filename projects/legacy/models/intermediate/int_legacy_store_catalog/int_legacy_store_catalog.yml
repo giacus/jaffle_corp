@@ -3,3 +3,35 @@ version: 2
 models:
   - name: int_legacy_store_catalog
     description: "{{ doc('jaffle_legacy__int_legacy_store_catalog') }}"
+
+    columns:
+      - name: shop
+        description: "{{ doc('legacy__int_legacy_store_catalog__shop') }}"
+        data_type: varchar
+      - name: shop_nm
+        description: "{{ doc('legacy__int_legacy_store_catalog__shop_nm') }}"
+        data_type: varchar
+      - name: cntry
+        description: "{{ doc('legacy__int_legacy_store_catalog__cntry') }}"
+        data_type: varchar
+      - name: city_nm
+        description: "{{ doc('legacy__int_legacy_store_catalog__city_nm') }}"
+        data_type: varchar
+      - name: local_money_kind
+        description: "{{ doc('legacy__int_legacy_store_catalog__local_money_kind') }}"
+        data_type: varchar
+      - name: hours_txt
+        description: "{{ doc('legacy__int_legacy_store_catalog__hours_txt') }}"
+        data_type: varchar
+      - name: shop_kind
+        description: "{{ doc('legacy__int_legacy_store_catalog__shop_kind') }}"
+        data_type: varchar
+      - name: item
+        description: "{{ doc('legacy__int_legacy_store_catalog__item') }}"
+        data_type: varchar
+      - name: item_sku
+        description: "{{ doc('legacy__int_legacy_store_catalog__item_sku') }}"
+        data_type: varchar
+      - name: item_family
+        description: "{{ doc('legacy__int_legacy_store_catalog__item_family') }}"
+        data_type: varchar

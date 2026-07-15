@@ -6,13 +6,44 @@ models:
       group: platform
     columns:
       - name: order_item_id
+        description: "{{ doc('shared__stg_order_items__order_item_id') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: order_id
+        description: "{{ doc('shared__stg_order_items__order_id') }}"
+        data_type: varchar
         data_tests:
           - relationships:
               arguments:
                 to: ref('stg_orders')
                 field: order_id
+      - name: product_id
+        description: "{{ doc('shared__stg_order_items__product_id') }}"
+        data_type: varchar
+      - name: quantity
+        description: "{{ doc('shared__stg_order_items__quantity') }}"
+        data_type: integer
+      - name: item_subtotal_minor
+        description: "{{ doc('shared__stg_order_items__item_subtotal_minor') }}"
+        data_type: integer
+      - name: item_discount_minor
+        description: "{{ doc('shared__stg_order_items__item_discount_minor') }}"
+        data_type: integer
+      - name: item_tax_minor
+        description: "{{ doc('shared__stg_order_items__item_tax_minor') }}"
+        data_type: integer
+      - name: item_total_minor
+        description: "{{ doc('shared__stg_order_items__item_total_minor') }}"
+        data_type: integer
+      - name: item_total_major
+        description: "{{ doc('shared__stg_order_items__item_total_major') }}"
+        data_type: double
+      - name: customization_count
+        description: "{{ doc('shared__stg_order_items__customization_count') }}"
+        data_type: integer
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_order_items__updated_at_utc') }}"
+        data_type: timestamp
     description: "{{ doc('jaffle_platform__stg_order_items') }}"

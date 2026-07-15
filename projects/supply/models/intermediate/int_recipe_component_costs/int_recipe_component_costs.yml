@@ -3,3 +3,44 @@ version: 2
 models:
   - name: int_recipe_component_costs
     description: "{{ doc('jaffle_supply__int_recipe_component_costs') }}"
+
+    columns:
+      - name: recipe_component_key
+        description: "{{ doc('shared__stg_recipe_components__recipe_component_key') }}"
+        data_type: varchar
+      - name: product_id
+        description: "{{ doc('shared__stg_recipe_components__product_id') }}"
+        data_type: varchar
+      - name: component_id
+        description: "{{ doc('shared__stg_recipe_components__component_id') }}"
+        data_type: varchar
+      - name: component_name
+        description: "{{ doc('shared__stg_recipe_components__component_name') }}"
+        data_type: varchar
+      - name: component_family
+        description: "{{ doc('shared__stg_recipe_components__component_family') }}"
+        data_type: varchar
+      - name: unit
+        description: "{{ doc('shared__stg_recipe_components__unit') }}"
+        data_type: varchar
+      - name: quantity_per_item
+        description: "{{ doc('shared__stg_recipe_components__quantity_per_item') }}"
+        data_type: double
+      - name: waste_factor
+        description: "{{ doc('shared__stg_recipe_components__waste_factor') }}"
+        data_type: double
+      - name: average_unit_cost_usd
+        description: "{{ doc('supply__int_recipe_component_costs__average_unit_cost_usd') }}"
+        data_type: double
+      - name: lowest_unit_cost_usd
+        description: "{{ doc('supply__int_recipe_component_costs__lowest_unit_cost_usd') }}"
+        data_type: double
+      - name: highest_unit_cost_usd
+        description: "{{ doc('supply__int_recipe_component_costs__highest_unit_cost_usd') }}"
+        data_type: double
+      - name: expected_component_cost_usd
+        description: "{{ doc('supply__int_recipe_component_costs__expected_component_cost_usd') }}"
+        data_type: double
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_recipe_components__updated_at_utc') }}"
+        data_type: timestamp

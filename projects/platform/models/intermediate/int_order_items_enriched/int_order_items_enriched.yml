@@ -3,3 +3,65 @@ version: 2
 models:
   - name: int_order_items_enriched
     description: "{{ doc('jaffle_platform__int_order_items_enriched') }}"
+
+    columns:
+      - name: order_item_id
+        description: "{{ doc('shared__stg_order_items__order_item_id') }}"
+        data_type: varchar
+      - name: order_id
+        description: "{{ doc('shared__stg_order_items__order_id') }}"
+        data_type: varchar
+      - name: ordered_date_utc
+        description: "{{ doc('shared__stg_orders__ordered_date_utc') }}"
+        data_type: date
+      - name: product_id
+        description: "{{ doc('shared__stg_order_items__product_id') }}"
+        data_type: varchar
+      - name: sku
+        description: "{{ doc('shared__stg_products__sku') }}"
+        data_type: varchar
+      - name: product_name
+        description: "{{ doc('shared__stg_products__product_name') }}"
+        data_type: varchar
+      - name: category
+        description: "{{ doc('shared__stg_products__category') }}"
+        data_type: varchar
+      - name: product_family
+        description: "{{ doc('shared__stg_products__product_family') }}"
+        data_type: varchar
+      - name: quantity
+        description: "{{ doc('shared__stg_order_items__quantity') }}"
+        data_type: integer
+      - name: item_subtotal_minor
+        description: "{{ doc('shared__stg_order_items__item_subtotal_minor') }}"
+        data_type: integer
+      - name: item_discount_minor
+        description: "{{ doc('shared__stg_order_items__item_discount_minor') }}"
+        data_type: integer
+      - name: item_tax_minor
+        description: "{{ doc('shared__stg_order_items__item_tax_minor') }}"
+        data_type: integer
+      - name: item_total_minor
+        description: "{{ doc('shared__stg_order_items__item_total_minor') }}"
+        data_type: integer
+      - name: item_total_major
+        description: "{{ doc('shared__stg_order_items__item_total_major') }}"
+        data_type: double
+      - name: customization_count
+        description: "{{ doc('shared__stg_order_items__customization_count') }}"
+        data_type: integer
+      - name: unit_cost_minor
+        description: "{{ doc('platform__int_order_items_enriched__unit_cost_minor') }}"
+        data_type: integer
+      - name: supply_currency
+        description: "{{ doc('platform__int_order_items_enriched__supply_currency') }}"
+        data_type: varchar
+      - name: has_perishable_supply
+        description: "{{ doc('platform__int_order_items_enriched__has_perishable_supply') }}"
+        data_type: boolean
+      - name: max_lead_time_days
+        description: "{{ doc('platform__int_order_items_enriched__max_lead_time_days') }}"
+        data_type: integer
+      - name: estimated_supply_cost_minor
+        description: "{{ doc('platform__int_order_items_enriched__estimated_supply_cost_minor') }}"
+        data_type: integer

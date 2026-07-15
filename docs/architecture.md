@@ -1,11 +1,12 @@
 # Architecture
 
-`jaffle-corp` is organized as a small dbt mesh plus a downstream extension
-fixture.
+`jaffle-corp` is a Mesh-inspired local dbt monorepo plus a downstream extension
+fixture. It demonstrates public interfaces and project boundaries without
+pretending that local package installation is the same as deployed dbt Mesh.
 
 The `jaffle_shared` project owns the complete ingestion boundary: raw fixture
-seeds, source definitions, and domain-organized staging models. It also owns
-cross-project macros and schema behavior.
+seeds, source definitions, domain-organized staging models, cross-project
+macros, and schema behavior. It is deliberately installed as a code package.
 
 The `jaffle_platform` project owns conformed dimensions and stable order-level
 interfaces. Downstream projects consume those interfaces instead of reaching
@@ -40,18 +41,19 @@ package so `scripts/generate_manifest.sh` can emit one full-repo
 
 ## Dependency Shape
 
-Arrows show the main business-data dependency shape. Catalog-only packaging
-edges are omitted:
+The graph uses dotted arrows for protected models supplied through the local
+`shared` package and solid arrows for domain-to-domain public interfaces.
+Catalog-only packaging edges are omitted:
 
 ```mermaid
 flowchart LR
-    shared["shared ingestion and staging"] --> platform["platform"]
-    shared --> supply["supply"]
-    shared --> experience["experience"]
-    shared --> storeops["store ops"]
-    shared --> merchandising["merchandising"]
-    shared --> planning["planning"]
-    shared --> legacy["legacy"]
+    shared["shared ingestion and staging"] -.-> platform["platform"]
+    shared -.-> supply["supply"]
+    shared -.-> experience["experience"]
+    shared -.-> storeops["store ops"]
+    shared -.-> merchandising["merchandising"]
+    shared -.-> planning["planning"]
+    shared -.-> legacy["legacy"]
     platform --> supply["supply"]
     platform --> finance["finance"]
     supply --> finance
@@ -79,6 +81,30 @@ flowchart LR
 
 `jaffle_catalog` observes all of these projects to create the combined manifest;
 business projects do not depend on it.
+
+## Package Boundary vs Project Boundary
+
+These relationships are intentionally different:
+
+| Relationship | Declared in | Access rule | Purpose |
+| --- | --- | --- | --- |
+| Project to `jaffle_shared` | `packages.yml` | Protected staging is allowed because `shared` sets `restrict-access: false`. | Centralized local ingestion, staging, macros, and fixture seeds. |
+| Domain to domain | `dependencies.yml` | Producers set `restrict-access: true`; consumers use public models only. | Stable cross-domain data interfaces. |
+| Local domain fallback | `packages.yml` | The same public-only policy is enforced by the producer. | Run dbt Core without hosted project metadata. |
+| Catalog observation | `projects/catalog/packages.yml` | Compile-only; no business ownership. | Emit one complete manifest for tooling. |
+
+`shared` is therefore a one-way package dependency, not a peer domain and not a
+reciprocal project dependency. Domain projects may consume its protected
+staging models, but `shared` must not depend on domain models. Third-party code
+packages such as `dbt_utils` follow the same package mechanism and remain in
+`packages.yml` in local and hosted environments.
+
+Column meaning follows the same ownership boundary. Each normalized staging
+output owns its canonical docs block. A downstream column that preserves the
+same name and value references that exact block; a rename, cast, calculation,
+aggregation, or multi-source choice owns a model-local definition. See
+[Column Documentation](column-documentation.md) for the convention and its
+automated lineage check.
 
 ## Domain Map
 

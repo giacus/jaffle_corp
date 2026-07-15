@@ -3,3 +3,23 @@ version: 2
 models:
   - name: int_product_day_actuals
     description: "{{ doc('jaffle_planning__int_product_day_actuals') }}"
+
+    columns:
+      - name: store_id
+        description: "{{ doc('shared__stg_orders__store_id') }}"
+        data_type: varchar
+      - name: product_id
+        description: "{{ doc('shared__stg_order_items__product_id') }}"
+        data_type: varchar
+      - name: actual_date_utc
+        description: "{{ doc('planning__int_product_day_actuals__actual_date_utc') }}"
+        data_type: date
+      - name: actual_units
+        description: "{{ doc('planning__int_product_day_actuals__actual_units') }}"
+        data_type: integer
+      - name: actual_item_revenue_usd
+        description: "{{ doc('planning__int_product_day_actuals__actual_item_revenue_usd') }}"
+        data_type: double
+      - name: actual_order_count
+        description: "{{ doc('planning__int_product_day_actuals__actual_order_count') }}"
+        data_type: integer

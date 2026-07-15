@@ -6,14 +6,36 @@ models:
       group: experience
     columns:
       - name: contact_event_id
+        description: "{{ doc('shared__stg_customer_contacts__contact_event_id') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
+      - name: support_ticket_id
+        description: "{{ doc('shared__stg_customer_contacts__support_ticket_id') }}"
+        data_type: varchar
+      - name: contact_channel
+        description: "{{ doc('shared__stg_customer_contacts__contact_channel') }}"
+        data_type: varchar
       - name: contact_direction
+        description: "{{ doc('shared__stg_customer_contacts__contact_direction') }}"
+        data_type: varchar
         data_tests:
           - accepted_values:
               arguments:
                 values:
                   - inbound
                   - outbound
+      - name: contact_at_utc
+        description: "{{ doc('shared__stg_customer_contacts__contact_at_utc') }}"
+        data_type: timestamp
+      - name: message_count
+        description: "{{ doc('shared__stg_customer_contacts__message_count') }}"
+        data_type: integer
+      - name: handled_by_role
+        description: "{{ doc('shared__stg_customer_contacts__handled_by_role') }}"
+        data_type: varchar
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_customer_contacts__updated_at_utc') }}"
+        data_type: timestamp
     description: "{{ doc('jaffle_experience__stg_customer_contacts') }}"

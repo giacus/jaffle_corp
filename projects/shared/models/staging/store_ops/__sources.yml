@@ -4,10 +4,6 @@ sources:
   - name: jaffle_store_ops_app
     schema: "{{ target.schema }}_raw"
     description: Synthetic store operations sources for service timing and quality examples.
-    freshness:
-      warn_after: {count: 24, period: hour}
-      error_after: {count: 96, period: hour}
-    loaded_at_field: updated_at_utc
     tables:
       - name: raw_kitchen_events
         description: Order-level kitchen event stream.
@@ -17,4 +13,3 @@ sources:
         description: Quality checks connected to orders and products.
       - name: raw_service_incidents
         description: Store incident records.
-

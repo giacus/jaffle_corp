@@ -10,29 +10,41 @@ models:
         enforced: true
     columns:
       - name: store_id
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: store_name
+        description: "{{ doc('shared__stg_stores__store_name') }}"
         data_type: varchar
       - name: country_code
+        description: "{{ doc('shared__stg_stores__country_code') }}"
         data_type: varchar
       - name: city
+        description: "{{ doc('shared__stg_stores__city') }}"
         data_type: varchar
       - name: opened_at
+        description: "{{ doc('shared__stg_stores__opened_at') }}"
         data_type: timestamp
       - name: timezone_name
+        description: "{{ doc('shared__stg_stores__timezone_name') }}"
         data_type: varchar
       - name: operating_currency
+        description: "{{ doc('shared__stg_stores__operating_currency') }}"
         data_type: varchar
       - name: tax_jurisdiction
+        description: "{{ doc('shared__stg_stores__tax_jurisdiction') }}"
         data_type: varchar
       - name: franchise_owner
+        description: "{{ doc('shared__stg_stores__franchise_owner') }}"
         data_type: varchar
       - name: is_dark_kitchen
+        description: "{{ doc('shared__stg_stores__is_dark_kitchen') }}"
         data_type: boolean
       - name: legacy_hours_blob
+        description: "{{ doc('shared__stg_store_hours_legacy__legacy_hours_blob') }}"
         data_type: varchar
       - name: legacy_hours_effective_from
+        description: "{{ doc('platform__dim_locations__legacy_hours_effective_from') }}"
         data_type: date

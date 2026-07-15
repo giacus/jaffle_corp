@@ -6,12 +6,46 @@ models:
       group: merchandising
     columns:
       - name: publication_id
+        description: "{{ doc('shared__stg_menu_publications__publication_id') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
+      - name: store_id
+        description: "{{ doc('shared__stg_menu_publications__store_id') }}"
+        data_type: varchar
+      - name: product_id
+        description: "{{ doc('shared__stg_menu_publications__product_id') }}"
+        data_type: varchar
+      - name: published_at_utc
+        description: "{{ doc('shared__stg_menu_publications__published_at_utc') }}"
+        data_type: timestamp
+      - name: retired_at_utc
+        description: "{{ doc('shared__stg_menu_publications__retired_at_utc') }}"
+        data_type: timestamp
+      - name: menu_section
+        description: "{{ doc('shared__stg_menu_publications__menu_section') }}"
+        data_type: varchar
+      - name: display_rank
+        description: "{{ doc('shared__stg_menu_publications__display_rank') }}"
+        data_type: integer
+      - name: is_featured
+        description: "{{ doc('shared__stg_menu_publications__is_featured') }}"
+        data_type: boolean
       - name: published_price_minor
+        description: "{{ doc('shared__stg_menu_publications__published_price_minor') }}"
+        data_type: integer
         data_tests:
           - dbt_utils.expression_is_true:
               arguments:
                 expression: '>= 0'
+      - name: currency
+        description: "{{ doc('shared__stg_menu_publications__currency') }}"
+        data_type: varchar
+      - name: menu_surface
+        description: "{{ doc('shared__stg_menu_publications__menu_surface') }}"
+        data_type: varchar
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_menu_publications__updated_at_utc') }}"
+        data_type: timestamp
     description: "{{ doc('jaffle_merchandising__stg_menu_publications') }}"

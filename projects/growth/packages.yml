@@ -1,5 +1,6 @@
 packages:
-  # Local fallback for contributors. Hosted mesh environments should rely on dependencies.yml.
+  # Shared is always a code package. Domain packages are dbt Core fallbacks for
+  # the public project dependencies declared in dependencies.yml.
   - local: ../shared
   - local: ../platform
   - local: ../finance

@@ -6,12 +6,43 @@ models:
       group: store_ops
     columns:
       - name: shift_plan_id
+        description: "{{ doc('shared__stg_store_shift_plans__shift_plan_id') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
+      - name: store_id
+        description: "{{ doc('shared__stg_store_shift_plans__store_id') }}"
+        data_type: varchar
+      - name: shift_date
+        description: "{{ doc('shared__stg_store_shift_plans__shift_date') }}"
+        data_type: date
+      - name: daypart
+        description: "{{ doc('shared__stg_store_shift_plans__daypart') }}"
+        data_type: varchar
       - name: planned_minutes
+        description: "{{ doc('shared__stg_store_shift_plans__planned_minutes') }}"
+        data_type: integer
         data_tests:
           - dbt_utils.expression_is_true:
               arguments:
                 expression: '>= 0'
+      - name: actual_minutes
+        description: "{{ doc('shared__stg_store_shift_plans__actual_minutes') }}"
+        data_type: integer
+      - name: team_member_count
+        description: "{{ doc('shared__stg_store_shift_plans__team_member_count') }}"
+        data_type: integer
+      - name: role_mix_code
+        description: "{{ doc('shared__stg_store_shift_plans__role_mix_code') }}"
+        data_type: varchar
+      - name: source_version
+        description: "{{ doc('shared__stg_store_shift_plans__source_version') }}"
+        data_type: varchar
+      - name: actual_to_planned_minutes_ratio
+        description: "{{ doc('shared__stg_store_shift_plans__actual_to_planned_minutes_ratio') }}"
+        data_type: double
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_store_shift_plans__updated_at_utc') }}"
+        data_type: timestamp
     description: "{{ doc('jaffle_store_ops__stg_store_shift_plans') }}"

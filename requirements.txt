@@ -5,3 +5,5 @@ duckdb==1.5.4
 sqlfluff==4.2.2
 sqlfluff-templater-dbt==4.2.2
 pre-commit==4.6.0
+PyYAML==6.0.3
+sqlglot==30.12.0

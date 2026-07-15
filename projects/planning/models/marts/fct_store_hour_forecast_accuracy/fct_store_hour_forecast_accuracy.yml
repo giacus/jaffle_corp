@@ -10,51 +10,74 @@ models:
         enforced: true
     columns:
       - name: store_hour_forecast_accuracy_key
+        description: "{{ doc('planning__int_store_hour_forecast_errors__store_hour_forecast_accuracy_key') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: forecast_id
+        description: "{{ doc('shared__stg_store_hour_forecasts__forecast_id') }}"
         data_type: varchar
       - name: model_run_id
+        description: "{{ doc('shared__stg_store_hour_forecasts__model_run_id') }}"
         data_type: varchar
       - name: store_id
+        description: "{{ doc('shared__stg_store_hour_forecasts__store_id') }}"
         data_type: varchar
       - name: forecast_hour_utc
+        description: "{{ doc('shared__stg_store_hour_forecasts__forecast_hour_utc') }}"
         data_type: timestamp
       - name: forecast_date_utc
+        description: "{{ doc('planning__int_store_hour_forecast_errors__forecast_date_utc') }}"
         data_type: date
       - name: forecasted_order_count
+        description: "{{ doc('shared__stg_store_hour_forecasts__forecasted_order_count') }}"
         data_type: double
       - name: lower_bound_orders
+        description: "{{ doc('shared__stg_store_hour_forecasts__lower_bound_orders') }}"
         data_type: double
       - name: upper_bound_orders
+        description: "{{ doc('shared__stg_store_hour_forecasts__upper_bound_orders') }}"
         data_type: double
       - name: scenario_name
+        description: "{{ doc('shared__stg_store_hour_forecasts__scenario_name') }}"
         data_type: varchar
       - name: model_version
+        description: "{{ doc('shared__stg_store_hour_forecasts__model_version') }}"
         data_type: varchar
       - name: actual_order_count
+        description: "{{ doc('planning__int_store_hour_forecast_errors__actual_order_count') }}"
         data_type: integer
       - name: actual_completed_order_count
+        description: "{{ doc('planning__int_store_hour_forecast_errors__actual_completed_order_count') }}"
         data_type: integer
       - name: actual_order_total_usd
+        description: "{{ doc('planning__int_store_hour_forecast_errors__actual_order_total_usd') }}"
         data_type: double
       - name: average_received_to_ready_minutes
+        description: "{{ doc('planning__int_store_hour_actuals__average_received_to_ready_minutes') }}"
         data_type: double
       - name: ready_inside_target_count
+        description: "{{ doc('planning__int_store_hour_actuals__ready_inside_target_count') }}"
         data_type: integer
       - name: forecast_error_orders
+        description: "{{ doc('planning__int_store_hour_forecast_errors__forecast_error_orders') }}"
         data_type: double
       - name: absolute_forecast_error_orders
+        description: "{{ doc('planning__int_store_hour_forecast_errors__absolute_forecast_error_orders') }}"
         data_type: double
       - name: absolute_percentage_error_orders
+        description: "{{ doc('planning__int_store_hour_forecast_errors__absolute_percentage_error_orders') }}"
         data_type: double
       - name: forecast_accuracy_band
+        description: "{{ doc('planning__fct_store_hour_forecast_accuracy__forecast_accuracy_band') }}"
         data_type: varchar
       - name: actual_inside_prediction_interval
+        description: "{{ doc('planning__int_store_hour_forecast_errors__actual_inside_prediction_interval') }}"
         data_type: boolean
       - name: created_at_utc
+        description: "{{ doc('shared__stg_store_hour_forecasts__created_at_utc') }}"
         data_type: timestamp
       - name: updated_at_utc
+        description: "{{ doc('shared__stg_store_hour_forecasts__updated_at_utc') }}"
         data_type: timestamp

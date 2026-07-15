@@ -1,12 +1,12 @@
-# Task 7: Observe Snapshot History
+# Lab 7: Observe Snapshot History
 
-[Course path](../course_path.md) · Previous: [Review a contract change](06-review-contract-change.md) · Next: [Query the semantic layer](08-query-semantic-layer.md)
+[Labs](../labs.md) · Previous: [Review a contract change](06-review-contract-change.md) · Next: [Query the semantic layer](08-query-semantic-layer.md)
 
 ## At a Glance
 
 - **Level:** intermediate
 - **Time:** 30–45 minutes
-- **Requires:** Task 1 complete with platform built
+- **Requires:** Lab 1 complete with platform built
 - **You will:** observe how a timestamp snapshot records a changing customer.
 
 ## Inspect
@@ -45,4 +45,4 @@ recreate the entire local database from a clean baseline.
 You are done when you can explain why a later timestamp creates a new version
 and how dbt marks the current versus historical row.
 
-Continue to [Task 8: Query the semantic layer](08-query-semantic-layer.md).
+Continue to [Lab 8: Query the semantic layer](08-query-semantic-layer.md).

@@ -10,45 +10,65 @@ models:
         enforced: true
     columns:
       - name: order_service_time_key
+        description: "{{ doc('store_ops__fct_order_service_times__order_service_time_key') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: order_id
+        description: "{{ doc('shared__stg_kitchen_events__order_id') }}"
         data_type: varchar
       - name: store_id
+        description: "{{ doc('shared__stg_kitchen_events__store_id') }}"
         data_type: varchar
       - name: customer_id
+        description: "{{ doc('shared__stg_orders__customer_id') }}"
         data_type: varchar
       - name: ordered_at_utc
+        description: "{{ doc('shared__stg_orders__ordered_at_utc') }}"
         data_type: timestamp
       - name: ordered_date_utc
+        description: "{{ doc('shared__stg_orders__ordered_date_utc') }}"
         data_type: date
       - name: order_status
+        description: "{{ doc('shared__stg_orders__order_status') }}"
         data_type: varchar
       - name: is_completed_order
+        description: "{{ doc('platform__int_orders_enriched__is_completed_order') }}"
         data_type: boolean
       - name: kitchen_received_at_utc
+        description: "{{ doc('store_ops__int_order_kitchen_timing__kitchen_received_at_utc') }}"
         data_type: timestamp
       - name: prep_started_at_utc
+        description: "{{ doc('store_ops__int_order_kitchen_timing__prep_started_at_utc') }}"
         data_type: timestamp
       - name: ready_at_utc
+        description: "{{ doc('store_ops__int_order_kitchen_timing__ready_at_utc') }}"
         data_type: timestamp
       - name: served_at_utc
+        description: "{{ doc('store_ops__int_order_kitchen_timing__served_at_utc') }}"
         data_type: timestamp
       - name: event_date_utc
+        description: "{{ doc('store_ops__int_order_kitchen_timing__event_date_utc') }}"
         data_type: date
       - name: stations_seen
+        description: "{{ doc('store_ops__int_order_kitchen_timing__stations_seen') }}"
         data_type: varchar
       - name: kitchen_event_count
+        description: "{{ doc('store_ops__int_order_kitchen_timing__kitchen_event_count') }}"
         data_type: integer
       - name: received_to_ready_minutes
+        description: "{{ doc('store_ops__int_order_kitchen_timing__received_to_ready_minutes') }}"
         data_type: bigint
       - name: prep_to_ready_minutes
+        description: "{{ doc('store_ops__int_order_kitchen_timing__prep_to_ready_minutes') }}"
         data_type: bigint
       - name: ready_to_served_minutes
+        description: "{{ doc('store_ops__int_order_kitchen_timing__ready_to_served_minutes') }}"
         data_type: bigint
       - name: received_to_ready_bucket
+        description: "{{ doc('store_ops__fct_order_service_times__received_to_ready_bucket') }}"
         data_type: varchar
       - name: met_ready_target
+        description: "{{ doc('store_ops__fct_order_service_times__met_ready_target') }}"
         data_type: boolean

@@ -3,3 +3,47 @@ version: 2
 models:
   - name: int_order_item_costs
     description: "{{ doc('jaffle_finance__int_order_item_costs') }}"
+
+    columns:
+      - name: order_item_id
+        description: "{{ doc('shared__stg_order_items__order_item_id') }}"
+        data_type: varchar
+      - name: order_id
+        description: "{{ doc('shared__stg_order_items__order_id') }}"
+        data_type: varchar
+      - name: ordered_date_utc
+        description: "{{ doc('shared__stg_orders__ordered_date_utc') }}"
+        data_type: date
+      - name: product_id
+        description: "{{ doc('shared__stg_order_items__product_id') }}"
+        data_type: varchar
+      - name: product_family
+        description: "{{ doc('shared__stg_products__product_family') }}"
+        data_type: varchar
+      - name: category
+        description: "{{ doc('shared__stg_products__category') }}"
+        data_type: varchar
+      - name: country_code
+        description: "{{ doc('shared__stg_stores__country_code') }}"
+        data_type: varchar
+      - name: order_currency
+        description: "{{ doc('finance__int_order_item_costs__order_currency') }}"
+        data_type: varchar
+      - name: supply_currency
+        description: "{{ doc('platform__int_order_items_enriched__supply_currency') }}"
+        data_type: varchar
+      - name: quantity
+        description: "{{ doc('shared__stg_order_items__quantity') }}"
+        data_type: integer
+      - name: item_total_major
+        description: "{{ doc('shared__stg_order_items__item_total_major') }}"
+        data_type: double
+      - name: estimated_supply_cost_minor
+        description: "{{ doc('platform__int_order_items_enriched__estimated_supply_cost_minor') }}"
+        data_type: integer
+      - name: estimated_supply_cost_major
+        description: "{{ doc('finance__int_order_item_costs__estimated_supply_cost_major') }}"
+        data_type: double
+      - name: estimated_supply_cost_usd
+        description: "{{ doc('finance__int_order_item_costs__estimated_supply_cost_usd') }}"
+        data_type: double

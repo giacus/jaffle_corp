@@ -6,12 +6,43 @@ models:
       group: supply
     columns:
       - name: waste_event_id
+        description: "{{ doc('shared__stg_waste_events__waste_event_id') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
+      - name: store_id
+        description: "{{ doc('shared__stg_waste_events__store_id') }}"
+        data_type: varchar
+      - name: component_id
+        description: "{{ doc('shared__stg_waste_events__component_id') }}"
+        data_type: varchar
+      - name: product_id
+        description: "{{ doc('shared__stg_waste_events__product_id') }}"
+        data_type: varchar
+      - name: order_id
+        description: "{{ doc('shared__stg_waste_events__order_id') }}"
+        data_type: varchar
+      - name: wasted_at_utc
+        description: "{{ doc('shared__stg_waste_events__wasted_at_utc') }}"
+        data_type: timestamp
+      - name: wasted_date_utc
+        description: "{{ doc('shared__stg_waste_events__wasted_date_utc') }}"
+        data_type: date
       - name: wasted_quantity
+        description: "{{ doc('shared__stg_waste_events__wasted_quantity') }}"
+        data_type: double
         data_tests:
           - dbt_utils.expression_is_true:
               arguments:
                 expression: '>= 0'
+      - name: unit
+        description: "{{ doc('shared__stg_waste_events__unit') }}"
+        data_type: varchar
+      - name: reason_code
+        description: "{{ doc('shared__stg_waste_events__reason_code') }}"
+        data_type: varchar
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_waste_events__updated_at_utc') }}"
+        data_type: timestamp
     description: "{{ doc('jaffle_supply__stg_waste_events') }}"

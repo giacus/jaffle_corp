@@ -10,21 +10,29 @@ models:
         enforced: true
     columns:
       - name: calendar_id
+        description: "{{ doc('shared__stg_operating_calendar__calendar_id') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: store_id
+        description: "{{ doc('shared__stg_operating_calendar__store_id') }}"
         data_type: varchar
       - name: calendar_date_utc
+        description: "{{ doc('shared__stg_operating_calendar__calendar_date_utc') }}"
         data_type: date
       - name: day_type
+        description: "{{ doc('shared__stg_operating_calendar__day_type') }}"
         data_type: varchar
       - name: expected_open_minutes
+        description: "{{ doc('shared__stg_operating_calendar__expected_open_minutes') }}"
         data_type: integer
       - name: local_holiday_name
+        description: "{{ doc('shared__stg_operating_calendar__local_holiday_name') }}"
         data_type: varchar
       - name: menu_focus
+        description: "{{ doc('shared__stg_operating_calendar__menu_focus') }}"
         data_type: varchar
       - name: updated_at_utc
+        description: "{{ doc('shared__stg_operating_calendar__updated_at_utc') }}"
         data_type: timestamp

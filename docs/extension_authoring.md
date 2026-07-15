@@ -29,9 +29,10 @@ projects/reliability
 The extension should include:
 
 - `dbt_project.yml` for its own schemas, tags, and default materialization.
-- `packages.yml` with local package fallbacks for the upstream projects it
-  consumes.
-- `dependencies.yml` with the intended dbt Mesh project dependencies.
+- `packages.yml` with `shared` as a code package plus local dbt Core fallbacks
+  for the upstream domain projects it consumes.
+- `dependencies.yml` with only the intended public domain-project dependencies;
+  do not declare `shared` as a peer project dependency.
 - `models/marts/<model>/<model>.yml` with public access and enforced contracts
   for reusable extension marts.
 - `models/marts/<model>/<model>.md` with model-local docs blocks.
@@ -72,6 +73,8 @@ Before adding a new upstream dependency, inspect the model YAML and confirm:
 ## Review Checklist
 
 - Does the extension avoid refs to `staging` and `intermediate` models?
+- Does `dependencies.yml` contain domain producers only, with code packages
+  kept in `packages.yml`?
 - Does every new mart have a stable key and a declared grain?
 - Would changing an upstream contracted column break this extension loudly?
 - Is there at least one test that protects the extension's business logic?

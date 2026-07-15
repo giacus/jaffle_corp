@@ -3,3 +3,50 @@ version: 2
 models:
   - name: int_campaign_touchpoints
     description: "{{ doc('jaffle_growth__int_campaign_touchpoints') }}"
+
+    columns:
+      - name: promo_event_id
+        description: "{{ doc('shared__stg_promo_events__promo_event_id') }}"
+        data_type: varchar
+      - name: customer_id
+        description: "{{ doc('shared__stg_promo_events__customer_id') }}"
+        data_type: varchar
+      - name: order_id
+        description: "{{ doc('shared__stg_promo_events__order_id') }}"
+        data_type: varchar
+      - name: campaign_id
+        description: "{{ doc('shared__stg_promo_events__campaign_id') }}"
+        data_type: varchar
+      - name: event_type
+        description: "{{ doc('shared__stg_promo_events__event_type') }}"
+        data_type: varchar
+      - name: event_at_utc
+        description: "{{ doc('shared__stg_promo_events__event_at_utc') }}"
+        data_type: timestamp
+      - name: event_date_utc
+        description: "{{ doc('shared__stg_promo_events__event_date_utc') }}"
+        data_type: date
+      - name: channel
+        description: "{{ doc('shared__stg_promo_events__channel') }}"
+        data_type: varchar
+      - name: cost_major
+        description: "{{ doc('shared__stg_promo_events__cost_major') }}"
+        data_type: double
+      - name: currency
+        description: "{{ doc('shared__stg_promo_events__currency') }}"
+        data_type: varchar
+      - name: estimated_cost_usd
+        description: "{{ doc('growth__int_campaign_touchpoints__estimated_cost_usd') }}"
+        data_type: double
+      - name: is_completed_order
+        description: "{{ doc('growth__int_campaign_touchpoints__is_completed_order') }}"
+        data_type: boolean
+      - name: net_revenue_usd
+        description: "{{ doc('finance__fct_order_revenue__net_revenue_usd') }}"
+        data_type: double
+      - name: estimated_gross_margin_usd
+        description: "{{ doc('finance__fct_order_revenue__estimated_gross_margin_usd') }}"
+        data_type: double
+      - name: is_attributed_order
+        description: "{{ doc('growth__int_campaign_touchpoints__is_attributed_order') }}"
+        data_type: boolean

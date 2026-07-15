@@ -10,25 +10,35 @@ models:
         enforced: true
     columns:
       - name: loyalty_event_key
+        description: "{{ doc('platform__fct_loyalty_events__loyalty_event_key') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: loyalty_event_id
+        description: "{{ doc('shared__stg_loyalty_events__loyalty_event_id') }}"
         data_type: varchar
       - name: customer_id
+        description: "{{ doc('shared__stg_loyalty_events__customer_id') }}"
         data_type: varchar
       - name: order_id
+        description: "{{ doc('shared__stg_loyalty_events__order_id') }}"
         data_type: varchar
       - name: event_type
+        description: "{{ doc('shared__stg_loyalty_events__event_type') }}"
         data_type: varchar
       - name: points_delta
+        description: "{{ doc('shared__stg_loyalty_events__points_delta') }}"
         data_type: integer
       - name: event_at_utc
+        description: "{{ doc('shared__stg_loyalty_events__event_at_utc') }}"
         data_type: timestamp
       - name: event_date_utc
+        description: "{{ doc('shared__stg_loyalty_events__event_date_utc') }}"
         data_type: date
       - name: program_tier
+        description: "{{ doc('shared__stg_loyalty_events__program_tier') }}"
         data_type: varchar
       - name: updated_at_utc
+        description: "{{ doc('shared__stg_loyalty_events__updated_at_utc') }}"
         data_type: timestamp

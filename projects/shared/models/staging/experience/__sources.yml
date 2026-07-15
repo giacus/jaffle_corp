@@ -4,10 +4,6 @@ sources:
   - name: jaffle_experience_app
     schema: "{{ target.schema }}_raw"
     description: Synthetic sources for support and experiment examples.
-    freshness:
-      warn_after: {count: 24, period: hour}
-      error_after: {count: 96, period: hour}
-    loaded_at_field: updated_at_utc
     tables:
       - name: raw_support_tickets
         description: Customer support tickets tied to orders when available.
@@ -17,4 +13,3 @@ sources:
         description: Experiment assignments and exposures.
       - name: raw_menu_price_tests
         description: Product price test windows.
-

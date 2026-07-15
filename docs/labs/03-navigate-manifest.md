@@ -1,12 +1,12 @@
-# Task 3: Navigate the Full Manifest
+# Lab 3: Navigate the Full Manifest
 
-[Course path](../course_path.md) · Previous: [Trace recognized revenue](02-trace-revenue.md) · Next: [Prove a test can fail](04-prove-test-failure.md)
+[Labs](../labs.md) · Previous: [Trace recognized revenue](02-trace-revenue.md) · Next: [Prove a test can fail](04-prove-test-failure.md)
 
 ## At a Glance
 
 - **Level:** guided
 - **Time:** 20–30 minutes
-- **Requires:** the local environment from Task 1
+- **Requires:** the local environment from Lab 1
 - **You will:** use one dbt artifact as an index to the full repository.
 
 ## Generate the Artifact
@@ -56,4 +56,4 @@ PY
 You are done when you can locate a model's owner, source file, access, contract,
 and graph links without searching the repository manually.
 
-Continue to [Task 4: Prove a test can fail](04-prove-test-failure.md).
+Continue to [Lab 4: Prove a test can fail](04-prove-test-failure.md).

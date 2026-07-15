@@ -10,6 +10,7 @@ models:
         metricflow_time_spine: true
     columns:
       - name: date_hour
+        description: "{{ doc('platform__metricflow_time_spine_hourly__date_hour') }}"
         data_type: timestamp
         granularity: hour
         data_tests:

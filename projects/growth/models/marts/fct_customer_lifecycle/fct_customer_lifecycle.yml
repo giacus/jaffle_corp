@@ -10,41 +10,59 @@ models:
         enforced: true
     columns:
       - name: customer_lifecycle_key
+        description: "{{ doc('growth__fct_customer_lifecycle__customer_lifecycle_key') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: customer_id
+        description: "{{ doc('shared__stg_customers__customer_id') }}"
         data_type: varchar
       - name: customer_name
+        description: "{{ doc('shared__stg_customers__customer_name') }}"
         data_type: varchar
       - name: email_domain
+        description: "{{ doc('shared__stg_customers__email_domain') }}"
         data_type: varchar
       - name: loyalty_region
+        description: "{{ doc('shared__stg_customers__loyalty_region') }}"
         data_type: varchar
       - name: first_seen_at
+        description: "{{ doc('shared__stg_customers__first_seen_at') }}"
         data_type: timestamp
       - name: default_currency
+        description: "{{ doc('shared__stg_customers__default_currency') }}"
         data_type: varchar
       - name: marketing_consent
+        description: "{{ doc('shared__stg_customers__marketing_consent') }}"
         data_type: boolean
       - name: first_ordered_at_utc
+        description: "{{ doc('growth__int_customer_lifecycle_events__first_ordered_at_utc') }}"
         data_type: timestamp
       - name: most_recent_ordered_at_utc
+        description: "{{ doc('growth__int_customer_lifecycle_events__most_recent_ordered_at_utc') }}"
         data_type: timestamp
       - name: order_count
+        description: "{{ doc('growth__int_customer_lifecycle_events__order_count') }}"
         data_type: integer
       - name: completed_order_count
+        description: "{{ doc('growth__int_customer_lifecycle_events__completed_order_count') }}"
         data_type: integer
       - name: lifetime_net_revenue_usd
+        description: "{{ doc('growth__int_customer_lifecycle_events__lifetime_net_revenue_usd') }}"
         data_type: double
       - name: lifetime_margin_usd
+        description: "{{ doc('growth__int_customer_lifecycle_events__lifetime_margin_usd') }}"
         data_type: double
       - name: net_loyalty_points
+        description: "{{ doc('growth__int_customer_lifecycle_events__net_loyalty_points') }}"
         data_type: integer
       - name: latest_program_tier
+        description: "{{ doc('growth__int_customer_lifecycle_events__latest_program_tier') }}"
         data_type: varchar
       - name: lifecycle_stage
+        description: "{{ doc('growth__int_customer_lifecycle_events__lifecycle_stage') }}"
         data_type: varchar
       - name: days_to_first_order
+        description: "{{ doc('growth__fct_customer_lifecycle__days_to_first_order') }}"
         data_type: bigint

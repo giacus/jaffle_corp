@@ -4,10 +4,6 @@ sources:
   - name: jaffle_supply_app
     schema: "{{ target.schema }}_raw"
     description: Synthetic supply-side source tables for recipe and stock examples.
-    freshness:
-      warn_after: {count: 24, period: hour}
-      error_after: {count: 96, period: hour}
-    loaded_at_field: updated_at_utc
     tables:
       - name: raw_recipe_components
         description: Product-to-component recipe requirements.
@@ -17,4 +13,3 @@ sources:
         description: Store component counts captured by local teams.
       - name: raw_waste_events
         description: Component waste events connected to orders where available.
-

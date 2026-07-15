@@ -6,14 +6,39 @@ models:
       group: planning
     columns:
       - name: plan_id
+        description: "{{ doc('shared__stg_component_week_plans__plan_id') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
+      - name: store_id
+        description: "{{ doc('shared__stg_component_week_plans__store_id') }}"
+        data_type: varchar
+      - name: component_id
+        description: "{{ doc('shared__stg_component_week_plans__component_id') }}"
+        data_type: varchar
+      - name: plan_week_start_utc
+        description: "{{ doc('shared__stg_component_week_plans__plan_week_start_utc') }}"
+        data_type: date
+      - name: planned_receipt_quantity
+        description: "{{ doc('shared__stg_component_week_plans__planned_receipt_quantity') }}"
+        data_type: double
+      - name: planned_usage_quantity
+        description: "{{ doc('shared__stg_component_week_plans__planned_usage_quantity') }}"
+        data_type: double
+      - name: planned_waste_quantity
+        description: "{{ doc('shared__stg_component_week_plans__planned_waste_quantity') }}"
+        data_type: double
       - name: scenario_name
+        description: "{{ doc('shared__stg_component_week_plans__scenario_name') }}"
+        data_type: varchar
         data_tests:
           - accepted_values:
               arguments:
                 values:
                   - base
                   - stretch
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_component_week_plans__updated_at_utc') }}"
+        data_type: timestamp
     description: "{{ doc('jaffle_planning__stg_component_week_plans') }}"
