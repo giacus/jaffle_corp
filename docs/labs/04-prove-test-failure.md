@@ -1,12 +1,12 @@
-# Task 4: Prove a Test Can Fail
+# Lab 4: Prove a Test Can Fail
 
-[Course path](../course_path.md) · Previous: [Navigate the manifest](03-navigate-manifest.md) · Next: [Add a behavior test](05-add-behavior-test.md)
+[Labs](../labs.md) · Previous: [Navigate the manifest](03-navigate-manifest.md) · Next: [Add a behavior test](05-add-behavior-test.md)
 
 ## At a Glance
 
 - **Level:** guided
 - **Time:** 20–30 minutes
-- **Requires:** the local environment from Task 1
+- **Requires:** the local environment from Lab 1
 - **You will:** create, observe, and recover from a controlled test failure.
 
 ## Prepare
@@ -44,4 +44,4 @@ git diff --exit-code -- \
 You are done when you have seen the expected failure once, restored the fixture,
 and can explain what row the test returned and why.
 
-Continue to [Task 5: Protect a price-window invariant](05-add-behavior-test.md).
+Continue to [Lab 5: Protect a price-window invariant](05-add-behavior-test.md).

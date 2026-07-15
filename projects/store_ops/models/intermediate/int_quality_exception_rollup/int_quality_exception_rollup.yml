@@ -3,3 +3,38 @@ version: 2
 models:
   - name: int_quality_exception_rollup
     description: "{{ doc('jaffle_store_ops__int_quality_exception_rollup') }}"
+
+    columns:
+      - name: store_id
+        description: "{{ doc('shared__stg_quality_checks__store_id') }}"
+        data_type: varchar
+      - name: order_id
+        description: "{{ doc('shared__stg_quality_checks__order_id') }}"
+        data_type: varchar
+      - name: checked_date_utc
+        description: "{{ doc('shared__stg_quality_checks__checked_date_utc') }}"
+        data_type: date
+      - name: product_family
+        description: "{{ doc('shared__stg_products__product_family') }}"
+        data_type: varchar
+      - name: category
+        description: "{{ doc('shared__stg_products__category') }}"
+        data_type: varchar
+      - name: quality_check_count
+        description: "{{ doc('store_ops__int_quality_exception_rollup__quality_check_count') }}"
+        data_type: integer
+      - name: passed_check_count
+        description: "{{ doc('store_ops__int_quality_exception_rollup__passed_check_count') }}"
+        data_type: integer
+      - name: review_check_count
+        description: "{{ doc('store_ops__int_quality_exception_rollup__review_check_count') }}"
+        data_type: integer
+      - name: failed_check_count
+        description: "{{ doc('store_ops__int_quality_exception_rollup__failed_check_count') }}"
+        data_type: integer
+      - name: first_checked_at_utc
+        description: "{{ doc('store_ops__int_quality_exception_rollup__first_checked_at_utc') }}"
+        data_type: timestamp
+      - name: last_checked_at_utc
+        description: "{{ doc('store_ops__int_quality_exception_rollup__last_checked_at_utc') }}"
+        data_type: timestamp

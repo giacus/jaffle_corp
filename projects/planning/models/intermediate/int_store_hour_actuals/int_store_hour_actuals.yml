@@ -3,3 +3,26 @@ version: 2
 models:
   - name: int_store_hour_actuals
     description: "{{ doc('jaffle_planning__int_store_hour_actuals') }}"
+
+    columns:
+      - name: store_id
+        description: "{{ doc('shared__stg_orders__store_id') }}"
+        data_type: varchar
+      - name: actual_hour_utc
+        description: "{{ doc('planning__int_store_hour_actuals__actual_hour_utc') }}"
+        data_type: timestamp
+      - name: actual_order_count
+        description: "{{ doc('planning__int_store_hour_actuals__actual_order_count') }}"
+        data_type: integer
+      - name: actual_completed_order_count
+        description: "{{ doc('planning__int_store_hour_actuals__actual_completed_order_count') }}"
+        data_type: integer
+      - name: actual_order_total_usd
+        description: "{{ doc('planning__int_store_hour_actuals__actual_order_total_usd') }}"
+        data_type: double
+      - name: average_received_to_ready_minutes
+        description: "{{ doc('planning__int_store_hour_actuals__average_received_to_ready_minutes') }}"
+        data_type: double
+      - name: ready_inside_target_count
+        description: "{{ doc('planning__int_store_hour_actuals__ready_inside_target_count') }}"
+        data_type: integer

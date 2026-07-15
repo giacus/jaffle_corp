@@ -3,3 +3,53 @@ version: 2
 models:
   - name: int_merch_goal_progress
     description: "{{ doc('jaffle_merchandising__int_merch_goal_progress') }}"
+
+    columns:
+      - name: menu_goal_progress_key
+        description: "{{ doc('merchandising__int_merch_goal_progress__menu_goal_progress_key') }}"
+        data_type: varchar
+      - name: goal_id
+        description: "{{ doc('shared__stg_menu_goals__goal_id') }}"
+        data_type: varchar
+      - name: store_id
+        description: "{{ doc('shared__stg_menu_goals__store_id') }}"
+        data_type: varchar
+      - name: product_family
+        description: "{{ doc('shared__stg_menu_goals__product_family') }}"
+        data_type: varchar
+      - name: goal_week_start_utc
+        description: "{{ doc('shared__stg_menu_goals__goal_week_start_utc') }}"
+        data_type: date
+      - name: target_units
+        description: "{{ doc('shared__stg_menu_goals__target_units') }}"
+        data_type: integer
+      - name: target_net_revenue_usd
+        description: "{{ doc('shared__stg_menu_goals__target_net_revenue_usd') }}"
+        data_type: double
+      - name: target_margin_usd
+        description: "{{ doc('shared__stg_menu_goals__target_margin_usd') }}"
+        data_type: double
+      - name: owner_role
+        description: "{{ doc('shared__stg_menu_goals__owner_role') }}"
+        data_type: varchar
+      - name: actual_units
+        description: "{{ doc('merchandising__int_merch_goal_progress__actual_units') }}"
+        data_type: hugeint
+      - name: actual_item_revenue_usd
+        description: "{{ doc('merchandising__int_merch_goal_progress__actual_item_revenue_usd') }}"
+        data_type: double
+      - name: estimated_actual_margin_usd
+        description: "{{ doc('merchandising__int_merch_goal_progress__estimated_actual_margin_usd') }}"
+        data_type: double
+      - name: unit_goal_attainment_rate
+        description: "{{ doc('merchandising__int_merch_goal_progress__unit_goal_attainment_rate') }}"
+        data_type: double
+      - name: revenue_goal_attainment_rate
+        description: "{{ doc('merchandising__int_merch_goal_progress__revenue_goal_attainment_rate') }}"
+        data_type: double
+      - name: unit_goal_status
+        description: "{{ doc('merchandising__int_merch_goal_progress__unit_goal_status') }}"
+        data_type: varchar
+      - name: average_expected_margin_rate
+        description: "{{ doc('merchandising__int_merch_goal_progress__average_expected_margin_rate') }}"
+        data_type: double

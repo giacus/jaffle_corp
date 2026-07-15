@@ -10,69 +10,101 @@ models:
         enforced: true
     columns:
       - name: support_ticket_key
+        description: "{{ doc('experience__fct_support_tickets__support_ticket_key') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: support_ticket_id
+        description: "{{ doc('shared__stg_support_tickets__support_ticket_id') }}"
         data_type: varchar
       - name: customer_id
+        description: "{{ doc('shared__stg_support_tickets__customer_id') }}"
         data_type: varchar
       - name: order_id
+        description: "{{ doc('shared__stg_support_tickets__order_id') }}"
         data_type: varchar
       - name: store_id
+        description: "{{ doc('shared__stg_support_tickets__store_id') }}"
         data_type: varchar
       - name: opened_at_utc
+        description: "{{ doc('shared__stg_support_tickets__opened_at_utc') }}"
         data_type: timestamp
       - name: opened_date_utc
+        description: "{{ doc('shared__stg_support_tickets__opened_date_utc') }}"
         data_type: date
       - name: first_response_at_utc
+        description: "{{ doc('shared__stg_support_tickets__first_response_at_utc') }}"
         data_type: timestamp
       - name: resolved_at_utc
+        description: "{{ doc('shared__stg_support_tickets__resolved_at_utc') }}"
         data_type: timestamp
       - name: normalized_issue_type
+        description: "{{ doc('shared__stg_support_tickets__normalized_issue_type') }}"
         data_type: varchar
       - name: raw_issue_type
+        description: "{{ doc('shared__stg_support_tickets__raw_issue_type') }}"
         data_type: varchar
       - name: ticket_status
+        description: "{{ doc('shared__stg_support_tickets__ticket_status') }}"
         data_type: varchar
       - name: resolution_type
+        description: "{{ doc('shared__stg_support_tickets__resolution_type') }}"
         data_type: varchar
       - name: satisfaction_score
+        description: "{{ doc('shared__stg_support_tickets__satisfaction_score') }}"
         data_type: integer
       - name: concession_minor
+        description: "{{ doc('shared__stg_support_tickets__concession_minor') }}"
         data_type: integer
       - name: concession_major
+        description: "{{ doc('shared__stg_support_tickets__concession_major') }}"
         data_type: double
       - name: currency
+        description: "{{ doc('shared__stg_support_tickets__currency') }}"
         data_type: varchar
       - name: first_response_minutes
+        description: "{{ doc('shared__stg_support_tickets__first_response_minutes') }}"
         data_type: bigint
       - name: resolution_minutes
+        description: "{{ doc('shared__stg_support_tickets__resolution_minutes') }}"
         data_type: bigint
       - name: first_response_sla_status
+        description: "{{ doc('experience__int_ticket_sla_events__first_response_sla_status') }}"
         data_type: varchar
       - name: resolution_sla_status
+        description: "{{ doc('experience__int_ticket_sla_events__resolution_sla_status') }}"
         data_type: varchar
       - name: order_status
+        description: "{{ doc('shared__stg_orders__order_status') }}"
         data_type: varchar
       - name: channel
+        description: "{{ doc('shared__stg_orders__channel') }}"
         data_type: varchar
       - name: order_total_usd
+        description: "{{ doc('experience__int_ticket_sla_events__order_total_usd') }}"
         data_type: double
       - name: net_revenue_usd
+        description: "{{ doc('experience__int_ticket_sla_events__net_revenue_usd') }}"
         data_type: double
       - name: estimated_gross_margin_usd
+        description: "{{ doc('experience__int_ticket_sla_events__estimated_gross_margin_usd') }}"
         data_type: double
       - name: refund_event_count
+        description: "{{ doc('experience__int_ticket_sla_events__refund_event_count') }}"
         data_type: integer
       - name: has_failed_payment
+        description: "{{ doc('experience__int_ticket_sla_events__has_failed_payment') }}"
         data_type: boolean
       - name: revenue_quality_status
+        description: "{{ doc('finance__int_order_payment_allocations__revenue_quality_status') }}"
         data_type: varchar
       - name: met_first_response_sla
+        description: "{{ doc('experience__fct_support_tickets__met_first_response_sla') }}"
         data_type: boolean
       - name: met_resolution_sla
+        description: "{{ doc('experience__fct_support_tickets__met_resolution_sla') }}"
         data_type: boolean
       - name: updated_at_utc
+        description: "{{ doc('shared__stg_support_tickets__updated_at_utc') }}"
         data_type: timestamp

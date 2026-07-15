@@ -6,10 +6,26 @@ models:
       group: merchandising
     columns:
       - name: availability_id
+        description: "{{ doc('shared__stg_product_availability__availability_id') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
+      - name: store_id
+        description: "{{ doc('shared__stg_product_availability__store_id') }}"
+        data_type: varchar
+      - name: product_id
+        description: "{{ doc('shared__stg_product_availability__product_id') }}"
+        data_type: varchar
+      - name: available_date_utc
+        description: "{{ doc('shared__stg_product_availability__available_date_utc') }}"
+        data_type: date
+      - name: hour_local
+        description: "{{ doc('shared__stg_product_availability__hour_local') }}"
+        data_type: integer
       - name: availability_status
+        description: "{{ doc('shared__stg_product_availability__availability_status') }}"
+        data_type: varchar
         data_tests:
           - accepted_values:
               arguments:
@@ -18,4 +34,16 @@ models:
                   - limited
                   - unavailable
                   - unknown
+      - name: observed_on_hand_units
+        description: "{{ doc('shared__stg_product_availability__observed_on_hand_units') }}"
+        data_type: integer
+      - name: expected_menu_units
+        description: "{{ doc('shared__stg_product_availability__expected_menu_units') }}"
+        data_type: integer
+      - name: outage_minutes
+        description: "{{ doc('shared__stg_product_availability__outage_minutes') }}"
+        data_type: integer
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_product_availability__updated_at_utc') }}"
+        data_type: timestamp
     description: "{{ doc('jaffle_merchandising__stg_product_availability') }}"

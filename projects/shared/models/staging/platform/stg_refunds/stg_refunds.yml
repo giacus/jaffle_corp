@@ -6,7 +6,36 @@ models:
       group: platform
     columns:
       - name: refund_id
+        description: "{{ doc('shared__stg_refunds__refund_id') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
+      - name: order_id
+        description: "{{ doc('shared__stg_refunds__order_id') }}"
+        data_type: varchar
+      - name: refund_reason
+        description: "{{ doc('shared__stg_refunds__refund_reason') }}"
+        data_type: varchar
+      - name: refunded_at_utc
+        description: "{{ doc('shared__stg_refunds__refunded_at_utc') }}"
+        data_type: timestamp
+      - name: refunded_date_utc
+        description: "{{ doc('shared__stg_refunds__refunded_date_utc') }}"
+        data_type: date
+      - name: refund_amount_minor
+        description: "{{ doc('shared__stg_refunds__refund_amount_minor') }}"
+        data_type: integer
+      - name: refund_amount_major
+        description: "{{ doc('shared__stg_refunds__refund_amount_major') }}"
+        data_type: double
+      - name: currency
+        description: "{{ doc('shared__stg_refunds__currency') }}"
+        data_type: varchar
+      - name: initiated_by
+        description: "{{ doc('shared__stg_refunds__initiated_by') }}"
+        data_type: varchar
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_refunds__updated_at_utc') }}"
+        data_type: timestamp
     description: "{{ doc('jaffle_platform__stg_refunds') }}"

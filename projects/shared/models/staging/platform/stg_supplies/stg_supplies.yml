@@ -3,3 +3,37 @@ version: 2
 models:
   - name: stg_supplies
     description: "{{ doc('jaffle_platform__stg_supplies') }}"
+    columns:
+      - name: supply_id
+        description: "{{ doc('shared__stg_supplies__supply_id') }}"
+        data_type: varchar
+      - name: product_id
+        description: "{{ doc('shared__stg_supplies__product_id') }}"
+        data_type: varchar
+      - name: supplier_name
+        description: "{{ doc('shared__stg_supplies__supplier_name') }}"
+        data_type: varchar
+      - name: supplier_country_code
+        description: "{{ doc('shared__stg_supplies__supplier_country_code') }}"
+        data_type: varchar
+      - name: unit_cost_minor
+        description: "{{ doc('shared__stg_supplies__unit_cost_minor') }}"
+        data_type: integer
+      - name: unit_cost_major
+        description: "{{ doc('shared__stg_supplies__unit_cost_major') }}"
+        data_type: double
+      - name: currency
+        description: "{{ doc('shared__stg_supplies__currency') }}"
+        data_type: varchar
+      - name: perishable
+        description: "{{ doc('shared__stg_supplies__perishable') }}"
+        data_type: boolean
+      - name: lead_time_days
+        description: "{{ doc('shared__stg_supplies__lead_time_days') }}"
+        data_type: integer
+      - name: replenishment_mode
+        description: "{{ doc('shared__stg_supplies__replenishment_mode') }}"
+        data_type: varchar
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_supplies__updated_at_utc') }}"
+        data_type: timestamp

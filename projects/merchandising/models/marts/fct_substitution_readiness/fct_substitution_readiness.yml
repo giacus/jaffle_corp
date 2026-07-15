@@ -10,35 +10,50 @@ models:
         enforced: true
     columns:
       - name: substitution_coverage_key
+        description: "{{ doc('merchandising__int_substitution_coverage__substitution_coverage_key') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: substitution_rule_id
+        description: "{{ doc('shared__stg_substitution_rules__substitution_rule_id') }}"
         data_type: varchar
       - name: store_id
+        description: "{{ doc('shared__stg_substitution_rules__store_id') }}"
         data_type: varchar
       - name: available_date_utc
+        description: "{{ doc('shared__stg_product_availability__available_date_utc') }}"
         data_type: date
       - name: unavailable_product_id
+        description: "{{ doc('shared__stg_substitution_rules__unavailable_product_id') }}"
         data_type: varchar
       - name: unavailable_product_name
+        description: "{{ doc('merchandising__int_substitution_coverage__unavailable_product_name') }}"
         data_type: varchar
       - name: substitute_product_id
+        description: "{{ doc('shared__stg_substitution_rules__substitute_product_id') }}"
         data_type: varchar
       - name: substitute_product_name
+        description: "{{ doc('merchandising__int_substitution_coverage__substitute_product_name') }}"
         data_type: varchar
       - name: priority_rank
+        description: "{{ doc('shared__stg_substitution_rules__priority_rank') }}"
         data_type: integer
       - name: reason_code
+        description: "{{ doc('shared__stg_substitution_rules__reason_code') }}"
         data_type: varchar
       - name: product_store_day_status
+        description: "{{ doc('merchandising__int_product_store_day_availability__product_store_day_status') }}"
         data_type: varchar
       - name: outage_minutes
+        description: "{{ doc('merchandising__int_product_store_day_availability__outage_minutes') }}"
         data_type: hugeint
       - name: rule_was_needed
+        description: "{{ doc('merchandising__int_substitution_coverage__rule_was_needed') }}"
         data_type: boolean
       - name: substitute_is_published
+        description: "{{ doc('merchandising__int_substitution_coverage__substitute_is_published') }}"
         data_type: boolean
       - name: substitution_readiness_status
+        description: "{{ doc('merchandising__fct_substitution_readiness__substitution_readiness_status') }}"
         data_type: varchar

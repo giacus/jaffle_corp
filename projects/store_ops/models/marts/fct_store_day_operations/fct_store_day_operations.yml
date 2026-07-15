@@ -10,61 +10,89 @@ models:
         enforced: true
     columns:
       - name: store_day_operations_key
+        description: "{{ doc('store_ops__fct_store_day_operations__store_day_operations_key') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: store_id
+        description: "{{ doc('finance__int_order_payment_allocations__store_id') }}"
         data_type: varchar
       - name: operating_date
+        description: "{{ doc('store_ops__int_store_day_operating_inputs__operating_date') }}"
         data_type: date
       - name: country_code
+        description: "{{ doc('finance__int_order_payment_allocations__country_code') }}"
         data_type: varchar
       - name: city
+        description: "{{ doc('finance__int_order_payment_allocations__city') }}"
         data_type: varchar
       - name: franchise_owner
+        description: "{{ doc('finance__int_order_payment_allocations__franchise_owner') }}"
         data_type: varchar
       - name: order_count
+        description: "{{ doc('finance__fct_daily_store_pnl__order_count') }}"
         data_type: integer
       - name: net_revenue_usd
+        description: "{{ doc('finance__fct_daily_store_pnl__net_revenue_usd') }}"
         data_type: double
       - name: estimated_gross_margin_usd
+        description: "{{ doc('finance__fct_daily_store_pnl__estimated_gross_margin_usd') }}"
         data_type: double
       - name: order_timing_count
+        description: "{{ doc('store_ops__int_store_day_operating_inputs__order_timing_count') }}"
         data_type: integer
       - name: average_received_to_ready_minutes
+        description: "{{ doc('store_ops__int_store_day_operating_inputs__average_received_to_ready_minutes') }}"
         data_type: double
       - name: ready_inside_target_count
+        description: "{{ doc('store_ops__fct_store_day_operations__ready_inside_target_count') }}"
         data_type: integer
       - name: ready_target_rate
+        description: "{{ doc('store_ops__fct_store_day_operations__ready_target_rate') }}"
         data_type: double
       - name: planned_minutes
+        description: "{{ doc('store_ops__int_store_day_operating_inputs__planned_minutes') }}"
         data_type: hugeint
       - name: actual_minutes
+        description: "{{ doc('store_ops__int_store_day_operating_inputs__actual_minutes') }}"
         data_type: hugeint
       - name: peak_team_member_count
+        description: "{{ doc('store_ops__int_store_day_operating_inputs__peak_team_member_count') }}"
         data_type: integer
       - name: orders_per_actual_minute
+        description: "{{ doc('store_ops__fct_store_day_operations__orders_per_actual_minute') }}"
         data_type: double
       - name: shift_exception_count
+        description: "{{ doc('store_ops__int_store_day_operating_inputs__shift_exception_count') }}"
         data_type: hugeint
       - name: quality_check_count
+        description: "{{ doc('store_ops__int_store_day_operating_inputs__quality_check_count') }}"
         data_type: hugeint
       - name: quality_exception_count
+        description: "{{ doc('store_ops__int_store_day_operating_inputs__quality_exception_count') }}"
         data_type: hugeint
       - name: quality_exception_rate
+        description: "{{ doc('store_ops__fct_store_day_operations__quality_exception_rate') }}"
         data_type: double
       - name: component_day_count
+        description: "{{ doc('store_ops__int_store_day_operating_inputs__component_day_count') }}"
         data_type: integer
       - name: supply_risk_component_count
+        description: "{{ doc('store_ops__int_store_day_operating_inputs__supply_risk_component_count') }}"
         data_type: integer
       - name: supply_risk_component_rate
+        description: "{{ doc('store_ops__fct_store_day_operations__supply_risk_component_rate') }}"
         data_type: double
       - name: incident_count
+        description: "{{ doc('store_ops__int_store_day_operating_inputs__incident_count') }}"
         data_type: integer
       - name: affected_order_count
+        description: "{{ doc('store_ops__int_store_day_operating_inputs__affected_order_count') }}"
         data_type: hugeint
       - name: incident_minutes
+        description: "{{ doc('store_ops__int_store_day_operating_inputs__incident_minutes') }}"
         data_type: hugeint
       - name: store_day_status
+        description: "{{ doc('store_ops__fct_store_day_operations__store_day_status') }}"
         data_type: varchar

@@ -3,3 +3,50 @@ version: 2
 models:
   - name: int_customer_contact_sequences
     description: "{{ doc('jaffle_experience__int_customer_contact_sequences') }}"
+
+    columns:
+      - name: contact_event_id
+        description: "{{ doc('shared__stg_customer_contacts__contact_event_id') }}"
+        data_type: varchar
+      - name: support_ticket_id
+        description: "{{ doc('shared__stg_customer_contacts__support_ticket_id') }}"
+        data_type: varchar
+      - name: contact_channel
+        description: "{{ doc('shared__stg_customer_contacts__contact_channel') }}"
+        data_type: varchar
+      - name: contact_direction
+        description: "{{ doc('shared__stg_customer_contacts__contact_direction') }}"
+        data_type: varchar
+      - name: contact_at_utc
+        description: "{{ doc('shared__stg_customer_contacts__contact_at_utc') }}"
+        data_type: timestamp
+      - name: message_count
+        description: "{{ doc('shared__stg_customer_contacts__message_count') }}"
+        data_type: integer
+      - name: handled_by_role
+        description: "{{ doc('shared__stg_customer_contacts__handled_by_role') }}"
+        data_type: varchar
+      - name: contact_sequence_number
+        description: "{{ doc('experience__int_customer_contact_sequences__contact_sequence_number') }}"
+        data_type: bigint
+      - name: first_contact_at_utc
+        description: "{{ doc('experience__int_customer_contact_sequences__first_contact_at_utc') }}"
+        data_type: timestamp
+      - name: most_recent_contact_at_utc
+        description: "{{ doc('experience__int_customer_contact_sequences__most_recent_contact_at_utc') }}"
+        data_type: timestamp
+      - name: contact_event_count
+        description: "{{ doc('experience__int_customer_contact_sequences__contact_event_count') }}"
+        data_type: integer
+      - name: total_message_count
+        description: "{{ doc('experience__int_customer_contact_sequences__total_message_count') }}"
+        data_type: integer
+      - name: inbound_contact_count
+        description: "{{ doc('experience__int_customer_contact_sequences__inbound_contact_count') }}"
+        data_type: integer
+      - name: outbound_contact_count
+        description: "{{ doc('experience__int_customer_contact_sequences__outbound_contact_count') }}"
+        data_type: integer
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_customer_contacts__updated_at_utc') }}"
+        data_type: timestamp

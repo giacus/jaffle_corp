@@ -10,25 +10,35 @@ models:
         enforced: true
     columns:
       - name: component_id
+        description: "{{ doc('shared__stg_recipe_components__component_id') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: component_name
+        description: "{{ doc('supply__int_component_catalog__component_name') }}"
         data_type: varchar
       - name: component_family
+        description: "{{ doc('supply__int_component_catalog__component_family') }}"
         data_type: varchar
       - name: recipe_unit
+        description: "{{ doc('supply__int_component_catalog__recipe_unit') }}"
         data_type: varchar
       - name: product_count
+        description: "{{ doc('supply__int_component_catalog__product_count') }}"
         data_type: integer
       - name: minimum_recipe_waste_factor
+        description: "{{ doc('supply__int_component_catalog__minimum_recipe_waste_factor') }}"
         data_type: double
       - name: maximum_recipe_waste_factor
+        description: "{{ doc('supply__int_component_catalog__maximum_recipe_waste_factor') }}"
         data_type: double
       - name: supplier_count
+        description: "{{ doc('supply__int_component_catalog__supplier_count') }}"
         data_type: integer
       - name: primary_supplier_name
+        description: "{{ doc('supply__int_component_catalog__primary_supplier_name') }}"
         data_type: varchar
       - name: updated_at_utc
+        description: "{{ doc('supply__int_component_catalog__updated_at_utc') }}"
         data_type: timestamp

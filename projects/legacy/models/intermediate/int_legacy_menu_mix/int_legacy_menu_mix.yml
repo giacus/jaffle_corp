@@ -3,3 +3,29 @@ version: 2
 models:
   - name: int_legacy_menu_mix
     description: "{{ doc('jaffle_legacy__int_legacy_menu_mix') }}"
+
+    columns:
+      - name: order_no
+        description: "{{ doc('legacy__int_legacy_menu_mix__order_no') }}"
+        data_type: varchar
+      - name: prod
+        description: "{{ doc('legacy__int_legacy_menu_mix__prod') }}"
+        data_type: varchar
+      - name: product_family
+        description: "{{ doc('shared__stg_products__product_family') }}"
+        data_type: varchar
+      - name: cat
+        description: "{{ doc('legacy__int_legacy_menu_mix__cat') }}"
+        data_type: varchar
+      - name: qty
+        description: "{{ doc('legacy__int_legacy_menu_mix__qty') }}"
+        data_type: integer
+      - name: item_amt
+        description: "{{ doc('legacy__int_legacy_menu_mix__item_amt') }}"
+        data_type: double
+      - name: supply_minor_guess
+        description: "{{ doc('legacy__int_legacy_menu_mix__supply_minor_guess') }}"
+        data_type: integer
+      - name: business_dt
+        description: "{{ doc('legacy__int_legacy_menu_mix__business_dt') }}"
+        data_type: date

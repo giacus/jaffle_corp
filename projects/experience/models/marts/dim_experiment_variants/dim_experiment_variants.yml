@@ -10,21 +10,29 @@ models:
         enforced: true
     columns:
       - name: experiment_variant_key
+        description: "{{ doc('experience__dim_experiment_variants__experiment_variant_key') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: experiment_id
+        description: "{{ doc('shared__stg_experiment_exposures__experiment_id') }}"
         data_type: varchar
       - name: variant_id
+        description: "{{ doc('shared__stg_experiment_exposures__variant_id') }}"
         data_type: varchar
       - name: first_exposed_at_utc
+        description: "{{ doc('experience__dim_experiment_variants__first_exposed_at_utc') }}"
         data_type: timestamp
       - name: most_recent_exposed_at_utc
+        description: "{{ doc('experience__dim_experiment_variants__most_recent_exposed_at_utc') }}"
         data_type: timestamp
       - name: exposure_count
+        description: "{{ doc('experience__dim_experiment_variants__exposure_count') }}"
         data_type: integer
       - name: price_test_count
+        description: "{{ doc('experience__dim_experiment_variants__price_test_count') }}"
         data_type: integer
       - name: surfaces
+        description: "{{ doc('experience__dim_experiment_variants__surfaces') }}"
         data_type: varchar

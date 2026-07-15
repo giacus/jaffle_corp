@@ -1,12 +1,12 @@
-# Task 10: Build a Cross-Domain Capstone
+# Lab 10: Build a Cross-Domain Capstone
 
-[Course path](../course_path.md) · Previous: [Refactor a legacy interface](09-refactor-legacy-interface.md)
+[Labs](../labs.md) · Previous: [Refactor a legacy interface](09-refactor-legacy-interface.md)
 
 ## At a Glance
 
 - **Level:** advanced
 - **Time:** 2–4 hours
-- **Requires:** the earlier tasks, or a successful full validation
+- **Requires:** the earlier labs, or a successful full validation
 - **You will:** design, contract, and test a new downstream model.
 
 ## Start from a Clean Baseline
@@ -40,7 +40,7 @@ analysis query.
 
 If you create another project, register it in:
 
-- `Taskfile.yml` and `scripts/validate_repo.sh` at the correct dependency point;
+- `scripts/validate_repo.sh` at the correct dependency point;
 - `projects/catalog/packages.yml` for manifest coverage;
 - `docs/architecture.md` for discoverability.
 
@@ -57,5 +57,4 @@ scripts/validate_repo.sh
 You are done when the model uses no protected refs, its grain is enforced, the
 business question is answerable from the result, and the full validator passes.
 
-Return to the [course path](../course_path.md) and choose a stretch idea from the
-[exercise catalog](../../EXERCISES.md).
+Return to the [labs index](../labs.md) and choose a stretch idea.

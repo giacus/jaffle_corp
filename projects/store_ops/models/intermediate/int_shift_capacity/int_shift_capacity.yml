@@ -3,3 +3,56 @@ version: 2
 models:
   - name: int_shift_capacity
     description: "{{ doc('jaffle_store_ops__int_shift_capacity') }}"
+
+    columns:
+      - name: shift_plan_id
+        description: "{{ doc('shared__stg_store_shift_plans__shift_plan_id') }}"
+        data_type: varchar
+      - name: store_id
+        description: "{{ doc('shared__stg_store_shift_plans__store_id') }}"
+        data_type: varchar
+      - name: country_code
+        description: "{{ doc('shared__stg_stores__country_code') }}"
+        data_type: varchar
+      - name: city
+        description: "{{ doc('shared__stg_stores__city') }}"
+        data_type: varchar
+      - name: timezone_name
+        description: "{{ doc('shared__stg_stores__timezone_name') }}"
+        data_type: varchar
+      - name: is_dark_kitchen
+        description: "{{ doc('shared__stg_stores__is_dark_kitchen') }}"
+        data_type: boolean
+      - name: shift_date
+        description: "{{ doc('shared__stg_store_shift_plans__shift_date') }}"
+        data_type: date
+      - name: daypart
+        description: "{{ doc('shared__stg_store_shift_plans__daypart') }}"
+        data_type: varchar
+      - name: planned_minutes
+        description: "{{ doc('shared__stg_store_shift_plans__planned_minutes') }}"
+        data_type: integer
+      - name: actual_minutes
+        description: "{{ doc('shared__stg_store_shift_plans__actual_minutes') }}"
+        data_type: integer
+      - name: team_member_count
+        description: "{{ doc('shared__stg_store_shift_plans__team_member_count') }}"
+        data_type: integer
+      - name: role_mix_code
+        description: "{{ doc('shared__stg_store_shift_plans__role_mix_code') }}"
+        data_type: varchar
+      - name: source_version
+        description: "{{ doc('shared__stg_store_shift_plans__source_version') }}"
+        data_type: varchar
+      - name: actual_to_planned_minutes_ratio
+        description: "{{ doc('shared__stg_store_shift_plans__actual_to_planned_minutes_ratio') }}"
+        data_type: double
+      - name: actual_minutes_per_team_member
+        description: "{{ doc('store_ops__int_shift_capacity__actual_minutes_per_team_member') }}"
+        data_type: double
+      - name: shift_adherence_status
+        description: "{{ doc('store_ops__int_shift_capacity__shift_adherence_status') }}"
+        data_type: varchar
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_store_shift_plans__updated_at_utc') }}"
+        data_type: timestamp

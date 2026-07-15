@@ -10,13 +10,17 @@ models:
         enforced: true
     columns:
       - name: exchange_rate_key
+        description: "{{ doc('platform__dim_exchange_rates__exchange_rate_key') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: currency
+        description: "{{ doc('shared__stg_fx_rates__currency') }}"
         data_type: varchar
       - name: rate_date
+        description: "{{ doc('shared__stg_fx_rates__rate_date') }}"
         data_type: date
       - name: usd_rate
+        description: "{{ doc('shared__stg_fx_rates__usd_rate') }}"
         data_type: double

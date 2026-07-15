@@ -6,14 +6,42 @@ models:
       group: supply
     columns:
       - name: inventory_count_id
+        description: "{{ doc('shared__stg_inventory_counts__inventory_count_id') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
+      - name: store_id
+        description: "{{ doc('shared__stg_inventory_counts__store_id') }}"
+        data_type: varchar
+      - name: component_id
+        description: "{{ doc('shared__stg_inventory_counts__component_id') }}"
+        data_type: varchar
+      - name: counted_at_utc
+        description: "{{ doc('shared__stg_inventory_counts__counted_at_utc') }}"
+        data_type: timestamp
+      - name: counted_date_utc
+        description: "{{ doc('shared__stg_inventory_counts__counted_date_utc') }}"
+        data_type: date
+      - name: quantity_on_hand
+        description: "{{ doc('shared__stg_inventory_counts__quantity_on_hand') }}"
+        data_type: double
+      - name: unit
+        description: "{{ doc('shared__stg_inventory_counts__unit') }}"
+        data_type: varchar
       - name: count_quality
+        description: "{{ doc('shared__stg_inventory_counts__count_quality') }}"
+        data_type: varchar
         data_tests:
           - accepted_values:
               arguments:
                 values:
                   - ok
                   - review
+      - name: source_version
+        description: "{{ doc('shared__stg_inventory_counts__source_version') }}"
+        data_type: varchar
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_inventory_counts__updated_at_utc') }}"
+        data_type: timestamp
     description: "{{ doc('jaffle_supply__stg_inventory_counts') }}"

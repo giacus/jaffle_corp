@@ -10,25 +10,35 @@ models:
         enforced: true
     columns:
       - name: basket_pair_affinity_key
+        description: "{{ doc('merchandising__fct_basket_pair_affinity__basket_pair_affinity_key') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: anchor_product_id
+        description: "{{ doc('merchandising__int_basket_pair_observations__anchor_product_id') }}"
         data_type: varchar
       - name: paired_product_id
+        description: "{{ doc('merchandising__int_basket_pair_observations__paired_product_id') }}"
         data_type: varchar
       - name: ordered_date_utc
+        description: "{{ doc('shared__stg_orders__ordered_date_utc') }}"
         data_type: date
       - name: pairing_id
+        description: "{{ doc('merchandising__int_basket_pair_observations__pairing_id') }}"
         data_type: varchar
       - name: pairing_reason
+        description: "{{ doc('merchandising__int_basket_pair_observations__pairing_reason') }}"
         data_type: varchar
       - name: pairing_rank
+        description: "{{ doc('shared__stg_product_pairings__pairing_rank') }}"
         data_type: integer
       - name: is_curated_pair
+        description: "{{ doc('merchandising__int_basket_pair_observations__is_curated_pair') }}"
         data_type: boolean
       - name: paired_order_count
+        description: "{{ doc('merchandising__fct_basket_pair_affinity__paired_order_count') }}"
         data_type: bigint
       - name: paired_item_total_major
+        description: "{{ doc('merchandising__fct_basket_pair_affinity__paired_item_total_major') }}"
         data_type: double

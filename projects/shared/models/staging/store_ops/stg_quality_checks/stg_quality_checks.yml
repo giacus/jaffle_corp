@@ -6,10 +6,26 @@ models:
       group: store_ops
     columns:
       - name: quality_check_id
+        description: "{{ doc('shared__stg_quality_checks__quality_check_id') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
+      - name: store_id
+        description: "{{ doc('shared__stg_quality_checks__store_id') }}"
+        data_type: varchar
+      - name: order_id
+        description: "{{ doc('shared__stg_quality_checks__order_id') }}"
+        data_type: varchar
+      - name: product_id
+        description: "{{ doc('shared__stg_quality_checks__product_id') }}"
+        data_type: varchar
+      - name: check_type
+        description: "{{ doc('shared__stg_quality_checks__check_type') }}"
+        data_type: varchar
       - name: check_result
+        description: "{{ doc('shared__stg_quality_checks__check_result') }}"
+        data_type: varchar
         data_tests:
           - accepted_values:
               arguments:
@@ -17,4 +33,22 @@ models:
                   - pass
                   - review
                   - fail
+      - name: measured_value
+        description: "{{ doc('shared__stg_quality_checks__measured_value') }}"
+        data_type: double
+      - name: expected_min
+        description: "{{ doc('shared__stg_quality_checks__expected_min') }}"
+        data_type: double
+      - name: expected_max
+        description: "{{ doc('shared__stg_quality_checks__expected_max') }}"
+        data_type: double
+      - name: checked_at_utc
+        description: "{{ doc('shared__stg_quality_checks__checked_at_utc') }}"
+        data_type: timestamp
+      - name: checked_date_utc
+        description: "{{ doc('shared__stg_quality_checks__checked_date_utc') }}"
+        data_type: date
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_quality_checks__updated_at_utc') }}"
+        data_type: timestamp
     description: "{{ doc('jaffle_store_ops__stg_quality_checks') }}"

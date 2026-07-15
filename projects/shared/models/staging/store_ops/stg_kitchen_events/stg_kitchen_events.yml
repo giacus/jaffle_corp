@@ -6,10 +6,23 @@ models:
       group: store_ops
     columns:
       - name: kitchen_event_id
+        description: "{{ doc('shared__stg_kitchen_events__kitchen_event_id') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
+      - name: order_id
+        description: "{{ doc('shared__stg_kitchen_events__order_id') }}"
+        data_type: varchar
+      - name: store_id
+        description: "{{ doc('shared__stg_kitchen_events__store_id') }}"
+        data_type: varchar
+      - name: station
+        description: "{{ doc('shared__stg_kitchen_events__station') }}"
+        data_type: varchar
       - name: kitchen_event_type
+        description: "{{ doc('shared__stg_kitchen_events__kitchen_event_type') }}"
+        data_type: varchar
         data_tests:
           - accepted_values:
               arguments:
@@ -19,4 +32,22 @@ models:
                   - ready
                   - served
                   - unknown
+      - name: raw_event_type
+        description: "{{ doc('shared__stg_kitchen_events__raw_event_type') }}"
+        data_type: varchar
+      - name: event_at_utc
+        description: "{{ doc('shared__stg_kitchen_events__event_at_utc') }}"
+        data_type: timestamp
+      - name: event_date_utc
+        description: "{{ doc('shared__stg_kitchen_events__event_date_utc') }}"
+        data_type: date
+      - name: batch_id
+        description: "{{ doc('shared__stg_kitchen_events__batch_id') }}"
+        data_type: varchar
+      - name: operator_initials
+        description: "{{ doc('shared__stg_kitchen_events__operator_initials') }}"
+        data_type: varchar
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_kitchen_events__updated_at_utc') }}"
+        data_type: timestamp
     description: "{{ doc('jaffle_store_ops__stg_kitchen_events') }}"

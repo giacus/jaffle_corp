@@ -10,31 +10,44 @@ models:
         enforced: true
     columns:
       - name: supply_risk_daily_key
+        description: "{{ doc('supply__fct_supply_risk_daily__supply_risk_daily_key') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: store_id
+        description: "{{ doc('supply__int_inventory_daily_balance__store_id') }}"
         data_type: varchar
       - name: component_id
+        description: "{{ doc('supply__int_inventory_daily_balance__component_id') }}"
         data_type: varchar
       - name: balance_date_utc
+        description: "{{ doc('supply__int_inventory_daily_balance__balance_date_utc') }}"
         data_type: date
       - name: unit
+        description: "{{ doc('supply__int_inventory_daily_balance__unit') }}"
         data_type: varchar
       - name: counted_quantity
+        description: "{{ doc('supply__int_inventory_daily_balance__counted_quantity') }}"
         data_type: double
       - name: estimated_closing_quantity
+        description: "{{ doc('supply__int_inventory_daily_balance__estimated_closing_quantity') }}"
         data_type: double
       - name: expected_used_quantity
+        description: "{{ doc('supply__int_inventory_daily_balance__expected_used_quantity') }}"
         data_type: double
       - name: observed_waste_quantity
+        description: "{{ doc('supply__int_inventory_daily_balance__observed_waste_quantity') }}"
         data_type: double
       - name: has_count_review
+        description: "{{ doc('supply__int_inventory_daily_balance__has_count_review') }}"
         data_type: boolean
       - name: has_late_receipt
+        description: "{{ doc('supply__int_inventory_daily_balance__has_late_receipt') }}"
         data_type: boolean
       - name: supply_risk_status
+        description: "{{ doc('supply__fct_supply_risk_daily__supply_risk_status') }}"
         data_type: varchar
       - name: has_supply_risk
+        description: "{{ doc('supply__fct_supply_risk_daily__has_supply_risk') }}"
         data_type: boolean

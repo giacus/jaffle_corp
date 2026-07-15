@@ -3,3 +3,29 @@ version: 2
 models:
   - name: int_component_daily_usage
     description: "{{ doc('jaffle_supply__int_component_daily_usage') }}"
+
+    columns:
+      - name: store_id
+        description: "{{ doc('shared__stg_orders__store_id') }}"
+        data_type: varchar
+      - name: usage_date_utc
+        description: "{{ doc('supply__int_component_daily_usage__usage_date_utc') }}"
+        data_type: date
+      - name: component_id
+        description: "{{ doc('shared__stg_recipe_components__component_id') }}"
+        data_type: varchar
+      - name: unit
+        description: "{{ doc('shared__stg_recipe_components__unit') }}"
+        data_type: varchar
+      - name: expected_used_quantity
+        description: "{{ doc('supply__int_component_daily_usage__expected_used_quantity') }}"
+        data_type: double
+      - name: expected_recipe_waste_quantity
+        description: "{{ doc('supply__int_component_daily_usage__expected_recipe_waste_quantity') }}"
+        data_type: double
+      - name: order_count_using_component
+        description: "{{ doc('supply__int_component_daily_usage__order_count_using_component') }}"
+        data_type: integer
+      - name: item_quantity_using_component
+        description: "{{ doc('supply__int_component_daily_usage__item_quantity_using_component') }}"
+        data_type: integer

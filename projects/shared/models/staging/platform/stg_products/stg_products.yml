@@ -6,11 +6,42 @@ models:
       group: merchandising
     columns:
       - name: product_id
+        description: "{{ doc('shared__stg_products__product_id') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: sku
+        description: "{{ doc('shared__stg_products__sku') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
+      - name: product_name
+        description: "{{ doc('shared__stg_products__product_name') }}"
+        data_type: varchar
+      - name: category
+        description: "{{ doc('shared__stg_products__category') }}"
+        data_type: varchar
+      - name: product_family
+        description: "{{ doc('shared__stg_products__product_family') }}"
+        data_type: varchar
+      - name: list_price_minor
+        description: "{{ doc('shared__stg_products__list_price_minor') }}"
+        data_type: integer
+      - name: list_price_usd
+        description: "{{ doc('shared__stg_products__list_price_usd') }}"
+        data_type: double
+      - name: catalog_currency
+        description: "{{ doc('shared__stg_products__catalog_currency') }}"
+        data_type: varchar
+      - name: is_limited_time
+        description: "{{ doc('shared__stg_products__is_limited_time') }}"
+        data_type: boolean
+      - name: introduced_at
+        description: "{{ doc('shared__stg_products__introduced_at') }}"
+        data_type: timestamp
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_products__updated_at_utc') }}"
+        data_type: timestamp
     description: "{{ doc('jaffle_platform__stg_products') }}"

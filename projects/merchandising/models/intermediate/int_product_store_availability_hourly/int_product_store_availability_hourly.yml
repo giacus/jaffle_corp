@@ -3,3 +3,74 @@ version: 2
 models:
   - name: int_product_store_availability_hourly
     description: "{{ doc('jaffle_merchandising__int_product_store_availability_hourly') }}"
+
+    columns:
+      - name: product_store_hour_key
+        description: "{{ doc('merchandising__int_product_store_availability_hourly__product_store_hour_key') }}"
+        data_type: varchar
+      - name: availability_id
+        description: "{{ doc('shared__stg_product_availability__availability_id') }}"
+        data_type: varchar
+      - name: store_id
+        description: "{{ doc('shared__stg_product_availability__store_id') }}"
+        data_type: varchar
+      - name: product_id
+        description: "{{ doc('shared__stg_product_availability__product_id') }}"
+        data_type: varchar
+      - name: available_date_utc
+        description: "{{ doc('shared__stg_product_availability__available_date_utc') }}"
+        data_type: date
+      - name: availability_hour_utc
+        description: "{{ doc('merchandising__int_product_store_availability_hourly__availability_hour_utc') }}"
+        data_type: timestamp
+      - name: hour_local
+        description: "{{ doc('shared__stg_product_availability__hour_local') }}"
+        data_type: integer
+      - name: availability_status
+        description: "{{ doc('shared__stg_product_availability__availability_status') }}"
+        data_type: varchar
+      - name: observed_on_hand_units
+        description: "{{ doc('shared__stg_product_availability__observed_on_hand_units') }}"
+        data_type: integer
+      - name: expected_menu_units
+        description: "{{ doc('shared__stg_product_availability__expected_menu_units') }}"
+        data_type: integer
+      - name: outage_minutes
+        description: "{{ doc('shared__stg_product_availability__outage_minutes') }}"
+        data_type: integer
+      - name: availability_health
+        description: "{{ doc('merchandising__int_product_store_availability_hourly__availability_health') }}"
+        data_type: varchar
+      - name: available_hour_count
+        description: "{{ doc('merchandising__int_product_store_availability_hourly__available_hour_count') }}"
+        data_type: integer
+      - name: constrained_hour_count
+        description: "{{ doc('merchandising__int_product_store_availability_hourly__constrained_hour_count') }}"
+        data_type: integer
+      - name: unavailable_hour_count
+        description: "{{ doc('merchandising__int_product_store_availability_hourly__unavailable_hour_count') }}"
+        data_type: integer
+      - name: publication_id
+        description: "{{ doc('shared__stg_menu_publications__publication_id') }}"
+        data_type: varchar
+      - name: menu_section
+        description: "{{ doc('shared__stg_menu_publications__menu_section') }}"
+        data_type: varchar
+      - name: menu_surface
+        description: "{{ doc('shared__stg_menu_publications__menu_surface') }}"
+        data_type: varchar
+      - name: menu_price_band
+        description: "{{ doc('merchandising__int_menu_product_windows__menu_price_band') }}"
+        data_type: varchar
+      - name: product_family
+        description: "{{ doc('shared__stg_products__product_family') }}"
+        data_type: varchar
+      - name: country_code
+        description: "{{ doc('shared__stg_stores__country_code') }}"
+        data_type: varchar
+      - name: city
+        description: "{{ doc('shared__stg_stores__city') }}"
+        data_type: varchar
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_product_availability__updated_at_utc') }}"
+        data_type: timestamp

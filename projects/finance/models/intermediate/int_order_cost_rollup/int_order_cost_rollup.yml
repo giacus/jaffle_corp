@@ -3,3 +3,20 @@ version: 2
 models:
   - name: int_order_cost_rollup
     description: "{{ doc('jaffle_finance__int_order_cost_rollup') }}"
+
+    columns:
+      - name: order_id
+        description: "{{ doc('shared__stg_order_items__order_id') }}"
+        data_type: varchar
+      - name: order_item_count
+        description: "{{ doc('finance__int_order_cost_rollup__order_item_count') }}"
+        data_type: integer
+      - name: total_item_quantity
+        description: "{{ doc('finance__int_order_cost_rollup__total_item_quantity') }}"
+        data_type: integer
+      - name: item_sales_major
+        description: "{{ doc('finance__int_order_cost_rollup__item_sales_major') }}"
+        data_type: double
+      - name: estimated_supply_cost_usd
+        description: "{{ doc('finance__int_order_cost_rollup__estimated_supply_cost_usd') }}"
+        data_type: double

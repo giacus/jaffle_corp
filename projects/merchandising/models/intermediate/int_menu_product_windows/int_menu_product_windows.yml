@@ -3,3 +3,74 @@ version: 2
 models:
   - name: int_menu_product_windows
     description: "{{ doc('jaffle_merchandising__int_menu_product_windows') }}"
+
+    columns:
+      - name: menu_product_window_key
+        description: "{{ doc('merchandising__int_menu_product_windows__menu_product_window_key') }}"
+        data_type: varchar
+      - name: publication_id
+        description: "{{ doc('shared__stg_menu_publications__publication_id') }}"
+        data_type: varchar
+      - name: store_id
+        description: "{{ doc('shared__stg_menu_publications__store_id') }}"
+        data_type: varchar
+      - name: country_code
+        description: "{{ doc('shared__stg_stores__country_code') }}"
+        data_type: varchar
+      - name: city
+        description: "{{ doc('shared__stg_stores__city') }}"
+        data_type: varchar
+      - name: product_id
+        description: "{{ doc('shared__stg_menu_publications__product_id') }}"
+        data_type: varchar
+      - name: sku
+        description: "{{ doc('shared__stg_products__sku') }}"
+        data_type: varchar
+      - name: product_name
+        description: "{{ doc('shared__stg_products__product_name') }}"
+        data_type: varchar
+      - name: category
+        description: "{{ doc('shared__stg_products__category') }}"
+        data_type: varchar
+      - name: product_family
+        description: "{{ doc('shared__stg_products__product_family') }}"
+        data_type: varchar
+      - name: published_at_utc
+        description: "{{ doc('shared__stg_menu_publications__published_at_utc') }}"
+        data_type: timestamp
+      - name: retired_at_utc
+        description: "{{ doc('shared__stg_menu_publications__retired_at_utc') }}"
+        data_type: timestamp
+      - name: effective_to_utc
+        description: "{{ doc('merchandising__int_menu_product_windows__effective_to_utc') }}"
+        data_type: timestamp
+      - name: menu_section
+        description: "{{ doc('shared__stg_menu_publications__menu_section') }}"
+        data_type: varchar
+      - name: display_rank
+        description: "{{ doc('shared__stg_menu_publications__display_rank') }}"
+        data_type: integer
+      - name: is_featured
+        description: "{{ doc('shared__stg_menu_publications__is_featured') }}"
+        data_type: boolean
+      - name: published_price_minor
+        description: "{{ doc('shared__stg_menu_publications__published_price_minor') }}"
+        data_type: integer
+      - name: currency
+        description: "{{ doc('shared__stg_menu_publications__currency') }}"
+        data_type: varchar
+      - name: menu_surface
+        description: "{{ doc('shared__stg_menu_publications__menu_surface') }}"
+        data_type: varchar
+      - name: menu_price_band
+        description: "{{ doc('merchandising__int_menu_product_windows__menu_price_band') }}"
+        data_type: varchar
+      - name: is_limited_time
+        description: "{{ doc('shared__stg_products__is_limited_time') }}"
+        data_type: boolean
+      - name: has_perishable_supply
+        description: "{{ doc('platform__dim_products__has_perishable_supply') }}"
+        data_type: boolean
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_menu_publications__updated_at_utc') }}"
+        data_type: timestamp

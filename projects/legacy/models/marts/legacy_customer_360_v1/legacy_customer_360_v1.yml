@@ -9,17 +9,41 @@ models:
         replacement_target: jaffle_growth.fct_customer_value_segments
     columns:
       - name: cust
+        description: "{{ doc('legacy__int_legacy_customer_notes__cust') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: cust_name
+        description: "{{ doc('legacy__int_legacy_customer_notes__cust_name') }}"
+        data_type: varchar
       - name: region_hint
+        description: "{{ doc('legacy__int_legacy_customer_notes__region_hint') }}"
+        data_type: varchar
       - name: old_lifecycle_bucket
+        description: "{{ doc('legacy__int_legacy_customer_notes__old_lifecycle_bucket') }}"
+        data_type: varchar
       - name: contact_flag
+        description: "{{ doc('legacy__int_legacy_customer_notes__contact_flag') }}"
+        data_type: varchar
       - name: order_cnt
+        description: "{{ doc('legacy__legacy_customer_360_v1__order_cnt') }}"
+        data_type: bigint
       - name: gross_amt
+        description: "{{ doc('legacy__legacy_customer_360_v1__gross_amt') }}"
+        data_type: double
       - name: refund_cnt
+        description: "{{ doc('legacy__legacy_customer_360_v1__refund_cnt') }}"
+        data_type: hugeint
       - name: ticket_cnt
+        description: "{{ doc('legacy__legacy_customer_360_v1__ticket_cnt') }}"
+        data_type: bigint
       - name: make_good_amt
+        description: "{{ doc('legacy__legacy_customer_360_v1__make_good_amt') }}"
+        data_type: double
       - name: last_business_dt
+        description: "{{ doc('legacy__legacy_customer_360_v1__last_business_dt') }}"
+        data_type: date
       - name: old_customer_note_blob
+        description: "{{ doc('legacy__int_legacy_customer_notes__old_customer_note_blob') }}"
+        data_type: varchar

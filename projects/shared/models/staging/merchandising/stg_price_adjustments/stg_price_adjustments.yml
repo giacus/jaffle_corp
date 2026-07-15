@@ -6,10 +6,26 @@ models:
       group: merchandising
     columns:
       - name: price_adjustment_id
+        description: "{{ doc('shared__stg_price_adjustments__price_adjustment_id') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
+      - name: store_id
+        description: "{{ doc('shared__stg_price_adjustments__store_id') }}"
+        data_type: varchar
+      - name: product_id
+        description: "{{ doc('shared__stg_price_adjustments__product_id') }}"
+        data_type: varchar
+      - name: effective_from_utc
+        description: "{{ doc('shared__stg_price_adjustments__effective_from_utc') }}"
+        data_type: timestamp
+      - name: effective_to_utc
+        description: "{{ doc('shared__stg_price_adjustments__effective_to_utc') }}"
+        data_type: timestamp
       - name: adjustment_reason
+        description: "{{ doc('shared__stg_price_adjustments__adjustment_reason') }}"
+        data_type: varchar
         data_tests:
           - accepted_values:
               arguments:
@@ -19,7 +35,12 @@ models:
                   - seasonal_test
                   - case_test
                   - stock_balance
+      - name: adjustment_price_minor
+        description: "{{ doc('shared__stg_price_adjustments__adjustment_price_minor') }}"
+        data_type: integer
       - name: approved_by_role
+        description: "{{ doc('shared__stg_price_adjustments__approved_by_role') }}"
+        data_type: varchar
         data_tests:
           - accepted_values:
               arguments:
@@ -27,4 +48,7 @@ models:
                   - menu_lead
                   - store_lead
                   - analyst
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_price_adjustments__updated_at_utc') }}"
+        data_type: timestamp
     description: "{{ doc('jaffle_merchandising__stg_price_adjustments') }}"

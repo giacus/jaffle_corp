@@ -3,3 +3,35 @@ version: 2
 models:
   - name: int_order_component_cost_bridge
     description: "{{ doc('jaffle_finance__int_order_component_cost_bridge') }}"
+
+    columns:
+      - name: order_item_id
+        description: "{{ doc('shared__stg_order_items__order_item_id') }}"
+        data_type: varchar
+      - name: order_id
+        description: "{{ doc('shared__stg_order_items__order_id') }}"
+        data_type: varchar
+      - name: product_id
+        description: "{{ doc('shared__stg_order_items__product_id') }}"
+        data_type: varchar
+      - name: ordered_date_utc
+        description: "{{ doc('shared__stg_orders__ordered_date_utc') }}"
+        data_type: date
+      - name: quantity
+        description: "{{ doc('shared__stg_order_items__quantity') }}"
+        data_type: integer
+      - name: estimated_supply_cost_minor
+        description: "{{ doc('platform__int_order_items_enriched__estimated_supply_cost_minor') }}"
+        data_type: integer
+      - name: platform_estimated_supply_cost_major
+        description: "{{ doc('finance__int_order_component_cost_bridge__platform_estimated_supply_cost_major') }}"
+        data_type: double
+      - name: recipe_expected_component_cost_usd
+        description: "{{ doc('finance__int_order_component_cost_bridge__recipe_expected_component_cost_usd') }}"
+        data_type: double
+      - name: component_count
+        description: "{{ doc('finance__int_order_component_cost_bridge__component_count') }}"
+        data_type: bigint
+      - name: component_families
+        description: "{{ doc('finance__int_order_component_cost_bridge__component_families') }}"
+        data_type: varchar

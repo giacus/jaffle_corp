@@ -1,6 +1,6 @@
-# Task 1: Get the Project Running
+# Lab 1: Get the Project Running
 
-[Course path](../course_path.md) · Next: [Trace recognized revenue](02-trace-revenue.md)
+[Labs](../labs.md) · Next: [Trace recognized revenue](02-trace-revenue.md)
 
 ## At a Glance
 
@@ -53,4 +53,4 @@ You are done when you can explain:
 - how raw input becomes a public platform model;
 - how to rebuild platform from the repository root.
 
-Continue to [Task 2: Trace recognized revenue](02-trace-revenue.md).
+Continue to [Lab 2: Trace recognized revenue](02-trace-revenue.md).

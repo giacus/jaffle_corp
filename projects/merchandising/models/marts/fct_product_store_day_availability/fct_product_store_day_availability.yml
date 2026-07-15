@@ -10,41 +10,59 @@ models:
         enforced: true
     columns:
       - name: product_store_day_availability_key
+        description: "{{ doc('merchandising__int_product_store_day_availability__product_store_day_availability_key') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: store_id
+        description: "{{ doc('shared__stg_product_availability__store_id') }}"
         data_type: varchar
       - name: product_id
+        description: "{{ doc('shared__stg_product_availability__product_id') }}"
         data_type: varchar
       - name: available_date_utc
+        description: "{{ doc('shared__stg_product_availability__available_date_utc') }}"
         data_type: date
       - name: product_family
+        description: "{{ doc('merchandising__int_product_store_day_availability__product_family') }}"
         data_type: varchar
       - name: menu_section
+        description: "{{ doc('merchandising__int_product_store_day_availability__menu_section') }}"
         data_type: varchar
       - name: menu_surface
+        description: "{{ doc('merchandising__int_product_store_day_availability__menu_surface') }}"
         data_type: varchar
       - name: country_code
+        description: "{{ doc('merchandising__int_product_store_day_availability__country_code') }}"
         data_type: varchar
       - name: city
+        description: "{{ doc('merchandising__int_product_store_day_availability__city') }}"
         data_type: varchar
       - name: observed_hour_count
+        description: "{{ doc('merchandising__fct_product_store_day_availability__observed_hour_count') }}"
         data_type: integer
       - name: available_hour_count
+        description: "{{ doc('merchandising__fct_product_store_day_availability__available_hour_count') }}"
         data_type: integer
       - name: constrained_hour_count
+        description: "{{ doc('merchandising__fct_product_store_day_availability__constrained_hour_count') }}"
         data_type: integer
       - name: unavailable_hour_count
+        description: "{{ doc('merchandising__fct_product_store_day_availability__unavailable_hour_count') }}"
         data_type: integer
       - name: outage_minutes
+        description: "{{ doc('merchandising__fct_product_store_day_availability__outage_minutes') }}"
         data_type: integer
       - name: average_observed_on_hand_units
+        description: "{{ doc('merchandising__int_product_store_day_availability__average_observed_on_hand_units') }}"
         data_type: double
       - name: average_expected_menu_units
+        description: "{{ doc('merchandising__int_product_store_day_availability__average_expected_menu_units') }}"
         data_type: double
       - name: availability_rate
+        description: "{{ doc('merchandising__int_product_store_day_availability__availability_rate') }}"
         data_type: double
       - name: product_store_day_status
+        description: "{{ doc('merchandising__int_product_store_day_availability__product_store_day_status') }}"
         data_type: varchar

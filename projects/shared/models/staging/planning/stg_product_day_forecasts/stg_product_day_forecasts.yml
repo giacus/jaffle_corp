@@ -6,19 +6,49 @@ models:
       group: planning
     columns:
       - name: forecast_id
+        description: "{{ doc('shared__stg_product_day_forecasts__forecast_id') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
+      - name: model_run_id
+        description: "{{ doc('shared__stg_product_day_forecasts__model_run_id') }}"
+        data_type: varchar
+      - name: store_id
+        description: "{{ doc('shared__stg_product_day_forecasts__store_id') }}"
+        data_type: varchar
+      - name: product_id
+        description: "{{ doc('shared__stg_product_day_forecasts__product_id') }}"
+        data_type: varchar
+      - name: forecast_date_utc
+        description: "{{ doc('shared__stg_product_day_forecasts__forecast_date_utc') }}"
+        data_type: date
       - name: forecasted_units
+        description: "{{ doc('shared__stg_product_day_forecasts__forecasted_units') }}"
+        data_type: double
         data_tests:
           - dbt_utils.expression_is_true:
               arguments:
                 expression: '>= 0'
+      - name: planned_price_minor
+        description: "{{ doc('shared__stg_product_day_forecasts__planned_price_minor') }}"
+        data_type: integer
       - name: scenario_name
+        description: "{{ doc('shared__stg_product_day_forecasts__scenario_name') }}"
+        data_type: varchar
         data_tests:
           - accepted_values:
               arguments:
                 values:
                   - base
                   - stretch
+      - name: model_version
+        description: "{{ doc('shared__stg_product_day_forecasts__model_version') }}"
+        data_type: varchar
+      - name: created_at_utc
+        description: "{{ doc('shared__stg_product_day_forecasts__created_at_utc') }}"
+        data_type: timestamp
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_product_day_forecasts__updated_at_utc') }}"
+        data_type: timestamp
     description: "{{ doc('jaffle_planning__stg_product_day_forecasts') }}"

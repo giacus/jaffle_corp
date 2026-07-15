@@ -10,17 +10,23 @@ models:
         enforced: true
     columns:
       - name: control_id
+        description: "{{ doc('finance__dim_finance_controls__control_id') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: control_name
+        description: "{{ doc('finance__dim_finance_controls__control_name') }}"
         data_type: varchar
       - name: control_area
+        description: "{{ doc('finance__dim_finance_controls__control_area') }}"
         data_type: varchar
       - name: expected_frequency
+        description: "{{ doc('finance__dim_finance_controls__expected_frequency') }}"
         data_type: varchar
       - name: severity
+        description: "{{ doc('finance__dim_finance_controls__severity') }}"
         data_type: varchar
       - name: owner_group
+        description: "{{ doc('finance__dim_finance_controls__owner_group') }}"
         data_type: varchar

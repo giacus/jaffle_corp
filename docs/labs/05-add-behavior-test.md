@@ -1,12 +1,12 @@
-# Task 5: Protect a Price-Window Invariant
+# Lab 5: Protect a Price-Window Invariant
 
-[Course path](../course_path.md) · Previous: [Prove a test can fail](04-prove-test-failure.md) · Next: [Review a contract change](06-review-contract-change.md)
+[Labs](../labs.md) · Previous: [Prove a test can fail](04-prove-test-failure.md) · Next: [Review a contract change](06-review-contract-change.md)
 
 ## At a Glance
 
 - **Level:** intermediate
 - **Time:** 45–60 minutes
-- **Requires:** Task 4 complete with the seed restored
+- **Requires:** Lab 4 complete with the seed restored
 - **You will:** write a singular test for cross-row business behavior.
 
 ## Design the Rule
@@ -47,4 +47,4 @@ reseed, and prove the test passes.
 You are done when the fixture is restored and your test's interval semantics are
 clear enough for another engineer to review.
 
-Continue to [Task 6: Review a contract change](06-review-contract-change.md).
+Continue to [Lab 6: Review a contract change](06-review-contract-change.md).

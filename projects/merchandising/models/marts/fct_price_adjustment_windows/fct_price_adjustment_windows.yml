@@ -10,39 +10,56 @@ models:
         enforced: true
     columns:
       - name: price_adjustment_window_key
+        description: "{{ doc('merchandising__int_price_adjustment_windows__price_adjustment_window_key') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: price_adjustment_id
+        description: "{{ doc('shared__stg_price_adjustments__price_adjustment_id') }}"
         data_type: varchar
       - name: store_id
+        description: "{{ doc('shared__stg_price_adjustments__store_id') }}"
         data_type: varchar
       - name: product_id
+        description: "{{ doc('shared__stg_price_adjustments__product_id') }}"
         data_type: varchar
       - name: product_name
+        description: "{{ doc('shared__stg_products__product_name') }}"
         data_type: varchar
       - name: product_family
+        description: "{{ doc('shared__stg_products__product_family') }}"
         data_type: varchar
       - name: country_code
+        description: "{{ doc('shared__stg_stores__country_code') }}"
         data_type: varchar
       - name: effective_from_utc
+        description: "{{ doc('shared__stg_price_adjustments__effective_from_utc') }}"
         data_type: timestamp
       - name: effective_to_utc
+        description: "{{ doc('shared__stg_price_adjustments__effective_to_utc') }}"
         data_type: timestamp
       - name: adjustment_reason
+        description: "{{ doc('shared__stg_price_adjustments__adjustment_reason') }}"
         data_type: varchar
       - name: adjustment_price_minor
+        description: "{{ doc('shared__stg_price_adjustments__adjustment_price_minor') }}"
         data_type: integer
       - name: published_price_minor
+        description: "{{ doc('shared__stg_menu_publications__published_price_minor') }}"
         data_type: integer
       - name: adjustment_delta_minor
+        description: "{{ doc('merchandising__int_price_adjustment_windows__adjustment_delta_minor') }}"
         data_type: integer
       - name: adjustment_delta_rate
+        description: "{{ doc('merchandising__int_price_adjustment_windows__adjustment_delta_rate') }}"
         data_type: double
       - name: approved_by_role
+        description: "{{ doc('shared__stg_price_adjustments__approved_by_role') }}"
         data_type: varchar
       - name: adjustment_price_band
+        description: "{{ doc('merchandising__int_price_adjustment_windows__adjustment_price_band') }}"
         data_type: varchar
       - name: updated_at_utc
+        description: "{{ doc('shared__stg_price_adjustments__updated_at_utc') }}"
         data_type: timestamp

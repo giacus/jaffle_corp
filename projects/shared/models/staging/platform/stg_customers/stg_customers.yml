@@ -6,10 +6,35 @@ models:
       group: platform
     columns:
       - name: customer_id
+        description: "{{ doc('shared__stg_customers__customer_id') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
+      - name: customer_name
+        description: "{{ doc('shared__stg_customers__customer_name') }}"
+        data_type: varchar
+      - name: email
+        description: "{{ doc('shared__stg_customers__email') }}"
+        data_type: varchar
       - name: email_domain
+        description: "{{ doc('shared__stg_customers__email_domain') }}"
+        data_type: varchar
         data_tests:
           - not_null
+      - name: loyalty_region
+        description: "{{ doc('shared__stg_customers__loyalty_region') }}"
+        data_type: varchar
+      - name: first_seen_at
+        description: "{{ doc('shared__stg_customers__first_seen_at') }}"
+        data_type: timestamp
+      - name: default_currency
+        description: "{{ doc('shared__stg_customers__default_currency') }}"
+        data_type: varchar
+      - name: marketing_consent
+        description: "{{ doc('shared__stg_customers__marketing_consent') }}"
+        data_type: boolean
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_customers__updated_at_utc') }}"
+        data_type: timestamp
     description: "{{ doc('jaffle_platform__stg_customers') }}"

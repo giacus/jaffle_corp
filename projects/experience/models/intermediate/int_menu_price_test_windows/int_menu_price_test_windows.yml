@@ -3,3 +3,56 @@ version: 2
 models:
   - name: int_menu_price_test_windows
     description: "{{ doc('jaffle_experience__int_menu_price_test_windows') }}"
+
+    columns:
+      - name: price_test_id
+        description: "{{ doc('shared__stg_menu_price_tests__price_test_id') }}"
+        data_type: varchar
+      - name: product_id
+        description: "{{ doc('shared__stg_menu_price_tests__product_id') }}"
+        data_type: varchar
+      - name: product_name
+        description: "{{ doc('shared__stg_products__product_name') }}"
+        data_type: varchar
+      - name: category
+        description: "{{ doc('shared__stg_products__category') }}"
+        data_type: varchar
+      - name: product_family
+        description: "{{ doc('shared__stg_products__product_family') }}"
+        data_type: varchar
+      - name: store_id
+        description: "{{ doc('shared__stg_menu_price_tests__store_id') }}"
+        data_type: varchar
+      - name: experiment_id
+        description: "{{ doc('shared__stg_menu_price_tests__experiment_id') }}"
+        data_type: varchar
+      - name: variant_id
+        description: "{{ doc('shared__stg_menu_price_tests__variant_id') }}"
+        data_type: varchar
+      - name: effective_from_utc
+        description: "{{ doc('shared__stg_menu_price_tests__effective_from_utc') }}"
+        data_type: timestamp
+      - name: effective_to_utc
+        description: "{{ doc('shared__stg_menu_price_tests__effective_to_utc') }}"
+        data_type: timestamp
+      - name: list_price_minor
+        description: "{{ doc('shared__stg_menu_price_tests__list_price_minor') }}"
+        data_type: integer
+      - name: list_price_major
+        description: "{{ doc('shared__stg_menu_price_tests__list_price_major') }}"
+        data_type: double
+      - name: currency
+        description: "{{ doc('shared__stg_menu_price_tests__currency') }}"
+        data_type: varchar
+      - name: observed_order_count
+        description: "{{ doc('experience__int_menu_price_test_windows__observed_order_count') }}"
+        data_type: integer
+      - name: observed_item_quantity
+        description: "{{ doc('experience__int_menu_price_test_windows__observed_item_quantity') }}"
+        data_type: integer
+      - name: observed_item_total_major
+        description: "{{ doc('experience__int_menu_price_test_windows__observed_item_total_major') }}"
+        data_type: double
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_menu_price_tests__updated_at_utc') }}"
+        data_type: timestamp

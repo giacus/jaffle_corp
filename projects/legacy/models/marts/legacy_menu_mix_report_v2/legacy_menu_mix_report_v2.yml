@@ -9,14 +9,32 @@ models:
         replacement_target: jaffle_finance.fct_component_cost_variance
     columns:
       - name: legacy_menu_mix_key
+        description: "{{ doc('legacy__legacy_menu_mix_report_v2__legacy_menu_mix_key') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: business_dt
+        description: "{{ doc('legacy__int_legacy_menu_mix__business_dt') }}"
+        data_type: date
       - name: product_family
+        description: "{{ doc('shared__stg_products__product_family') }}"
+        data_type: varchar
       - name: cat
+        description: "{{ doc('legacy__int_legacy_menu_mix__cat') }}"
+        data_type: varchar
       - name: orders_cnt
+        description: "{{ doc('legacy__legacy_menu_mix_report_v2__orders_cnt') }}"
+        data_type: bigint
       - name: items_qty
+        description: "{{ doc('legacy__legacy_menu_mix_report_v2__items_qty') }}"
+        data_type: hugeint
       - name: item_amt
+        description: "{{ doc('legacy__legacy_menu_mix_report_v2__item_amt') }}"
+        data_type: double
       - name: supply_guess_amt
+        description: "{{ doc('legacy__legacy_menu_mix_report_v2__supply_guess_amt') }}"
+        data_type: double
       - name: margin_guess_amt
+        description: "{{ doc('legacy__legacy_menu_mix_report_v2__margin_guess_amt') }}"
+        data_type: double

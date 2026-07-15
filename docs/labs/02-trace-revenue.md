@@ -1,12 +1,12 @@
-# Task 2: Trace Recognized Revenue
+# Lab 2: Trace Recognized Revenue
 
-[Course path](../course_path.md) · Previous: [Get the project running](01-get-running.md) · Next: [Navigate the manifest](03-navigate-manifest.md)
+[Labs](../labs.md) · Previous: [Get the project running](01-get-running.md) · Next: [Navigate the manifest](03-navigate-manifest.md)
 
 ## At a Glance
 
 - **Level:** guided
 - **Time:** 25–35 minutes
-- **Requires:** Task 1 complete
+- **Requires:** Lab 1 complete
 - **You will:** follow one business question across project boundaries.
 
 ## Question
@@ -50,4 +50,4 @@ Answer:
 You are done when you can narrate the lineage from platform orders and items to
 recognized finance revenue without reading every finance model.
 
-Continue to [Task 3: Navigate the full manifest](03-navigate-manifest.md).
+Continue to [Lab 3: Navigate the full manifest](03-navigate-manifest.md).

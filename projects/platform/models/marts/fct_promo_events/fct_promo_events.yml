@@ -10,31 +10,44 @@ models:
         enforced: true
     columns:
       - name: promo_event_key
+        description: "{{ doc('platform__fct_promo_events__promo_event_key') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: promo_event_id
+        description: "{{ doc('shared__stg_promo_events__promo_event_id') }}"
         data_type: varchar
       - name: customer_id
+        description: "{{ doc('shared__stg_promo_events__customer_id') }}"
         data_type: varchar
       - name: order_id
+        description: "{{ doc('shared__stg_promo_events__order_id') }}"
         data_type: varchar
       - name: campaign_id
+        description: "{{ doc('shared__stg_promo_events__campaign_id') }}"
         data_type: varchar
       - name: event_type
+        description: "{{ doc('shared__stg_promo_events__event_type') }}"
         data_type: varchar
       - name: event_at_utc
+        description: "{{ doc('shared__stg_promo_events__event_at_utc') }}"
         data_type: timestamp
       - name: event_date_utc
+        description: "{{ doc('shared__stg_promo_events__event_date_utc') }}"
         data_type: date
       - name: channel
+        description: "{{ doc('shared__stg_promo_events__channel') }}"
         data_type: varchar
       - name: cost_minor
+        description: "{{ doc('shared__stg_promo_events__cost_minor') }}"
         data_type: integer
       - name: cost_major
+        description: "{{ doc('shared__stg_promo_events__cost_major') }}"
         data_type: double
       - name: currency
+        description: "{{ doc('shared__stg_promo_events__currency') }}"
         data_type: varchar
       - name: updated_at_utc
+        description: "{{ doc('shared__stg_promo_events__updated_at_utc') }}"
         data_type: timestamp

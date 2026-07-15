@@ -3,3 +3,35 @@ version: 2
 models:
   - name: int_basket_pair_observations
     description: "{{ doc('jaffle_merchandising__int_basket_pair_observations') }}"
+
+    columns:
+      - name: basket_pair_observation_key
+        description: "{{ doc('merchandising__int_basket_pair_observations__basket_pair_observation_key') }}"
+        data_type: varchar
+      - name: order_id
+        description: "{{ doc('shared__stg_order_items__order_id') }}"
+        data_type: varchar
+      - name: anchor_product_id
+        description: "{{ doc('merchandising__int_basket_pair_observations__anchor_product_id') }}"
+        data_type: varchar
+      - name: paired_product_id
+        description: "{{ doc('merchandising__int_basket_pair_observations__paired_product_id') }}"
+        data_type: varchar
+      - name: ordered_date_utc
+        description: "{{ doc('shared__stg_orders__ordered_date_utc') }}"
+        data_type: date
+      - name: pairing_id
+        description: "{{ doc('merchandising__int_basket_pair_observations__pairing_id') }}"
+        data_type: varchar
+      - name: pairing_reason
+        description: "{{ doc('merchandising__int_basket_pair_observations__pairing_reason') }}"
+        data_type: varchar
+      - name: pairing_rank
+        description: "{{ doc('shared__stg_product_pairings__pairing_rank') }}"
+        data_type: integer
+      - name: paired_item_total_major
+        description: "{{ doc('merchandising__int_basket_pair_observations__paired_item_total_major') }}"
+        data_type: double
+      - name: is_curated_pair
+        description: "{{ doc('merchandising__int_basket_pair_observations__is_curated_pair') }}"
+        data_type: boolean

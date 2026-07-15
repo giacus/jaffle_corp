@@ -10,29 +10,41 @@ models:
         enforced: true
     columns:
       - name: store_id
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: store_name
+        description: "{{ doc('shared__stg_stores__store_name') }}"
         data_type: varchar
       - name: country_code
+        description: "{{ doc('shared__stg_stores__country_code') }}"
         data_type: varchar
       - name: city
+        description: "{{ doc('shared__stg_stores__city') }}"
         data_type: varchar
       - name: timezone_name
+        description: "{{ doc('shared__stg_stores__timezone_name') }}"
         data_type: varchar
       - name: operating_currency
+        description: "{{ doc('shared__stg_stores__operating_currency') }}"
         data_type: varchar
       - name: franchise_owner
+        description: "{{ doc('shared__stg_stores__franchise_owner') }}"
         data_type: varchar
       - name: is_dark_kitchen
+        description: "{{ doc('shared__stg_stores__is_dark_kitchen') }}"
         data_type: boolean
       - name: daypart_count
+        description: "{{ doc('store_ops__dim_store_operating_profiles__daypart_count') }}"
         data_type: bigint
       - name: average_shift_adherence_ratio
+        description: "{{ doc('store_ops__dim_store_operating_profiles__average_shift_adherence_ratio') }}"
         data_type: double
       - name: peak_team_member_count
+        description: "{{ doc('store_ops__dim_store_operating_profiles__peak_team_member_count') }}"
         data_type: integer
       - name: observed_role_mix_codes
+        description: "{{ doc('store_ops__dim_store_operating_profiles__observed_role_mix_codes') }}"
         data_type: varchar

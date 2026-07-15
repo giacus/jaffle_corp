@@ -3,3 +3,92 @@ version: 2
 models:
   - name: int_order_payment_allocations
     description: "{{ doc('jaffle_finance__int_order_payment_allocations') }}"
+
+    columns:
+      - name: order_id
+        description: "{{ doc('finance__int_order_payment_allocations__order_id') }}"
+        data_type: varchar
+      - name: customer_id
+        description: "{{ doc('finance__int_order_payment_allocations__customer_id') }}"
+        data_type: varchar
+      - name: store_id
+        description: "{{ doc('finance__int_order_payment_allocations__store_id') }}"
+        data_type: varchar
+      - name: ordered_at_utc
+        description: "{{ doc('finance__int_order_payment_allocations__ordered_at_utc') }}"
+        data_type: timestamp
+      - name: ordered_date_utc
+        description: "{{ doc('finance__int_order_payment_allocations__ordered_date_utc') }}"
+        data_type: date
+      - name: order_status
+        description: "{{ doc('finance__int_order_payment_allocations__order_status') }}"
+        data_type: varchar
+      - name: channel
+        description: "{{ doc('finance__int_order_payment_allocations__channel') }}"
+        data_type: varchar
+      - name: currency
+        description: "{{ doc('finance__int_order_payment_allocations__currency') }}"
+        data_type: varchar
+      - name: country_code
+        description: "{{ doc('finance__int_order_payment_allocations__country_code') }}"
+        data_type: varchar
+      - name: city
+        description: "{{ doc('finance__int_order_payment_allocations__city') }}"
+        data_type: varchar
+      - name: tax_jurisdiction
+        description: "{{ doc('finance__int_order_payment_allocations__tax_jurisdiction') }}"
+        data_type: varchar
+      - name: franchise_owner
+        description: "{{ doc('finance__int_order_payment_allocations__franchise_owner') }}"
+        data_type: varchar
+      - name: subtotal_minor
+        description: "{{ doc('finance__int_order_payment_allocations__subtotal_minor') }}"
+        data_type: integer
+      - name: tax_minor
+        description: "{{ doc('finance__int_order_payment_allocations__tax_minor') }}"
+        data_type: integer
+      - name: discount_minor
+        description: "{{ doc('finance__int_order_payment_allocations__discount_minor') }}"
+        data_type: integer
+      - name: service_fee_minor
+        description: "{{ doc('finance__int_order_payment_allocations__service_fee_minor') }}"
+        data_type: integer
+      - name: order_total_minor
+        description: "{{ doc('finance__int_order_payment_allocations__order_total_minor') }}"
+        data_type: integer
+      - name: order_total_major
+        description: "{{ doc('finance__int_order_payment_allocations__order_total_major') }}"
+        data_type: double
+      - name: order_total_usd
+        description: "{{ doc('finance__int_order_payment_allocations__order_total_usd') }}"
+        data_type: double
+      - name: captured_amount_major
+        description: "{{ doc('finance__int_order_payment_allocations__captured_amount_major') }}"
+        data_type: double
+      - name: captured_amount_usd
+        description: "{{ doc('finance__int_order_payment_allocations__captured_amount_usd') }}"
+        data_type: double
+      - name: refunded_amount_major
+        description: "{{ doc('finance__int_order_payment_allocations__refunded_amount_major') }}"
+        data_type: double
+      - name: refunded_amount_usd
+        description: "{{ doc('finance__int_order_payment_allocations__refunded_amount_usd') }}"
+        data_type: double
+      - name: payment_attempt_count
+        description: "{{ doc('finance__int_order_payment_allocations__payment_attempt_count') }}"
+        data_type: integer
+      - name: refund_event_count
+        description: "{{ doc('finance__int_order_payment_allocations__refund_event_count') }}"
+        data_type: integer
+      - name: has_failed_payment
+        description: "{{ doc('finance__int_order_payment_allocations__has_failed_payment') }}"
+        data_type: boolean
+      - name: is_completed_order
+        description: "{{ doc('finance__int_order_payment_allocations__is_completed_order') }}"
+        data_type: boolean
+      - name: is_cancelled_order
+        description: "{{ doc('finance__int_order_payment_allocations__is_cancelled_order') }}"
+        data_type: boolean
+      - name: revenue_quality_status
+        description: "{{ doc('finance__int_order_payment_allocations__revenue_quality_status') }}"
+        data_type: varchar

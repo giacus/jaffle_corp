@@ -10,27 +10,38 @@ models:
         enforced: true
     columns:
       - name: experiment_conversion_key
+        description: "{{ doc('growth__fct_experiment_conversion__experiment_conversion_key') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: experiment_id
+        description: "{{ doc('shared__stg_experiment_exposures__experiment_id') }}"
         data_type: varchar
       - name: variant_id
+        description: "{{ doc('shared__stg_experiment_exposures__variant_id') }}"
         data_type: varchar
       - name: exposed_date_utc
+        description: "{{ doc('shared__stg_experiment_exposures__exposed_date_utc') }}"
         data_type: date
       - name: surface
+        description: "{{ doc('shared__stg_experiment_exposures__surface') }}"
         data_type: varchar
       - name: exposure_count
+        description: "{{ doc('growth__int_experiment_conversion_rollup__exposure_count') }}"
         data_type: bigint
       - name: conversion_count
+        description: "{{ doc('growth__int_experiment_conversion_rollup__conversion_count') }}"
         data_type: hugeint
       - name: order_count_7d
+        description: "{{ doc('growth__int_experiment_conversion_rollup__order_count_7d') }}"
         data_type: hugeint
       - name: net_revenue_usd_7d
+        description: "{{ doc('growth__int_experiment_conversion_rollup__net_revenue_usd_7d') }}"
         data_type: double
       - name: estimated_margin_usd_7d
+        description: "{{ doc('growth__int_experiment_conversion_rollup__estimated_margin_usd_7d') }}"
         data_type: double
       - name: conversion_rate
+        description: "{{ doc('growth__int_experiment_conversion_rollup__conversion_rate') }}"
         data_type: double

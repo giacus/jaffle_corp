@@ -3,3 +3,41 @@ version: 2
 models:
   - name: int_legacy_order_headers
     description: "{{ doc('jaffle_legacy__int_legacy_order_headers') }}"
+
+    columns:
+      - name: order_no
+        description: "{{ doc('legacy__int_legacy_order_headers__order_no') }}"
+        data_type: varchar
+      - name: modern_order_id
+        description: "{{ doc('legacy__int_legacy_order_headers__modern_order_id') }}"
+        data_type: varchar
+      - name: cust
+        description: "{{ doc('legacy__int_legacy_order_headers__cust') }}"
+        data_type: varchar
+      - name: shop
+        description: "{{ doc('legacy__int_legacy_order_headers__shop') }}"
+        data_type: varchar
+      - name: business_dt
+        description: "{{ doc('legacy__int_legacy_order_headers__business_dt') }}"
+        data_type: date
+      - name: old_status_bucket
+        description: "{{ doc('legacy__int_legacy_order_headers__old_status_bucket') }}"
+        data_type: varchar
+      - name: money_kind
+        description: "{{ doc('legacy__int_legacy_order_headers__money_kind') }}"
+        data_type: varchar
+      - name: gross_amt
+        description: "{{ doc('legacy__int_legacy_order_headers__gross_amt') }}"
+        data_type: double
+      - name: refund_amt
+        description: "{{ doc('legacy__int_legacy_order_headers__refund_amt') }}"
+        data_type: double
+      - name: net_amt
+        description: "{{ doc('legacy__int_legacy_order_headers__net_amt') }}"
+        data_type: double
+      - name: has_refund_flag
+        description: "{{ doc('legacy__int_legacy_order_headers__has_refund_flag') }}"
+        data_type: varchar
+      - name: load_ts
+        description: "{{ doc('legacy__int_legacy_order_headers__load_ts') }}"
+        data_type: timestamp

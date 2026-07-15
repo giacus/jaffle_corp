@@ -4,10 +4,6 @@ sources:
   - name: jaffle_app
     schema: "{{ target.schema }}_raw"
     description: Synthetic source tables for the core jaffle application.
-    freshness:
-      warn_after: {count: 24, period: hour}
-      error_after: {count: 72, period: hour}
-    loaded_at_field: updated_at_utc
     tables:
       - name: raw_customers
         description: One row per customer profile from the fictional jaffle app.
@@ -27,13 +23,9 @@ sources:
         description: Refund events by order.
       - name: raw_fx_rates
         description: Daily exchange rates to USD.
-        freshness: null
-        loaded_at_field: null
       - name: raw_promo_events
         description: Campaign touch and redemption events.
       - name: raw_loyalty_events
         description: Loyalty point balance changes.
       - name: raw_store_hours_legacy
         description: Legacy comma-delimited store opening windows.
-        freshness: null
-        loaded_at_field: null

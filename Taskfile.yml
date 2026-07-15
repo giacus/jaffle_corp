@@ -1,117 +1,35 @@
 version: "3"
 
-vars:
-  PROJECTS: "projects/platform projects/supply projects/finance projects/experience projects/growth projects/store_ops projects/merchandising projects/planning projects/legacy"
-  EXTENSION_PROJECTS: "projects/reliability"
-  SEED_PROJECT: "projects/platform"
-
+# Task is only a discoverable front door. The scripts remain the canonical
+# implementation so local use, CI, and contributor docs cannot drift apart.
 tasks:
+  default:
+    desc: List the available repository tasks
+    silent: true
+    cmds:
+      - task --list
+
   setup:
+    desc: Install the local toolchain and run the fast smoke compile
     cmds:
       - scripts/bootstrap.sh
 
   setup-full:
+    desc: Install the toolchain and compile every project
     cmds:
       - scripts/bootstrap.sh --full
 
-  deps:
+  validate:
+    desc: Run the complete repository validator
     cmds:
-      - dbt deps --project-dir projects/shared --profiles-dir .
-      - for: { var: PROJECTS }
-        cmd: dbt deps --project-dir {{ .ITEM }} --profiles-dir .
-      - for: { var: EXTENSION_PROJECTS }
-        cmd: dbt deps --project-dir {{ .ITEM }} --profiles-dir .
-
-  seed:
-    cmds:
-      - dbt seed --project-dir {{ .SEED_PROJECT }} --profiles-dir .
-
-  parse:
-    deps: [deps]
-    cmds:
-      - for: { var: PROJECTS }
-        cmd: dbt parse --project-dir {{ .ITEM }} --profiles-dir .
-      - for: { var: EXTENSION_PROJECTS }
-        cmd: dbt parse --project-dir {{ .ITEM }} --profiles-dir .
+      - scripts/validate_repo.sh
 
   manifest:
+    desc: Generate the full-project dbt manifest
     cmds:
       - scripts/generate_manifest.sh
 
   lint:
-    deps: [deps]
+    desc: Lint SQL in every dbt project
     cmds:
       - scripts/lint_sql_projects.sh
-
-  build:
-    deps: [deps, seed]
-    cmds:
-      - for: { var: PROJECTS }
-        cmd: dbt build --project-dir {{ .ITEM }} --profiles-dir . --exclude resource_type:seed
-      - for: { var: EXTENSION_PROJECTS }
-        cmd: dbt build --project-dir {{ .ITEM }} --profiles-dir . --select jaffle_reliability --exclude resource_type:seed
-
-  semantic:
-    deps: [build]
-    cmds:
-      - |
-        export JAFFLE_CORP_DUCKDB_PATH="$PWD/jaffle_corp.duckdb"
-        (
-          cd projects/finance
-          export DBT_PROFILES_DIR=../..
-          mf validate-configs --skip-dw
-          mf query --metrics net_revenue_usd,estimated_gross_margin_usd,refund_rate --group-by metric_time,location,order__country_code --limit 20
-        )
-        (
-          cd projects/growth
-          export DBT_PROFILES_DIR=../..
-          mf validate-configs --skip-dw
-          mf query --metrics attributed_net_revenue_usd,campaign_roas --group-by metric_time,campaign_performance__campaign_id,campaign_performance__channel --limit 20
-        )
-        (
-          cd projects/merchandising
-          export DBT_PROFILES_DIR=../..
-          mf validate-configs --skip-dw
-          mf query --metrics merchandising_observed_hours,merchandising_available_hours,merchandising_availability_rate,merchandising_outage_minutes --group-by metric_time,product,location,product_store_hour__availability_status,product_store_hour__product_family --limit 20
-          mf query --metrics menu_actual_units,menu_target_units,menu_unit_attainment_rate --group-by metric_time,location,menu_goal__product_family,menu_goal__unit_goal_status --limit 20
-        )
-        (
-          cd projects/planning
-          export DBT_PROFILES_DIR=../..
-          mf validate-configs --skip-dw
-          mf query --metrics planned_component_usage,actual_component_usage --group-by metric_time,location,component,component_week_plan__scenario_name,component_week_plan__usage_variance_status --limit 20
-          mf query --metrics forecasted_orders,actual_orders_for_forecast,absolute_order_forecast_error,forecast_interval_hit_rate --group-by metric_time,location,store_hour_forecast__scenario_name,store_hour_forecast__forecast_accuracy_band --limit 20
-        )
-
-  validate:
-    cmds:
-      - scripts/validate_repo.sh
-
-  build-platform:
-    deps: [deps, seed]
-    cmds:
-      - dbt build --project-dir projects/platform --profiles-dir . --exclude resource_type:seed
-
-  build-public-stack:
-    deps: [deps, seed]
-    cmds:
-      - dbt build --project-dir projects/platform --profiles-dir . --exclude resource_type:seed
-      - dbt build --project-dir projects/supply --profiles-dir . --exclude resource_type:seed
-      - dbt build --project-dir projects/finance --profiles-dir . --exclude resource_type:seed
-      - dbt build --project-dir projects/experience --profiles-dir . --exclude resource_type:seed
-      - dbt build --project-dir projects/growth --profiles-dir . --exclude resource_type:seed
-      - dbt build --project-dir projects/store_ops --profiles-dir . --exclude resource_type:seed
-      - dbt build --project-dir projects/merchandising --profiles-dir . --exclude resource_type:seed
-      - dbt build --project-dir projects/planning --profiles-dir . --exclude resource_type:seed
-
-  build-extension:
-    deps: [build-public-stack]
-    cmds:
-      - dbt build --project-dir projects/reliability --profiles-dir . --select jaffle_reliability --exclude resource_type:seed
-
-  clean:
-    cmds:
-      - rm -f jaffle_corp.duckdb jaffle_corp.duckdb.wal
-      - rm -rf target logs
-      - find projects -mindepth 2 -maxdepth 2 -type d \( -name target -o -name dbt_packages -o -name logs \) -prune -exec rm -rf {} +
-      - find projects \( -name "*.duckdb" -o -name "*.duckdb.wal" \) -type f -delete

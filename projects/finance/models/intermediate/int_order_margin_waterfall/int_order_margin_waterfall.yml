@@ -3,3 +3,77 @@ version: 2
 models:
   - name: int_order_margin_waterfall
     description: "{{ doc('jaffle_finance__int_order_margin_waterfall') }}"
+
+    columns:
+      - name: order_id
+        description: "{{ doc('finance__int_order_payment_allocations__order_id') }}"
+        data_type: varchar
+      - name: customer_id
+        description: "{{ doc('finance__int_order_payment_allocations__customer_id') }}"
+        data_type: varchar
+      - name: store_id
+        description: "{{ doc('finance__int_order_payment_allocations__store_id') }}"
+        data_type: varchar
+      - name: recognized_date
+        description: "{{ doc('finance__fct_order_revenue__recognized_date') }}"
+        data_type: date
+      - name: order_status
+        description: "{{ doc('finance__int_order_payment_allocations__order_status') }}"
+        data_type: varchar
+      - name: channel
+        description: "{{ doc('finance__int_order_payment_allocations__channel') }}"
+        data_type: varchar
+      - name: country_code
+        description: "{{ doc('finance__int_order_payment_allocations__country_code') }}"
+        data_type: varchar
+      - name: city
+        description: "{{ doc('finance__int_order_payment_allocations__city') }}"
+        data_type: varchar
+      - name: gross_revenue_usd
+        description: "{{ doc('finance__fct_order_revenue__gross_revenue_usd') }}"
+        data_type: double
+      - name: captured_amount_usd
+        description: "{{ doc('finance__int_order_payment_allocations__captured_amount_usd') }}"
+        data_type: double
+      - name: refunded_amount_usd
+        description: "{{ doc('finance__int_order_payment_allocations__refunded_amount_usd') }}"
+        data_type: double
+      - name: net_revenue_usd
+        description: "{{ doc('finance__fct_order_revenue__net_revenue_usd') }}"
+        data_type: double
+      - name: platform_supply_cost_usd
+        description: "{{ doc('finance__int_order_margin_waterfall__platform_supply_cost_usd') }}"
+        data_type: double
+      - name: recipe_expected_component_cost_usd
+        description: "{{ doc('finance__int_order_margin_waterfall__recipe_expected_component_cost_usd') }}"
+        data_type: double
+      - name: recipe_cost_variance_usd
+        description: "{{ doc('finance__int_order_margin_waterfall__recipe_cost_variance_usd') }}"
+        data_type: double
+      - name: recipe_margin_usd
+        description: "{{ doc('finance__int_order_margin_waterfall__recipe_margin_usd') }}"
+        data_type: double
+      - name: platform_margin_usd
+        description: "{{ doc('finance__int_order_margin_waterfall__platform_margin_usd') }}"
+        data_type: double
+      - name: margin_method_variance_usd
+        description: "{{ doc('finance__int_order_margin_waterfall__margin_method_variance_usd') }}"
+        data_type: double
+      - name: component_count
+        description: "{{ doc('finance__int_order_margin_waterfall__component_count') }}"
+        data_type: integer
+      - name: order_item_count
+        description: "{{ doc('finance__fct_order_revenue__order_item_count') }}"
+        data_type: integer
+      - name: total_item_quantity
+        description: "{{ doc('finance__fct_order_revenue__total_item_quantity') }}"
+        data_type: integer
+      - name: payment_attempt_count
+        description: "{{ doc('finance__int_order_payment_allocations__payment_attempt_count') }}"
+        data_type: integer
+      - name: refund_event_count
+        description: "{{ doc('finance__int_order_payment_allocations__refund_event_count') }}"
+        data_type: integer
+      - name: revenue_quality_status
+        description: "{{ doc('finance__int_order_payment_allocations__revenue_quality_status') }}"
+        data_type: varchar

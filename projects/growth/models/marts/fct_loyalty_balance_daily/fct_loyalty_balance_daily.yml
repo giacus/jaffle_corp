@@ -10,21 +10,29 @@ models:
         enforced: true
     columns:
       - name: loyalty_balance_daily_key
+        description: "{{ doc('growth__fct_loyalty_balance_daily__loyalty_balance_daily_key') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: customer_id
+        description: "{{ doc('shared__stg_loyalty_events__customer_id') }}"
         data_type: varchar
       - name: event_date_utc
+        description: "{{ doc('shared__stg_loyalty_events__event_date_utc') }}"
         data_type: date
       - name: points_delta
+        description: "{{ doc('growth__int_loyalty_balance_projection__points_delta') }}"
         data_type: hugeint
       - name: projected_points_balance
+        description: "{{ doc('growth__int_loyalty_balance_projection__projected_points_balance') }}"
         data_type: hugeint
       - name: latest_program_tier
+        description: "{{ doc('growth__int_loyalty_balance_projection__latest_program_tier') }}"
         data_type: varchar
       - name: loyalty_event_count
+        description: "{{ doc('growth__int_loyalty_balance_projection__loyalty_event_count') }}"
         data_type: bigint
       - name: loyalty_balance_status
+        description: "{{ doc('growth__int_loyalty_balance_projection__loyalty_balance_status') }}"
         data_type: varchar

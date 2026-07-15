@@ -6,10 +6,35 @@ models:
       group: experience
     columns:
       - name: support_ticket_id
+        description: "{{ doc('shared__stg_support_tickets__support_ticket_id') }}"
+        data_type: varchar
         data_tests:
           - not_null
           - unique
+      - name: customer_id
+        description: "{{ doc('shared__stg_support_tickets__customer_id') }}"
+        data_type: varchar
+      - name: order_id
+        description: "{{ doc('shared__stg_support_tickets__order_id') }}"
+        data_type: varchar
+      - name: store_id
+        description: "{{ doc('shared__stg_support_tickets__store_id') }}"
+        data_type: varchar
+      - name: opened_at_utc
+        description: "{{ doc('shared__stg_support_tickets__opened_at_utc') }}"
+        data_type: timestamp
+      - name: first_response_at_utc
+        description: "{{ doc('shared__stg_support_tickets__first_response_at_utc') }}"
+        data_type: timestamp
+      - name: resolved_at_utc
+        description: "{{ doc('shared__stg_support_tickets__resolved_at_utc') }}"
+        data_type: timestamp
+      - name: opened_date_utc
+        description: "{{ doc('shared__stg_support_tickets__opened_date_utc') }}"
+        data_type: date
       - name: normalized_issue_type
+        description: "{{ doc('shared__stg_support_tickets__normalized_issue_type') }}"
+        data_type: varchar
         data_tests:
           - accepted_values:
               arguments:
@@ -21,4 +46,34 @@ models:
                   - payment_question
                   - account_help
                   - other
+      - name: raw_issue_type
+        description: "{{ doc('shared__stg_support_tickets__raw_issue_type') }}"
+        data_type: varchar
+      - name: ticket_status
+        description: "{{ doc('shared__stg_support_tickets__ticket_status') }}"
+        data_type: varchar
+      - name: resolution_type
+        description: "{{ doc('shared__stg_support_tickets__resolution_type') }}"
+        data_type: varchar
+      - name: satisfaction_score
+        description: "{{ doc('shared__stg_support_tickets__satisfaction_score') }}"
+        data_type: integer
+      - name: concession_minor
+        description: "{{ doc('shared__stg_support_tickets__concession_minor') }}"
+        data_type: integer
+      - name: concession_major
+        description: "{{ doc('shared__stg_support_tickets__concession_major') }}"
+        data_type: double
+      - name: currency
+        description: "{{ doc('shared__stg_support_tickets__currency') }}"
+        data_type: varchar
+      - name: first_response_minutes
+        description: "{{ doc('shared__stg_support_tickets__first_response_minutes') }}"
+        data_type: bigint
+      - name: resolution_minutes
+        description: "{{ doc('shared__stg_support_tickets__resolution_minutes') }}"
+        data_type: bigint
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_support_tickets__updated_at_utc') }}"
+        data_type: timestamp
     description: "{{ doc('jaffle_experience__stg_support_tickets') }}"

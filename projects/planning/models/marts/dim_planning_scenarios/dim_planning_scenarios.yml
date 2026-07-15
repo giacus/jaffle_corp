@@ -10,25 +10,35 @@ models:
         enforced: true
     columns:
       - name: capacity_scenario_window_key
+        description: "{{ doc('planning__int_capacity_scenario_windows__capacity_scenario_window_key') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: scenario_id
+        description: "{{ doc('shared__stg_capacity_scenarios__scenario_id') }}"
         data_type: varchar
       - name: store_id
+        description: "{{ doc('shared__stg_capacity_scenarios__store_id') }}"
         data_type: varchar
       - name: scenario_name
+        description: "{{ doc('shared__stg_capacity_scenarios__scenario_name') }}"
         data_type: varchar
       - name: effective_from_utc
+        description: "{{ doc('shared__stg_capacity_scenarios__effective_from_utc') }}"
         data_type: timestamp
       - name: effective_to_utc
+        description: "{{ doc('shared__stg_capacity_scenarios__effective_to_utc') }}"
         data_type: timestamp
       - name: target_orders_per_hour
+        description: "{{ doc('shared__stg_capacity_scenarios__target_orders_per_hour') }}"
         data_type: double
       - name: target_ready_minutes
+        description: "{{ doc('shared__stg_capacity_scenarios__target_ready_minutes') }}"
         data_type: double
       - name: target_team_hours
+        description: "{{ doc('shared__stg_capacity_scenarios__target_team_hours') }}"
         data_type: double
       - name: updated_at_utc
+        description: "{{ doc('shared__stg_capacity_scenarios__updated_at_utc') }}"
         data_type: timestamp

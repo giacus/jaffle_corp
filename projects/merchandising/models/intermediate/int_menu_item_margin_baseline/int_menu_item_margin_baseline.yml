@@ -3,3 +3,65 @@ version: 2
 models:
   - name: int_menu_item_margin_baseline
     description: "{{ doc('jaffle_merchandising__int_menu_item_margin_baseline') }}"
+
+    columns:
+      - name: menu_item_margin_baseline_key
+        description: "{{ doc('merchandising__int_menu_item_margin_baseline__menu_item_margin_baseline_key') }}"
+        data_type: varchar
+      - name: publication_id
+        description: "{{ doc('shared__stg_menu_publications__publication_id') }}"
+        data_type: varchar
+      - name: store_id
+        description: "{{ doc('shared__stg_menu_publications__store_id') }}"
+        data_type: varchar
+      - name: product_id
+        description: "{{ doc('shared__stg_menu_publications__product_id') }}"
+        data_type: varchar
+      - name: product_name
+        description: "{{ doc('shared__stg_products__product_name') }}"
+        data_type: varchar
+      - name: product_family
+        description: "{{ doc('shared__stg_products__product_family') }}"
+        data_type: varchar
+      - name: country_code
+        description: "{{ doc('shared__stg_stores__country_code') }}"
+        data_type: varchar
+      - name: currency
+        description: "{{ doc('shared__stg_menu_publications__currency') }}"
+        data_type: varchar
+      - name: published_price_minor
+        description: "{{ doc('shared__stg_menu_publications__published_price_minor') }}"
+        data_type: integer
+      - name: published_price_major
+        description: "{{ doc('merchandising__int_menu_item_margin_baseline__published_price_major') }}"
+        data_type: double
+      - name: published_price_usd
+        description: "{{ doc('merchandising__int_menu_item_margin_baseline__published_price_usd') }}"
+        data_type: double
+      - name: usd_rate
+        description: "{{ doc('shared__stg_fx_rates__usd_rate') }}"
+        data_type: double
+      - name: expected_recipe_cost_usd
+        description: "{{ doc('merchandising__int_menu_item_margin_baseline__expected_recipe_cost_usd') }}"
+        data_type: double
+      - name: expected_recipe_margin_usd
+        description: "{{ doc('merchandising__int_menu_item_margin_baseline__expected_recipe_margin_usd') }}"
+        data_type: double
+      - name: expected_recipe_margin_rate
+        description: "{{ doc('merchandising__int_menu_item_margin_baseline__expected_recipe_margin_rate') }}"
+        data_type: double
+      - name: needs_cost_review
+        description: "{{ doc('merchandising__int_menu_item_margin_baseline__needs_cost_review') }}"
+        data_type: boolean
+      - name: menu_price_band
+        description: "{{ doc('merchandising__int_menu_product_windows__menu_price_band') }}"
+        data_type: varchar
+      - name: published_at_utc
+        description: "{{ doc('shared__stg_menu_publications__published_at_utc') }}"
+        data_type: timestamp
+      - name: retired_at_utc
+        description: "{{ doc('shared__stg_menu_publications__retired_at_utc') }}"
+        data_type: timestamp
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_menu_publications__updated_at_utc') }}"
+        data_type: timestamp

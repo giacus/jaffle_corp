@@ -9,16 +9,40 @@ models:
         replacement_target: jaffle_finance.fct_order_revenue
     columns:
       - name: order_no
+        description: "{{ doc('legacy__int_legacy_order_headers__order_no') }}"
+        data_type: varchar
         data_tests:
           - not_null
       - name: modern_order_id
+        description: "{{ doc('legacy__int_legacy_order_headers__modern_order_id') }}"
+        data_type: varchar
       - name: cust
+        description: "{{ doc('legacy__int_legacy_order_headers__cust') }}"
+        data_type: varchar
       - name: shop
+        description: "{{ doc('legacy__int_legacy_order_headers__shop') }}"
+        data_type: varchar
       - name: business_dt
+        description: "{{ doc('legacy__int_legacy_order_headers__business_dt') }}"
+        data_type: date
       - name: old_status_bucket
+        description: "{{ doc('legacy__int_legacy_order_headers__old_status_bucket') }}"
+        data_type: varchar
       - name: money_kind
+        description: "{{ doc('legacy__int_legacy_order_headers__money_kind') }}"
+        data_type: varchar
       - name: gross_amt
+        description: "{{ doc('legacy__int_legacy_order_headers__gross_amt') }}"
+        data_type: double
       - name: net_amt
+        description: "{{ doc('legacy__int_legacy_order_headers__net_amt') }}"
+        data_type: double
       - name: approximate_supply_cost_major
+        description: "{{ doc('legacy__legacy_order_margin_v0__approximate_supply_cost_major') }}"
+        data_type: double
       - name: margin_guess_major
+        description: "{{ doc('legacy__legacy_order_margin_v0__margin_guess_major') }}"
+        data_type: double
       - name: needs_currency_review
+        description: "{{ doc('legacy__legacy_order_margin_v0__needs_currency_review') }}"
+        data_type: boolean

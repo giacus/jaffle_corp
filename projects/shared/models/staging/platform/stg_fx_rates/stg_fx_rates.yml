@@ -3,3 +3,13 @@ version: 2
 models:
   - name: stg_fx_rates
     description: "{{ doc('jaffle_platform__stg_fx_rates') }}"
+    columns:
+      - name: currency
+        description: "{{ doc('shared__stg_fx_rates__currency') }}"
+        data_type: varchar
+      - name: rate_date
+        description: "{{ doc('shared__stg_fx_rates__rate_date') }}"
+        data_type: date
+      - name: usd_rate
+        description: "{{ doc('shared__stg_fx_rates__usd_rate') }}"
+        data_type: double

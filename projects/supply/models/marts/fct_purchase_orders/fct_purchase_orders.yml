@@ -10,51 +10,74 @@ models:
         enforced: true
     columns:
       - name: purchase_order_key
+        description: "{{ doc('supply__fct_purchase_orders__purchase_order_key') }}"
         data_type: varchar
         data_tests:
           - not_null
           - unique
       - name: purchase_order_id
+        description: "{{ doc('shared__stg_purchase_orders__purchase_order_id') }}"
         data_type: varchar
       - name: store_id
+        description: "{{ doc('shared__stg_purchase_orders__store_id') }}"
         data_type: varchar
       - name: country_code
+        description: "{{ doc('shared__stg_stores__country_code') }}"
         data_type: varchar
       - name: city
+        description: "{{ doc('shared__stg_stores__city') }}"
         data_type: varchar
       - name: component_id
+        description: "{{ doc('shared__stg_purchase_orders__component_id') }}"
         data_type: varchar
       - name: supplier_name
+        description: "{{ doc('shared__stg_purchase_orders__supplier_name') }}"
         data_type: varchar
       - name: ordered_at_utc
+        description: "{{ doc('shared__stg_purchase_orders__ordered_at_utc') }}"
         data_type: timestamp
       - name: expected_at_utc
+        description: "{{ doc('shared__stg_purchase_orders__expected_at_utc') }}"
         data_type: timestamp
       - name: received_at_utc
+        description: "{{ doc('shared__stg_purchase_orders__received_at_utc') }}"
         data_type: timestamp
       - name: received_date_utc
+        description: "{{ doc('supply__int_purchase_order_receipts__received_date_utc') }}"
         data_type: date
       - name: purchase_order_status
+        description: "{{ doc('shared__stg_purchase_orders__purchase_order_status') }}"
         data_type: varchar
       - name: quantity_ordered
+        description: "{{ doc('shared__stg_purchase_orders__quantity_ordered') }}"
         data_type: double
       - name: quantity_received
+        description: "{{ doc('shared__stg_purchase_orders__quantity_received') }}"
         data_type: double
       - name: unit
+        description: "{{ doc('shared__stg_purchase_orders__unit') }}"
         data_type: varchar
       - name: unit_cost_major
+        description: "{{ doc('shared__stg_purchase_orders__unit_cost_major') }}"
         data_type: double
       - name: currency
+        description: "{{ doc('shared__stg_purchase_orders__currency') }}"
         data_type: varchar
       - name: unit_cost_usd
+        description: "{{ doc('supply__int_purchase_order_receipts__unit_cost_usd') }}"
         data_type: double
       - name: receipt_fill_rate
+        description: "{{ doc('supply__int_purchase_order_receipts__receipt_fill_rate') }}"
         data_type: double
       - name: receipt_delay_minutes
+        description: "{{ doc('supply__int_purchase_order_receipts__receipt_delay_minutes') }}"
         data_type: bigint
       - name: receipt_delay_bucket
+        description: "{{ doc('supply__fct_purchase_orders__receipt_delay_bucket') }}"
         data_type: varchar
       - name: is_late_receipt
+        description: "{{ doc('supply__int_purchase_order_receipts__is_late_receipt') }}"
         data_type: boolean
       - name: updated_at_utc
+        description: "{{ doc('shared__stg_purchase_orders__updated_at_utc') }}"
         data_type: timestamp
