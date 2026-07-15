@@ -27,7 +27,7 @@ sql_files=()
 
 add_project() {
   local candidate="$1"
-  case " ${projects[*]} " in
+  case " ${projects[*]-} " in
     *" $candidate "*) ;;
     *) projects+=("$candidate") ;;
   esac
