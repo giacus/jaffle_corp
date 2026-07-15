@@ -1,0 +1,8 @@
+packages:
+  # Local fallback for contributors. Hosted mesh environments should rely on dependencies.yml.
+  - local: ../shared
+  - local: ../platform
+  - local: ../finance
+  - local: ../experience
+  - package: dbt-labs/dbt_utils
+    version: 1.3.3

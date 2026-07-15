@@ -1,0 +1,6 @@
+packages:
+  - local: ../shared
+  - local: ../platform
+  - local: ../finance
+  - package: dbt-labs/dbt_utils
+    version: 1.3.3

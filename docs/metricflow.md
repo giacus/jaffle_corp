@@ -15,7 +15,7 @@ MetricFlow from the dbt project that owns the metrics you want to inspect:
 
 ```bash
 source .venv/bin/activate
-cd projects/jaffle_finance
+cd projects/finance
 mf list metrics
 mf list dimensions --metrics <metric_name>
 mf list entities --metrics <metric_name>
@@ -29,7 +29,7 @@ The venv hook loads `scripts/env.sh`, which sets it to the absolute repo path.
 ## Finance
 
 ```bash
-cd projects/jaffle_finance
+cd projects/finance
 mf validate-configs --skip-dw
 mf query \
   --metrics net_revenue_usd,estimated_gross_margin_usd,refund_rate \
@@ -41,7 +41,7 @@ cd ../..
 ## Growth
 
 ```bash
-cd projects/jaffle_growth
+cd projects/growth
 mf validate-configs --skip-dw
 mf query \
   --metrics attributed_net_revenue_usd,campaign_roas \
@@ -53,7 +53,7 @@ cd ../..
 ## Merchandising
 
 ```bash
-cd projects/jaffle_merchandising
+cd projects/merchandising
 mf validate-configs --skip-dw
 mf query \
   --metrics merchandising_observed_hours,merchandising_available_hours,merchandising_availability_rate,merchandising_outage_minutes \
@@ -69,7 +69,7 @@ cd ../..
 ## Planning
 
 ```bash
-cd projects/jaffle_planning
+cd projects/planning
 mf validate-configs --skip-dw
 mf query \
   --metrics planned_component_usage,actual_component_usage \

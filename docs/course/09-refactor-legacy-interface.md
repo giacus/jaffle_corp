@@ -13,14 +13,14 @@
 
 Start with:
 
-- `projects/jaffle_legacy/models/marts/legacy_daily_store_rollup`
-- `projects/jaffle_legacy/models/exposures.yml`
+- `projects/legacy/models/marts/legacy_daily_store_rollup`
+- `projects/legacy/models/exposures.yml`
 
 ```bash
-dbt deps --project-dir projects/jaffle_legacy
-dbt build --project-dir projects/jaffle_legacy \
+dbt deps --project-dir projects/legacy
+dbt build --project-dir projects/legacy \
   --select +legacy_daily_store_rollup
-dbt show --project-dir projects/jaffle_legacy --inline \
+dbt show --project-dir projects/legacy --inline \
   "select count(*) as row_count from {{ ref('legacy_daily_store_rollup') }}"
 ```
 

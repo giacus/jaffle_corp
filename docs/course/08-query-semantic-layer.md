@@ -12,19 +12,19 @@
 ## Build the Required Domain
 
 ```bash
-dbt deps --project-dir projects/jaffle_supply
-dbt seed --project-dir projects/jaffle_supply
-dbt deps --project-dir projects/jaffle_finance
-dbt build --project-dir projects/jaffle_finance --exclude resource_type:seed
+dbt deps --project-dir projects/supply
+dbt seed --project-dir projects/supply
+dbt deps --project-dir projects/finance
+dbt build --project-dir projects/finance --exclude resource_type:seed
 ```
 
 ## Trace Before Querying
 
 Inspect in this order:
 
-1. `projects/jaffle_finance/models/marts/fct_order_revenue`
-2. `projects/jaffle_finance/models/semantic_models.yml`
-3. `projects/jaffle_finance/models/metrics.yml`
+1. `projects/finance/models/marts/fct_order_revenue`
+2. `projects/finance/models/semantic_models.yml`
+3. `projects/finance/models/metrics.yml`
 4. [MetricFlow guide](../metricflow.md)
 
 Find the measure and semantic model behind `net_revenue_usd`.
@@ -32,7 +32,7 @@ Find the measure and semantic model behind `net_revenue_usd`.
 ## Query
 
 ```bash
-cd projects/jaffle_finance
+cd projects/finance
 mf validate-configs --skip-dw
 mf list metrics
 mf query \

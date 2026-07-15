@@ -15,26 +15,26 @@ How does an order become recognized revenue?
 
 ## Inspect
 
-- `projects/jaffle_platform/models/marts/fct_orders/fct_orders.sql`
-- `projects/jaffle_platform/models/marts/fct_order_items/fct_order_items.sql`
-- `projects/jaffle_finance/models/marts/fct_order_revenue/fct_order_revenue.sql`
-- `projects/jaffle_finance/models/marts/fct_order_revenue/fct_order_revenue.yml`
-- `projects/jaffle_finance/packages.yml`
+- `projects/platform/models/marts/fct_orders/fct_orders.sql`
+- `projects/platform/models/marts/fct_order_items/fct_order_items.sql`
+- `projects/finance/models/marts/fct_order_revenue/fct_order_revenue.sql`
+- `projects/finance/models/marts/fct_order_revenue/fct_order_revenue.yml`
+- `projects/finance/packages.yml`
 
 ## Follow the Graph
 
 ```bash
-dbt deps --project-dir projects/jaffle_finance
+dbt deps --project-dir projects/finance
 
-dbt ls --project-dir projects/jaffle_finance \
+dbt ls --project-dir projects/finance \
   --select +fct_order_revenue \
   --resource-type model
 
-dbt ls --project-dir projects/jaffle_finance \
+dbt ls --project-dir projects/finance \
   --select fct_order_revenue \
   --resource-type test
 
-dbt build --project-dir projects/jaffle_finance \
+dbt build --project-dir projects/finance \
   --select +fct_order_revenue
 ```
 

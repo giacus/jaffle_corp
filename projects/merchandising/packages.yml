@@ -1,0 +1,6 @@
+packages:
+  - local: ../shared
+  - local: ../platform
+  - local: ../supply
+  - package: dbt-labs/dbt_utils
+    version: 1.3.3

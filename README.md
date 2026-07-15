@@ -30,8 +30,8 @@ visit, stay at the repository root and use this path:
 ```bash
 scripts/bootstrap.sh
 source .venv/bin/activate
-dbt seed --project-dir projects/jaffle_platform
-dbt build --project-dir projects/jaffle_platform --exclude resource_type:seed
+dbt seed --project-dir projects/platform
+dbt build --project-dir projects/platform --exclude resource_type:seed
 scripts/generate_manifest.sh
 ```
 
@@ -128,8 +128,8 @@ bash scripts/install_venv_hook.sh
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
-dbt deps --project-dir projects/jaffle_platform --profiles-dir .
-dbt compile --project-dir projects/jaffle_platform --profiles-dir .
+dbt deps --project-dir projects/platform --profiles-dir .
+dbt compile --project-dir projects/platform --profiles-dir .
 ```
 
 If you use another Python environment manager and do not want to patch
@@ -158,10 +158,10 @@ After activating the patched venv, both command styles work:
 
 ```bash
 # From the repo root
-dbt compile --project-dir projects/jaffle_platform
+dbt compile --project-dir projects/platform
 
 # From inside a dbt project
-cd projects/jaffle_platform
+cd projects/platform
 dbt compile
 cd ../..
 ```
@@ -171,10 +171,10 @@ must include a path:
 
 ```bash
 # From the repo root
-dbt compile --project-dir projects/jaffle_platform --profiles-dir .
+dbt compile --project-dir projects/platform --profiles-dir .
 
 # From inside a dbt project
-cd projects/jaffle_platform
+cd projects/platform
 dbt compile --profiles-dir ../..
 cd ../..
 ```
@@ -249,10 +249,10 @@ raw fixture layer, and builds the core customer, order, product, store, payment,
 and refund interfaces that other projects consume.
 
 ```bash
-dbt debug --project-dir projects/jaffle_platform
-dbt deps --project-dir projects/jaffle_platform
-dbt seed --project-dir projects/jaffle_platform
-dbt build --project-dir projects/jaffle_platform --exclude resource_type:seed
+dbt debug --project-dir projects/platform
+dbt deps --project-dir projects/platform
+dbt seed --project-dir projects/platform
+dbt build --project-dir projects/platform --exclude resource_type:seed
 ```
 
 The explicit seed step matters in a new database: staging models read the raw
@@ -263,7 +263,7 @@ Now list the public platform models:
 
 ```bash
 dbt ls \
-  --project-dir projects/jaffle_platform \
+  --project-dir projects/platform \
   --select access:public \
   --resource-type model
 ```
@@ -304,16 +304,16 @@ On a typical laptop, this should take a few minutes, not hours.
 If you prefer to run the build manually, keep the projects in this order:
 
 ```text
-projects/jaffle_platform
-projects/jaffle_supply
-projects/jaffle_finance
-projects/jaffle_experience
-projects/jaffle_growth
-projects/jaffle_store_ops
-projects/jaffle_merchandising
-projects/jaffle_planning
-projects/jaffle_legacy
-projects/jaffle_reliability
+projects/platform
+projects/supply
+projects/finance
+projects/experience
+projects/growth
+projects/store_ops
+projects/merchandising
+projects/planning
+projects/legacy
+projects/reliability
 ```
 
 The order matters because this local setup uses one DuckDB file as the shared
@@ -371,7 +371,7 @@ jq -r '.nodes | to_entries[] | select(.value.resource_type == "model" and .value
 ```
 
 With Task installed, `task manifest` runs the same command. See
-[`projects/jaffle_catalog/README.md`](projects/jaffle_catalog/README.md) for the
+[`projects/catalog/README.md`](projects/catalog/README.md) for the
 catalog project's boundary and extension notes.
 
 ## Explore the Repo
@@ -398,8 +398,8 @@ Use this edit map when you know the kind of change but not the folder:
 
 | You want to change | Start in |
 | --- | --- |
-| Synthetic input data | `projects/jaffle_shared/seeds/<domain>/` |
-| Source cleanup or naming | `projects/jaffle_shared/models/staging/<domain>/` |
+| Synthetic input data | `projects/shared/seeds/<domain>/` |
+| Source cleanup or naming | `projects/shared/models/staging/<domain>/` |
 | Reusable transformation logic | `models/intermediate/` |
 | A consumer-facing dataset or contract | `models/marts/` and its model-local YAML |
 | Cross-row business behavior | The project's `tests/` folder |
@@ -411,10 +411,10 @@ For a fuller map, read [docs/architecture.md](docs/architecture.md).
 Try these from the repo root:
 
 ```bash
-dbt ls --project-dir projects/jaffle_finance --select access:public --resource-type model
-dbt build --project-dir projects/jaffle_finance --select +fct_order_revenue
-dbt docs generate --project-dir projects/jaffle_platform
-dbt docs serve --project-dir projects/jaffle_platform
+dbt ls --project-dir projects/finance --select access:public --resource-type model
+dbt build --project-dir projects/finance --select +fct_order_revenue
+dbt docs generate --project-dir projects/platform
+dbt docs serve --project-dir projects/platform
 ```
 
 Model files use a model-local folder convention:
@@ -431,7 +431,7 @@ the layer or project level.
 
 ## Work on Downstream Extensions
 
-`projects/jaffle_reliability` exists to prove that this repo can serve as a
+`projects/reliability` exists to prove that this repo can serve as a
 fixture for downstream projects.
 
 It depends on public models from finance, merchandising, and planning. It should
@@ -440,7 +440,7 @@ extension project:
 
 ```bash
 dbt build \
-  --project-dir projects/jaffle_reliability \
+  --project-dir projects/reliability \
   --select jaffle_reliability
 ```
 
@@ -468,7 +468,7 @@ source .venv/bin/activate
 Then run MetricFlow from the dbt project that owns the metrics:
 
 ```bash
-cd projects/jaffle_finance
+cd projects/finance
 mf validate-configs --skip-dw
 mf list metrics
 mf query \

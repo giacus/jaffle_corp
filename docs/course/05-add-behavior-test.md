@@ -13,14 +13,14 @@
 
 Inspect:
 
-- `projects/jaffle_shared/models/staging/merchandising/stg_price_adjustments`
-- `projects/jaffle_merchandising/models/marts/fct_price_adjustment_windows`
-- `projects/jaffle_merchandising/tests`
+- `projects/shared/models/staging/merchandising/stg_price_adjustments`
+- `projects/merchandising/models/marts/fct_price_adjustment_windows`
+- `projects/merchandising/tests`
 
 Create:
 
 ```text
-projects/jaffle_merchandising/tests/assert_price_adjustment_windows_do_not_overlap.sql
+projects/merchandising/tests/assert_price_adjustment_windows_do_not_overlap.sql
 ```
 
 The test must return rows when two adjustment windows overlap for the same
@@ -30,12 +30,12 @@ that choice in the SQL.
 ## Verify
 
 ```bash
-dbt deps --project-dir projects/jaffle_merchandising
-dbt seed --project-dir projects/jaffle_merchandising \
+dbt deps --project-dir projects/merchandising
+dbt seed --project-dir projects/merchandising \
   --select raw_price_adjustments --full-refresh
-dbt build --project-dir projects/jaffle_merchandising \
+dbt build --project-dir projects/merchandising \
   --select +fct_price_adjustment_windows
-dbt test --project-dir projects/jaffle_merchandising \
+dbt test --project-dir projects/merchandising \
   --select assert_price_adjustment_windows_do_not_overlap
 ```
 

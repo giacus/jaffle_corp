@@ -7,25 +7,25 @@ DEFAULT_DUCKDB_PATH="$ROOT_DIR/jaffle_corp.duckdb"
 export JAFFLE_CORP_DUCKDB_PATH="${JAFFLE_CORP_DUCKDB_PATH:-$DEFAULT_DUCKDB_PATH}"
 
 PROJECTS=(
-  projects/jaffle_platform
-  projects/jaffle_supply
-  projects/jaffle_finance
-  projects/jaffle_experience
-  projects/jaffle_growth
-  projects/jaffle_store_ops
-  projects/jaffle_merchandising
-  projects/jaffle_planning
-  projects/jaffle_legacy
+  projects/platform
+  projects/supply
+  projects/finance
+  projects/experience
+  projects/growth
+  projects/store_ops
+  projects/merchandising
+  projects/planning
+  projects/legacy
 )
 
 EXTENSION_PROJECTS=(
-  projects/jaffle_reliability
+  projects/reliability
 )
 
-SEED_PROJECT="projects/jaffle_platform"
+SEED_PROJECT="projects/platform"
 
 ALL_PROJECTS=("${PROJECTS[@]}" "${EXTENSION_PROJECTS[@]}")
-DEPENDENCY_PROJECTS=(projects/jaffle_shared "${ALL_PROJECTS[@]}")
+DEPENDENCY_PROJECTS=(projects/shared "${ALL_PROJECTS[@]}")
 
 rm -rf "$ROOT_DIR/target" "$ROOT_DIR/logs"
 find "$ROOT_DIR/projects" \
@@ -95,38 +95,38 @@ run_metricflow_query() {
   )
 }
 
-run_metricflow_validate projects/jaffle_finance
-run_metricflow_validate projects/jaffle_growth
-run_metricflow_validate projects/jaffle_merchandising
-run_metricflow_validate projects/jaffle_planning
+run_metricflow_validate projects/finance
+run_metricflow_validate projects/growth
+run_metricflow_validate projects/merchandising
+run_metricflow_validate projects/planning
 
 run_metricflow_query \
-  projects/jaffle_finance \
+  projects/finance \
   "net_revenue_usd,estimated_gross_margin_usd,refund_rate" \
   "metric_time,location,order__country_code"
 
 run_metricflow_query \
-  projects/jaffle_growth \
+  projects/growth \
   "attributed_net_revenue_usd,campaign_roas" \
   "metric_time,campaign_performance__campaign_id,campaign_performance__channel"
 
 run_metricflow_query \
-  projects/jaffle_merchandising \
+  projects/merchandising \
   "merchandising_observed_hours,merchandising_available_hours,merchandising_availability_rate,merchandising_outage_minutes" \
   "metric_time,product,location,product_store_hour__availability_status,product_store_hour__product_family"
 
 run_metricflow_query \
-  projects/jaffle_merchandising \
+  projects/merchandising \
   "menu_actual_units,menu_target_units,menu_unit_attainment_rate" \
   "metric_time,location,menu_goal__product_family,menu_goal__unit_goal_status"
 
 run_metricflow_query \
-  projects/jaffle_planning \
+  projects/planning \
   "planned_component_usage,actual_component_usage" \
   "metric_time,location,component,component_week_plan__scenario_name,component_week_plan__usage_variance_status"
 
 run_metricflow_query \
-  projects/jaffle_planning \
+  projects/planning \
   "forecasted_orders,actual_orders_for_forecast,absolute_order_forecast_error,forecast_interval_hit_rate" \
   "metric_time,location,store_hour_forecast__scenario_name,store_hour_forecast__forecast_accuracy_band"
 

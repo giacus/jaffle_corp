@@ -1,0 +1,14 @@
+packages:
+  - local: ../shared
+  - local: ../platform
+  - local: ../supply
+  - local: ../finance
+  - local: ../experience
+  - local: ../growth
+  - local: ../store_ops
+  - local: ../merchandising
+  - local: ../planning
+  - local: ../legacy
+  - local: ../reliability
+  - package: dbt-labs/dbt_utils
+    version: 1.3.3
