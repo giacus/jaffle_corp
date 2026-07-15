@@ -16,10 +16,10 @@ From the repository root:
 ```bash
 scripts/bootstrap.sh
 source .venv/bin/activate
-dbt debug --project-dir projects/jaffle_platform
-dbt deps --project-dir projects/jaffle_platform
-dbt seed --project-dir projects/jaffle_platform
-dbt build --project-dir projects/jaffle_platform --exclude resource_type:seed
+dbt debug --project-dir projects/platform
+dbt deps --project-dir projects/platform
+dbt seed --project-dir projects/platform
+dbt build --project-dir projects/platform --exclude resource_type:seed
 ```
 
 The seed runs separately because staging models read raw tables with `source()`;
@@ -30,16 +30,16 @@ dbt cannot infer that those source tables come from local seeds.
 Open these in order:
 
 1. `profiles.yml` — the shared DuckDB connection.
-2. `projects/jaffle_shared/dbt_project.yml` — centralized staging configuration.
-3. `projects/jaffle_shared/seeds/platform` — synthetic core raw data.
-4. `projects/jaffle_shared/models/staging/platform` — core source cleanup.
-5. `projects/jaffle_platform/dbt_project.yml` — platform project configuration.
-6. `projects/jaffle_platform/models/marts` — stable interfaces.
+2. `projects/shared/dbt_project.yml` — centralized staging configuration.
+3. `projects/shared/seeds/platform` — synthetic core raw data.
+4. `projects/shared/models/staging/platform` — core source cleanup.
+5. `projects/platform/dbt_project.yml` — platform project configuration.
+6. `projects/platform/models/marts` — stable interfaces.
 
 Then list the public platform models:
 
 ```bash
-dbt ls --project-dir projects/jaffle_platform \
+dbt ls --project-dir projects/platform \
   --select access:public \
   --resource-type model
 ```

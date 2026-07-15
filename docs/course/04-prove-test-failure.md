@@ -13,8 +13,8 @@
 
 Use:
 
-- `projects/jaffle_shared/seeds/merchandising/raw_price_adjustments.csv`
-- `projects/jaffle_shared/models/staging/merchandising/stg_price_adjustments/stg_price_adjustments.yml`
+- `projects/shared/seeds/merchandising/raw_price_adjustments.csv`
+- `projects/shared/models/staging/merchandising/stg_price_adjustments/stg_price_adjustments.yml`
 
 Save a temporary copy of the seed outside the repository. Then duplicate one
 data row so two rows have the same `price_adjustment_id`.
@@ -22,10 +22,10 @@ data row so two rows have the same `price_adjustment_id`.
 ## Prove the Failure
 
 ```bash
-dbt deps --project-dir projects/jaffle_merchandising
-dbt seed --project-dir projects/jaffle_merchandising \
+dbt deps --project-dir projects/merchandising
+dbt seed --project-dir projects/merchandising \
   --select raw_price_adjustments --full-refresh
-dbt build --project-dir projects/jaffle_merchandising \
+dbt build --project-dir projects/merchandising \
   --select stg_price_adjustments
 ```
 
@@ -36,7 +36,7 @@ Confirm only that seed is clean:
 
 ```bash
 git diff --exit-code -- \
-  projects/jaffle_shared/seeds/merchandising/raw_price_adjustments.csv
+  projects/shared/seeds/merchandising/raw_price_adjustments.csv
 ```
 
 ## Checkpoint

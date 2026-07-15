@@ -3,7 +3,7 @@
 Use this guide when you want to build a downstream dbt project that relies on
 `jaffle-corp` instead of editing the core domains directly.
 
-The reference implementation is `projects/jaffle_reliability`. It consumes
+The reference implementation is `projects/reliability`. It consumes
 public contracted marts from finance, merchandising, and planning, then adds its
 own model, contract, tests, and analysis.
 
@@ -23,7 +23,7 @@ Inside this monorepo, keep extension fixtures under `projects/` so local package
 paths resolve as siblings:
 
 ```text
-projects/jaffle_reliability
+projects/reliability
 ```
 
 The extension should include:
@@ -48,8 +48,8 @@ scripts/validate_repo.sh
 Iterate on only the extension after upstream projects have been built:
 
 ```bash
-dbt deps --project-dir projects/jaffle_reliability
-dbt build --project-dir projects/jaffle_reliability --select jaffle_reliability
+dbt deps --project-dir projects/reliability
+dbt build --project-dir projects/reliability --select jaffle_reliability
 ```
 
 ## Public Interfaces To Start From

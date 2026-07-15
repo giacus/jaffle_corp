@@ -1,9 +1,9 @@
 version: "3"
 
 vars:
-  PROJECTS: "projects/jaffle_platform projects/jaffle_supply projects/jaffle_finance projects/jaffle_experience projects/jaffle_growth projects/jaffle_store_ops projects/jaffle_merchandising projects/jaffle_planning projects/jaffle_legacy"
-  EXTENSION_PROJECTS: "projects/jaffle_reliability"
-  SEED_PROJECT: "projects/jaffle_platform"
+  PROJECTS: "projects/platform projects/supply projects/finance projects/experience projects/growth projects/store_ops projects/merchandising projects/planning projects/legacy"
+  EXTENSION_PROJECTS: "projects/reliability"
+  SEED_PROJECT: "projects/platform"
 
 tasks:
   setup:
@@ -16,7 +16,7 @@ tasks:
 
   deps:
     cmds:
-      - dbt deps --project-dir projects/jaffle_shared --profiles-dir .
+      - dbt deps --project-dir projects/shared --profiles-dir .
       - for: { var: PROJECTS }
         cmd: dbt deps --project-dir {{ .ITEM }} --profiles-dir .
       - for: { var: EXTENSION_PROJECTS }
@@ -57,26 +57,26 @@ tasks:
       - |
         export JAFFLE_CORP_DUCKDB_PATH="$PWD/jaffle_corp.duckdb"
         (
-          cd projects/jaffle_finance
+          cd projects/finance
           export DBT_PROFILES_DIR=../..
           mf validate-configs --skip-dw
           mf query --metrics net_revenue_usd,estimated_gross_margin_usd,refund_rate --group-by metric_time,location,order__country_code --limit 20
         )
         (
-          cd projects/jaffle_growth
+          cd projects/growth
           export DBT_PROFILES_DIR=../..
           mf validate-configs --skip-dw
           mf query --metrics attributed_net_revenue_usd,campaign_roas --group-by metric_time,campaign_performance__campaign_id,campaign_performance__channel --limit 20
         )
         (
-          cd projects/jaffle_merchandising
+          cd projects/merchandising
           export DBT_PROFILES_DIR=../..
           mf validate-configs --skip-dw
           mf query --metrics merchandising_observed_hours,merchandising_available_hours,merchandising_availability_rate,merchandising_outage_minutes --group-by metric_time,product,location,product_store_hour__availability_status,product_store_hour__product_family --limit 20
           mf query --metrics menu_actual_units,menu_target_units,menu_unit_attainment_rate --group-by metric_time,location,menu_goal__product_family,menu_goal__unit_goal_status --limit 20
         )
         (
-          cd projects/jaffle_planning
+          cd projects/planning
           export DBT_PROFILES_DIR=../..
           mf validate-configs --skip-dw
           mf query --metrics planned_component_usage,actual_component_usage --group-by metric_time,location,component,component_week_plan__scenario_name,component_week_plan__usage_variance_status --limit 20
@@ -90,24 +90,24 @@ tasks:
   build-platform:
     deps: [deps, seed]
     cmds:
-      - dbt build --project-dir projects/jaffle_platform --profiles-dir . --exclude resource_type:seed
+      - dbt build --project-dir projects/platform --profiles-dir . --exclude resource_type:seed
 
   build-public-stack:
     deps: [deps, seed]
     cmds:
-      - dbt build --project-dir projects/jaffle_platform --profiles-dir . --exclude resource_type:seed
-      - dbt build --project-dir projects/jaffle_supply --profiles-dir . --exclude resource_type:seed
-      - dbt build --project-dir projects/jaffle_finance --profiles-dir . --exclude resource_type:seed
-      - dbt build --project-dir projects/jaffle_experience --profiles-dir . --exclude resource_type:seed
-      - dbt build --project-dir projects/jaffle_growth --profiles-dir . --exclude resource_type:seed
-      - dbt build --project-dir projects/jaffle_store_ops --profiles-dir . --exclude resource_type:seed
-      - dbt build --project-dir projects/jaffle_merchandising --profiles-dir . --exclude resource_type:seed
-      - dbt build --project-dir projects/jaffle_planning --profiles-dir . --exclude resource_type:seed
+      - dbt build --project-dir projects/platform --profiles-dir . --exclude resource_type:seed
+      - dbt build --project-dir projects/supply --profiles-dir . --exclude resource_type:seed
+      - dbt build --project-dir projects/finance --profiles-dir . --exclude resource_type:seed
+      - dbt build --project-dir projects/experience --profiles-dir . --exclude resource_type:seed
+      - dbt build --project-dir projects/growth --profiles-dir . --exclude resource_type:seed
+      - dbt build --project-dir projects/store_ops --profiles-dir . --exclude resource_type:seed
+      - dbt build --project-dir projects/merchandising --profiles-dir . --exclude resource_type:seed
+      - dbt build --project-dir projects/planning --profiles-dir . --exclude resource_type:seed
 
   build-extension:
     deps: [build-public-stack]
     cmds:
-      - dbt build --project-dir projects/jaffle_reliability --profiles-dir . --select jaffle_reliability --exclude resource_type:seed
+      - dbt build --project-dir projects/reliability --profiles-dir . --select jaffle_reliability --exclude resource_type:seed
 
   clean:
     cmds:

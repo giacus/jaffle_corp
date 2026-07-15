@@ -4,7 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 cd "$ROOT_DIR"
 
-CATALOG_PROJECT="projects/jaffle_catalog"
+CATALOG_PROJECT="projects/catalog"
 
 if ! command -v dbt >/dev/null 2>&1; then
   echo "dbt is not available. Run scripts/bootstrap.sh, then source .venv/bin/activate." >&2

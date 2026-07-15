@@ -1,0 +1,27 @@
+packages:
+  - local: ../shared
+    name: jaffle_shared
+  - local: ../platform
+    name: jaffle_platform
+  - local: ../supply
+    name: jaffle_supply
+  - local: ../finance
+    name: jaffle_finance
+  - local: ../experience
+    name: jaffle_experience
+  - local: ../growth
+    name: jaffle_growth
+  - local: ../store_ops
+    name: jaffle_store_ops
+  - local: ../merchandising
+    name: jaffle_merchandising
+  - local: ../planning
+    name: jaffle_planning
+  - local: ../legacy
+    name: jaffle_legacy
+  - local: ../reliability
+    name: jaffle_reliability
+  - name: dbt_utils
+    package: dbt-labs/dbt_utils
+    version: 1.3.3
+sha1_hash: c41adf8403704831c3ccd0885dddc519bd13a2ab

@@ -11,8 +11,8 @@
 
 ## Inspect
 
-- `projects/jaffle_platform/snapshots/customer_profile_snapshot.sql`
-- `projects/jaffle_shared/seeds/platform/raw_customers.csv`
+- `projects/platform/snapshots/customer_profile_snapshot.sql`
+- `projects/shared/seeds/platform/raw_customers.csv`
 
 ## Create Two Versions
 
@@ -23,16 +23,16 @@
 5. Inspect the history.
 
 ```bash
-dbt snapshot --project-dir projects/jaffle_platform \
+dbt snapshot --project-dir projects/platform \
   --select customer_profile_snapshot
 
-dbt seed --project-dir projects/jaffle_platform \
+dbt seed --project-dir projects/platform \
   --select raw_customers --full-refresh
 
-dbt snapshot --project-dir projects/jaffle_platform \
+dbt snapshot --project-dir projects/platform \
   --select customer_profile_snapshot
 
-dbt show --project-dir projects/jaffle_platform --inline \
+dbt show --project-dir projects/platform --inline \
   "select customer_id, dbt_valid_from, dbt_valid_to from {{ ref('customer_profile_snapshot') }} order by customer_id, dbt_valid_from"
 ```
 

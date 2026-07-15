@@ -41,7 +41,7 @@ analysis query.
 If you create another project, register it in:
 
 - `Taskfile.yml` and `scripts/validate_repo.sh` at the correct dependency point;
-- `projects/jaffle_catalog/packages.yml` for manifest coverage;
+- `projects/catalog/packages.yml` for manifest coverage;
 - `docs/architecture.md` for discoverability.
 
 ## Final Verification

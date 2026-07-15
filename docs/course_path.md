@@ -52,13 +52,13 @@ Use this map when a task introduces an unfamiliar surface:
 | Local package fallback | `projects/*/packages.yml` |
 | Intended project dependencies | `projects/*/dependencies.yml` |
 | Domain ownership | `docs/architecture.md` |
-| Staging models | `projects/jaffle_shared/models/staging/<domain>` |
+| Staging models | `projects/shared/models/staging/<domain>` |
 | Intermediate models | `projects/*/models/intermediate` |
 | Public marts and contracts | `projects/*/models/marts/<model>/<model>.yml` |
 | Singular tests | `projects/*/tests` |
-| Snapshots | `projects/jaffle_platform/snapshots` |
+| Snapshots | `projects/platform/snapshots` |
 | Semantic models and metrics | `projects/*/models/semantic_models.yml` and `models/metrics.yml` |
-| Downstream extension pattern | `projects/jaffle_reliability` |
+| Downstream extension pattern | `projects/reliability` |
 | Full-project artifact | `target/manifest.json` from `scripts/generate_manifest.sh` |
 | End-to-end validation | `scripts/validate_repo.sh` |
 

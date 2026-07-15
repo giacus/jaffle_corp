@@ -11,7 +11,7 @@ The goal is realistic complexity, not maximum complexity. Contributions should m
 - Add focused tests for public interfaces.
 - Add examples of common modeling tradeoffs.
 - Improve Semantic Layer or MetricFlow examples.
-- Improve migration examples in `projects/jaffle_legacy`.
+- Improve migration examples in `projects/legacy`.
 
 ## Boundaries
 

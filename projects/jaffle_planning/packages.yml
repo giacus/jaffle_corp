@@ -1,8 +1,0 @@
-packages:
-  - local: ../jaffle_shared
-  - local: ../jaffle_platform
-  - local: ../jaffle_supply
-  - local: ../jaffle_finance
-  - local: ../jaffle_store_ops
-  - package: dbt-labs/dbt_utils
-    version: 1.3.3
