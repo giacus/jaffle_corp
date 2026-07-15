@@ -14,4 +14,4 @@ select
         else 'N'
     end as has_refund_flag,
     updated_at_utc as load_ts
-from {{ jaffle_shared.legacy_platform_relation('fct_orders') }}
+from {{ ref('jaffle_platform', 'fct_orders') }}

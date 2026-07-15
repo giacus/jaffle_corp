@@ -28,6 +28,10 @@ models:
     +meta:
       domain: legacy
       migration_status: needs_rewrite
+    intermediate:
+      +schema: int_legacy
+      +tags: ["legacy", "intermediate"]
+      +access: protected
     marts:
       +schema: legacy
       +tags: ["legacy", "deprecated"]

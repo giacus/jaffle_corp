@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_legacy_store_catalog
+    description: "{{ doc('jaffle_legacy__int_legacy_store_catalog') }}"

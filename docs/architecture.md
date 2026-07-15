@@ -25,7 +25,10 @@ The `jaffle_merchandising` project owns menu publication windows, product-store 
 
 The `jaffle_planning` project owns store-hour forecasts, store-product-day forecasts, component-week plans, operating calendars, capacity scenarios, and forecast exception rollups.
 
-The `jaffle_legacy` project intentionally demonstrates migration debt: inconsistent naming, mixed grains, hand-rolled currency logic, and deprecated marts.
+The `jaffle_legacy` project intentionally demonstrates migration debt:
+inconsistent naming, mixed grains, hand-rolled currency logic, and deprecated
+marts. Its intermediate compatibility adapters reshape public upstream models;
+they are not part of the shared source-ingestion boundary.
 
 The `jaffle_reliability` project is a downstream extension fixture. It consumes
 public contracted marts from finance, merchandising, and planning without

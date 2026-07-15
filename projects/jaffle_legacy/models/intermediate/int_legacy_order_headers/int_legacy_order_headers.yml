@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_legacy_order_headers
+    description: "{{ doc('jaffle_legacy__int_legacy_order_headers') }}"

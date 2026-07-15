@@ -64,15 +64,6 @@ models:
         +meta:
           domain: planning
           source_system: synthetic_jaffle_corp
-      legacy:
-        +schema: stg_legacy
-        +materialized: table
-        +tags: ["staging", "legacy"]
-        +access: protected
-        +meta:
-          domain: legacy
-          migration_status: needs_rewrite
-
 seeds:
   jaffle_shared:
     +schema: raw

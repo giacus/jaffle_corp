@@ -1,5 +1,5 @@
 with headers as (
-    select * from {{ ref('stg_legacy_order_headers') }}
+    select * from {{ ref('int_legacy_order_headers') }}
 ),
 
 items as (

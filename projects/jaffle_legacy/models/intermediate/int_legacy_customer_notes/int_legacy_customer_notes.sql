@@ -8,4 +8,4 @@ select
         else 'do_not_email'
     end as contact_flag,
     concat(customer_id, '|', lifecycle_stage, '|', loyalty_region) as old_customer_note_blob
-from {{ jaffle_shared.legacy_platform_relation('dim_customers') }}
+from {{ ref('jaffle_platform', 'dim_customers') }}

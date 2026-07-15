@@ -180,9 +180,9 @@ cd ../..
 ```
 
 `jaffle_shared` is the centralized ingestion and staging package. It owns all
-raw fixture seeds, source definitions, staging models, and shared macros. Run it
-through an importing domain project, such as `jaffle_platform`, so cross-project
-legacy compatibility models can resolve their public upstream refs.
+raw fixture seeds, source definitions, source-facing staging models, and shared
+macros. It compiles independently and is imported by domain projects such as
+`jaffle_platform`.
 
 ### Troubleshooting
 

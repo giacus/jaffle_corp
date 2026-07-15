@@ -1,5 +1,5 @@
 with customers as (
-    select * from {{ ref('stg_legacy_customer_notes') }}
+    select * from {{ ref('int_legacy_customer_notes') }}
 ),
 
 orders as (
