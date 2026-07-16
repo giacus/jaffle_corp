@@ -42,9 +42,35 @@ mf query \
 cd ../..
 ```
 
-## Checkpoint
+## Expected Observations
 
-You are done when you can connect model grain, measure, metric, dimensions, and
-query output without treating MetricFlow as a black box.
+- MetricFlow resolves the requested metrics from measures declared on the
+  order-revenue semantic model.
+- Entity and dimension names form the query interface; they are not necessarily
+  identical to physical column names.
+- The grouped result changes grain from one row per order to the requested time,
+  location, and order-country combination.
+- Ratio metrics require more than summing a precomputed row-level percentage.
+
+## Common Failure Modes
+
+Run MetricFlow from `projects/finance`, where its dbt project context is
+available. If validation succeeds but the query cannot find relations, rebuild
+the required Supply and Finance domains in the same DuckDB profile. Treat an
+unknown group-by as a semantic configuration problem, not a warehouse problem.
+
+## Workspace State and Cleanup
+
+This lab materializes domain relations and creates generated MetricFlow/dbt
+artifacts only. Return to the repository root after querying. Keep the data for
+the remaining labs, or remove it with `scripts/clean.sh` when the session ends.
+
+## Completion Rubric
+
+- [ ] Semantic configuration validation and the representative query both pass.
+- [ ] You can trace each requested metric to its measure and physical model.
+- [ ] You can explain why the output grain differs from the model grain.
+- [ ] You can identify which names belong to dbt models, semantic entities,
+      dimensions, measures, and metrics.
 
 Continue to [Lab 9: Refactor a legacy interface](09-refactor-legacy-interface.md).

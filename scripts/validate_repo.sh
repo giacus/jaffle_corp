@@ -27,26 +27,11 @@ SEED_PROJECT="projects/platform"
 ALL_PROJECTS=("${PROJECTS[@]}" "${EXTENSION_PROJECTS[@]}")
 DEPENDENCY_PROJECTS=(projects/shared "${ALL_PROJECTS[@]}")
 
-rm -rf "$ROOT_DIR/target" "$ROOT_DIR/logs"
-find "$ROOT_DIR/projects" \
-  -mindepth 2 \
-  -maxdepth 2 \
-  -type d \
-  \( -name target -o -name dbt_packages -o -name logs \) \
-  -prune \
-  -exec rm -rf {} +
-
-if [[ "$JAFFLE_CORP_DUCKDB_PATH" == "$DEFAULT_DUCKDB_PATH" ]]; then
-  rm -f "$JAFFLE_CORP_DUCKDB_PATH" "$JAFFLE_CORP_DUCKDB_PATH.wal"
-  find "$ROOT_DIR/projects" \
-    \( -name "*.duckdb" -o -name "*.duckdb.wal" \) \
-    -type f \
-    -delete
+if [[ "$JAFFLE_CORP_DUCKDB_PATH" != "$DEFAULT_DUCKDB_PATH" ]]; then
+  echo "Using an external JAFFLE_CORP_DUCKDB_PATH; only generated state inside this checkout will be reset."
 fi
-
-for project in "${DEPENDENCY_PROJECTS[@]}"; do
-  rm -rf "$project/target" "$project/dbt_packages"
-done
+scripts/clean.sh --keep-venv
+python scripts/check_semantic_models.py
 
 for project in "${DEPENDENCY_PROJECTS[@]}"; do
   dbt deps --project-dir "$project" --profiles-dir .
@@ -95,15 +80,23 @@ run_metricflow_query() {
   )
 }
 
-run_metricflow_validate projects/finance
-run_metricflow_validate projects/growth
-run_metricflow_validate projects/merchandising
-run_metricflow_validate projects/planning
+for semantic_file in projects/*/models/semantic_models.yml; do
+  [[ -f "$semantic_file" ]] || continue
+  run_metricflow_validate "${semantic_file%/models/semantic_models.yml}"
+done
 
 run_metricflow_query \
   projects/finance \
   "net_revenue_usd,estimated_gross_margin_usd,refund_rate" \
   "metric_time,location,order__country_code"
+
+# Exercise the Finance semantic model's primary entity explicitly. This guards
+# against advertising an entity whose expression is absent from the backing
+# mart, which broader dimension-based queries can otherwise miss.
+run_metricflow_query \
+  projects/finance \
+  "net_revenue_usd" \
+  "order_revenue"
 
 run_metricflow_query \
   projects/growth \

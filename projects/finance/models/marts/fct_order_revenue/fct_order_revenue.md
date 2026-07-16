@@ -1,5 +1,24 @@
 {% docs jaffle_finance__fct_order_revenue %}
-Public finance fact at one row per order.
+Public Finance interface for recognized order revenue, refunds, estimated cost,
+and gross-margin analysis.
+
+- **Grain:** one row per `order_id`.
+- **Business rules:** defines net revenue as captured less refunded USD, then
+  subtracts estimated supply cost for an estimated gross margin. Missing item
+  cost rollups are treated as zero.
+- **Caveats:** `recognized_date` follows the order date in this fixture, the
+  model is not a GAAP revenue ledger, and cost and FX values are estimates meant
+  for analytical exercises.
+
+A useful query reconciles recognized value and estimated margin by quality
+status:
+
+```sql
+select revenue_quality_status, count(*) as orders, sum(net_revenue_usd) as net_revenue_usd, sum(estimated_gross_margin_usd) as estimated_gross_margin_usd
+from {% raw %}{{ ref('fct_order_revenue') }}{% endraw %}
+group by 1
+order by 1
+```
 {% enddocs %}
 
 {% docs finance__fct_order_revenue__order_revenue_key %}

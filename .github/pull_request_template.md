@@ -5,7 +5,7 @@
 ## Validation
 
 - [ ] `source .venv/bin/activate`
-- [ ] `scripts/validate_repo.sh`
+- [ ] `scripts/validate_repo.sh` (clean rebuild; resets local generated state)
 
 ## Safety Checks
 

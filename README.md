@@ -1,5 +1,7 @@
 # jaffle-corp
 
+[![CI](https://github.com/giacus/jaffle_corp/actions/workflows/ci.yml/badge.svg)](https://github.com/giacus/jaffle_corp/actions/workflows/ci.yml)
+
 `jaffle-corp` is a laptop-runnable dbt Core playground for practicing the parts
 of analytics engineering that appear after a first tutorial: multiple domains,
 public contracts, protected implementation models, cross-project dependencies,
@@ -13,23 +15,32 @@ installs the exact transitive Python versions in `requirements.lock.txt`.
 > [!NOTE]
 > This is not an introduction to `ref`, sources, or generic tests. Use it when
 > you know the dbt basics and want to practice architecture, review, governance,
-> refactoring, and extension work.
+> refactoring, and extension work. If those foundations are new, start with the
+> official [dbt quickstart](https://docs.getdbt.com/) and return afterward.
 
 ## Five-Minute Start
 
-From the repository root:
+The tested local path is Python 3.11 on macOS or Linux with Bash or Zsh. Windows
+users should use WSL. The first setup needs internet access and approximately
+1 GiB of free disk space, including room for downloads and generated state.
+
+Clone the current workshop baseline and enter the repository:
 
 ```bash
+git clone --branch v0.1.0 https://github.com/giacus/jaffle_corp.git
+cd jaffle_corp
 scripts/bootstrap.sh
 source .venv/bin/activate
 dbt seed --project-dir projects/platform
 dbt build --project-dir projects/platform --exclude resource_type:seed
+dbt show --project-dir projects/platform --select fct_orders --limit 5
 scripts/generate_manifest.sh
 ```
 
-You now have one built domain and a complete, git-ignored project index at
-`target/manifest.json`. For prerequisites, manual setup, environment behavior,
-and troubleshooting, read [Getting Started](docs/getting-started.md).
+The `dbt show` result is the first payoff: a readable preview of the public
+order fact you just built. You also have a complete, git-ignored project index
+at `target/manifest.json`. For installation choices, environment behavior,
+cleanup, and troubleshooting, read [Getting Started](docs/getting-started.md).
 
 ## How the Repo Is Organized
 
@@ -102,16 +113,22 @@ Run commands sequentially because all projects share one local DuckDB file.
 | Build the first domain | `dbt build --project-dir projects/platform --exclude resource_type:seed` |
 | List a domain's public models | `dbt ls --project-dir projects/finance --select access:public --resource-type model` |
 | Generate the complete manifest | `scripts/generate_manifest.sh` |
+| Generate the full dbt docs site | `scripts/docs.sh generate` |
+| Serve generated docs locally | `scripts/docs.sh serve` |
 | Lint all project SQL | `scripts/lint_sql_projects.sh` |
-| Run the complete health check | `scripts/validate_repo.sh` |
+| Clean rebuild and validate everything | `scripts/validate_repo.sh` |
+| Reset generated state but keep `.venv` | `scripts/clean.sh --keep-venv` |
+| Remove all generated local state | `scripts/clean.sh` |
 
 If [Task](https://taskfile.dev/) is installed, `task`, `task setup`,
 `task manifest`, `task lint`, and `task validate` are thin wrappers around the
 same canonical scripts.
 
-The full validator installs packages, lints SQL, loads seeds, builds every
-project in dependency order, runs tests and representative MetricFlow queries,
-and regenerates `target/manifest.json`.
+The full validator starts by deleting generated artifacts and the default local
+DuckDB database while preserving `.venv`. It then installs packages, lints SQL,
+loads seeds, builds every project in dependency order, runs tests and
+representative MetricFlow queries, and regenerates `target/manifest.json`.
+Use `scripts/clean.sh --dry-run` to preview the complete end-of-session cleanup.
 
 ## Where to Make a Change
 
@@ -123,7 +140,7 @@ and regenerates `target/manifest.json`.
 | Domain implementation logic | `projects/<domain>/models/intermediate/` |
 | Consumer-facing dataset or contract | `projects/<domain>/models/marts/` |
 | Cross-row behavior | `projects/<domain>/tests/` |
-| Semantic measures or metrics | `models/semantic_models.yml` or `models/metrics.yml` |
+| Semantic measures or metrics | `projects/<domain>/models/semantic_models.yml` or `projects/<domain>/models/metrics.yml` |
 | New downstream use case | `projects/reliability/` or another extension project |
 | Deferred project improvements | [TODO](TODO.md) |
 
@@ -141,6 +158,7 @@ and regenerates `target/manifest.json`.
 
 - [Getting Started](docs/getting-started.md)
 - [Architecture](docs/architecture.md)
+- [Company and Fixture Guide](docs/company-and-fixtures.md)
 - [Column Documentation](docs/column-documentation.md)
 - [Labs](docs/labs.md)
 - [Extension Authoring](docs/extension_authoring.md)

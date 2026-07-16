@@ -4,7 +4,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 
 if ! command -v sqlfluff >/dev/null 2>&1; then
-  echo "sqlfluff is not installed. Run: python -m pip install -r requirements.txt" >&2
+  echo "sqlfluff is not installed. Run scripts/bootstrap.sh, then source .venv/bin/activate." >&2
   exit 127
 fi
 

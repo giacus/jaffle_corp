@@ -12,7 +12,9 @@ from urllib.parse import unquote
 ROOT = Path(__file__).resolve().parents[1]
 IGNORED_PARTS = {".git", ".venv", "dbt_packages", "logs", "target"}
 LINK_PATTERN = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
+CODE_SPAN_PATTERN = re.compile(r"(?<!`)`([^`\n]+)`(?!`)")
 HEADING_PATTERN = re.compile(r"^(#{1,6})\s+\S")
+REPOSITORY_PATH_PREFIXES = ("docs/", "projects/", "scripts/")
 
 
 def markdown_files() -> list[Path]:
@@ -26,6 +28,7 @@ def markdown_files() -> list[Path]:
 def main() -> int:
     errors: list[str] = []
     link_count = 0
+    path_count = 0
 
     for path in markdown_files():
         relative = path.relative_to(ROOT)
@@ -49,6 +52,18 @@ def main() -> int:
 
             if fence is not None:
                 continue
+
+            for code_span in CODE_SPAN_PATTERN.findall(line):
+                if not code_span.startswith(REPOSITORY_PATH_PREFIXES):
+                    continue
+                if any(marker in code_span for marker in (" ", "*", "<", ">")):
+                    continue
+                repository_path = code_span.rstrip("/")
+                path_count += 1
+                if not (ROOT / repository_path).exists():
+                    errors.append(
+                        f"{relative}:{number}: missing repository path -> {repository_path}"
+                    )
 
             heading = HEADING_PATTERN.match(line)
             if heading:
@@ -76,7 +91,10 @@ def main() -> int:
         print("\n".join(f"- {error}" for error in errors), file=sys.stderr)
         return 1
 
-    print(f"Markdown: {len(markdown_files())} files, {link_count} relative links, 0 errors")
+    print(
+        f"Markdown: {len(markdown_files())} files, {link_count} relative links, "
+        f"{path_count} repository paths, 0 errors"
+    )
     return 0
 
 

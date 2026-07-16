@@ -23,6 +23,6 @@ outside the current change. Items are grouped by outcome, not by file.
   downstream consumer or learning objective justifies the contract.
 - Add focused model versions, dbt unit tests, and relationship tests where they
   teach compatibility or protect important business behavior.
-- Document the synthetic-data edge-case matrix and add optional scale fixtures
-  without making the default local workflow heavy.
-- Publish a first release and maintain a small community-facing roadmap.
+- Add optional scale fixtures without making the default local workflow heavy.
+- Maintain a small community-facing roadmap after the `v0.1.0` workshop
+  baseline.

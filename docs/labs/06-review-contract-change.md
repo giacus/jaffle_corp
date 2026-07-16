@@ -33,9 +33,33 @@ Create a short local design note containing:
 Do not implement the breaking change. This lab is about making the decision
 before making the diff.
 
-## Checkpoint
+## Expected Observations
 
-You are done when another engineer could turn your note into a safe pull request
-without rediscovering the model's consumers or contract.
+- A public model's YAML contract describes relation shape, while the manifest
+  shows consumers that may rely on more than that declared shape.
+- A change can compile locally yet still require downstream migration.
+- Focused validation commands should cover both the changed interface and known
+  consumers rather than rebuilding unrelated domains.
+
+## Common Failure Modes
+
+Do not count tests, macros, or exposures as executable downstream models when
+describing the migration blast radius; classify them separately. If the graph
+looks incomplete, regenerate the manifest before writing the review.
+
+## Workspace State and Cleanup
+
+Write the design note outside the repository unless you intend it to become a
+tracked proposal. This lab should not change model code or DuckDB data. The
+manifest is generated state and can be removed later with
+`scripts/clean.sh`.
+
+## Completion Rubric
+
+- [ ] The note names one compatible and one breaking change precisely.
+- [ ] Downstream models, tests, and exposures are identified and classified.
+- [ ] The breaking change has an ordered migration path and rollback boundary.
+- [ ] Another engineer could execute the proposed focused checks without
+      rediscovering the graph.
 
 Continue to [Lab 7: Observe snapshot history](07-observe-snapshot-history.md).

@@ -12,6 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DBT_GLOBAL_FILES = {
     ".sqlfluff",
+    "Taskfile.yml",
     "profiles.yml",
     "requirements.txt",
     "requirements.lock.txt",
@@ -19,6 +20,9 @@ DBT_GLOBAL_FILES = {
 DBT_SCRIPTS = {
     "scripts/bootstrap.sh",
     "scripts/check_column_docs.py",
+    "scripts/check_semantic_models.py",
+    "scripts/clean.sh",
+    "scripts/docs.sh",
     "scripts/env.sh",
     "scripts/generate_manifest.sh",
     "scripts/install_venv_hook.sh",

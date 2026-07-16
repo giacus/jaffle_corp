@@ -39,9 +39,34 @@ git diff --exit-code -- \
   projects/shared/seeds/merchandising/raw_price_adjustments.csv
 ```
 
-## Checkpoint
+## Expected Observations
 
-You are done when you have seen the expected failure once, restored the fixture,
-and can explain what row the test returned and why.
+- The controlled duplicate makes the staging model's uniqueness test fail while
+  the SQL model itself can still build.
+- The failing test query returns the duplicated identifier, which is more useful
+  evidence than the command's nonzero exit code alone.
+- Restoring and reseeding the raw input makes the same focused build pass.
+
+## Common Failure Modes
+
+Editing a row without creating an exact duplicate identifier will not exercise
+the intended uniqueness test. If the failure persists after restoration, make
+sure you reseeded with `--full-refresh` before rebuilding the staging model.
+
+## Workspace State and Cleanup
+
+The temporary seed mutation must not survive the lab. Delete its out-of-repo
+backup after the final `git diff --exit-code` passes. The restored seed remains
+loaded in DuckDB; keep it for Lab 5 or run `scripts/clean.sh` at the end of the
+session.
+
+## Completion Rubric
+
+- [ ] You captured one expected uniqueness failure and inspected its returned
+      row or compiled query.
+- [ ] The restored seed produces a passing focused build.
+- [ ] `git diff --exit-code` confirms the fixture is unchanged.
+- [ ] You can explain why this test detects a data violation rather than a SQL
+      compilation problem.
 
 Continue to [Lab 5: Protect a price-window invariant](05-add-behavior-test.md).

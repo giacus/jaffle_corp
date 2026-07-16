@@ -51,9 +51,33 @@ print(*sorted({node["package_name"] for node in manifest["nodes"].values()}), se
 PY
 ```
 
-## Checkpoint
+## Expected Observations
 
-You are done when you can locate a model's owner, source file, access, contract,
-and graph links without searching the repository manually.
+- The manifest combines resources from every installed project into one
+  machine-readable catalog.
+- `package_name`, `original_file_path`, access, contract configuration, and
+  dependency identifiers let you move between ownership, code, and lineage.
+- Public interfaces are a subset of all executable nodes; ephemeral and
+  protected models still appear in the artifact.
+
+## Common Failure Modes
+
+If `target/manifest.json` is missing or does not reflect recent edits, rerun
+`scripts/generate_manifest.sh`. If `jq` is unavailable, use the Python example;
+the learning objective is the artifact structure, not a particular CLI tool.
+
+## Workspace State and Cleanup
+
+The generated root `target/manifest.json` and per-project package/target folders
+are ignored build artifacts. Keep the manifest while exploring the later labs,
+or remove all local workshop state with `scripts/clean.sh`.
+
+## Completion Rubric
+
+- [ ] You can locate a model's owner and source file from the manifest.
+- [ ] You can distinguish public contracted models from internal graph nodes.
+- [ ] You can recover the parents and children of a named model from artifact
+      identifiers without manually searching SQL files.
+- [ ] Your answers come from a freshly generated manifest.
 
 Continue to [Lab 4: Prove a test can fail](04-prove-test-failure.md).

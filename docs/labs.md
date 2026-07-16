@@ -4,8 +4,9 @@ This is the guided lab route through `jaffle-corp`. Work from top to bottom when
 you want a coherent sequence, or open one lab directly when you already have its
 prerequisites.
 
-Every lab lives in its own file and follows the same shape: purpose, setup,
-work, checkpoint, and next step.
+Every lab lives in its own file and follows the same teaching contract: purpose,
+setup, work, expected observations, common failure modes, workspace state and cleanup,
+completion evidence, and next step.
 
 ## Choose a Route
 
@@ -25,6 +26,12 @@ source .venv/bin/activate
 
 Stay at the repository root unless a lab explicitly changes directories. Run
 dbt commands sequentially because all projects share one local DuckDB file.
+If you already completed the README start, Lab 1 tells you where to resume
+without repeating setup. For labs that change tracked files, use a disposable
+learning branch. Keep generated state while following the sequence: later labs
+reuse earlier seeds and builds. Use `scripts/clean.sh --keep-venv` only for an
+intentional restart, then rerun Lab 1 and the stated prerequisites.
+`scripts/clean.sh` removes everything generated when the session ends.
 
 ## The Journey
 
@@ -52,12 +59,13 @@ Use this map when a lab introduces an unfamiliar surface:
 | Code packages and local dbt Core fallbacks | `projects/*/packages.yml` |
 | Public domain-project dependencies | `projects/*/dependencies.yml` |
 | Domain ownership | `docs/architecture.md` |
+| Company flow and fixture edge cases | `docs/company-and-fixtures.md` |
 | Staging models | `projects/shared/models/staging/<domain>` |
 | Intermediate models | `projects/*/models/intermediate` |
 | Public marts and contracts | `projects/*/models/marts/<model>/<model>.yml` |
 | Singular tests | `projects/*/tests` |
 | Snapshots | `projects/platform/snapshots` |
-| Semantic models and metrics | `projects/*/models/semantic_models.yml` and `models/metrics.yml` |
+| Semantic models and metrics | `projects/*/models/semantic_models.yml` and `projects/*/models/metrics.yml` |
 | Downstream extension pattern | `projects/reliability` |
 | Full-project artifact | `target/manifest.json` from `scripts/generate_manifest.sh` |
 | End-to-end validation | `scripts/validate_repo.sh` |
@@ -77,5 +85,6 @@ own sake:
 - Explore a dbt unit test, an incremental model with a full-refresh comparison,
   or a state-based selection workflow.
 
-The labs provide expected observations, not an answer key. A green command is
-only part of completion; explain grain, ownership, and validation choices too.
+Expected observations are guardrails, not an answer key. A green command is only
+part of completion; each lab also asks for evidence about grain, ownership,
+business behavior, or validation choices.
