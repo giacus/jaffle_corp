@@ -35,7 +35,7 @@ add_project() {
 
 for file in "${changed_files[@]}"; do
   case "$file" in
-    requirements.txt|requirements.lock.txt|profiles.yml|.sqlfluff|scripts/bootstrap.sh|scripts/env.sh|scripts/generate_manifest.sh|scripts/install_venv_hook.sh|scripts/lint_sql_projects.sh|scripts/validate_changed.sh|scripts/validate_repo.sh|scripts/check_column_docs.py)
+    requirements.txt|requirements.lock.txt|profiles.yml|Taskfile.yml|.sqlfluff|scripts/bootstrap.sh|scripts/env.sh|scripts/generate_manifest.sh|scripts/install_venv_hook.sh|scripts/lint_sql_projects.sh|scripts/validate_changed.sh|scripts/validate_repo.sh|scripts/check_column_docs.py|scripts/check_semantic_models.py|scripts/clean.sh|scripts/docs.sh)
       global_change=true
       ;;
     projects/shared/*)

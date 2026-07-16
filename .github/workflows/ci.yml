@@ -73,6 +73,9 @@ jobs:
       - name: Check YAML
         run: python scripts/check_yaml.py
 
+      - name: Check Semantic Layer bindings
+        run: python scripts/check_semantic_models.py
+
       - name: Check shell and Python syntax
         run: |
           bash -n scripts/*.sh

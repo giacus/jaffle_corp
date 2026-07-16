@@ -1,14 +1,16 @@
 # MetricFlow Commands
 
-Run these from a built local checkout after installing `requirements.txt`,
-activating the patched `.venv`, running `dbt deps`, seeding the shared raw layer,
-and building the dbt projects in README order.
+Run these from a built local checkout after `scripts/bootstrap.sh` and the
+relevant domain builds. `scripts/validate_repo.sh` provides the canonical clean
+full build when you want every example available at once.
 
-The Semantic Layer files are intentionally compact:
+Each participating project keeps its Semantic Layer files together under
+`projects/<domain>/models/`:
 
-- `models/semantic_models.yml` contains semantic models.
-- `models/metrics.yml` contains metrics.
-- Add `models/saved_queries.yml` only when you want to version a reusable query.
+- `projects/<domain>/models/semantic_models.yml` contains semantic models.
+- `projects/<domain>/models/metrics.yml` contains metrics.
+- Add `projects/<domain>/models/saved_queries.yml` only when a repeated consumer
+  justifies a versioned query.
 
 No Python wrapper is required. Activate the local environment once, then run
 MetricFlow from the dbt project that owns the metrics you want to inspect:

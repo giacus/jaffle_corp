@@ -1,5 +1,21 @@
 {% docs jaffle_merchandising__stg_price_adjustments %}
-Staging model for `stg_price_adjustments` source cleanup and normalization.
+Typed source boundary for temporary product-store price adjustments.
+
+- **Grain:** one source row per `price_adjustment_id`.
+- **Business rules:** casts identifiers, timestamps, classifications, and minor
+  currency units without resolving publication windows or applying pricing
+  policy.
+- **Caveats:** a null end timestamp means open-ended, and this staging boundary
+  does not prevent invalid ranges or overlapping adjustments.
+
+A useful source-profile query checks the reason mix and open-ended records:
+
+```sql
+select adjustment_reason, count(*) as adjustments, count(*) filter (where effective_to_utc is null) as open_ended
+from {% raw %}{{ ref('stg_price_adjustments') }}{% endraw %}
+group by 1
+order by 1
+```
 {% enddocs %}
 
 {% docs shared__stg_price_adjustments__price_adjustment_id %}

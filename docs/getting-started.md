@@ -7,18 +7,29 @@ the shortest useful route, use the five-minute start in the repository README.
 
 You need:
 
-- Python 3.11 or 3.12;
-- Git and a terminal;
-- enough disk space for a small virtual environment and DuckDB database.
+- Python 3.11 (`.python-version` pins the tested 3.11.9 patch release);
+- Git, Bash or Zsh, and a terminal;
+- internet access for the initial Python and dbt package installation;
+- at least 1 GiB of free disk space for downloads and generated state.
 
-Python 3.14 is not supported by the pinned dependency stack. Notices about
-newer dbt or package releases are informational; do not upgrade dependencies
-individually during setup.
+The automated scripts are tested on macOS and Linux. On Windows, use WSL; native
+PowerShell is not currently a supported execution path. Other Python versions
+are not part of the `v0.1.0` workshop contract. Notices about newer dbt or
+package releases are informational; do not upgrade dependencies individually
+during setup.
 
 `requirements.txt` records the intentional top-level tool choices.
 `requirements.lock.txt` records the exact Python 3.11 environment used by
 bootstrap and CI. Update both together after testing an intentional dependency
 upgrade; do not hand-edit one transitive package in isolation.
+
+If Python 3.11 is not installed, use your normal Python manager. For example,
+with pyenv:
+
+```bash
+pyenv install 3.11.9
+pyenv local 3.11.9
+```
 
 Optional tools:
 
@@ -29,15 +40,19 @@ Optional tools:
 
 ## Automated Setup
 
-From the repository root:
+For a repeatable workshop, clone the tagged baseline:
 
 ```bash
+git clone --branch v0.1.0 https://github.com/giacus/jaffle_corp.git
+cd jaffle_corp
 scripts/bootstrap.sh
 source .venv/bin/activate
 ```
 
-Bootstrap creates or reuses `.venv`, installs pinned dependencies, installs the
-repo environment hook, resolves dbt packages, and smoke-compiles `platform`.
+Bootstrap creates or reuses a Python 3.11 `.venv`, installs pinned dependencies,
+installs the repo environment hook, resolves dbt packages, and smoke-compiles
+`platform`. A valid existing `.venv` is reused even when `python3.11` is not on
+the current shell's `PATH`.
 
 To compile every runnable project and generate the complete manifest during
 setup:
@@ -108,10 +123,13 @@ dbt debug --project-dir projects/platform
 dbt deps --project-dir projects/platform
 dbt seed --project-dir projects/platform
 dbt build --project-dir projects/platform --exclude resource_type:seed
+dbt show --project-dir projects/platform --select fct_orders --limit 5
 ```
 
 The explicit seed step matters in a new database. Staging models use `source()`,
-so dbt does not infer a seed-to-model dependency.
+so dbt does not infer a seed-to-model dependency. The final command should show
+five rows from the public order fact, including its stable key, source order ID,
+customer, store, and order timestamp.
 
 Inspect the public output:
 
@@ -122,7 +140,7 @@ dbt ls \
   --resource-type model
 ```
 
-## Full Validation and Manifest
+## Clean Rebuild, Validation, and Manifest
 
 Run the complete repository check from the root:
 
@@ -130,10 +148,12 @@ Run the complete repository check from the root:
 scripts/validate_repo.sh
 ```
 
-It cleans generated artifacts, resolves packages, lints SQL, loads synthetic
-sources, builds every project in dependency order, tests the downstream
-extension, validates representative Semantic Layer queries, and regenerates the
-complete manifest.
+This command is intentionally destructive to generated local state: it removes
+project targets, dbt packages, logs, and the default `jaffle_corp.duckdb` before
+rebuilding. Tracked source files and `.venv` are preserved. It then resolves
+packages, lints SQL, loads synthetic sources, builds every project in dependency
+order, tests the downstream extension, validates the Semantic Layer, and
+regenerates the complete manifest.
 
 To generate only the monorepo-wide artifact:
 
@@ -143,6 +163,48 @@ scripts/generate_manifest.sh
 
 The tooling-only `catalog` project writes `target/manifest.json`. Normal dbt
 commands continue to produce project-local manifests.
+
+## Browse the dbt Documentation Site
+
+After building the fixture, generate and serve the full-project documentation:
+
+```bash
+scripts/docs.sh generate
+scripts/docs.sh serve
+```
+
+Open <http://localhost:8080> to explore model descriptions, column docs,
+contracts, ownership, and lineage. Press `Ctrl-C` to stop the server. The site
+is generated under ignored `target/` state and is removed by the cleanup script.
+
+## Reset or Finish a Session
+
+Preview what the cleanup would remove:
+
+```bash
+scripts/clean.sh --dry-run
+```
+
+Keep generated state while following the sequential lab route because later
+labs reuse earlier seeds and builds. To intentionally restart the data work
+while keeping the Python environment, run:
+
+```bash
+scripts/clean.sh --keep-venv
+```
+
+Then rerun Lab 1 and any prerequisites named by the lab where you resume.
+
+At the end of a workshop, reclaim all generated local disk space, including
+`.venv`:
+
+```bash
+scripts/clean.sh
+```
+
+The cleanup script operates only on an explicit allowlist of ignored generated
+paths inside this checkout. It never removes tracked SQL, YAML, Markdown, seeds,
+or other source files.
 
 ## Troubleshooting
 
@@ -171,11 +233,25 @@ If DuckDB reports a lock on `jaffle_corp.duckdb`, stop the dbt, MetricFlow, or
 docs process using it. Run builds sequentially because the default local file
 allows one writer at a time.
 
+### Python 3.11 not found
+
+If bootstrap finds an older system Python, install Python 3.11 or pass the
+absolute interpreter path explicitly:
+
+```bash
+PYTHON=/absolute/path/to/python3.11 scripts/bootstrap.sh
+```
+
+If an existing `.venv` was created with another Python version, run
+`scripts/clean.sh`, then bootstrap again.
+
 ## Automation Notes
 
 - Start a shell with `source .venv/bin/activate`.
 - Use `scripts/validate_repo.sh` as the canonical full health check.
 - Use `scripts/generate_manifest.sh` when only the combined artifact matters.
+- Use `scripts/docs.sh generate` and `scripts/docs.sh serve` for local dbt docs.
+- Use `scripts/clean.sh` when the workshop is over.
 - Run project builds sequentially.
 - Avoid per-project database or profile overrides unless the test explicitly
   requires isolation.

@@ -7,9 +7,9 @@ semantic_models:
     defaults:
       agg_time_dimension: recognized_date
     entities:
-      - name: order_margin
+      - name: order_revenue
         type: primary
-        expr: order_margin_waterfall_key
+        expr: order_revenue_key
       - name: order
         type: foreign
         expr: order_id

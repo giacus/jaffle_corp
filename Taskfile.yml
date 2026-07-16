@@ -20,7 +20,7 @@ tasks:
       - scripts/bootstrap.sh --full
 
   validate:
-    desc: Run the complete repository validator
+    desc: Reset generated state and validate the complete repository
     cmds:
       - scripts/validate_repo.sh
 
@@ -28,6 +28,26 @@ tasks:
     desc: Generate the full-project dbt manifest
     cmds:
       - scripts/generate_manifest.sh
+
+  docs:
+    desc: Generate the full-project dbt documentation site
+    cmds:
+      - scripts/docs.sh generate
+
+  docs-serve:
+    desc: Serve generated dbt documentation at localhost:8080
+    cmds:
+      - scripts/docs.sh serve
+
+  clean-state:
+    desc: Remove generated data and artifacts while preserving .venv
+    cmds:
+      - scripts/clean.sh --keep-venv
+
+  clean:
+    desc: Remove all generated local state, including .venv
+    cmds:
+      - scripts/clean.sh
 
   lint:
     desc: Lint SQL in every dbt project

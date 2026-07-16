@@ -1,5 +1,22 @@
 {% docs jaffle_finance__int_order_payment_allocations %}
-Intermediate model for `int_order_payment_allocations` transformation logic.
+Finance policy layer that converts public platform payment activity into a
+recognition-ready order record.
+
+- **Grain:** one row per `order_id`.
+- **Business rules:** infers an order-level USD conversion ratio, translates
+  captured and refunded amounts, and assigns one revenue-quality status with a
+  deliberate precedence from payment risk through pending.
+- **Caveats:** a zero order total produces a zero conversion ratio, and the
+  inferred ratio is a fixture simplification rather than transaction-level FX.
+
+A useful review query makes the status precedence and monetary exposure visible:
+
+```sql
+select revenue_quality_status, count(*) as orders, sum(captured_amount_usd) as captured_usd, sum(refunded_amount_usd) as refunded_usd
+from {% raw %}{{ ref('int_order_payment_allocations') }}{% endraw %}
+group by 1
+order by 1
+```
 {% enddocs %}
 
 {% docs finance__int_order_payment_allocations__order_id %}

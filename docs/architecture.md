@@ -4,6 +4,9 @@
 fixture. It demonstrates public interfaces and project boundaries without
 pretending that local package installation is the same as deployed dbt Mesh.
 
+For the fictional company flow and the intentional data edge cases behind this
+graph, read [Company and Fixture Guide](company-and-fixtures.md).
+
 The `jaffle_shared` project owns the complete ingestion boundary: raw fixture
 seeds, source definitions, domain-organized staging models, cross-project
 macros, and schema behavior. It is deliberately installed as a code package.

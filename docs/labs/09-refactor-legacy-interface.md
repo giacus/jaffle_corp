@@ -36,9 +36,35 @@ Capture the row count and representative business totals before editing SQL.
 
 Rerun the focused build and select your characterization test by name.
 
-## Checkpoint
+## Expected Observations
 
-You are done when the before/after evidence is explicit, the compatibility test
-passes, and you can explain which awkward behavior was intentionally preserved.
+- The legacy output mixes awkward names and business semantics that downstream
+  exposure consumers may nevertheless rely on.
+- A characterization test preserves observed behavior without claiming that the
+  behavior is ideal.
+- An adapter can offer a clearer interface while isolating compatibility logic
+  from new domain logic.
+
+## Common Failure Modes
+
+Do not use a row count alone as proof of equivalence; capture representative
+totals at the model grain and account for null and currency behavior. Avoid
+silently renaming or recasting columns still referenced by the exposure.
+
+## Workspace State and Cleanup
+
+Do this exercise on a learning branch. The replacement model,
+characterization test, and documentation are authored code and are never removed
+by the local-state cleanup script. Keep or discard those changes deliberately;
+use `scripts/clean.sh` only to remove generated data and artifacts.
+
+## Completion Rubric
+
+- [ ] Baseline evidence includes row count and business totals at the declared
+      grain.
+- [ ] The characterization test fails for a meaningful incompatible change.
+- [ ] The replacement or adapter improves a named problem without breaking the
+      behavior you chose to preserve.
+- [ ] Focused builds and tests pass, and the compatibility decision is recorded.
 
 Continue to [Lab 10: Build a cross-domain capstone](10-cross-domain-capstone.md).

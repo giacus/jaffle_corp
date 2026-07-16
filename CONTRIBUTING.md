@@ -34,9 +34,15 @@ source .venv/bin/activate
 scripts/validate_repo.sh
 ```
 
-The bootstrap script creates or repairs `.venv`, installs dependencies, installs
-the activation hook, installs dbt packages where needed, and verifies that
-`dbt compile` can find the repo-local profile for `jaffle_platform`. Use
+The validator is a clean rebuild: it removes generated dbt artifacts and the
+default local DuckDB database before checking the fixture, while preserving
+tracked source files and `.venv`. Preview or remove all end-of-session state
+with `scripts/clean.sh --dry-run` or `scripts/clean.sh`.
+
+The bootstrap script creates or reuses a Python 3.11 `.venv`, installs pinned
+dependencies and the activation hook, resolves dbt packages where needed, and
+verifies that `dbt compile` can find the repo-local profile for
+`jaffle_platform`. Use
 `scripts/bootstrap.sh --full` to compile every runnable dbt project
 and generate the full manifest during setup. The validation script installs dbt
 project dependencies, lints SQL project-by-project, seeds local DuckDB sources,

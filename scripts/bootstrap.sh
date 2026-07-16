@@ -36,8 +36,27 @@ esac
 
 PYTHON_BIN="${PYTHON:-}"
 
+if [[ -d .venv && ! -x .venv/bin/python ]]; then
+  echo "Existing .venv is incomplete or its Python interpreter is unavailable." >&2
+  echo "Run scripts/clean.sh, then rerun bootstrap with Python 3.11." >&2
+  exit 1
+fi
+
+if [[ -x .venv/bin/python ]]; then
+  existing_version="$(.venv/bin/python -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')"
+  if [[ "$existing_version" != "3.11" ]]; then
+    echo "Existing .venv uses unsupported Python $existing_version." >&2
+    echo "Run scripts/clean.sh, then bootstrap again with Python 3.11." >&2
+    exit 1
+  fi
+  if [[ -z "$PYTHON_BIN" ]]; then
+    PYTHON_BIN="$ROOT_DIR/.venv/bin/python"
+    echo "Reusing the existing Python $existing_version virtual environment."
+  fi
+fi
+
 if [[ -z "$PYTHON_BIN" ]]; then
-  for candidate in python3.11 python3.12 python3; do
+  for candidate in python3.11 python3; do
     if command -v "$candidate" >/dev/null 2>&1; then
       PYTHON_BIN="$candidate"
       break
@@ -46,16 +65,21 @@ if [[ -z "$PYTHON_BIN" ]]; then
 fi
 
 if [[ -z "$PYTHON_BIN" ]]; then
-  echo "Could not find Python. Install Python 3.11 or 3.12, then rerun this script." >&2
+  echo "Could not find Python 3.11. Install it, then rerun this script." >&2
+  exit 1
+fi
+
+if ! command -v "$PYTHON_BIN" >/dev/null 2>&1; then
+  echo "Python interpreter is not executable: $PYTHON_BIN" >&2
   exit 1
 fi
 
 python_version="$("$PYTHON_BIN" -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')"
 case "$python_version" in
-  3.11|3.12) ;;
+  3.11) ;;
   *)
     echo "Unsupported Python version: $python_version" >&2
-    echo "Use Python 3.11 or 3.12. Example: PYTHON=python3.11 scripts/bootstrap.sh" >&2
+    echo "Use Python 3.11. Example: PYTHON=python3.11 scripts/bootstrap.sh" >&2
     exit 1
     ;;
 esac
