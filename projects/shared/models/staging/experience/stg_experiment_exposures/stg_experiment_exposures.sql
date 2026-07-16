@@ -8,4 +8,4 @@ select
     cast(surface as varchar) as surface,
     cast(assignment_reason as varchar) as assignment_reason,
     cast(updated_at_utc as timestamp) as updated_at_utc
-from {{ source('jaffle_experience_app', 'raw_experiment_exposures') }}
+from {{ source('experience_app', 'raw_experiment_exposures') }}

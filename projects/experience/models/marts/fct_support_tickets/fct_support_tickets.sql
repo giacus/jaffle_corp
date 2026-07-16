@@ -1,5 +1,5 @@
 select
-    {{ jaffle_shared.stable_hash(['support_ticket_id']) }} as support_ticket_key,
+    {{ shared.stable_hash(['support_ticket_id']) }} as support_ticket_key,
     support_ticket_id,
     customer_id,
     order_id,

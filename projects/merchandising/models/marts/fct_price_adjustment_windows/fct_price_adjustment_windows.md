@@ -1,4 +1,4 @@
-{% docs jaffle_merchandising__fct_price_adjustment_windows %}
+{% docs merchandising__fct_price_adjustment_windows %}
 Public interface for evaluating a temporary product-store price against the menu
 publication active when the adjustment begins.
 

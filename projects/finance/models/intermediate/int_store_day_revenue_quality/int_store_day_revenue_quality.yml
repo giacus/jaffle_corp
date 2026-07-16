@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: int_store_day_revenue_quality
-    description: "{{ doc('jaffle_finance__int_store_day_revenue_quality') }}"
+    description: "{{ doc('finance__int_store_day_revenue_quality') }}"
 
     columns:
       - name: store_id

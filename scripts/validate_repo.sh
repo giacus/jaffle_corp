@@ -39,7 +39,7 @@ done
 
 scripts/lint_sql_projects.sh
 
-# jaffle_shared owns every raw fixture seed. Seeding through one importing
+# shared owns every raw fixture seed. Seeding through one importing
 # project loads the complete raw layer once without repeating it per domain.
 dbt seed --project-dir "$SEED_PROJECT" --profiles-dir .
 
@@ -54,7 +54,7 @@ for project in "${EXTENSION_PROJECTS[@]}"; do
   dbt build \
     --project-dir "$project" \
     --profiles-dir . \
-    --select jaffle_reliability \
+    --select reliability \
     --exclude resource_type:seed
 done
 

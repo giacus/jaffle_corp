@@ -1,4 +1,4 @@
-{% docs jaffle_finance__int_order_item_costs %}
+{% docs finance__int_order_item_costs %}
 Item-level bridge between the public platform sales interfaces and Finance cost
 estimation.
 

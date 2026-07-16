@@ -7,4 +7,4 @@ select
     cast(target_net_revenue_usd as double) as target_net_revenue_usd,
     cast(target_margin_usd as double) as target_margin_usd,
     cast(owner_role as varchar) as owner_role
-from {{ source('jaffle_merchandising_app', 'raw_menu_goals') }}
+from {{ source('merchandising_app', 'raw_menu_goals') }}

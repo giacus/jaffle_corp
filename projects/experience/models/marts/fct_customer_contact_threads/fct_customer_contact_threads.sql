@@ -1,5 +1,5 @@
 select
-    {{ jaffle_shared.stable_hash(['support_ticket_id']) }} as contact_thread_key,
+    {{ shared.stable_hash(['support_ticket_id']) }} as contact_thread_key,
     support_ticket_id,
     min(first_contact_at_utc) as first_contact_at_utc,
     max(most_recent_contact_at_utc) as most_recent_contact_at_utc,

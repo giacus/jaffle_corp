@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: dim_product_pairings
-    description: "{{ doc('jaffle_merchandising__dim_product_pairings') }}"
+    description: "{{ doc('merchandising__dim_product_pairings') }}"
     config:
       group: merchandising
       access: public

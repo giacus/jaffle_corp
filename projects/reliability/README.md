@@ -16,13 +16,13 @@ Then iterate on only the extension after the upstream projects have been built:
 
 ```bash
 dbt deps --project-dir projects/reliability
-dbt build --project-dir projects/reliability --select jaffle_reliability
+dbt build --project-dir projects/reliability --select reliability
 ```
 
 The extension currently joins:
 
-- `jaffle_finance.fct_store_day_revenue_quality`
-- `jaffle_merchandising.fct_product_store_day_availability`
-- `jaffle_planning.fct_store_day_capacity_plan`
+- `finance.fct_store_day_revenue_quality`
+- `merchandising.fct_product_store_day_availability`
+- `planning.fct_store_day_capacity_plan`
 
 Those are all public contracted upstream models.

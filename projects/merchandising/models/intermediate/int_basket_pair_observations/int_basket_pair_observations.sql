@@ -6,8 +6,8 @@ with item_pairs as (
         left_items.ordered_date_utc,
         left_items.item_total_major as anchor_item_total_major,
         right_items.item_total_major as paired_item_total_major
-    from {{ ref('jaffle_platform', 'fct_order_items') }} as left_items
-    inner join {{ ref('jaffle_platform', 'fct_order_items') }} as right_items
+    from {{ ref('platform', 'fct_order_items') }} as left_items
+    inner join {{ ref('platform', 'fct_order_items') }} as right_items
         on
             left_items.order_id = right_items.order_id
             and left_items.product_id < right_items.product_id
@@ -18,7 +18,7 @@ pairings as (
 )
 
 select
-    {{ jaffle_shared.stable_hash(['item_pairs.order_id', 'item_pairs.anchor_product_id', 'item_pairs.paired_product_id']) }} as basket_pair_observation_key,
+    {{ shared.stable_hash(['item_pairs.order_id', 'item_pairs.anchor_product_id', 'item_pairs.paired_product_id']) }} as basket_pair_observation_key,
     item_pairs.order_id,
     item_pairs.anchor_product_id,
     item_pairs.paired_product_id,

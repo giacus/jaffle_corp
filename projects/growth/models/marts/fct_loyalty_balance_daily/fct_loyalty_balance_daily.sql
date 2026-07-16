@@ -1,5 +1,5 @@
 select
-    {{ jaffle_shared.stable_hash(['customer_id', 'event_date_utc']) }} as loyalty_balance_daily_key,
+    {{ shared.stable_hash(['customer_id', 'event_date_utc']) }} as loyalty_balance_daily_key,
     customer_id,
     event_date_utc,
     points_delta,

@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_menu_price_test_results
-    description: "{{ doc('jaffle_experience__fct_menu_price_test_results') }}"
+    description: "{{ doc('experience__fct_menu_price_test_results') }}"
     config:
       group: experience
       access: public

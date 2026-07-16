@@ -1,4 +1,4 @@
-name: jaffle_merchandising
+name: merchandising
 version: "0.1.0"
 config-version: 2
 
@@ -24,9 +24,9 @@ vars:
   availability_thin_threshold: 0.50
 
 models:
-  jaffle_merchandising:
+  merchandising:
     +materialized: view
-    +post-hook: "{{ jaffle_shared.audit_noop() }}"
+    +post-hook: "{{ shared.audit_noop() }}"
     +meta:
       domain: merchandising
       source_system: synthetic_jaffle_corp

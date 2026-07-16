@@ -1,5 +1,5 @@
 with revenue as (
-    select * from {{ ref('jaffle_finance', 'fct_order_revenue') }}
+    select * from {{ ref('finance', 'fct_order_revenue') }}
 ),
 
 tickets as (
@@ -8,11 +8,11 @@ tickets as (
         normalized_issue_type,
         resolution_type,
         concession_major
-    from {{ ref('jaffle_experience', 'fct_support_tickets') }}
+    from {{ ref('experience', 'fct_support_tickets') }}
 )
 
 select
-    {{ jaffle_shared.stable_hash(['revenue.order_id', 'coalesce(tickets.normalized_issue_type, revenue.revenue_quality_status)']) }}
+    {{ shared.stable_hash(['revenue.order_id', 'coalesce(tickets.normalized_issue_type, revenue.revenue_quality_status)']) }}
         as old_refund_bridge_key,
     revenue.order_id as order_no,
     revenue.recognized_date as business_dt,

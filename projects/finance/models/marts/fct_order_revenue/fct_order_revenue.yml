@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_order_revenue
-    description: "{{ doc('jaffle_finance__fct_order_revenue') }}"
+    description: "{{ doc('finance__fct_order_revenue') }}"
     config:
       group: finance
       access: public

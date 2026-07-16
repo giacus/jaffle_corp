@@ -7,4 +7,4 @@ select
     cast(effective_from_utc as timestamp) as effective_from_utc,
     cast(nullif(cast(effective_to_utc as varchar), '') as timestamp) as effective_to_utc,
     cast(reason_code as varchar) as reason_code
-from {{ source('jaffle_merchandising_app', 'raw_substitution_rules') }}
+from {{ source('merchandising_app', 'raw_substitution_rules') }}

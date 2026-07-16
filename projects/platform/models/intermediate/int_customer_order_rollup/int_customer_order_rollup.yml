@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: int_customer_order_rollup
-    description: "{{ doc('jaffle_platform__int_customer_order_rollup') }}"
+    description: "{{ doc('platform__int_customer_order_rollup') }}"
 
     columns:
       - name: customer_id

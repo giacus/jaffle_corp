@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: stg_promo_events
-    description: "{{ doc('jaffle_platform__stg_promo_events') }}"
+    description: "{{ doc('platform__stg_promo_events') }}"
     columns:
       - name: promo_event_id
         description: "{{ doc('shared__stg_promo_events__promo_event_id') }}"

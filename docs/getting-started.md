@@ -14,7 +14,7 @@ You need:
 
 The automated scripts are tested on macOS and Linux. On Windows, use WSL; native
 PowerShell is not currently a supported execution path. Other Python versions
-are not part of the `v0.1.0` workshop contract. Notices about newer dbt or
+are not part of the tested workshop contract. Notices about newer dbt or
 package releases are informational; do not upgrade dependencies individually
 during setup.
 
@@ -40,14 +40,18 @@ Optional tools:
 
 ## Automated Setup
 
-For a repeatable workshop, clone the tagged baseline:
+Clone the current repository:
 
 ```bash
-git clone --branch v0.1.0 https://github.com/giacus/jaffle_corp.git
+git clone https://github.com/giacus/jaffle_corp.git
 cd jaffle_corp
 scripts/bootstrap.sh
 source .venv/bin/activate
 ```
+
+For a frozen workshop cohort, select a release from the repository's
+[release page](https://github.com/giacus/jaffle_corp/releases) and add
+`--branch <release-tag>` to the clone command.
 
 Bootstrap creates or reuses a Python 3.11 `.venv`, installs pinned dependencies,
 installs the repo environment hook, resolves dbt packages, and smoke-compiles

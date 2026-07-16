@@ -1,4 +1,4 @@
-name: jaffle_legacy
+name: legacy
 version: "0.1.0"
 config-version: 2
 
@@ -24,7 +24,7 @@ vars:
   legacy_default_currency: "USD"
 
 models:
-  jaffle_legacy:
+  legacy:
     +materialized: table
     +meta:
       domain: legacy

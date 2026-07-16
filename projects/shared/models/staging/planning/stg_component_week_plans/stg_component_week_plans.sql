@@ -8,4 +8,4 @@ select
     cast(planned_waste_quantity as double) as planned_waste_quantity,
     cast(scenario_name as varchar) as scenario_name,
     cast(updated_at_utc as timestamp) as updated_at_utc
-from {{ source('jaffle_planning_app', 'raw_component_week_plans') }}
+from {{ source('planning_app', 'raw_component_week_plans') }}

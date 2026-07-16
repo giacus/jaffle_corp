@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: dim_operating_calendar
-    description: "{{ doc('jaffle_planning__dim_operating_calendar') }}"
+    description: "{{ doc('planning__dim_operating_calendar') }}"
     config:
       group: planning
       access: public

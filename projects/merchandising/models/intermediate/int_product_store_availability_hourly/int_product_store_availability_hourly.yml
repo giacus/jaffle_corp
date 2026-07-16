@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: int_product_store_availability_hourly
-    description: "{{ doc('jaffle_merchandising__int_product_store_availability_hourly') }}"
+    description: "{{ doc('merchandising__int_product_store_availability_hourly') }}"
 
     columns:
       - name: product_store_hour_key

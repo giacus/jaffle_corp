@@ -2,11 +2,11 @@ version: 2
 
 models:
   - name: legacy_daily_store_rollup
-    description: "{{ doc('jaffle_legacy__legacy_daily_store_rollup') }}"
+    description: "{{ doc('legacy__legacy_daily_store_rollup') }}"
     config:
       meta:
         migration_owner: analytics-modernization@jaffle.example
-        replacement_target: jaffle_finance.fct_daily_store_pnl
+        replacement_target: finance.fct_daily_store_pnl
     columns:
       - name: legacy_store_day_key
         description: "{{ doc('legacy__legacy_daily_store_rollup__legacy_store_day_key') }}"

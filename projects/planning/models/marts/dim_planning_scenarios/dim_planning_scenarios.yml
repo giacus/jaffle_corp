@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: dim_planning_scenarios
-    description: "{{ doc('jaffle_planning__dim_planning_scenarios') }}"
+    description: "{{ doc('planning__dim_planning_scenarios') }}"
     config:
       group: planning
       access: public

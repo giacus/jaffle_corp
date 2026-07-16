@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: int_ticket_sla_events
-    description: "{{ doc('jaffle_experience__int_ticket_sla_events') }}"
+    description: "{{ doc('experience__int_ticket_sla_events') }}"
 
     columns:
       - name: support_ticket_id

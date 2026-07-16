@@ -1,5 +1,5 @@
 with locations as (
-    select * from {{ ref('jaffle_platform', 'dim_locations') }}
+    select * from {{ ref('platform', 'dim_locations') }}
 ),
 
 shifts as (

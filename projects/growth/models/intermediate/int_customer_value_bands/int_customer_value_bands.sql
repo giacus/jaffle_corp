@@ -1,5 +1,5 @@
 with customers as (
-    select * from {{ ref('jaffle_platform', 'dim_customers') }}
+    select * from {{ ref('platform', 'dim_customers') }}
 ),
 
 finance as (
@@ -9,7 +9,7 @@ finance as (
         sum(net_revenue_usd) as lifetime_net_revenue_usd,
         sum(recipe_margin_usd) as lifetime_recipe_margin_usd,
         max(recognized_date) as most_recent_recognized_date
-    from {{ ref('jaffle_finance', 'fct_order_margin_waterfall') }}
+    from {{ ref('finance', 'fct_order_margin_waterfall') }}
     group by 1
 ),
 
@@ -19,7 +19,7 @@ support as (
         count(*) as support_ticket_count,
         sum(case when met_first_response_sla then 1 else 0 end) as first_response_sla_met_count,
         sum(concession_major) as concession_major
-    from {{ ref('jaffle_experience', 'fct_support_tickets') }}
+    from {{ ref('experience', 'fct_support_tickets') }}
     group by 1
 ),
 
@@ -28,7 +28,7 @@ experiments as (
         customer_id,
         count(*) as exposure_count,
         sum(case when converted_7d then 1 else 0 end) as converted_exposure_count
-    from {{ ref('jaffle_experience', 'fct_experiment_outcomes') }}
+    from {{ ref('experience', 'fct_experiment_outcomes') }}
     group by 1
 )
 

@@ -38,4 +38,4 @@ models:
       - name: updated_at_utc
         description: "{{ doc('shared__stg_customer_contacts__updated_at_utc') }}"
         data_type: timestamp
-    description: "{{ doc('jaffle_experience__stg_customer_contacts') }}"
+    description: "{{ doc('experience__stg_customer_contacts') }}"

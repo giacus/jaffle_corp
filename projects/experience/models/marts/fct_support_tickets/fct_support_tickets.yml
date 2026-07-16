@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_support_tickets
-    description: "{{ doc('jaffle_experience__fct_support_tickets') }}"
+    description: "{{ doc('experience__fct_support_tickets') }}"
     config:
       group: experience
       access: public

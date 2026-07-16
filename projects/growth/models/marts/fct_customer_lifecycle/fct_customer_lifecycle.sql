@@ -1,5 +1,5 @@
 select
-    {{ jaffle_shared.stable_hash(['customer_id', 'lifecycle_stage']) }} as customer_lifecycle_key,
+    {{ shared.stable_hash(['customer_id', 'lifecycle_stage']) }} as customer_lifecycle_key,
     customer_id,
     customer_name,
     email_domain,

@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: int_recipe_component_costs
-    description: "{{ doc('jaffle_supply__int_recipe_component_costs') }}"
+    description: "{{ doc('supply__int_recipe_component_costs') }}"
 
     columns:
       - name: recipe_component_key

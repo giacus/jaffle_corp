@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_campaign_incrementality
-    description: "{{ doc('jaffle_growth__fct_campaign_incrementality') }}"
+    description: "{{ doc('growth__fct_campaign_incrementality') }}"
     config:
       group: growth
       access: public

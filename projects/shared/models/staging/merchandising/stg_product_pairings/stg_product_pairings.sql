@@ -6,4 +6,4 @@ select
     cast(effective_from_utc as timestamp) as effective_from_utc,
     cast(nullif(cast(effective_to_utc as varchar), '') as timestamp) as effective_to_utc,
     cast(pairing_rank as integer) as pairing_rank
-from {{ source('jaffle_merchandising_app', 'raw_product_pairings') }}
+from {{ source('merchandising_app', 'raw_product_pairings') }}

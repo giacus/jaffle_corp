@@ -11,7 +11,7 @@
 {% endmacro %}
 
 {% macro absolute_forecast_error(actual_expr, forecast_expr) %}
-    abs({{ jaffle_shared.forecast_error(actual_expr, forecast_expr) }})
+    abs({{ shared.forecast_error(actual_expr, forecast_expr) }})
 {% endmacro %}
 
 {% macro forecast_accuracy_band(absolute_percentage_error_expr) %}

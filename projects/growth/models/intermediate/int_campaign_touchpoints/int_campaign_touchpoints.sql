@@ -1,5 +1,5 @@
 with promo_events as (
-    select * from {{ ref('jaffle_platform', 'fct_promo_events') }}
+    select * from {{ ref('platform', 'fct_promo_events') }}
 ),
 
 orders as (
@@ -10,7 +10,7 @@ orders as (
         is_completed_order,
         order_total_major,
         order_total_usd
-    from {{ ref('jaffle_platform', 'fct_orders') }}
+    from {{ ref('platform', 'fct_orders') }}
 ),
 
 revenue as (
@@ -18,7 +18,7 @@ revenue as (
         order_id,
         net_revenue_usd,
         estimated_gross_margin_usd
-    from {{ ref('jaffle_finance', 'fct_order_revenue') }}
+    from {{ ref('finance', 'fct_order_revenue') }}
 )
 
 select

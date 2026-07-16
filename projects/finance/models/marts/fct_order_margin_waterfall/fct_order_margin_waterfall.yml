@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_order_margin_waterfall
-    description: "{{ doc('jaffle_finance__fct_order_margin_waterfall') }}"
+    description: "{{ doc('finance__fct_order_margin_waterfall') }}"
     config:
       group: finance
       access: public

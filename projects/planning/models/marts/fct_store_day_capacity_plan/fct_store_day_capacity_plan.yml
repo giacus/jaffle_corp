@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_store_day_capacity_plan
-    description: "{{ doc('jaffle_planning__fct_store_day_capacity_plan') }}"
+    description: "{{ doc('planning__fct_store_day_capacity_plan') }}"
     config:
       group: planning
       access: public

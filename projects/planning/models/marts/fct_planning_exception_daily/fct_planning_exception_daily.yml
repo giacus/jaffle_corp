@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_planning_exception_daily
-    description: "{{ doc('jaffle_planning__fct_planning_exception_daily') }}"
+    description: "{{ doc('planning__fct_planning_exception_daily') }}"
     config:
       group: planning
       access: public

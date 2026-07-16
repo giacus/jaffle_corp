@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_experiment_conversion
-    description: "{{ doc('jaffle_growth__fct_experiment_conversion') }}"
+    description: "{{ doc('growth__fct_experiment_conversion') }}"
     config:
       group: growth
       access: public

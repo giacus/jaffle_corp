@@ -1,5 +1,5 @@
 select
-    {{ jaffle_shared.stable_hash(['exposure_id']) }} as experiment_outcome_key,
+    {{ shared.stable_hash(['exposure_id']) }} as experiment_outcome_key,
     exposure_id,
     customer_id,
     experiment_id,

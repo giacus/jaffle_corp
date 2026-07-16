@@ -1,5 +1,5 @@
 select
-    {{ jaffle_shared.stable_hash(['customer_id', 'value_band', 'care_profile']) }} as customer_value_segment_key,
+    {{ shared.stable_hash(['customer_id', 'value_band', 'care_profile']) }} as customer_value_segment_key,
     customer_id,
     customer_name,
     loyalty_region,

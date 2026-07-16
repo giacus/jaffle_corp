@@ -1,4 +1,4 @@
-name: jaffle_shared
+name: shared
 version: "0.1.0"
 config-version: 2
 
@@ -22,9 +22,9 @@ clean-targets:
   - dbt_packages
 
 models:
-  jaffle_shared:
+  shared:
     +materialized: view
-    +post-hook: "{{ jaffle_shared.audit_noop() }}"
+    +post-hook: "{{ shared.audit_noop() }}"
     staging:
       platform:
         +schema: stg
@@ -69,6 +69,6 @@ models:
           domain: planning
           source_system: synthetic_jaffle_corp
 seeds:
-  jaffle_shared:
+  shared:
     +schema: raw
     +quote_columns: false

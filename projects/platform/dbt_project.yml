@@ -1,4 +1,4 @@
-name: jaffle_platform
+name: platform
 version: "0.1.0"
 config-version: 2
 
@@ -24,9 +24,9 @@ vars:
   window_hours_back: 6
 
 models:
-  jaffle_platform:
+  platform:
     +materialized: view
-    +post-hook: "{{ jaffle_shared.audit_noop() }}"
+    +post-hook: "{{ shared.audit_noop() }}"
     +meta:
       domain: platform
       source_system: synthetic_jaffle_corp

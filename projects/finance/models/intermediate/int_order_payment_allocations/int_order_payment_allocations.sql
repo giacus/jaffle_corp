@@ -1,5 +1,5 @@
 with orders as (
-    select * from {{ ref('jaffle_platform', 'fct_orders') }}
+    select * from {{ ref('platform', 'fct_orders') }}
 ),
 
 order_ratios as (

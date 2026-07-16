@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_incident_reviews
-    description: "{{ doc('jaffle_store_ops__fct_incident_reviews') }}"
+    description: "{{ doc('store_ops__fct_incident_reviews') }}"
     config:
       group: store_ops
       access: public

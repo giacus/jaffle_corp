@@ -46,4 +46,4 @@ models:
       - name: updated_at_utc
         description: "{{ doc('shared__stg_order_items__updated_at_utc') }}"
         data_type: timestamp
-    description: "{{ doc('jaffle_platform__stg_order_items') }}"
+    description: "{{ doc('platform__stg_order_items') }}"

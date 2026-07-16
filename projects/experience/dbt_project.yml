@@ -1,4 +1,4 @@
-name: jaffle_experience
+name: experience
 version: "0.1.0"
 config-version: 2
 
@@ -25,9 +25,9 @@ vars:
   ticket_resolution_target_minutes: 120
 
 models:
-  jaffle_experience:
+  experience:
     +materialized: view
-    +post-hook: "{{ jaffle_shared.audit_noop() }}"
+    +post-hook: "{{ shared.audit_noop() }}"
     +meta:
       domain: experience
       source_system: synthetic_jaffle_corp

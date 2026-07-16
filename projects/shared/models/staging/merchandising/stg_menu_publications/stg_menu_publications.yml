@@ -48,4 +48,4 @@ models:
       - name: updated_at_utc
         description: "{{ doc('shared__stg_menu_publications__updated_at_utc') }}"
         data_type: timestamp
-    description: "{{ doc('jaffle_merchandising__stg_menu_publications') }}"
+    description: "{{ doc('merchandising__stg_menu_publications') }}"

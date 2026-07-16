@@ -1,5 +1,5 @@
 select
-    {{ jaffle_shared.stable_hash(['order_item_id', 'order_id']) }} as order_item_key,
+    {{ shared.stable_hash(['order_item_id', 'order_id']) }} as order_item_key,
     order_item_id,
     order_id,
     ordered_date_utc,

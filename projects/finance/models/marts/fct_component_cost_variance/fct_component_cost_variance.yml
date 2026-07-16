@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_component_cost_variance
-    description: "{{ doc('jaffle_finance__fct_component_cost_variance') }}"
+    description: "{{ doc('finance__fct_component_cost_variance') }}"
     config:
       group: finance
       access: public

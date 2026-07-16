@@ -1,5 +1,5 @@
 select
-    {{ jaffle_shared.stable_hash(['shop', 'business_dt']) }} as legacy_store_day_key,
+    {{ shared.stable_hash(['shop', 'business_dt']) }} as legacy_store_day_key,
     shop,
     business_dt,
     money_kind,

@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: dim_components
-    description: "{{ doc('jaffle_supply__dim_components') }}"
+    description: "{{ doc('supply__dim_components') }}"
     config:
       group: supply
       access: public

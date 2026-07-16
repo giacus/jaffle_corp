@@ -48,4 +48,4 @@ models:
       - name: updated_at_utc
         description: "{{ doc('shared__stg_service_incidents__updated_at_utc') }}"
         data_type: timestamp
-    description: "{{ doc('jaffle_store_ops__stg_service_incidents') }}"
+    description: "{{ doc('store_ops__stg_service_incidents') }}"

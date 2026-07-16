@@ -1,6 +1,6 @@
 # Jaffle Catalog
 
-`jaffle_catalog` is a tooling project, not a business domain. It imports every
+`catalog` is a tooling project, not a business domain. It imports every
 local dbt project so dbt can parse their resources into one canonical artifact:
 
 ```text

@@ -29,4 +29,4 @@ models:
       - name: pairing_rank
         description: "{{ doc('shared__stg_product_pairings__pairing_rank') }}"
         data_type: integer
-    description: "{{ doc('jaffle_merchandising__stg_product_pairings') }}"
+    description: "{{ doc('merchandising__stg_product_pairings') }}"

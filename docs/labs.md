@@ -78,7 +78,7 @@ After the guided labs, extend the fixture without adding complexity for its
 own sake:
 
 - Add a variable-controlled threshold and prove both branches.
-- Extract a repeated business expression into `jaffle_shared` with tests that
+- Extract a repeated business expression into `shared` with tests that
   justify the abstraction.
 - Add MetricFlow coverage for substitution readiness or planning exceptions.
 - Add a saved query only after naming a repeated consumer.

@@ -10,4 +10,4 @@ select
     cast(model_version as varchar) as model_version,
     cast(created_at_utc as timestamp) as created_at_utc,
     cast(updated_at_utc as timestamp) as updated_at_utc
-from {{ source('jaffle_planning_app', 'raw_store_hour_forecasts') }}
+from {{ source('planning_app', 'raw_store_hour_forecasts') }}

@@ -1,5 +1,5 @@
 select
-    {{ jaffle_shared.stable_hash(['order_item_id', 'product_id']) }} as component_cost_variance_key,
+    {{ shared.stable_hash(['order_item_id', 'product_id']) }} as component_cost_variance_key,
     order_item_id,
     order_id,
     product_id,

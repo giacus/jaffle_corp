@@ -1,5 +1,5 @@
 select
-    {{ jaffle_shared.stable_hash(['product_id', 'component_id']) }} as recipe_component_key,
+    {{ shared.stable_hash(['product_id', 'component_id']) }} as recipe_component_key,
     cast(product_id as varchar) as product_id,
     cast(component_id as varchar) as component_id,
     cast(component_name as varchar) as component_name,
@@ -8,4 +8,4 @@ select
     cast(quantity_per_item as double) as quantity_per_item,
     cast(waste_factor as double) as waste_factor,
     cast(updated_at_utc as timestamp) as updated_at_utc
-from {{ source('jaffle_supply_app', 'raw_recipe_components') }}
+from {{ source('supply_app', 'raw_recipe_components') }}

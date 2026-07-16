@@ -1,5 +1,5 @@
 select
-    {{ jaffle_shared.stable_hash(['anchor_product_id', 'paired_product_id', 'ordered_date_utc']) }} as basket_pair_affinity_key,
+    {{ shared.stable_hash(['anchor_product_id', 'paired_product_id', 'ordered_date_utc']) }} as basket_pair_affinity_key,
     anchor_product_id,
     paired_product_id,
     ordered_date_utc,

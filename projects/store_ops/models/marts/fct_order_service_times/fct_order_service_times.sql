@@ -1,5 +1,5 @@
 select
-    {{ jaffle_shared.stable_hash(['order_id', 'store_id']) }} as order_service_time_key,
+    {{ shared.stable_hash(['order_id', 'store_id']) }} as order_service_time_key,
     order_id,
     store_id,
     customer_id,
@@ -17,6 +17,6 @@ select
     received_to_ready_minutes,
     prep_to_ready_minutes,
     ready_to_served_minutes,
-    {{ jaffle_shared.bucket_minutes('received_to_ready_minutes') }} as received_to_ready_bucket,
+    {{ shared.bucket_minutes('received_to_ready_minutes') }} as received_to_ready_bucket,
     received_to_ready_minutes <= {{ var('kitchen_ready_target_minutes', 12) }} as met_ready_target
 from {{ ref('int_order_kitchen_timing') }}

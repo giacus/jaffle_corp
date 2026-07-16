@@ -76,4 +76,4 @@ models:
       - name: updated_at_utc
         description: "{{ doc('shared__stg_support_tickets__updated_at_utc') }}"
         data_type: timestamp
-    description: "{{ doc('jaffle_experience__stg_support_tickets') }}"
+    description: "{{ doc('experience__stg_support_tickets') }}"

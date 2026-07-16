@@ -11,4 +11,4 @@ select
     cast(currency as varchar) as currency,
     cast(menu_surface as varchar) as menu_surface,
     cast(updated_at_utc as timestamp) as updated_at_utc
-from {{ source('jaffle_merchandising_app', 'raw_menu_publications') }}
+from {{ source('merchandising_app', 'raw_menu_publications') }}

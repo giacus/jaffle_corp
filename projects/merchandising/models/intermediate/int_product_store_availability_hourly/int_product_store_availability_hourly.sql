@@ -7,7 +7,7 @@ menu_windows as (
 )
 
 select
-    {{ jaffle_shared.product_store_hour_key('availability.product_id', 'availability.store_id', "cast(availability.available_date_utc as varchar) || '-' || cast(availability.hour_local as varchar)") }} as product_store_hour_key,
+    {{ shared.product_store_hour_key('availability.product_id', 'availability.store_id', "cast(availability.available_date_utc as varchar) || '-' || cast(availability.hour_local as varchar)") }} as product_store_hour_key,
     availability.availability_id,
     availability.store_id,
     availability.product_id,
@@ -18,7 +18,7 @@ select
     availability.observed_on_hand_units,
     availability.expected_menu_units,
     availability.outage_minutes,
-    {{ jaffle_shared.availability_health('availability.availability_status', 'availability.expected_menu_units', 'availability.observed_on_hand_units') }} as availability_health,
+    {{ shared.availability_health('availability.availability_status', 'availability.expected_menu_units', 'availability.observed_on_hand_units') }} as availability_health,
     case when availability.availability_status = 'available' then 1 else 0 end as available_hour_count,
     case when availability.availability_status in ('limited', 'unavailable') then 1 else 0 end as constrained_hour_count,
     case when availability.availability_status = 'unavailable' then 1 else 0 end as unavailable_hour_count,

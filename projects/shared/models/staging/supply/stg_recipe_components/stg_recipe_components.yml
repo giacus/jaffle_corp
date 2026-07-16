@@ -39,4 +39,4 @@ models:
       - name: updated_at_utc
         description: "{{ doc('shared__stg_recipe_components__updated_at_utc') }}"
         data_type: timestamp
-    description: "{{ doc('jaffle_supply__stg_recipe_components') }}"
+    description: "{{ doc('supply__stg_recipe_components') }}"

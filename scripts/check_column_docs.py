@@ -28,7 +28,7 @@ DOC_BLOCK = re.compile(
 
 
 def is_staging(node: dict) -> bool:
-    return node["package_name"] == "jaffle_shared" and "/staging/" in node["original_file_path"]
+    return node["package_name"] == "shared" and "/staging/" in node["original_file_path"]
 
 
 def project_doc_namespace(package_name: str) -> str:

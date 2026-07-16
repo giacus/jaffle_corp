@@ -6,9 +6,9 @@ items as (
     select
         order_id,
         sum(item_total_major) as item_total_major,
-        sum({{ jaffle_shared.minor_units_to_major_units('estimated_supply_cost_minor') }})
+        sum({{ shared.minor_units_to_major_units('estimated_supply_cost_minor') }})
             as approximate_supply_cost_major
-    from {{ ref('jaffle_platform', 'fct_order_items') }}
+    from {{ ref('platform', 'fct_order_items') }}
     group by 1
 )
 

@@ -1,5 +1,5 @@
 select
-    {{ jaffle_shared.stable_hash(['business_dt', 'product_family', 'cat']) }} as legacy_menu_mix_key,
+    {{ shared.stable_hash(['business_dt', 'product_family', 'cat']) }} as legacy_menu_mix_key,
     business_dt,
     product_family,
     cat,

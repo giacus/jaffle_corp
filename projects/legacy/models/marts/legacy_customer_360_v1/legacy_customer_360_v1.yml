@@ -2,11 +2,11 @@ version: 2
 
 models:
   - name: legacy_customer_360_v1
-    description: "{{ doc('jaffle_legacy__legacy_customer_360_v1') }}"
+    description: "{{ doc('legacy__legacy_customer_360_v1') }}"
     config:
       meta:
         migration_owner: analytics-modernization@jaffle.example
-        replacement_target: jaffle_growth.fct_customer_value_segments
+        replacement_target: growth.fct_customer_value_segments
     columns:
       - name: cust
         description: "{{ doc('legacy__int_legacy_customer_notes__cust') }}"

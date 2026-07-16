@@ -1,7 +1,7 @@
 version: 2
 
 sources:
-  - name: jaffle_experience_app
+  - name: experience_app
     schema: "{{ target.schema }}_raw"
     description: Synthetic sources for support and experiment examples.
     tables:

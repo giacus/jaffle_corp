@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: int_product_store_day_availability
-    description: "{{ doc('jaffle_merchandising__int_product_store_day_availability') }}"
+    description: "{{ doc('merchandising__int_product_store_day_availability') }}"
 
     columns:
       - name: product_store_day_availability_key

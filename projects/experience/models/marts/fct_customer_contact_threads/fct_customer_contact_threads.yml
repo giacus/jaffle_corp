@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_customer_contact_threads
-    description: "{{ doc('jaffle_experience__fct_customer_contact_threads') }}"
+    description: "{{ doc('experience__fct_customer_contact_threads') }}"
     config:
       group: experience
       access: public

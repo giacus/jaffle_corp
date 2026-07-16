@@ -9,7 +9,7 @@ locations as (
         city,
         timezone_name,
         is_dark_kitchen
-    from {{ ref('jaffle_platform', 'dim_locations') }}
+    from {{ ref('platform', 'dim_locations') }}
 )
 
 select
@@ -27,7 +27,7 @@ select
     shifts.role_mix_code,
     shifts.source_version,
     shifts.actual_to_planned_minutes_ratio,
-    {{ jaffle_shared.safe_divide('shifts.actual_minutes', 'shifts.team_member_count') }}
+    {{ shared.safe_divide('shifts.actual_minutes', 'shifts.team_member_count') }}
         as actual_minutes_per_team_member,
     case
         when shifts.actual_to_planned_minutes_ratio < 0.85 then 'under_plan'

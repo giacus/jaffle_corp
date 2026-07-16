@@ -1,5 +1,5 @@
 select
-    {{ jaffle_shared.stable_hash(['scenario_id', 'store_id', 'scenario_name']) }} as capacity_scenario_window_key,
+    {{ shared.stable_hash(['scenario_id', 'store_id', 'scenario_name']) }} as capacity_scenario_window_key,
     scenario_id,
     store_id,
     scenario_name,

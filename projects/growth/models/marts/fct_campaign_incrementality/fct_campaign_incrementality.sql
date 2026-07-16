@@ -1,5 +1,5 @@
 select
-    {{ jaffle_shared.stable_hash(['campaign_id', 'event_date_utc', 'channel']) }} as campaign_incrementality_key,
+    {{ shared.stable_hash(['campaign_id', 'event_date_utc', 'channel']) }} as campaign_incrementality_key,
     campaign_id,
     event_date_utc,
     channel,
@@ -15,6 +15,6 @@ select
     nearby_experiment_net_revenue_usd_7d,
     heuristic_incremental_revenue_usd,
     heuristic_incremental_margin_usd,
-    {{ jaffle_shared.safe_divide('heuristic_incremental_revenue_usd', 'estimated_campaign_cost_usd') }}
+    {{ shared.safe_divide('heuristic_incremental_revenue_usd', 'estimated_campaign_cost_usd') }}
         as heuristic_incremental_roas
 from {{ ref('int_campaign_incrementality') }}

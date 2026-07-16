@@ -1,5 +1,5 @@
 with loyalty_events as (
-    select * from {{ ref('jaffle_platform', 'fct_loyalty_events') }}
+    select * from {{ ref('platform', 'fct_loyalty_events') }}
 ),
 
 daily_events as (

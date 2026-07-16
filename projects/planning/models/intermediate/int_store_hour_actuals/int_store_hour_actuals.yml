@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: int_store_hour_actuals
-    description: "{{ doc('jaffle_planning__int_store_hour_actuals') }}"
+    description: "{{ doc('planning__int_store_hour_actuals') }}"
 
     columns:
       - name: store_id

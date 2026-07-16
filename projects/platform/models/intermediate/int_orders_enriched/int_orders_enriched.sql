@@ -55,13 +55,13 @@ select
     orders.order_total_minor,
     orders.order_total_major,
     fx_rates.usd_rate,
-    {{ jaffle_shared.fx_to_usd('orders.order_total_major', 'orders.currency', 'fx_rates.usd_rate') }}
+    {{ shared.fx_to_usd('orders.order_total_major', 'orders.currency', 'fx_rates.usd_rate') }}
         as order_total_usd,
     cast(coalesce(payments.captured_amount_minor, 0) as integer) as captured_amount_minor,
-    {{ jaffle_shared.minor_units_to_major_units('coalesce(payments.captured_amount_minor, 0)') }}
+    {{ shared.minor_units_to_major_units('coalesce(payments.captured_amount_minor, 0)') }}
         as captured_amount_major,
     cast(coalesce(refunds.refunded_amount_minor, 0) as integer) as refunded_amount_minor,
-    {{ jaffle_shared.minor_units_to_major_units('coalesce(refunds.refunded_amount_minor, 0)') }}
+    {{ shared.minor_units_to_major_units('coalesce(refunds.refunded_amount_minor, 0)') }}
         as refunded_amount_major,
     coalesce(payments.payment_attempt_count, 0) as payment_attempt_count,
     coalesce(refunds.refund_event_count, 0) as refund_event_count,

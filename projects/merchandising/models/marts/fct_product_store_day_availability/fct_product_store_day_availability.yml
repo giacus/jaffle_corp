@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_product_store_day_availability
-    description: "{{ doc('jaffle_merchandising__fct_product_store_day_availability') }}"
+    description: "{{ doc('merchandising__fct_product_store_day_availability') }}"
     config:
       group: merchandising
       access: public

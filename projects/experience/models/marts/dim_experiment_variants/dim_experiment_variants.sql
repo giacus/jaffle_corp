@@ -7,7 +7,7 @@ price_tests as (
 )
 
 select
-    {{ jaffle_shared.stable_hash(['exposures.experiment_id', 'exposures.variant_id']) }} as experiment_variant_key,
+    {{ shared.stable_hash(['exposures.experiment_id', 'exposures.variant_id']) }} as experiment_variant_key,
     exposures.experiment_id,
     exposures.variant_id,
     min(exposures.exposed_at_utc) as first_exposed_at_utc,

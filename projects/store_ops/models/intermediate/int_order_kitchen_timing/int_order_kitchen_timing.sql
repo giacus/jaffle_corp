@@ -25,7 +25,7 @@ orders as (
         ordered_date_utc,
         order_status,
         is_completed_order
-    from {{ ref('jaffle_platform', 'fct_orders') }}
+    from {{ ref('platform', 'fct_orders') }}
 )
 
 select
@@ -43,11 +43,11 @@ select
     event_pivot.event_date_utc,
     event_pivot.stations_seen,
     event_pivot.kitchen_event_count,
-    {{ jaffle_shared.minutes_between('event_pivot.kitchen_received_at_utc', 'event_pivot.ready_at_utc') }}
+    {{ shared.minutes_between('event_pivot.kitchen_received_at_utc', 'event_pivot.ready_at_utc') }}
         as received_to_ready_minutes,
-    {{ jaffle_shared.minutes_between('event_pivot.prep_started_at_utc', 'event_pivot.ready_at_utc') }}
+    {{ shared.minutes_between('event_pivot.prep_started_at_utc', 'event_pivot.ready_at_utc') }}
         as prep_to_ready_minutes,
-    {{ jaffle_shared.minutes_between('event_pivot.ready_at_utc', 'event_pivot.served_at_utc') }}
+    {{ shared.minutes_between('event_pivot.ready_at_utc', 'event_pivot.served_at_utc') }}
         as ready_to_served_minutes
 from event_pivot
 left join orders on event_pivot.order_id = orders.order_id

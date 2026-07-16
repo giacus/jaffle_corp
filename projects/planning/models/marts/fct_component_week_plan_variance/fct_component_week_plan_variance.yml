@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_component_week_plan_variance
-    description: "{{ doc('jaffle_planning__fct_component_week_plan_variance') }}"
+    description: "{{ doc('planning__fct_component_week_plan_variance') }}"
     config:
       group: planning
       access: public

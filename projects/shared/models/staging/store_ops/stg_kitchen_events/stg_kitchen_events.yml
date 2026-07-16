@@ -50,4 +50,4 @@ models:
       - name: updated_at_utc
         description: "{{ doc('shared__stg_kitchen_events__updated_at_utc') }}"
         data_type: timestamp
-    description: "{{ doc('jaffle_store_ops__stg_kitchen_events') }}"
+    description: "{{ doc('store_ops__stg_kitchen_events') }}"

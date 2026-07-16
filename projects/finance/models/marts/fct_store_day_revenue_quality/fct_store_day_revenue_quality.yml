@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_store_day_revenue_quality
-    description: "{{ doc('jaffle_finance__fct_store_day_revenue_quality') }}"
+    description: "{{ doc('finance__fct_store_day_revenue_quality') }}"
     config:
       group: finance
       access: public

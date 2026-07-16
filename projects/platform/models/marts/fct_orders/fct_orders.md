@@ -1,4 +1,4 @@
-{% docs jaffle_platform__fct_orders %}
+{% docs platform__fct_orders %}
 Primary public interface for order-level analysis and downstream domain packages.
 
 - **Grain:** one row per `order_id`.

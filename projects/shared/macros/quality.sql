@@ -1,5 +1,5 @@
 {% macro audit_noop() %}
-    select 1 as jaffle_audit_marker
+    select 1 as audit_marker
 {% endmacro %}
 
 {% test accepted_not_unknown(model, column_name) %}

@@ -6,5 +6,5 @@
 {% endmacro %}
 
 {% macro bounded_ratio(numerator_expr, denominator_expr) %}
-    least(1.0, greatest(0.0, coalesce({{ jaffle_shared.safe_divide(numerator_expr, denominator_expr) }}, 0.0)))
+    least(1.0, greatest(0.0, coalesce({{ shared.safe_divide(numerator_expr, denominator_expr) }}, 0.0)))
 {% endmacro %}

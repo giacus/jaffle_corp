@@ -1,5 +1,5 @@
 select
-    {{ jaffle_shared.stable_hash(['quality_check_id']) }} as quality_event_key,
+    {{ shared.stable_hash(['quality_check_id']) }} as quality_event_key,
     quality_check_id,
     store_id,
     order_id,
