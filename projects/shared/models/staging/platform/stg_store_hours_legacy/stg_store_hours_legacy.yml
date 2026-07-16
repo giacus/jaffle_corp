@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: stg_store_hours_legacy
-    description: "{{ doc('jaffle_platform__stg_store_hours_legacy') }}"
+    description: "{{ doc('platform__stg_store_hours_legacy') }}"
     columns:
       - name: store_id
         description: "{{ doc('shared__stg_store_hours_legacy__store_id') }}"

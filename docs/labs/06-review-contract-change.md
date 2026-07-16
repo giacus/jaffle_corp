@@ -17,7 +17,7 @@ Refresh the complete graph:
 scripts/generate_manifest.sh
 ```
 
-Choose one public model consumed by `jaffle_reliability`. Inspect its model YAML,
+Choose one public model consumed by `reliability`. Inspect its model YAML,
 its contract, and its entries in `target/manifest.json`.
 
 ## Write the Review

@@ -1,5 +1,5 @@
 with finance_store_day as (
-    select * from {{ ref('jaffle_finance', 'fct_daily_store_pnl') }}
+    select * from {{ ref('finance', 'fct_daily_store_pnl') }}
 ),
 
 timing as (
@@ -42,7 +42,7 @@ supply as (
         balance_date_utc as operating_date,
         cast(count(*) as integer) as component_day_count,
         cast(sum(case when has_supply_risk then 1 else 0 end) as integer) as supply_risk_component_count
-    from {{ ref('jaffle_supply', 'fct_supply_risk_daily') }}
+    from {{ ref('supply', 'fct_supply_risk_daily') }}
     group by 1, 2
 ),
 

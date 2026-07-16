@@ -27,8 +27,8 @@ scripts/validate_repo.sh
 
 Use only these public contracted inputs:
 
-- `jaffle_store_ops.fct_order_service_times`
-- `jaffle_experience.fct_support_tickets`
+- `store_ops.fct_order_service_times`
+- `experience.fct_support_tickets`
 
 ## Design Before SQL
 
@@ -38,7 +38,7 @@ Decide:
 2. Which key enforces that grain?
 3. Which columns belong in the public contract?
 4. Which behavioral test proves the result is trustworthy?
-5. Should this extend `jaffle_reliability` or become another extension project?
+5. Should this extend `reliability` or become another extension project?
 
 Then add the model, YAML contract, documentation, behavioral test, and one
 analysis query.

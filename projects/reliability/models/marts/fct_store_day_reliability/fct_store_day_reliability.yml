@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_store_day_reliability
-    description: "{{ doc('jaffle_reliability__fct_store_day_reliability') }}"
+    description: "{{ doc('reliability__fct_store_day_reliability') }}"
     config:
       access: public
       contract:

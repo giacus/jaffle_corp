@@ -10,4 +10,4 @@ select
     cast(franchise_owner as varchar) as franchise_owner,
     cast(is_dark_kitchen as boolean) as is_dark_kitchen,
     cast(updated_at_utc as timestamp) as updated_at_utc
-from {{ source('jaffle_app', 'raw_stores') }}
+from {{ source('platform_app', 'raw_stores') }}

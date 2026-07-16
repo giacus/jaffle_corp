@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_basket_pair_affinity
-    description: "{{ doc('jaffle_merchandising__fct_basket_pair_affinity') }}"
+    description: "{{ doc('merchandising__fct_basket_pair_affinity') }}"
     config:
       group: merchandising
       access: public

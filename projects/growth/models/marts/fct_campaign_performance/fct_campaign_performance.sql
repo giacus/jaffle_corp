@@ -1,5 +1,5 @@
 select
-    {{ jaffle_shared.stable_hash(['campaign_id', 'event_date_utc', 'channel']) }} as campaign_performance_key,
+    {{ shared.stable_hash(['campaign_id', 'event_date_utc', 'channel']) }} as campaign_performance_key,
     campaign_id,
     event_date_utc,
     channel,

@@ -1,3 +1,3 @@
-{% docs jaffle_merchandising__dim_product_pairings %}
+{% docs merchandising__dim_product_pairings %}
 Public product-pairing dimension used for basket analysis.
 {% enddocs %}

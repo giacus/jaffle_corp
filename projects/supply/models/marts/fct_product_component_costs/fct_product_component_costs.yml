@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_product_component_costs
-    description: "{{ doc('jaffle_supply__fct_product_component_costs') }}"
+    description: "{{ doc('supply__fct_product_component_costs') }}"
     config:
       group: supply
       access: public

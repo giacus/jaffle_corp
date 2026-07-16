@@ -1,5 +1,5 @@
 select
-    {{ jaffle_shared.stable_hash(['store_id', 'component_id', 'balance_date_utc']) }} as supply_risk_daily_key,
+    {{ shared.stable_hash(['store_id', 'component_id', 'balance_date_utc']) }} as supply_risk_daily_key,
     store_id,
     component_id,
     balance_date_utc,

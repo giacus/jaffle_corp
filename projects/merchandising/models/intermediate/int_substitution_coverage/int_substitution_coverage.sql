@@ -11,7 +11,7 @@ menu_items as (
 )
 
 select
-    {{ jaffle_shared.stable_hash(['rules.substitution_rule_id', 'availability.available_date_utc']) }} as substitution_coverage_key,
+    {{ shared.stable_hash(['rules.substitution_rule_id', 'availability.available_date_utc']) }} as substitution_coverage_key,
     rules.substitution_rule_id,
     rules.store_id,
     availability.available_date_utc,

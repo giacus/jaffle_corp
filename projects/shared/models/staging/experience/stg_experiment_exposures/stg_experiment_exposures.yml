@@ -37,4 +37,4 @@ models:
       - name: updated_at_utc
         description: "{{ doc('shared__stg_experiment_exposures__updated_at_utc') }}"
         data_type: timestamp
-    description: "{{ doc('jaffle_experience__stg_experiment_exposures') }}"
+    description: "{{ doc('experience__stg_experiment_exposures') }}"

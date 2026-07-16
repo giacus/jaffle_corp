@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_order_items
-    description: "{{ doc('jaffle_platform__fct_order_items') }}"
+    description: "{{ doc('platform__fct_order_items') }}"
     config:
       group: platform
       access: public

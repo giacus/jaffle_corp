@@ -1,5 +1,5 @@
 projects:
-  - name: jaffle_platform
-  - name: jaffle_finance
-  - name: jaffle_supply
+  - name: platform
+  - name: finance
+  - name: supply
 

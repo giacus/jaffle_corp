@@ -19,7 +19,7 @@ select
     forecast_error_units,
     absolute_forecast_error_units,
     absolute_percentage_error_units,
-    {{ jaffle_shared.forecast_accuracy_band('absolute_percentage_error_units') }} as forecast_accuracy_band,
+    {{ shared.forecast_accuracy_band('absolute_percentage_error_units') }} as forecast_accuracy_band,
     created_at_utc,
     updated_at_utc
 from {{ ref('int_product_day_forecast_errors') }}

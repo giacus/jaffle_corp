@@ -1,5 +1,5 @@
 select
-    {{ jaffle_shared.stable_hash(['store_id', 'exception_date_utc', 'scenario_name', 'exception_family']) }} as planning_exception_daily_key,
+    {{ shared.stable_hash(['store_id', 'exception_date_utc', 'scenario_name', 'exception_family']) }} as planning_exception_daily_key,
     store_id,
     exception_date_utc,
     scenario_name,

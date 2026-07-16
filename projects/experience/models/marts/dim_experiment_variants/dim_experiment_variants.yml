@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: dim_experiment_variants
-    description: "{{ doc('jaffle_experience__dim_experiment_variants') }}"
+    description: "{{ doc('experience__dim_experiment_variants') }}"
     config:
       group: experience
       access: public

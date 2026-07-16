@@ -8,4 +8,4 @@ select
     cast(default_currency as varchar) as default_currency,
     cast(marketing_consent as boolean) as marketing_consent,
     cast(updated_at_utc as timestamp) as updated_at_utc
-from {{ source('jaffle_app', 'raw_customers') }}
+from {{ source('platform_app', 'raw_customers') }}

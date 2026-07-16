@@ -1,15 +1,15 @@
 packages:
   - local: ../shared
-    name: jaffle_shared
+    name: shared
   - local: ../platform
-    name: jaffle_platform
+    name: platform
   - local: ../finance
-    name: jaffle_finance
+    name: finance
   - local: ../experience
-    name: jaffle_experience
+    name: experience
   - name: dbt_utils
     package: dbt-labs/dbt_utils
     version: 1.3.3
   - local: ../supply
-    name: jaffle_supply
+    name: supply
 sha1_hash: 230ace0ff31fd76a0b48106137b7cbd4a4683017

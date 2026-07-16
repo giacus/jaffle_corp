@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: dim_finance_controls
-    description: "{{ doc('jaffle_finance__dim_finance_controls') }}"
+    description: "{{ doc('finance__dim_finance_controls') }}"
     config:
       group: finance
       access: public

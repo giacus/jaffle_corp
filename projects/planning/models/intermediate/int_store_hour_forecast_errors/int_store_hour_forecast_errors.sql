@@ -7,7 +7,7 @@ actuals as (
 )
 
 select
-    {{ jaffle_shared.stable_hash(['forecasts.forecast_id', 'forecasts.store_id', 'forecasts.forecast_hour_utc']) }} as store_hour_forecast_accuracy_key,
+    {{ shared.stable_hash(['forecasts.forecast_id', 'forecasts.store_id', 'forecasts.forecast_hour_utc']) }} as store_hour_forecast_accuracy_key,
     forecasts.forecast_id,
     forecasts.model_run_id,
     forecasts.store_id,
@@ -23,9 +23,9 @@ select
     coalesce(actuals.actual_order_total_usd, 0) as actual_order_total_usd,
     actuals.average_received_to_ready_minutes,
     actuals.ready_inside_target_count,
-    {{ jaffle_shared.forecast_error('coalesce(actuals.actual_order_count, 0)', 'forecasts.forecasted_order_count') }} as forecast_error_orders,
-    {{ jaffle_shared.absolute_forecast_error('coalesce(actuals.actual_order_count, 0)', 'forecasts.forecasted_order_count') }} as absolute_forecast_error_orders,
-    {{ jaffle_shared.safe_divide(jaffle_shared.absolute_forecast_error('coalesce(actuals.actual_order_count, 0)', 'forecasts.forecasted_order_count'), 'nullif(actuals.actual_order_count, 0)') }} as absolute_percentage_error_orders,
+    {{ shared.forecast_error('coalesce(actuals.actual_order_count, 0)', 'forecasts.forecasted_order_count') }} as forecast_error_orders,
+    {{ shared.absolute_forecast_error('coalesce(actuals.actual_order_count, 0)', 'forecasts.forecasted_order_count') }} as absolute_forecast_error_orders,
+    {{ shared.safe_divide(shared.absolute_forecast_error('coalesce(actuals.actual_order_count, 0)', 'forecasts.forecasted_order_count'), 'nullif(actuals.actual_order_count, 0)') }} as absolute_percentage_error_orders,
     coalesce(coalesce(actuals.actual_order_count, 0) between forecasts.lower_bound_orders and forecasts.upper_bound_orders, false) as actual_inside_prediction_interval,
     forecasts.created_at_utc,
     forecasts.updated_at_utc

@@ -8,6 +8,6 @@ select
     lower(cast(severity as varchar)) as severity,
     cast(affected_orders as integer) as affected_orders,
     cast(notes_code as varchar) as notes_code,
-    {{ jaffle_shared.minutes_between('opened_at_utc', 'resolved_at_utc') }} as incident_minutes,
+    {{ shared.minutes_between('opened_at_utc', 'resolved_at_utc') }} as incident_minutes,
     cast(updated_at_utc as timestamp) as updated_at_utc
-from {{ source('jaffle_store_ops_app', 'raw_service_incidents') }}
+from {{ source('store_ops_app', 'raw_service_incidents') }}

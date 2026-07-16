@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: int_shift_capacity
-    description: "{{ doc('jaffle_store_ops__int_shift_capacity') }}"
+    description: "{{ doc('store_ops__int_shift_capacity') }}"
 
     columns:
       - name: shift_plan_id

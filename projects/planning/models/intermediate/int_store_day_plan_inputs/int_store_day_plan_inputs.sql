@@ -24,7 +24,7 @@ operations as (
         ready_target_rate,
         quality_exception_count,
         incident_count
-    from {{ ref('jaffle_store_ops', 'fct_store_day_operations') }}
+    from {{ ref('store_ops', 'fct_store_day_operations') }}
 ),
 
 pnl as (
@@ -33,11 +33,11 @@ pnl as (
         recognized_date,
         net_revenue_usd,
         estimated_gross_margin_usd
-    from {{ ref('jaffle_finance', 'fct_daily_store_pnl') }}
+    from {{ ref('finance', 'fct_daily_store_pnl') }}
 )
 
 select
-    {{ jaffle_shared.scenario_store_day_key("coalesce(store_hour_forecasts.scenario_name, 'base')", 'calendar.store_id', 'calendar.calendar_date_utc') }} as store_day_capacity_plan_key,
+    {{ shared.scenario_store_day_key("coalesce(store_hour_forecasts.scenario_name, 'base')", 'calendar.store_id', 'calendar.calendar_date_utc') }} as store_day_capacity_plan_key,
     calendar.calendar_id,
     calendar.store_id,
     calendar.calendar_date_utc,

@@ -24,10 +24,10 @@ The tested local path is Python 3.11 on macOS or Linux with Bash or Zsh. Windows
 users should use WSL. The first setup needs internet access and approximately
 1 GiB of free disk space, including room for downloads and generated state.
 
-Clone the current workshop baseline and enter the repository:
+Clone the current repository and enter it:
 
 ```bash
-git clone --branch v0.1.0 https://github.com/giacus/jaffle_corp.git
+git clone https://github.com/giacus/jaffle_corp.git
 cd jaffle_corp
 scripts/bootstrap.sh
 source .venv/bin/activate
@@ -44,23 +44,24 @@ cleanup, and troubleshooting, read [Getting Started](docs/getting-started.md).
 
 ## How the Repo Is Organized
 
-Folder names are deliberately short. The dbt project names remain explicit in
-artifacts, selectors, and two-argument `ref()` calls.
+Folder and dbt project names deliberately use the same short domain identifier.
+Those identifiers also appear in artifacts, selectors, package namespaces, and
+two-argument `ref()` calls, so the graph stays readable end to end.
 
 | Folder | dbt project | Responsibility |
 | --- | --- | --- |
-| `shared` | `jaffle_shared` | Synthetic seeds, sources, staging models, macros, and schema behavior. |
-| `platform` | `jaffle_platform` | Conformed dimensions and stable core interfaces. |
-| `supply` | `jaffle_supply` | Recipes, purchasing, inventory, waste, and supply risk. |
-| `finance` | `jaffle_finance` | Payments, refunds, FX, revenue, margin, and store P&L. |
-| `experience` | `jaffle_experience` | Support, contacts, experiments, and price tests. |
-| `growth` | `jaffle_growth` | Attribution, loyalty, lifecycle, and customer value. |
-| `store_ops` | `jaffle_store_ops` | Kitchen timing, shifts, quality, incidents, and operating health. |
-| `merchandising` | `jaffle_merchandising` | Menus, availability, price windows, pairings, and substitutions. |
-| `planning` | `jaffle_planning` | Forecasts, capacity, scenarios, and planning exceptions. |
-| `legacy` | `jaffle_legacy` | Intentional migration and refactoring debt. |
-| `reliability` | `jaffle_reliability` | Downstream extension that proves public contracts are usable. |
-| `catalog` | `jaffle_catalog` | Tooling-only project that emits the complete manifest. |
+| `shared` | `shared` | Synthetic seeds, sources, staging models, macros, and schema behavior. |
+| `platform` | `platform` | Conformed dimensions and stable core interfaces. |
+| `supply` | `supply` | Recipes, purchasing, inventory, waste, and supply risk. |
+| `finance` | `finance` | Payments, refunds, FX, revenue, margin, and store P&L. |
+| `experience` | `experience` | Support, contacts, experiments, and price tests. |
+| `growth` | `growth` | Attribution, loyalty, lifecycle, and customer value. |
+| `store_ops` | `store_ops` | Kitchen timing, shifts, quality, incidents, and operating health. |
+| `merchandising` | `merchandising` | Menus, availability, price windows, pairings, and substitutions. |
+| `planning` | `planning` | Forecasts, capacity, scenarios, and planning exceptions. |
+| `legacy` | `legacy` | Intentional migration and refactoring debt. |
+| `reliability` | `reliability` | Downstream extension that proves public contracts are usable. |
+| `catalog` | `catalog` | Tooling-only project that emits the complete manifest. |
 
 Use [Architecture](docs/architecture.md) for ownership and dependency details.
 
@@ -68,7 +69,7 @@ Use [Architecture](docs/architecture.md) for ownership and dependency details.
 
 The repo uses two different dependency mechanisms on purpose:
 
-- `jaffle_shared` is a **code package**, not a deployed dbt Mesh project. Every
+- `shared` is a **code package**, not a deployed dbt Mesh project. Every
   runnable project installs it through `packages.yml`; its protected staging
   models and macros form the deliberate shared implementation boundary.
 - Domain-to-domain relationships are **public project interfaces**. They are
@@ -77,7 +78,7 @@ The repo uses two different dependency mechanisms on purpose:
 - Local domain entries in `packages.yml` are dbt Core fallbacks for those
   project dependencies. They make the monorepo runnable without hosted project
   metadata; they do not turn protected domain models into valid interfaces.
-- `jaffle_catalog` imports every project only to compile one complete manifest.
+- `catalog` imports every project only to compile one complete manifest.
   Business projects never depend on it.
 
 Keep `shared` and third-party code packages such as `dbt_utils` in

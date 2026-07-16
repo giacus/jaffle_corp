@@ -11,4 +11,4 @@ select
     cast(checked_at_utc as timestamp) as checked_at_utc,
     cast(cast(checked_at_utc as timestamp) as date) as checked_date_utc,
     cast(updated_at_utc as timestamp) as updated_at_utc
-from {{ source('jaffle_store_ops_app', 'raw_quality_checks') }}
+from {{ source('store_ops_app', 'raw_quality_checks') }}

@@ -1,4 +1,4 @@
-{% docs jaffle_legacy__legacy_daily_store_rollup %}
+{% docs legacy__legacy_daily_store_rollup %}
 Deprecated reporting interface retained to make migration and compatibility
 trade-offs concrete.
 

@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: stg_fx_rates
-    description: "{{ doc('jaffle_platform__stg_fx_rates') }}"
+    description: "{{ doc('platform__stg_fx_rates') }}"
     columns:
       - name: currency
         description: "{{ doc('shared__stg_fx_rates__currency') }}"

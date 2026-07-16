@@ -1,7 +1,7 @@
 version: 2
 
 sources:
-  - name: jaffle_merchandising_app
+  - name: merchandising_app
     schema: "{{ target.schema }}_raw"
     description: Synthetic merchandising source tables for menus, availability, and pricing examples.
     tables:

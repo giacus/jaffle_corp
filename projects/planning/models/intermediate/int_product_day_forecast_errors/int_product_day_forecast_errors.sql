@@ -11,11 +11,11 @@ products as (
         product_id,
         product_family,
         category
-    from {{ ref('jaffle_platform', 'dim_products') }}
+    from {{ ref('platform', 'dim_products') }}
 )
 
 select
-    {{ jaffle_shared.scenario_product_store_day_key('forecasts.scenario_name', 'forecasts.product_id', 'forecasts.store_id', 'forecasts.forecast_date_utc') }} as product_day_forecast_accuracy_key,
+    {{ shared.scenario_product_store_day_key('forecasts.scenario_name', 'forecasts.product_id', 'forecasts.store_id', 'forecasts.forecast_date_utc') }} as product_day_forecast_accuracy_key,
     forecasts.forecast_id,
     forecasts.model_run_id,
     forecasts.store_id,
@@ -30,9 +30,9 @@ select
     coalesce(actuals.actual_units, 0) as actual_units,
     coalesce(actuals.actual_item_revenue_usd, 0) as actual_item_revenue_usd,
     coalesce(actuals.actual_order_count, 0) as actual_order_count,
-    {{ jaffle_shared.forecast_error('coalesce(actuals.actual_units, 0)', 'forecasts.forecasted_units') }} as forecast_error_units,
-    {{ jaffle_shared.absolute_forecast_error('coalesce(actuals.actual_units, 0)', 'forecasts.forecasted_units') }} as absolute_forecast_error_units,
-    {{ jaffle_shared.safe_divide(jaffle_shared.absolute_forecast_error('coalesce(actuals.actual_units, 0)', 'forecasts.forecasted_units'), 'nullif(actuals.actual_units, 0)') }} as absolute_percentage_error_units,
+    {{ shared.forecast_error('coalesce(actuals.actual_units, 0)', 'forecasts.forecasted_units') }} as forecast_error_units,
+    {{ shared.absolute_forecast_error('coalesce(actuals.actual_units, 0)', 'forecasts.forecasted_units') }} as absolute_forecast_error_units,
+    {{ shared.safe_divide(shared.absolute_forecast_error('coalesce(actuals.actual_units, 0)', 'forecasts.forecasted_units'), 'nullif(actuals.actual_units, 0)') }} as absolute_percentage_error_units,
     forecasts.created_at_utc,
     forecasts.updated_at_utc
 from forecasts

@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: int_capacity_scenario_windows
-    description: "{{ doc('jaffle_planning__int_capacity_scenario_windows') }}"
+    description: "{{ doc('planning__int_capacity_scenario_windows') }}"
 
     columns:
       - name: capacity_scenario_window_key

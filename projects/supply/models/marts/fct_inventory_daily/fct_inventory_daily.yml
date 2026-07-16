@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_inventory_daily
-    description: "{{ doc('jaffle_supply__fct_inventory_daily') }}"
+    description: "{{ doc('supply__fct_inventory_daily') }}"
     config:
       group: supply
       access: public

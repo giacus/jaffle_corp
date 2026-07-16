@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: dim_customers
-    description: "{{ doc('jaffle_platform__dim_customers') }}"
+    description: "{{ doc('platform__dim_customers') }}"
     config:
       group: platform
       access: public

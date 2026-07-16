@@ -7,38 +7,38 @@ pretending that local package installation is the same as deployed dbt Mesh.
 For the fictional company flow and the intentional data edge cases behind this
 graph, read [Company and Fixture Guide](company-and-fixtures.md).
 
-The `jaffle_shared` project owns the complete ingestion boundary: raw fixture
+The `shared` project owns the complete ingestion boundary: raw fixture
 seeds, source definitions, domain-organized staging models, cross-project
 macros, and schema behavior. It is deliberately installed as a code package.
 
-The `jaffle_platform` project owns conformed dimensions and stable order-level
+The `platform` project owns conformed dimensions and stable order-level
 interfaces. Downstream projects consume those interfaces instead of reaching
 into shared staging tables.
 
-The `jaffle_supply` project owns recipe components, purchase orders, inventory counts, waste events, component costs, and supply-risk classification.
+The `supply` project owns recipe components, purchase orders, inventory counts, waste events, component costs, and supply-risk classification.
 
-The `jaffle_finance` project owns money semantics: payment capture, refunds, FX normalization, and store-level profit and loss. It exposes finance-ready facts for other teams.
+The `finance` project owns money semantics: payment capture, refunds, FX normalization, and store-level profit and loss. It exposes finance-ready facts for other teams.
 
-The `jaffle_experience` project owns support tickets, contact threads, experiment exposures, and menu price tests. It joins customer experience signals to order and finance truth without leaking implementation models.
+The `experience` project owns support tickets, contact threads, experiment exposures, and menu price tests. It joins customer experience signals to order and finance truth without leaking implementation models.
 
-The `jaffle_growth` project owns campaign, lifecycle, loyalty, experiment conversion, and customer value semantics. It depends on both behavioral and monetary truth because growth reporting commonly needs both.
+The `growth` project owns campaign, lifecycle, loyalty, experiment conversion, and customer value semantics. It depends on both behavioral and monetary truth because growth reporting commonly needs both.
 
-The `jaffle_store_ops` project owns kitchen event timing, shifts, quality checks, incidents, and store-day operations by combining platform, supply, and finance facts.
+The `store_ops` project owns kitchen event timing, shifts, quality checks, incidents, and store-day operations by combining platform, supply, and finance facts.
 
-The `jaffle_merchandising` project owns menu publication windows, product-store availability observations, price adjustment windows, menu goals, product pairings, and substitution readiness.
+The `merchandising` project owns menu publication windows, product-store availability observations, price adjustment windows, menu goals, product pairings, and substitution readiness.
 
-The `jaffle_planning` project owns store-hour forecasts, store-product-day forecasts, component-week plans, operating calendars, capacity scenarios, and forecast exception rollups.
+The `planning` project owns store-hour forecasts, store-product-day forecasts, component-week plans, operating calendars, capacity scenarios, and forecast exception rollups.
 
-The `jaffle_legacy` project intentionally demonstrates migration debt:
+The `legacy` project intentionally demonstrates migration debt:
 inconsistent naming, mixed grains, hand-rolled currency logic, and deprecated
 marts. Its intermediate compatibility adapters reshape public upstream models;
 they are not part of the shared source-ingestion boundary.
 
-The `jaffle_reliability` project is a downstream extension fixture. It consumes
+The `reliability` project is a downstream extension fixture. It consumes
 public contracted marts from finance, merchandising, and planning without
 depending on their staging or intermediate models.
 
-The `jaffle_catalog` project is tooling-only. It imports every project as a dbt
+The `catalog` project is tooling-only. It imports every project as a dbt
 package so `scripts/generate_manifest.sh` can emit one full-repo
 `target/manifest.json`; it must not own business models.
 
@@ -82,7 +82,7 @@ flowchart LR
     planning --> reliability
 ```
 
-`jaffle_catalog` observes all of these projects to create the combined manifest;
+`catalog` observes all of these projects to create the combined manifest;
 business projects do not depend on it.
 
 ## Package Boundary vs Project Boundary
@@ -91,7 +91,7 @@ These relationships are intentionally different:
 
 | Relationship | Declared in | Access rule | Purpose |
 | --- | --- | --- | --- |
-| Project to `jaffle_shared` | `packages.yml` | Protected staging is allowed because `shared` sets `restrict-access: false`. | Centralized local ingestion, staging, macros, and fixture seeds. |
+| Project to `shared` | `packages.yml` | Protected staging is allowed because `shared` sets `restrict-access: false`. | Centralized local ingestion, staging, macros, and fixture seeds. |
 | Domain to domain | `dependencies.yml` | Producers set `restrict-access: true`; consumers use public models only. | Stable cross-domain data interfaces. |
 | Local domain fallback | `packages.yml` | The same public-only policy is enforced by the producer. | Run dbt Core without hosted project metadata. |
 | Catalog observation | `projects/catalog/packages.yml` | Compile-only; no business ownership. | Emit one complete manifest for tooling. |

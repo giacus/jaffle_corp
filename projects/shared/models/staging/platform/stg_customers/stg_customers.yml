@@ -37,4 +37,4 @@ models:
       - name: updated_at_utc
         description: "{{ doc('shared__stg_customers__updated_at_utc') }}"
         data_type: timestamp
-    description: "{{ doc('jaffle_platform__stg_customers') }}"
+    description: "{{ doc('platform__stg_customers') }}"

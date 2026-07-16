@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: int_basket_pair_observations
-    description: "{{ doc('jaffle_merchandising__int_basket_pair_observations') }}"
+    description: "{{ doc('merchandising__int_basket_pair_observations') }}"
 
     columns:
       - name: basket_pair_observation_key

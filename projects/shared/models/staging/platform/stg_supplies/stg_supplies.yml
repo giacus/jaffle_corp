@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: stg_supplies
-    description: "{{ doc('jaffle_platform__stg_supplies') }}"
+    description: "{{ doc('platform__stg_supplies') }}"
     columns:
       - name: supply_id
         description: "{{ doc('shared__stg_supplies__supply_id') }}"

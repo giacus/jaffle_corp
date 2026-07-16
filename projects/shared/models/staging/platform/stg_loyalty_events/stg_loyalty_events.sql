@@ -8,4 +8,4 @@ select
     cast(cast(event_at_utc as timestamp) as date) as event_date_utc,
     cast(program_tier as varchar) as program_tier,
     cast(updated_at_utc as timestamp) as updated_at_utc
-from {{ source('jaffle_app', 'raw_loyalty_events') }}
+from {{ source('platform_app', 'raw_loyalty_events') }}

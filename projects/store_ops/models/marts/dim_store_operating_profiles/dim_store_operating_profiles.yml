@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: dim_store_operating_profiles
-    description: "{{ doc('jaffle_store_ops__dim_store_operating_profiles') }}"
+    description: "{{ doc('store_ops__dim_store_operating_profiles') }}"
     config:
       group: store_ops
       access: public

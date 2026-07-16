@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_loyalty_balance_daily
-    description: "{{ doc('jaffle_growth__fct_loyalty_balance_daily') }}"
+    description: "{{ doc('growth__fct_loyalty_balance_daily') }}"
     config:
       group: growth
       access: public

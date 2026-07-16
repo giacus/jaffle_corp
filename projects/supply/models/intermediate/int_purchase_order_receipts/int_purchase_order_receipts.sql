@@ -3,11 +3,11 @@ with purchase_orders as (
 ),
 
 exchange_rates as (
-    select * from {{ ref('jaffle_platform', 'dim_exchange_rates') }}
+    select * from {{ ref('platform', 'dim_exchange_rates') }}
 ),
 
 locations as (
-    select * from {{ ref('jaffle_platform', 'dim_locations') }}
+    select * from {{ ref('platform', 'dim_locations') }}
 )
 
 select
@@ -30,11 +30,11 @@ select
     purchase_orders.unit_cost_major,
     purchase_orders.currency,
     exchange_rates.usd_rate,
-    {{ jaffle_shared.fx_to_usd('purchase_orders.unit_cost_major', 'purchase_orders.currency', 'exchange_rates.usd_rate') }}
+    {{ shared.fx_to_usd('purchase_orders.unit_cost_major', 'purchase_orders.currency', 'exchange_rates.usd_rate') }}
         as unit_cost_usd,
-    {{ jaffle_shared.safe_divide('purchase_orders.quantity_received', 'purchase_orders.quantity_ordered') }}
+    {{ shared.safe_divide('purchase_orders.quantity_received', 'purchase_orders.quantity_ordered') }}
         as receipt_fill_rate,
-    {{ jaffle_shared.minutes_between('purchase_orders.expected_at_utc', 'purchase_orders.received_at_utc') }}
+    {{ shared.minutes_between('purchase_orders.expected_at_utc', 'purchase_orders.received_at_utc') }}
         as receipt_delay_minutes,
     purchase_orders.received_at_utc > purchase_orders.expected_at_utc as is_late_receipt,
     purchase_orders.updated_at_utc

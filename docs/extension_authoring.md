@@ -50,7 +50,7 @@ Iterate on only the extension after upstream projects have been built:
 
 ```bash
 dbt deps --project-dir projects/reliability
-dbt build --project-dir projects/reliability --select jaffle_reliability
+dbt build --project-dir projects/reliability --select reliability
 ```
 
 This local package fallback makes every upstream project's source code part of
@@ -62,11 +62,11 @@ for installing and building the upstream code in its own target.
 
 Good first upstream refs for extension projects:
 
-- `ref('jaffle_finance', 'fct_store_day_revenue_quality')`
-- `ref('jaffle_merchandising', 'fct_product_store_day_availability')`
-- `ref('jaffle_merchandising', 'fct_substitution_readiness')`
-- `ref('jaffle_planning', 'fct_store_day_capacity_plan')`
-- `ref('jaffle_planning', 'fct_planning_exception_daily')`
+- `ref('finance', 'fct_store_day_revenue_quality')`
+- `ref('merchandising', 'fct_product_store_day_availability')`
+- `ref('merchandising', 'fct_substitution_readiness')`
+- `ref('planning', 'fct_store_day_capacity_plan')`
+- `ref('planning', 'fct_planning_exception_daily')`
 
 Before adding a new upstream dependency, inspect the model YAML and confirm:
 
@@ -100,28 +100,30 @@ required because this fixture's local package fallbacks use paths such as
 
 ```bash
 git clone https://github.com/giacus/jaffle_corp.git jaffle-corp-workspace
-git -C jaffle-corp-workspace switch --detach v0.1.0
-git clone https://github.com/your-org/jaffle-store-watchlist.git \
-  jaffle-corp-workspace/projects/jaffle-store-watchlist
-cd jaffle-corp-workspace/projects/jaffle-store-watchlist
+git -C jaffle-corp-workspace switch --detach origin/master
+git -C jaffle-corp-workspace rev-parse HEAD
+git clone https://github.com/your-org/store-watchlist.git \
+  jaffle-corp-workspace/projects/store-watchlist
+cd jaffle-corp-workspace/projects/store-watchlist
 ```
 
 The nested extension checkout has its own `.git` directory and remote; it is
 not committed to `jaffle-corp`. Add its path to the parent checkout's local
 `.git/info/exclude` if you do not want the parent repository to report it as
-untracked. Record `v0.1.0` in the extension's own setup documentation or a
-small version file so every contributor checks out the same upstream baseline.
+untracked. Record the full commit printed by `rev-parse` in the extension's own
+setup documentation or a small version file so every contributor checks out
+the same upstream baseline.
 
 The workspace should have this shape:
 
 ```text
-jaffle-corp-workspace/         # upstream checkout at v0.1.0
+jaffle-corp-workspace/         # upstream checkout at the recorded commit
 └── projects/
     ├── shared/
     ├── platform/
     ├── supply/
     ├── finance/
-    └── jaffle-store-watchlist/   # independent Git repository
+    └── store-watchlist/          # independent Git repository
         ├── dbt_project.yml
         ├── dependencies.yml
         ├── models/
@@ -148,13 +150,13 @@ the in-repository extension does:
 
 ```yaml
 projects:
-  - name: jaffle_finance
+  - name: finance
 ```
 
 The external project's `dbt_project.yml` can stay small:
 
 ```yaml
-name: jaffle_store_watchlist
+name: store_watchlist
 version: "0.1.0"
 config-version: 2
 
@@ -165,7 +167,7 @@ restrict-access: true
 model-paths: ["models"]
 
 models:
-  jaffle_store_watchlist:
+  store_watchlist:
     +materialized: view
     +group: reliability
 ```
@@ -193,7 +195,7 @@ select
     refund_order_rate,
     revenue_exception_rate,
     refund_order_rate > 0 or revenue_exception_rate > 0 as needs_review
-from {{ ref('jaffle_finance', 'fct_store_day_revenue_quality') }}
+from {{ ref('finance', 'fct_store_day_revenue_quality') }}
 ```
 
 Spell out the complete output contract in
@@ -204,7 +206,7 @@ version: 2
 
 models:
   - name: fct_store_day_watchlist
-    description: "{{ doc('jaffle_store_watchlist__fct_store_day_watchlist') }}"
+    description: "{{ doc('store_watchlist__fct_store_day_watchlist') }}"
     config:
       access: public
       contract:
@@ -238,7 +240,7 @@ Only the model, renamed key, and calculated flag need local definitions in
 `fct_store_day_watchlist.md`; unchanged columns reuse their producer blocks:
 
 ```jinja
-{% docs jaffle_store_watchlist__fct_store_day_watchlist %}
+{% docs store_watchlist__fct_store_day_watchlist %}
 Store-day revenue outcomes that need a reliability review.
 {% enddocs %}
 
@@ -267,7 +269,7 @@ dbt build --project-dir . \
 Commit the generated `package-lock.yml` and the documented upstream revision to
 the extension repository. A `local:` entry cannot record the upstream Git
 revision by itself. Do not tell contributors to use a moving branch such as
-`main` or `master`; require a release tag such as `v0.1.0` or a full
+`main` or `master`; require a published release tag or a full
 40-character commit hash in the workspace setup.
 
 #### Why Not Install Every Domain Directly from Its Git Subdirectory?
@@ -279,7 +281,7 @@ only shared macros could pin `projects/shared` directly:
 ```yaml
 packages:
   - git: https://github.com/giacus/jaffle_corp.git
-    revision: v0.1.0
+    revision: "<release-tag-or-full-sha>"
     subdirectory: projects/shared
 ```
 
@@ -298,20 +300,20 @@ uses:
 ```yaml
 # dependencies.yml
 projects:
-  - name: jaffle_finance
+  - name: finance
 ```
 
 Keep the same two-argument ref:
 
 ```sql
-{{ ref('jaffle_finance', 'fct_store_day_revenue_quality') }}
+{{ ref('finance', 'fct_store_day_revenue_quality') }}
 ```
 
 The producer must have a successful deployment that exposes a current manifest
 and the referenced model must be `access: public`. Hosted project dependencies
 resolve that deployed relation through metadata; they do not ask the consumer
 to build finance. Remove the finance local package when switching to this mode.
-Keep `jaffle_shared` as a package only if the extension calls its macros; it is
+Keep `shared` as a package only if the extension calls its macros; it is
 not a peer project dependency in this fixture.
 
 ### Upgrade a Pinned Extension Safely

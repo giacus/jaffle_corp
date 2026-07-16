@@ -8,4 +8,4 @@ select
     cast(adjustment_price_minor as integer) as adjustment_price_minor,
     cast(approved_by_role as varchar) as approved_by_role,
     cast(updated_at_utc as timestamp) as updated_at_utc
-from {{ source('jaffle_merchandising_app', 'raw_price_adjustments') }}
+from {{ source('merchandising_app', 'raw_price_adjustments') }}

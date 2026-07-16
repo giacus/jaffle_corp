@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_order_service_times
-    description: "{{ doc('jaffle_store_ops__fct_order_service_times') }}"
+    description: "{{ doc('store_ops__fct_order_service_times') }}"
     config:
       group: store_ops
       access: public

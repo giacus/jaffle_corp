@@ -1,4 +1,4 @@
-{% docs jaffle_finance__int_order_payment_allocations %}
+{% docs finance__int_order_payment_allocations %}
 Finance policy layer that converts public platform payment activity into a
 recognition-ready order record.
 

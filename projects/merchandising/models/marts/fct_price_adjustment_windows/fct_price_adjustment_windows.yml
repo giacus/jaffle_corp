@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_price_adjustment_windows
-    description: "{{ doc('jaffle_merchandising__fct_price_adjustment_windows') }}"
+    description: "{{ doc('merchandising__fct_price_adjustment_windows') }}"
     config:
       group: merchandising
       access: public

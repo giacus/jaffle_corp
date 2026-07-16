@@ -1,7 +1,7 @@
 version: 2
 
 sources:
-  - name: jaffle_store_ops_app
+  - name: store_ops_app
     schema: "{{ target.schema }}_raw"
     description: Synthetic store operations sources for service timing and quality examples.
     tables:

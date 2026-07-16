@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: int_order_cost_rollup
-    description: "{{ doc('jaffle_finance__int_order_cost_rollup') }}"
+    description: "{{ doc('finance__int_order_cost_rollup') }}"
 
     columns:
       - name: order_id

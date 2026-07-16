@@ -1,4 +1,4 @@
-{% docs jaffle_finance__int_order_cost_rollup %}
+{% docs finance__int_order_cost_rollup %}
 Order-level cost rollup used to add item counts, quantities, and estimated supply
 cost to recognized revenue.
 

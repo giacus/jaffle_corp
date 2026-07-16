@@ -42,7 +42,7 @@ with `scripts/clean.sh --dry-run` or `scripts/clean.sh`.
 The bootstrap script creates or reuses a Python 3.11 `.venv`, installs pinned
 dependencies and the activation hook, resolves dbt packages where needed, and
 verifies that `dbt compile` can find the repo-local profile for
-`jaffle_platform`. Use
+`platform`. Use
 `scripts/bootstrap.sh --full` to compile every runnable dbt project
 and generate the full manifest during setup. The validation script installs dbt
 project dependencies, lints SQL project-by-project, seeds local DuckDB sources,

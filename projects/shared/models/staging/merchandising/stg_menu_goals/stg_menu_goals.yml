@@ -39,4 +39,4 @@ models:
                   - menu_lead
                   - store_lead
                   - analyst
-    description: "{{ doc('jaffle_merchandising__stg_menu_goals') }}"
+    description: "{{ doc('merchandising__stg_menu_goals') }}"

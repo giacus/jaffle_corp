@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: stg_loyalty_events
-    description: "{{ doc('jaffle_platform__stg_loyalty_events') }}"
+    description: "{{ doc('platform__stg_loyalty_events') }}"
     columns:
       - name: loyalty_event_id
         description: "{{ doc('shared__stg_loyalty_events__loyalty_event_id') }}"

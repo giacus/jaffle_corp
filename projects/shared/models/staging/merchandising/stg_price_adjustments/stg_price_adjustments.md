@@ -1,4 +1,4 @@
-{% docs jaffle_merchandising__stg_price_adjustments %}
+{% docs merchandising__stg_price_adjustments %}
 Typed source boundary for temporary product-store price adjustments.
 
 - **Grain:** one source row per `price_adjustment_id`.

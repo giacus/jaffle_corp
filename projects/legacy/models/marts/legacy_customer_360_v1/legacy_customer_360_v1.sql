@@ -9,7 +9,7 @@ orders as (
         sum(order_total_major) as gross_amt,
         sum(case when refund_event_count > 0 then 1 else 0 end) as refund_cnt,
         max(ordered_date_utc) as last_business_dt
-    from {{ ref('jaffle_platform', 'fct_orders') }}
+    from {{ ref('platform', 'fct_orders') }}
     group by 1
 ),
 
@@ -18,7 +18,7 @@ tickets as (
         customer_id,
         count(*) as ticket_cnt,
         sum(concession_major) as make_good_amt
-    from {{ ref('jaffle_experience', 'fct_support_tickets') }}
+    from {{ ref('experience', 'fct_support_tickets') }}
     group by 1
 )
 

@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_purchase_orders
-    description: "{{ doc('jaffle_supply__fct_purchase_orders') }}"
+    description: "{{ doc('supply__fct_purchase_orders') }}"
     config:
       group: supply
       access: public

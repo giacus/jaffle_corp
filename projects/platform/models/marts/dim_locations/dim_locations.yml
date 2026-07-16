@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: dim_locations
-    description: "{{ doc('jaffle_platform__dim_locations') }}"
+    description: "{{ doc('platform__dim_locations') }}"
     config:
       group: platform
       access: public

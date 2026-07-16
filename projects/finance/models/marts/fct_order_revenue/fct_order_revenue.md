@@ -1,4 +1,4 @@
-{% docs jaffle_finance__fct_order_revenue %}
+{% docs finance__fct_order_revenue %}
 Public Finance interface for recognized order revenue, refunds, estimated cost,
 and gross-margin analysis.
 

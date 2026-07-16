@@ -1,4 +1,4 @@
-{% docs jaffle_store_ops__fct_order_service_times %}
+{% docs store_ops__fct_order_service_times %}
 Public operational interface for connecting an order to observed kitchen timing
 and ready-target performance.
 

@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: dim_menu_items
-    description: "{{ doc('jaffle_merchandising__dim_menu_items') }}"
+    description: "{{ doc('merchandising__dim_menu_items') }}"
     config:
       group: merchandising
       access: public

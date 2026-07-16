@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: int_inventory_daily_balance
-    description: "{{ doc('jaffle_supply__int_inventory_daily_balance') }}"
+    description: "{{ doc('supply__int_inventory_daily_balance') }}"
 
     columns:
       - name: store_id

@@ -1,5 +1,5 @@
 select
-    {{ jaffle_shared.stable_hash(['price_test_id']) }} as menu_price_test_result_key,
+    {{ shared.stable_hash(['price_test_id']) }} as menu_price_test_result_key,
     price_test_id,
     product_id,
     product_name,
@@ -16,6 +16,6 @@ select
     observed_order_count,
     observed_item_quantity,
     observed_item_total_major,
-    {{ jaffle_shared.safe_divide('observed_item_total_major', 'observed_item_quantity') }} as observed_average_item_price_major,
+    {{ shared.safe_divide('observed_item_total_major', 'observed_item_quantity') }} as observed_average_item_price_major,
     updated_at_utc
 from {{ ref('int_menu_price_test_windows') }}

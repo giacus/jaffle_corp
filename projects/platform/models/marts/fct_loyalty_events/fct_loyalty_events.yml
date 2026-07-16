@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_loyalty_events
-    description: "{{ doc('jaffle_platform__fct_loyalty_events') }}"
+    description: "{{ doc('platform__fct_loyalty_events') }}"
     config:
       group: platform
       access: public

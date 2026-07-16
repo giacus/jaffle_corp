@@ -8,6 +8,6 @@ select
     cast(team_member_count as integer) as team_member_count,
     cast(role_mix_code as varchar) as role_mix_code,
     cast(source_version as varchar) as source_version,
-    {{ jaffle_shared.safe_divide('actual_minutes', 'planned_minutes') }} as actual_to_planned_minutes_ratio,
+    {{ shared.safe_divide('actual_minutes', 'planned_minutes') }} as actual_to_planned_minutes_ratio,
     cast(updated_at_utc as timestamp) as updated_at_utc
-from {{ source('jaffle_store_ops_app', 'raw_store_shift_plans') }}
+from {{ source('store_ops_app', 'raw_store_shift_plans') }}

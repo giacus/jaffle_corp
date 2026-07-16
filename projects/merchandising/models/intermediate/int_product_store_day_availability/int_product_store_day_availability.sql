@@ -1,5 +1,5 @@
 select
-    {{ jaffle_shared.product_store_day_key('product_id', 'store_id', 'available_date_utc') }} as product_store_day_availability_key,
+    {{ shared.product_store_day_key('product_id', 'store_id', 'available_date_utc') }} as product_store_day_availability_key,
     store_id,
     product_id,
     available_date_utc,
@@ -15,7 +15,7 @@ select
     sum(outage_minutes) as outage_minutes,
     avg(observed_on_hand_units) as average_observed_on_hand_units,
     avg(expected_menu_units) as average_expected_menu_units,
-    {{ jaffle_shared.safe_divide('sum(available_hour_count)', 'count(*)') }} as availability_rate,
+    {{ shared.safe_divide('sum(available_hour_count)', 'count(*)') }} as availability_rate,
     case
         when sum(unavailable_hour_count) > 0 then 'blocked'
         when sum(constrained_hour_count) > 0 then 'constrained'

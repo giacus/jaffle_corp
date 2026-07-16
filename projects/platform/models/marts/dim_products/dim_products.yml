@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: dim_products
-    description: "{{ doc('jaffle_platform__dim_products') }}"
+    description: "{{ doc('platform__dim_products') }}"
     config:
       group: merchandising
       access: public

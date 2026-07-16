@@ -32,4 +32,4 @@ models:
       - name: reason_code
         description: "{{ doc('shared__stg_substitution_rules__reason_code') }}"
         data_type: varchar
-    description: "{{ doc('jaffle_merchandising__stg_substitution_rules') }}"
+    description: "{{ doc('merchandising__stg_substitution_rules') }}"

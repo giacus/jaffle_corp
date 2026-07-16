@@ -1,7 +1,7 @@
 version: 2
 
 sources:
-  - name: jaffle_app
+  - name: platform_app
     schema: "{{ target.schema }}_raw"
     description: Synthetic source tables for the core jaffle application.
     tables:

@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: int_menu_item_margin_baseline
-    description: "{{ doc('jaffle_merchandising__int_menu_item_margin_baseline') }}"
+    description: "{{ doc('merchandising__int_menu_item_margin_baseline') }}"
 
     columns:
       - name: menu_item_margin_baseline_key

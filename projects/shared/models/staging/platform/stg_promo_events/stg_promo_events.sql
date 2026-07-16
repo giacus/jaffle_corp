@@ -8,7 +8,7 @@ select
     cast(cast(event_at_utc as timestamp) as date) as event_date_utc,
     cast(channel as varchar) as channel,
     cast(cost_minor as integer) as cost_minor,
-    {{ jaffle_shared.minor_units_to_major_units('cost_minor') }} as cost_major,
+    {{ shared.minor_units_to_major_units('cost_minor') }} as cost_major,
     cast(currency as varchar) as currency,
     cast(updated_at_utc as timestamp) as updated_at_utc
-from {{ source('jaffle_app', 'raw_promo_events') }}
+from {{ source('platform_app', 'raw_promo_events') }}

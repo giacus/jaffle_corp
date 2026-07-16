@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: int_experiment_conversion_rollup
-    description: "{{ doc('jaffle_growth__int_experiment_conversion_rollup') }}"
+    description: "{{ doc('growth__int_experiment_conversion_rollup') }}"
 
     columns:
       - name: experiment_id

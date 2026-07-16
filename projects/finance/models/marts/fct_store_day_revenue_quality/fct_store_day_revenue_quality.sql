@@ -1,5 +1,5 @@
 select
-    {{ jaffle_shared.stable_hash(['store_id', 'recognized_date']) }} as store_day_revenue_quality_key,
+    {{ shared.stable_hash(['store_id', 'recognized_date']) }} as store_day_revenue_quality_key,
     store_id,
     recognized_date,
     country_code,

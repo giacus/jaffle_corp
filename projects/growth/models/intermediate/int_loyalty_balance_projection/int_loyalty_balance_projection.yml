@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: int_loyalty_balance_projection
-    description: "{{ doc('jaffle_growth__int_loyalty_balance_projection') }}"
+    description: "{{ doc('growth__int_loyalty_balance_projection') }}"
 
     columns:
       - name: customer_id

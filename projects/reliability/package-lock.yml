@@ -1,18 +1,18 @@
 packages:
   - local: ../shared
-    name: jaffle_shared
+    name: shared
   - local: ../platform
-    name: jaffle_platform
+    name: platform
   - local: ../supply
-    name: jaffle_supply
+    name: supply
   - local: ../finance
-    name: jaffle_finance
+    name: finance
   - local: ../merchandising
-    name: jaffle_merchandising
+    name: merchandising
   - local: ../store_ops
-    name: jaffle_store_ops
+    name: store_ops
   - local: ../planning
-    name: jaffle_planning
+    name: planning
   - name: dbt_utils
     package: dbt-labs/dbt_utils
     version: 1.3.3

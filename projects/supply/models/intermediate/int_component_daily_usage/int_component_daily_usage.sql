@@ -1,5 +1,5 @@
 with order_items as (
-    select * from {{ ref('jaffle_platform', 'fct_order_items') }}
+    select * from {{ ref('platform', 'fct_order_items') }}
 ),
 
 orders as (
@@ -7,7 +7,7 @@ orders as (
         order_id,
         store_id,
         is_completed_order
-    from {{ ref('jaffle_platform', 'fct_orders') }}
+    from {{ ref('platform', 'fct_orders') }}
 ),
 
 recipe_components as (

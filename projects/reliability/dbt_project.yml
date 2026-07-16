@@ -1,4 +1,4 @@
-name: jaffle_reliability
+name: reliability
 version: "0.1.0"
 config-version: 2
 
@@ -19,9 +19,9 @@ clean-targets:
   - dbt_packages
 
 models:
-  jaffle_reliability:
+  reliability:
     +materialized: view
-    +post-hook: "{{ jaffle_shared.audit_noop() }}"
+    +post-hook: "{{ shared.audit_noop() }}"
     +meta:
       domain: reliability
       source_system: downstream_extension_fixture

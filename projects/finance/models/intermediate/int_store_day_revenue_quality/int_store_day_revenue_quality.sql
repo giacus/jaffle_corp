@@ -22,9 +22,9 @@ store_day as (
 
 select
     *,
-    {{ jaffle_shared.safe_divide('recipe_margin_usd', 'net_revenue_usd') }} as recipe_margin_rate,
-    {{ jaffle_shared.safe_divide('refund_order_count', 'order_count') }} as refund_order_rate,
-    {{ jaffle_shared.safe_divide('revenue_exception_order_count', 'order_count') }} as revenue_exception_rate,
+    {{ shared.safe_divide('recipe_margin_usd', 'net_revenue_usd') }} as recipe_margin_rate,
+    {{ shared.safe_divide('refund_order_count', 'order_count') }} as refund_order_rate,
+    {{ shared.safe_divide('revenue_exception_order_count', 'order_count') }} as revenue_exception_rate,
     case
         when negative_margin_order_count > 0 then 'negative_margin'
         when revenue_exception_order_count > 0 then 'revenue_review'

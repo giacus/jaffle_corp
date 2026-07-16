@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_quality_events
-    description: "{{ doc('jaffle_store_ops__fct_quality_events') }}"
+    description: "{{ doc('store_ops__fct_quality_events') }}"
     config:
       group: store_ops
       access: public

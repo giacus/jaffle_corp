@@ -1,7 +1,7 @@
 version: 2
 
 sources:
-  - name: jaffle_supply_app
+  - name: supply_app
     schema: "{{ target.schema }}_raw"
     description: Synthetic supply-side source tables for recipe and stock examples.
     tables:

@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_substitution_readiness
-    description: "{{ doc('jaffle_merchandising__fct_substitution_readiness') }}"
+    description: "{{ doc('merchandising__fct_substitution_readiness') }}"
     config:
       group: merchandising
       access: public

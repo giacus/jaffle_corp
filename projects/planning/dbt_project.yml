@@ -1,4 +1,4 @@
-name: jaffle_planning
+name: planning
 version: "0.1.0"
 config-version: 2
 
@@ -24,9 +24,9 @@ vars:
   planning_accuracy_tolerance: 0.25
 
 models:
-  jaffle_planning:
+  planning:
     +materialized: view
-    +post-hook: "{{ jaffle_shared.audit_noop() }}"
+    +post-hook: "{{ shared.audit_noop() }}"
     +meta:
       domain: planning
       source_system: synthetic_jaffle_corp

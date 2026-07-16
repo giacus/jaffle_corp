@@ -41,4 +41,4 @@ models:
       - name: updated_at_utc
         description: "{{ doc('shared__stg_component_week_plans__updated_at_utc') }}"
         data_type: timestamp
-    description: "{{ doc('jaffle_planning__stg_component_week_plans') }}"
+    description: "{{ doc('planning__stg_component_week_plans') }}"

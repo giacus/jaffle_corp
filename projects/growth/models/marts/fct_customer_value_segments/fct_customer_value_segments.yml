@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_customer_value_segments
-    description: "{{ doc('jaffle_growth__fct_customer_value_segments') }}"
+    description: "{{ doc('growth__fct_customer_value_segments') }}"
     config:
       group: growth
       access: public

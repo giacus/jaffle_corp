@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: int_order_payment_allocations
-    description: "{{ doc('jaffle_finance__int_order_payment_allocations') }}"
+    description: "{{ doc('finance__int_order_payment_allocations') }}"
 
     columns:
       - name: order_id

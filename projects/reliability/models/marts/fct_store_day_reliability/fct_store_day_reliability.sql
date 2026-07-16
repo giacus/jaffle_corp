@@ -8,7 +8,7 @@ with revenue_quality as (
         refund_order_rate,
         revenue_exception_rate,
         store_day_revenue_quality_status
-    from {{ ref('jaffle_finance', 'fct_store_day_revenue_quality') }}
+    from {{ ref('finance', 'fct_store_day_revenue_quality') }}
 ),
 
 availability as (
@@ -22,7 +22,7 @@ availability as (
         cast(sum(unavailable_hour_count) as integer) as unavailable_hour_count,
         cast(sum(outage_minutes) as integer) as outage_minutes,
         avg(availability_rate) as average_product_availability_rate
-    from {{ ref('jaffle_merchandising', 'fct_product_store_day_availability') }}
+    from {{ ref('merchandising', 'fct_product_store_day_availability') }}
     group by 1, 2
 ),
 
@@ -35,13 +35,13 @@ capacity_plan as (
         cast(actual_order_count as integer) as actual_order_count,
         prediction_interval_hit_rate,
         ready_target_rate
-    from {{ ref('jaffle_planning', 'fct_store_day_capacity_plan') }}
+    from {{ ref('planning', 'fct_store_day_capacity_plan') }}
     where scenario_name = 'base'
 ),
 
 scored as (
     select
-        {{ jaffle_shared.scenario_store_day_key("'base'", 'revenue_quality.store_id', 'revenue_quality.recognized_date') }} as store_day_reliability_key,
+        {{ shared.scenario_store_day_key("'base'", 'revenue_quality.store_id', 'revenue_quality.recognized_date') }} as store_day_reliability_key,
         revenue_quality.store_id,
         revenue_quality.recognized_date as reliability_date,
         coalesce(capacity_plan.scenario_name, 'base') as scenario_name,

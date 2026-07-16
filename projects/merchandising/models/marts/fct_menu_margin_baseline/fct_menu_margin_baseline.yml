@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_menu_margin_baseline
-    description: "{{ doc('jaffle_merchandising__fct_menu_margin_baseline') }}"
+    description: "{{ doc('merchandising__fct_menu_margin_baseline') }}"
     config:
       group: merchandising
       access: public

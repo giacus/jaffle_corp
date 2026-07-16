@@ -1,4 +1,4 @@
 projects:
-  - name: jaffle_platform
-  - name: jaffle_finance
-  - name: jaffle_experience
+  - name: platform
+  - name: finance
+  - name: experience

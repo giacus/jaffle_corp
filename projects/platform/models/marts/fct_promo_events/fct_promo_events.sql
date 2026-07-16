@@ -1,5 +1,5 @@
 select
-    {{ jaffle_shared.stable_hash(['promo_event_id', 'event_at_utc']) }} as promo_event_key,
+    {{ shared.stable_hash(['promo_event_id', 'event_at_utc']) }} as promo_event_key,
     promo_event_id,
     customer_id,
     order_id,

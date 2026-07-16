@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: int_campaign_incrementality
-    description: "{{ doc('jaffle_growth__int_campaign_incrementality') }}"
+    description: "{{ doc('growth__int_campaign_incrementality') }}"
 
     columns:
       - name: campaign_id

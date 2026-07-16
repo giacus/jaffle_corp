@@ -8,7 +8,7 @@ products as (
         product_name,
         category,
         product_family
-    from {{ ref('jaffle_platform', 'dim_products') }}
+    from {{ ref('platform', 'dim_products') }}
 ),
 
 order_items as (
@@ -20,8 +20,8 @@ order_items as (
         orders.ordered_at_utc,
         order_items.quantity,
         order_items.item_total_major
-    from {{ ref('jaffle_platform', 'fct_order_items') }} as order_items
-    inner join {{ ref('jaffle_platform', 'fct_orders') }} as orders
+    from {{ ref('platform', 'fct_order_items') }} as order_items
+    inner join {{ ref('platform', 'fct_orders') }} as orders
         on order_items.order_id = orders.order_id
 )
 

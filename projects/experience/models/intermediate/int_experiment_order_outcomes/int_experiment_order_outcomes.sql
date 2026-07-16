@@ -10,7 +10,7 @@ orders as (
         ordered_date_utc,
         channel,
         is_completed_order
-    from {{ ref('jaffle_platform', 'fct_orders') }}
+    from {{ ref('platform', 'fct_orders') }}
 ),
 
 revenue as (
@@ -18,7 +18,7 @@ revenue as (
         order_id,
         net_revenue_usd,
         estimated_gross_margin_usd
-    from {{ ref('jaffle_finance', 'fct_order_revenue') }}
+    from {{ ref('finance', 'fct_order_revenue') }}
 ),
 
 exposure_orders as (

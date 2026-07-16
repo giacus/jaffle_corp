@@ -3,15 +3,15 @@ with publications as (
 ),
 
 products as (
-    select * from {{ ref('jaffle_platform', 'dim_products') }}
+    select * from {{ ref('platform', 'dim_products') }}
 ),
 
 locations as (
-    select * from {{ ref('jaffle_platform', 'dim_locations') }}
+    select * from {{ ref('platform', 'dim_locations') }}
 )
 
 select
-    {{ jaffle_shared.stable_hash(['publications.publication_id', 'publications.store_id', 'publications.product_id']) }} as menu_product_window_key,
+    {{ shared.stable_hash(['publications.publication_id', 'publications.store_id', 'publications.product_id']) }} as menu_product_window_key,
     publications.publication_id,
     publications.store_id,
     locations.country_code,
@@ -30,7 +30,7 @@ select
     publications.published_price_minor,
     publications.currency,
     publications.menu_surface,
-    {{ jaffle_shared.menu_price_band('publications.published_price_minor') }} as menu_price_band,
+    {{ shared.menu_price_band('publications.published_price_minor') }} as menu_price_band,
     products.is_limited_time,
     products.has_perishable_supply,
     publications.updated_at_utc

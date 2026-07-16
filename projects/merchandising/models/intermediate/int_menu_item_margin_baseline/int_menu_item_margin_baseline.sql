@@ -6,7 +6,7 @@ component_costs as (
     select
         product_id,
         sum(expected_component_cost_usd) as expected_recipe_cost_usd
-    from {{ ref('jaffle_supply', 'fct_product_component_costs') }}
+    from {{ ref('supply', 'fct_product_component_costs') }}
     group by 1
 ),
 
@@ -15,7 +15,7 @@ exchange_rates as (
         currency,
         rate_date,
         usd_rate
-    from {{ ref('jaffle_platform', 'dim_exchange_rates') }}
+    from {{ ref('platform', 'dim_exchange_rates') }}
 ),
 
 menu_windows_with_fx as (
@@ -51,7 +51,7 @@ select
         menu_windows_with_fx.published_price_minor / 100.0 * menu_windows_with_fx.usd_rate
         - coalesce(component_costs.expected_recipe_cost_usd, 0)
     ) as expected_recipe_margin_usd,
-    {{ jaffle_shared.safe_divide('menu_windows_with_fx.published_price_minor / 100.0 * menu_windows_with_fx.usd_rate - coalesce(component_costs.expected_recipe_cost_usd, 0)', 'menu_windows_with_fx.published_price_minor / 100.0 * menu_windows_with_fx.usd_rate') }} as expected_recipe_margin_rate,
+    {{ shared.safe_divide('menu_windows_with_fx.published_price_minor / 100.0 * menu_windows_with_fx.usd_rate - coalesce(component_costs.expected_recipe_cost_usd, 0)', 'menu_windows_with_fx.published_price_minor / 100.0 * menu_windows_with_fx.usd_rate') }} as expected_recipe_margin_rate,
     coalesce(menu_windows_with_fx.is_featured and coalesce(component_costs.expected_recipe_cost_usd, 0) = 0, false) as needs_cost_review,
     menu_windows_with_fx.menu_price_band,
     menu_windows_with_fx.published_at_utc,

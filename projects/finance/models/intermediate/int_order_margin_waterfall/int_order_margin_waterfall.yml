@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: int_order_margin_waterfall
-    description: "{{ doc('jaffle_finance__int_order_margin_waterfall') }}"
+    description: "{{ doc('finance__int_order_margin_waterfall') }}"
 
     columns:
       - name: order_id

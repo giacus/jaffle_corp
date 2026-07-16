@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: int_menu_price_test_windows
-    description: "{{ doc('jaffle_experience__int_menu_price_test_windows') }}"
+    description: "{{ doc('experience__int_menu_price_test_windows') }}"
 
     columns:
       - name: price_test_id

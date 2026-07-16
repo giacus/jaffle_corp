@@ -7,4 +7,4 @@ select
     nullif(cast(local_holiday_name as varchar), '') as local_holiday_name,
     cast(menu_focus as varchar) as menu_focus,
     cast(updated_at_utc as timestamp) as updated_at_utc
-from {{ source('jaffle_planning_app', 'raw_operating_calendar') }}
+from {{ source('planning_app', 'raw_operating_calendar') }}

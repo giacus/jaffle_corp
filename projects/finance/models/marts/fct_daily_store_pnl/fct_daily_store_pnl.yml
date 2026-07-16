@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_daily_store_pnl
-    description: "{{ doc('jaffle_finance__fct_daily_store_pnl') }}"
+    description: "{{ doc('finance__fct_daily_store_pnl') }}"
     config:
       group: finance
       access: public

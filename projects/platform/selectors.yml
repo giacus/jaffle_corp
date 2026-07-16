@@ -25,8 +25,8 @@ selectors:
     definition:
       union:
         - method: source
-          value: jaffle_app.raw_orders
+          value: platform_app.raw_orders
         - method: source
-          value: jaffle_app.raw_payments
+          value: platform_app.raw_payments
         - method: source
-          value: jaffle_app.raw_refunds
+          value: platform_app.raw_refunds

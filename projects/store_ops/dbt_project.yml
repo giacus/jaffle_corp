@@ -1,4 +1,4 @@
-name: jaffle_store_ops
+name: store_ops
 version: "0.1.0"
 config-version: 2
 
@@ -24,9 +24,9 @@ vars:
   kitchen_ready_target_minutes: 12
 
 models:
-  jaffle_store_ops:
+  store_ops:
     +materialized: view
-    +post-hook: "{{ jaffle_shared.audit_noop() }}"
+    +post-hook: "{{ shared.audit_noop() }}"
     +meta:
       domain: store_ops
       source_system: synthetic_jaffle_corp

@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_store_hour_forecast_accuracy
-    description: "{{ doc('jaffle_planning__fct_store_hour_forecast_accuracy') }}"
+    description: "{{ doc('planning__fct_store_hour_forecast_accuracy') }}"
     config:
       group: planning
       access: public

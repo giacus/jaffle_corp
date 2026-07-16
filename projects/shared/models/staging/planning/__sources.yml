@@ -1,7 +1,7 @@
 version: 2
 
 sources:
-  - name: jaffle_planning_app
+  - name: planning_app
     schema: "{{ target.schema }}_raw"
     description: Synthetic planning source tables for forecasts, scenarios, and calendars.
     tables:

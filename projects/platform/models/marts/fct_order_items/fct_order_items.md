@@ -1,4 +1,4 @@
-{% docs jaffle_platform__fct_order_items %}
+{% docs platform__fct_order_items %}
 Public item-level interface for product-mix analysis and downstream cost
 estimation.
 

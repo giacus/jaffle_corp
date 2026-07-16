@@ -1,13 +1,13 @@
 with customers as (
-    select * from {{ ref('jaffle_platform', 'dim_customers') }}
+    select * from {{ ref('platform', 'dim_customers') }}
 ),
 
 orders as (
-    select * from {{ ref('jaffle_platform', 'fct_orders') }}
+    select * from {{ ref('platform', 'fct_orders') }}
 ),
 
 revenue as (
-    select * from {{ ref('jaffle_finance', 'fct_order_revenue') }}
+    select * from {{ ref('finance', 'fct_order_revenue') }}
 ),
 
 loyalty as (
@@ -15,7 +15,7 @@ loyalty as (
         customer_id,
         cast(sum(points_delta) as integer) as net_loyalty_points,
         max(program_tier) as latest_program_tier
-    from {{ ref('jaffle_platform', 'fct_loyalty_events') }}
+    from {{ ref('platform', 'fct_loyalty_events') }}
     group by 1
 ),
 

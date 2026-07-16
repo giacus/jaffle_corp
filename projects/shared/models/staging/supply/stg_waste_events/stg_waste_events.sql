@@ -10,4 +10,4 @@ select
     cast(unit as varchar) as unit,
     cast(reason_code as varchar) as reason_code,
     cast(updated_at_utc as timestamp) as updated_at_utc
-from {{ source('jaffle_supply_app', 'raw_waste_events') }}
+from {{ source('supply_app', 'raw_waste_events') }}

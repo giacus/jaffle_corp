@@ -10,7 +10,7 @@ orders as (
         order_total_usd,
         refund_event_count,
         has_failed_payment
-    from {{ ref('jaffle_platform', 'fct_orders') }}
+    from {{ ref('platform', 'fct_orders') }}
 ),
 
 revenue as (
@@ -19,7 +19,7 @@ revenue as (
         net_revenue_usd,
         estimated_gross_margin_usd,
         revenue_quality_status
-    from {{ ref('jaffle_finance', 'fct_order_revenue') }}
+    from {{ ref('finance', 'fct_order_revenue') }}
 )
 
 select
@@ -41,9 +41,9 @@ select
     tickets.currency,
     tickets.first_response_minutes,
     tickets.resolution_minutes,
-    {{ jaffle_shared.sla_status('tickets.first_response_minutes', var('ticket_first_response_target_minutes', 10)) }}
+    {{ shared.sla_status('tickets.first_response_minutes', var('ticket_first_response_target_minutes', 10)) }}
         as first_response_sla_status,
-    {{ jaffle_shared.sla_status('tickets.resolution_minutes', var('ticket_resolution_target_minutes', 120)) }}
+    {{ shared.sla_status('tickets.resolution_minutes', var('ticket_resolution_target_minutes', 120)) }}
         as resolution_sla_status,
     orders.order_status,
     orders.channel,

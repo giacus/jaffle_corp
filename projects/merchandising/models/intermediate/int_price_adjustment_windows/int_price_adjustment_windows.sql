@@ -7,7 +7,7 @@ menu_windows as (
 )
 
 select
-    {{ jaffle_shared.stable_hash(['adjustments.price_adjustment_id', 'adjustments.store_id', 'adjustments.product_id']) }} as price_adjustment_window_key,
+    {{ shared.stable_hash(['adjustments.price_adjustment_id', 'adjustments.store_id', 'adjustments.product_id']) }} as price_adjustment_window_key,
     adjustments.price_adjustment_id,
     adjustments.store_id,
     adjustments.product_id,
@@ -20,9 +20,9 @@ select
     adjustments.adjustment_price_minor,
     menu_windows.published_price_minor,
     adjustments.adjustment_price_minor - menu_windows.published_price_minor as adjustment_delta_minor,
-    {{ jaffle_shared.safe_divide('adjustments.adjustment_price_minor - menu_windows.published_price_minor', 'menu_windows.published_price_minor') }} as adjustment_delta_rate,
+    {{ shared.safe_divide('adjustments.adjustment_price_minor - menu_windows.published_price_minor', 'menu_windows.published_price_minor') }} as adjustment_delta_rate,
     adjustments.approved_by_role,
-    {{ jaffle_shared.menu_price_band('adjustments.adjustment_price_minor') }} as adjustment_price_band,
+    {{ shared.menu_price_band('adjustments.adjustment_price_minor') }} as adjustment_price_band,
     adjustments.updated_at_utc
 from adjustments
 left join menu_windows

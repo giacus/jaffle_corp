@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: int_quality_exception_rollup
-    description: "{{ doc('jaffle_store_ops__int_quality_exception_rollup') }}"
+    description: "{{ doc('store_ops__int_quality_exception_rollup') }}"
 
     columns:
       - name: store_id

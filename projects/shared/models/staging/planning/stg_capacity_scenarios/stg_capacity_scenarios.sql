@@ -8,4 +8,4 @@ select
     cast(target_ready_minutes as double) as target_ready_minutes,
     cast(target_team_hours as double) as target_team_hours,
     cast(updated_at_utc as timestamp) as updated_at_utc
-from {{ source('jaffle_planning_app', 'raw_capacity_scenarios') }}
+from {{ source('planning_app', 'raw_capacity_scenarios') }}

@@ -1,4 +1,4 @@
-{% docs jaffle_experience__fct_support_tickets %}
+{% docs experience__fct_support_tickets %}
 Public customer-support interface combining ticket lifecycle, SLA outcomes, and
 available order and Finance context.
 

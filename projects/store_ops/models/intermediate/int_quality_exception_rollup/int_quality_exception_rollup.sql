@@ -7,7 +7,7 @@ products as (
         product_id,
         product_family,
         category
-    from {{ ref('jaffle_platform', 'dim_products') }}
+    from {{ ref('platform', 'dim_products') }}
 )
 
 select

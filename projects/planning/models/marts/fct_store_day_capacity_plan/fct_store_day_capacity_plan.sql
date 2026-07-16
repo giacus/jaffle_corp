@@ -19,7 +19,7 @@ select
     incident_count,
     net_revenue_usd,
     estimated_gross_margin_usd,
-    {{ jaffle_shared.safe_divide('forecasted_order_count', 'expected_open_minutes / 60.0') }} as forecasted_orders_per_open_hour,
-    {{ jaffle_shared.safe_divide('actual_order_count', 'expected_open_minutes / 60.0') }} as actual_orders_per_open_hour,
-    {{ jaffle_shared.safe_divide('inside_interval_hour_count', 'forecast_hour_count') }} as prediction_interval_hit_rate
+    {{ shared.safe_divide('forecasted_order_count', 'expected_open_minutes / 60.0') }} as forecasted_orders_per_open_hour,
+    {{ shared.safe_divide('actual_order_count', 'expected_open_minutes / 60.0') }} as actual_orders_per_open_hour,
+    {{ shared.safe_divide('inside_interval_hour_count', 'forecast_hour_count') }} as prediction_interval_hit_rate
 from {{ ref('int_store_day_plan_inputs') }}

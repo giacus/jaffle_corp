@@ -20,7 +20,7 @@ select
     forecast_error_orders,
     absolute_forecast_error_orders,
     absolute_percentage_error_orders,
-    {{ jaffle_shared.forecast_accuracy_band('absolute_percentage_error_orders') }} as forecast_accuracy_band,
+    {{ shared.forecast_accuracy_band('absolute_percentage_error_orders') }} as forecast_accuracy_band,
     actual_inside_prediction_interval,
     created_at_utc,
     updated_at_utc
