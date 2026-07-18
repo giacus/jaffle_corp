@@ -1,11 +1,8 @@
 # Contributing
 
-Thanks for helping make `jaffle-corp` a useful public dbt reference fixture.
+Thanks for helping make `jaffle-corp` a useful public dbt playground.
 
-The goal is realistic, inspectable complexity rather than maximum complexity.
-Contributions should improve at least one supported use: architecture
-exploration, analytics-tool testing, public-contract validation, downstream
-extension work, or the optional guided labs.
+The goal is realistic complexity, not maximum complexity. Contributions should make it easier for people to learn how dbt projects behave once they include multiple domains, project dependencies, contracts, semantic models, legacy marts, and imperfect source data.
 
 ## Good Contributions
 

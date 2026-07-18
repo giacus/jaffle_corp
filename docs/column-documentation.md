@@ -58,8 +58,9 @@ Order total at order grain, converted to US dollars with the rate for the order 
 
 - Put every column block in the adjacent `.md` file of the model that first
   defines or changes its meaning.
-- Name blocks `<project>__<model>__<column>`, using the exact short dbt project
-  name such as `shared` or `platform`.
+- Name blocks `<project>__<model>__<column>`, using the concise project folder
+  name such as `shared` or `platform` rather than the redundant dbt package
+  prefix `jaffle_`.
 - Keep every column `description` as a single `doc()` reference.
 - Describe business meaning, unit, grain, and important null or fallback
   behavior when those details are not already implied by the owning model.

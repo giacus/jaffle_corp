@@ -8,9 +8,9 @@ including issues, pull requests, reviews, discussions, and other public forums.
 ## Expected Behavior
 
 Be respectful, specific, and constructive. Disagreement about architecture or
-fixture-design choices is welcome; harassment, personal attacks,
-discrimination, sexualized behavior, threats, publishing private information,
-and sustained disruption are not.
+teaching choices is welcome; harassment, personal attacks, discrimination,
+sexualized behavior, threats, publishing private information, and sustained
+disruption are not.
 
 Maintainers may edit or remove contributions, comments, or other participation
 that violates these expectations. They may also warn, temporarily restrict, or

@@ -7,8 +7,7 @@ multi-project dbt estate interesting: commerce, money, supply, customer
 experience, growth, store operations, merchandising, and planning.
 
 All names, people, stores, suppliers, and events are synthetic. The fixture is
-for architecture exploration, behavior validation, extension work, and tool
-testing; it is not for statistical analysis or benchmarking.
+for learning and tool testing, not for statistical analysis or benchmarking.
 
 ## The Company in One Minute
 
