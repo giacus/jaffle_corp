@@ -16,6 +16,6 @@ selectors:
     definition:
       union:
         - method: fqn
-          value: legacy_customer_360_v1
+          value: legacy_customer_360.v1
         - method: fqn
           value: legacy_refund_reason_bridge_v0
