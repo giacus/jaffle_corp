@@ -31,13 +31,8 @@ def is_staging(node: dict) -> bool:
     return node["package_name"] == "shared" and "/staging/" in node["original_file_path"]
 
 
-def project_doc_namespace(package_name: str) -> str:
-    """Use the concise project name; `jaffle_` is constant across this repository."""
-    return package_name.removeprefix("jaffle_")
-
-
 def local_doc_id(node: dict, column: str) -> str:
-    project = project_doc_namespace(node["package_name"])
+    project = node["package_name"]
     return f"{project}__{node['name']}__{column}"
 
 
@@ -276,7 +271,7 @@ def main() -> int:
                 f"{doc_name}: defined in {path.relative_to(ROOT)}, expected {expected_path.relative_to(ROOT)}"
             )
 
-    namespaces = {project_doc_namespace(package) for package in package_folders}
+    namespaces = set(package_folders)
     for doc_name in sorted(definitions):
         parts = doc_name.split("__")
         if len(parts) == 3 and parts[0] in namespaces and doc_name not in expected_definitions:

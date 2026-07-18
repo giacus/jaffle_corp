@@ -1,6 +1,6 @@
 selectors:
   - name: merchandising_public_surface
-    description: Marts and MetricFlow resources for the merchandising learning surface.
+    description: Marts and MetricFlow resources for the merchandising fixture surface.
     definition:
       union:
         - method: path
