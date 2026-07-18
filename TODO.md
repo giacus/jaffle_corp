@@ -6,7 +6,7 @@ outside the current change. Items are grouped by outcome, not by file.
 ## Documentation depth
 
 - Deepen model-local `.md` files with grain, business meaning, caveats, and a
-  useful example where it helps a learner.
+  useful example where it materially improves inspection or use.
 
 ## Live-data readiness
 
@@ -20,9 +20,10 @@ outside the current change. Items are grouped by outcome, not by file.
 - Add an automated architecture-policy check for public-only cross-project refs
   and the deliberate `shared` package exception.
 - Audit the public model surface and keep a model public only when a real
-  downstream consumer or learning objective justifies the contract.
+  downstream consumer, architectural claim, or tool-test case justifies the
+  contract.
 - Add focused model versions, dbt unit tests, and relationship tests where they
-  teach compatibility or protect important business behavior.
+  demonstrate compatibility or protect important business behavior.
 - Add optional scale fixtures without making the default local workflow heavy.
-- Maintain a small community-facing roadmap after the `v0.1.0` workshop
-  baseline.
+- Maintain a small community-facing roadmap after the `v0.2.0` reference
+  fixture baseline.
