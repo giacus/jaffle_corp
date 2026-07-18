@@ -7,7 +7,7 @@ estimation.
   order-implied USD conversion ratio to estimated supply cost.
 - **Caveats:** missing order context leaves conversion fields null, and applying
   an order-currency ratio to supply estimates is intentionally simplified for
-  the fixture rather than presented as audited costing.
+  the workshop rather than presented as audited costing.
 
 A useful query surfaces items whose order context did not resolve:
 

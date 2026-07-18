@@ -2,26 +2,21 @@
 
 [![CI](https://github.com/giacus/jaffle_corp/actions/workflows/ci.yml/badge.svg)](https://github.com/giacus/jaffle_corp/actions/workflows/ci.yml)
 
-`jaffle-corp` is a laptop-runnable, multi-project dbt Core reference fixture for
-exploring and testing domain boundaries, public model contracts, cross-project
-dependencies, Semantic Layer behavior, downstream extensions, and legacy
-migrations.
+`jaffle-corp` is a laptop-runnable dbt Core playground for practicing the parts
+of analytics engineering that appear after a first tutorial: multiple domains,
+public contracts, protected implementation models, cross-project dependencies,
+the Semantic Layer, downstream extensions, and legacy debt.
 
 The company is fictional, the data is synthetic, and the default stack is dbt
 Core plus DuckDB. No warehouse credentials or dbt Cloud account are required.
 Every dbt project requires the tested dbt Core 1.11.12 release, and bootstrap
 installs the exact transitive Python versions in `requirements.lock.txt`.
 
-`jaffle-corp` is the human-facing fixture name, `jaffle_corp` is the repository
-and dbt profile identifier, and `shared`, `platform`, `finance`, and the other
-short names are dbt project identities.
-
 > [!NOTE]
-> This fixture assumes familiarity with `ref`, sources, and generic tests. It is
-> intended for analytics engineers, dbt maintainers, tool authors, extension
-> authors, and advanced practitioners who need a realistic but inspectable dbt
-> estate. If the dbt foundations are new, start with the official
-> [dbt quickstart](https://docs.getdbt.com/) and return afterward.
+> This is not an introduction to `ref`, sources, or generic tests. Use it when
+> you know the dbt basics and want to practice architecture, review, governance,
+> refactoring, and extension work. If those foundations are new, start with the
+> official [dbt quickstart](https://docs.getdbt.com/) and return afterward.
 
 ## Five-Minute Start
 
@@ -89,22 +84,18 @@ The repo uses two different dependency mechanisms on purpose:
 Keep `shared` and third-party code packages such as `dbt_utils` in
 `packages.yml` even when adapting the domain projects to a hosted Mesh setup.
 
-## Ways to Use This Repository
+## Choose a Learning Route
 
-- **Inspect a multi-project architecture:** start with `platform`, then follow
-  one downstream lane in the architecture map.
-- **Test analytics tooling:** generate the combined manifest and exercise
-  lineage, contracts, access rules, semantic models, metrics, and dbt functions.
-- **Evaluate an interface change:** modify a public contract and use
-  `reliability` to observe the downstream effect.
-- **Author an extension:** inspect `reliability` and follow
+- **Quick tour:** labs 1–3, about 90 minutes.
+- **Half-day workshop:** labs 1–6.
+- **Full lab sequence:** all ten labs and the cross-domain capstone.
+- **One domain:** start with `platform`, then follow one downstream lane from
+  the architecture map.
+- **Extension practice:** inspect `reliability` and read
   [Extension Authoring](docs/extension_authoring.md).
-- **Follow optional guided labs:** use labs 1–3 for a quick tour or continue
-  through the cross-domain capstone.
 
-The labs are an optional route through the fixture rather than its defining
-purpose; their single index is [Labs](docs/labs.md). Model SQL, contract YAML,
-and docs live together under:
+The single learning index is [Labs](docs/labs.md). Model SQL,
+contract YAML, and docs live together under:
 
 ```text
 models/<layer>/<model_name>/<model_name>.sql
@@ -154,18 +145,15 @@ Use `scripts/clean.sh --dry-run` to preview the complete end-of-session cleanup.
 | New downstream use case | `projects/reliability/` or another extension project |
 | Deferred project improvements | [TODO](TODO.md) |
 
-## Fixture Contract
+## Project Boundaries
 
 - Keep data fictional, compact, deterministic, and safe to publish.
 - Depend on public contracted domain models across project boundaries.
 - Treat protected domain models as implementation details.
 - Keep the `shared` package exception explicit; do not model it as a reciprocal
   project dependency.
-- Add complexity only when it supports a named scenario, architectural claim,
-  tool-test case, or downstream consumer.
+- Add complexity only when it supports a named learning objective or consumer.
 - Do not add real company data, credentials, private schemas, or internal names.
-- Do not present this fixture as a production starter kit, performance or
-  statistical benchmark, or simulation of deployed dbt Mesh infrastructure.
 
 ## More Documentation
 
