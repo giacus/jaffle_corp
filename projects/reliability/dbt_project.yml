@@ -7,6 +7,7 @@ require-dbt-version: "=1.11.12"
 restrict-access: true
 
 model-paths: ["models"]
+function-paths: ["functions"]
 analysis-paths: ["analyses"]
 test-paths: ["tests"]
 seed-paths: ["seeds"]

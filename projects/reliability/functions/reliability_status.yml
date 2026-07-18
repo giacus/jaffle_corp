@@ -1,0 +1,11 @@
+version: 2
+
+functions:
+  - name: reliability_status
+    description: Classifies a bounded reliability score for warehouse and downstream reuse.
+    arguments:
+      - name: reliability_score
+        data_type: double
+        description: Reliability score between zero and one.
+    returns:
+      data_type: varchar
