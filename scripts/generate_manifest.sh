@@ -13,12 +13,15 @@ fi
 
 export DBT_PROFILES_DIR="${DBT_PROFILES_DIR:-$ROOT_DIR}"
 export JAFFLE_CORP_DUCKDB_PATH="${JAFFLE_CORP_DUCKDB_PATH:-$ROOT_DIR/jaffle_corp.duckdb}"
+CATALOG_GIT_SHA="$(git -C "$ROOT_DIR" rev-parse HEAD)"
+export DBT_ENV_CUSTOM_ENV_GIT_SHA="$CATALOG_GIT_SHA"
 
 echo "Installing catalog dependencies..."
 dbt deps --project-dir "$CATALOG_PROJECT" --profiles-dir "$DBT_PROFILES_DIR"
 
 echo "Compiling the complete jaffle-corp catalog..."
 dbt compile \
+  --no-partial-parse \
   --project-dir "$CATALOG_PROJECT" \
   --profiles-dir "$DBT_PROFILES_DIR" \
   --target-path "$ROOT_DIR/target"
@@ -30,7 +33,7 @@ if [[ ! -f "$MANIFEST_PATH" ]]; then
   exit 1
 fi
 
-python - "$ROOT_DIR" "$MANIFEST_PATH" <<'PY'
+python - "$ROOT_DIR" "$MANIFEST_PATH" "$DBT_ENV_CUSTOM_ENV_GIT_SHA" <<'PY'
 import json
 import re
 import sys
@@ -38,7 +41,15 @@ from pathlib import Path
 
 root = Path(sys.argv[1])
 manifest_path = Path(sys.argv[2])
+expected_git_sha = sys.argv[3]
 manifest = json.loads(manifest_path.read_text())
+
+manifest_git_sha = manifest.get("metadata", {}).get("env", {}).get("GIT_SHA")
+if manifest_git_sha != expected_git_sha:
+    raise SystemExit(
+        "Full-project manifest Git revision mismatch: "
+        f"expected {expected_git_sha}, got {manifest_git_sha or 'missing'}"
+    )
 
 expected_projects = set()
 for project_file in sorted((root / "projects").glob("*/dbt_project.yml")):
@@ -53,6 +64,7 @@ for section in (
     "exposures",
     "metrics",
     "semantic_models",
+    "functions",
     "macros",
 ):
     represented_projects.update(
@@ -76,6 +88,7 @@ print(
     f"{len(manifest.get('metrics', {}))} metrics, "
     f"{len(manifest.get('semantic_models', {}))} semantic models."
 )
+print(f"Manifest Git revision: {manifest_git_sha}")
 PY
 
 echo

@@ -7,6 +7,12 @@ local dbt project so dbt can parse their resources into one canonical artifact:
 target/manifest.json
 ```
 
+The generator also records the repository revision in
+`metadata.env.GIT_SHA`. Tools comparing this production-style artifact with a
+source-derived graph can therefore verify that both sides describe the same
+checkout, rather than treating matching structure from unknown revisions as
+conclusive parity.
+
 Generate it from the repository root:
 
 ```bash
