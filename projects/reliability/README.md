@@ -26,3 +26,9 @@ The extension currently joins:
 - `planning.fct_store_day_capacity_plan`
 
 Those are all public contracted upstream models.
+
+The project also defines the `reliability_status` dbt user-defined function and
+uses `{{ function('reliability_status') }}` in its mart. DuckDB does not yet
+provide dbt's scalar function DDL directly, so the project dispatches dbt's UDF
+materialization to an equivalent DuckDB scalar macro while keeping the standard
+dbt function resource and dependency behavior.

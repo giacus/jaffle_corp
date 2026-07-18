@@ -109,10 +109,6 @@ select
     prediction_interval_hit_rate,
     ready_target_rate,
     reliability_score,
-    case
-        when reliability_score < 0.60 then 'critical'
-        when reliability_score < 0.80 then 'watch'
-        else 'stable'
-    end as reliability_status,
+    {{ function('reliability_status') }}(reliability_score) as reliability_status,
     reliability_score < 0.80 as needs_reliability_review
 from scored
