@@ -14,8 +14,8 @@ You need:
 
 The automated scripts are tested on macOS and Linux. On Windows, use WSL; native
 PowerShell is not currently a supported execution path. Other Python versions
-are not part of the tested workshop contract. Notices about newer dbt or
-package releases are informational; do not upgrade dependencies individually
+are not part of the tested local-environment contract. Notices about newer dbt
+or package releases are informational; do not upgrade dependencies individually
 during setup.
 
 `requirements.txt` records the intentional top-level tool choices.
@@ -49,8 +49,9 @@ scripts/bootstrap.sh
 source .venv/bin/activate
 ```
 
-For a frozen workshop cohort, select a release from the repository's
-[release page](https://github.com/giacus/jaffle_corp/releases) and add
+For a reproducible tool test, extension, or guided session, select a release
+from the repository's
+[release page](https://github.com/giacus/jaffle_corp/releases). Add
 `--branch <release-tag>` to the clone command.
 
 Bootstrap creates or reuses a Python 3.11 `.venv`, installs pinned dependencies,
@@ -199,7 +200,7 @@ scripts/clean.sh --keep-venv
 
 Then rerun Lab 1 and any prerequisites named by the lab where you resume.
 
-At the end of a workshop, reclaim all generated local disk space, including
+At the end of a session, reclaim all generated local disk space, including
 `.venv`:
 
 ```bash
@@ -255,7 +256,7 @@ If an existing `.venv` was created with another Python version, run
 - Use `scripts/validate_repo.sh` as the canonical full health check.
 - Use `scripts/generate_manifest.sh` when only the combined artifact matters.
 - Use `scripts/docs.sh generate` and `scripts/docs.sh serve` for local dbt docs.
-- Use `scripts/clean.sh` when the workshop is over.
+- Use `scripts/clean.sh` when the session is over.
 - Run project builds sequentially.
 - Avoid per-project database or profile overrides unless the test explicitly
   requires isolation.

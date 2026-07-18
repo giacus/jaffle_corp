@@ -343,7 +343,8 @@ staging deployment before promoting the producer release.
 - Does every new mart have a stable key and a declared grain?
 - Would changing an upstream contracted column break this extension loudly?
 - Is there at least one test that protects the extension's business logic?
-- Can a student understand the model from lineage, YAML, and one analysis query?
+- Can a new extension author understand the model from lineage, YAML, and one
+  analysis query?
 - Is an external checkout pinned to a tag or full commit rather than a moving
   branch?
 - Does the documentation say whether the extension is using local package code

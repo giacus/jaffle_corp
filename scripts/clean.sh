@@ -19,7 +19,7 @@ Options:
   --dry-run    List what would be removed without deleting it.
   -h, --help   Show this help.
 
-Run without options at the end of a workshop to reclaim all local disk space,
+Run without options at the end of a session to reclaim all local disk space,
 including the repository virtual environment.
 EOF
 }
