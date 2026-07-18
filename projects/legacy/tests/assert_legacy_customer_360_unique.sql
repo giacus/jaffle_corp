@@ -1,6 +1,6 @@
 select
     cust,
     count(*) as records
-from {{ ref('legacy_customer_360_v1') }}
+from {{ ref('legacy_customer_360', version=1) }}
 group by 1
 having count(*) > 1

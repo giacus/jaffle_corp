@@ -1,8 +1,11 @@
 version: 2
 
 models:
-  - name: legacy_customer_360_v1
+  - name: legacy_customer_360
     description: "{{ doc('legacy__legacy_customer_360_v1') }}"
+    latest_version: 1
+    versions:
+      - v: 1
     config:
       meta:
         migration_owner: analytics-modernization@jaffle.example
@@ -27,22 +30,22 @@ models:
         description: "{{ doc('legacy__int_legacy_customer_notes__contact_flag') }}"
         data_type: varchar
       - name: order_cnt
-        description: "{{ doc('legacy__legacy_customer_360_v1__order_cnt') }}"
+        description: "{{ doc('legacy__legacy_customer_360__order_cnt') }}"
         data_type: bigint
       - name: gross_amt
-        description: "{{ doc('legacy__legacy_customer_360_v1__gross_amt') }}"
+        description: "{{ doc('legacy__legacy_customer_360__gross_amt') }}"
         data_type: double
       - name: refund_cnt
-        description: "{{ doc('legacy__legacy_customer_360_v1__refund_cnt') }}"
+        description: "{{ doc('legacy__legacy_customer_360__refund_cnt') }}"
         data_type: hugeint
       - name: ticket_cnt
-        description: "{{ doc('legacy__legacy_customer_360_v1__ticket_cnt') }}"
+        description: "{{ doc('legacy__legacy_customer_360__ticket_cnt') }}"
         data_type: bigint
       - name: make_good_amt
-        description: "{{ doc('legacy__legacy_customer_360_v1__make_good_amt') }}"
+        description: "{{ doc('legacy__legacy_customer_360__make_good_amt') }}"
         data_type: double
       - name: last_business_dt
-        description: "{{ doc('legacy__legacy_customer_360_v1__last_business_dt') }}"
+        description: "{{ doc('legacy__legacy_customer_360__last_business_dt') }}"
         data_type: date
       - name: old_customer_note_blob
         description: "{{ doc('legacy__int_legacy_customer_notes__old_customer_note_blob') }}"
