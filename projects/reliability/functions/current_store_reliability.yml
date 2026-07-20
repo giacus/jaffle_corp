@@ -1,0 +1,14 @@
+version: 2
+
+functions:
+  - name: current_store_reliability
+    description: Returns the latest reliability status available for a store on or before a requested date.
+    arguments:
+      - name: lookup_store_id
+        data_type: varchar
+        description: Store whose latest reliability status should be returned.
+      - name: lookup_date
+        data_type: date
+        description: Latest date eligible for the reliability lookup.
+    returns:
+      data_type: varchar

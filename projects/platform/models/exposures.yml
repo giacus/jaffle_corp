@@ -1,0 +1,16 @@
+version: 2
+
+exposures:
+  - name: order_pipeline_health
+    label: Order Pipeline Health
+    type: dashboard
+    maturity: high
+    url: https://example.test/jaffle-corp/order-pipeline
+    description: Operational dashboard comparing the raw order feed with the conformed order mart and its headline volume metric.
+    depends_on:
+      - source('platform_app', 'raw_orders')
+      - ref('fct_orders')
+      - metric('order_count')
+    owner:
+      name: Jaffle Platform Guild
+      email: platform@jaffle.example

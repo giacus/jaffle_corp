@@ -33,6 +33,9 @@ models:
       - name: marketing_consent
         description: "{{ doc('shared__stg_customers__marketing_consent') }}"
         data_type: boolean
+      - name: updated_at_utc
+        description: "{{ doc('shared__stg_customers__updated_at_utc') }}"
+        data_type: timestamp
       - name: first_ordered_at_utc
         description: "{{ doc('platform__int_customer_order_rollup__first_ordered_at_utc') }}"
         data_type: timestamp

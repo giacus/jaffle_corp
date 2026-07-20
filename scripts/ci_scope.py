@@ -20,6 +20,7 @@ DBT_GLOBAL_FILES = {
 DBT_SCRIPTS = {
     "scripts/bootstrap.sh",
     "scripts/check_column_docs.py",
+    "scripts/check_manifest_graph.py",
     "scripts/check_semantic_models.py",
     "scripts/clean.sh",
     "scripts/docs.sh",
@@ -30,7 +31,7 @@ DBT_SCRIPTS = {
     "scripts/validate_changed.sh",
     "scripts/validate_repo.sh",
 }
-DBT_SUFFIXES = {".csv", ".md", ".sql", ".yaml", ".yml"}
+DBT_SUFFIXES = {".csv", ".md", ".py", ".sql", ".yaml", ".yml"}
 
 
 def git(*args: str) -> str:

@@ -33,7 +33,10 @@ def is_staging(node: dict) -> bool:
 
 def local_doc_id(node: dict, column: str) -> str:
     project = node["package_name"]
-    return f"{project}__{node['name']}__{column}"
+    model_name = node["name"]
+    if node.get("version") is not None:
+        model_name = f"{model_name}_v{node['version']}"
+    return f"{project}__{model_name}__{column}"
 
 
 def staging_doc_id(node: dict, column: str) -> str:
@@ -62,7 +65,9 @@ def main() -> int:
         ids_by_model_name[node["name"].lower()].append(unique_id)
 
     package_folders: dict[str, str] = {}
-    metadata: dict[tuple[str, str, str], tuple[str | None, str | None]] = {}
+    metadata: dict[
+        tuple[str, str, str | None, str], tuple[str | None, str | None]
+    ] = {}
     duplicate_metadata: list[str] = []
     for project_file in sorted((ROOT / "projects").glob("*/dbt_project.yml")):
         project = yaml.safe_load(project_file.read_text(encoding="utf-8"))
@@ -71,11 +76,20 @@ def main() -> int:
         for yaml_file in sorted((project_file.parent / "models").rglob("*.yml")):
             parsed = yaml.safe_load(yaml_file.read_text(encoding="utf-8")) or {}
             for model in parsed.get("models", []) or []:
-                for column in model.get("columns", []) or []:
-                    key = (package, model["name"], column["name"])
-                    if key in metadata:
-                        duplicate_metadata.append(".".join(key))
-                    metadata[key] = (column.get("description"), column.get("data_type"))
+                column_sets = [(None, model.get("columns", []) or [])]
+                column_sets.extend(
+                    (str(version["v"]), version.get("columns", []) or [])
+                    for version in model.get("versions", []) or []
+                )
+                for version, columns in column_sets:
+                    for column in columns:
+                        key = (package, model["name"], version, column["name"])
+                        if key in metadata:
+                            duplicate_metadata.append(".".join(str(part) for part in key))
+                        metadata[key] = (
+                            column.get("description"),
+                            column.get("data_type"),
+                        )
 
     definitions: dict[str, tuple[Path, str]] = {}
     duplicate_docs: list[str] = []
@@ -193,7 +207,15 @@ def main() -> int:
     actual_columns: dict[str, list[tuple[str, str]]] = {}
     for unique_id, node in sorted(models.items()):
         try:
-            rows = connection.execute(f"describe {node['compiled_code']}").fetchall()
+            if node.get("language") == "python":
+                relation_name = node.get("relation_name")
+                if not relation_name:
+                    raise ValueError("built Python model has no relation name")
+                rows = connection.execute(
+                    f"describe select * from {relation_name}"
+                ).fetchall()
+            else:
+                rows = connection.execute(f"describe {node['compiled_code']}").fetchall()
         except Exception as exc:
             errors.append(f"{node['name']}: could not inspect compiled output: {exc}")
             continue
@@ -208,11 +230,26 @@ def main() -> int:
     for unique_id, node in sorted(models.items()):
         outputs = actual_columns.get(unique_id, [])
         output_names = [column for column, _ in outputs]
-        declared_names = [
-            column
-            for package, model, column in metadata
-            if package == node["package_name"] and model == node["name"]
-        ]
+        node_version = (
+            str(node["version"]) if node.get("version") is not None else None
+        )
+        node_metadata = {
+            column: values
+            for (package, model, version, column), values in metadata.items()
+            if package == node["package_name"]
+            and model == node["name"]
+            and version is None
+        }
+        node_metadata.update(
+            {
+                column: values
+                for (package, model, version, column), values in metadata.items()
+                if package == node["package_name"]
+                and model == node["name"]
+                and version == node_version
+            }
+        )
+        declared_names = list(node_metadata)
         missing = sorted(set(output_names) - set(declared_names))
         extra = sorted(set(declared_names) - set(output_names))
         if missing:
@@ -223,8 +260,7 @@ def main() -> int:
         for column, actual_type in outputs:
             model_assignments += 1
             doc_name, owner_id, owner_column = expected_doc(unique_id, column)
-            key = (node["package_name"], node["name"], column)
-            actual_description, declared_type = metadata.get(key, (None, None))
+            actual_description, declared_type = node_metadata.get(column, (None, None))
             expected_description = f"{{{{ doc('{doc_name}') }}}}"
             if actual_description != expected_description:
                 errors.append(

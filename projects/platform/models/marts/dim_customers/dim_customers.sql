@@ -14,6 +14,7 @@ select
     customers.first_seen_at,
     customers.default_currency,
     customers.marketing_consent,
+    customers.updated_at_utc,
     orders.first_ordered_at_utc,
     orders.most_recent_ordered_at_utc,
     coalesce(orders.lifetime_order_count, 0) as lifetime_order_count,

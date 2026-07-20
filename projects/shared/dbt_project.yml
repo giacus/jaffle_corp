@@ -25,6 +25,13 @@ models:
   shared:
     +materialized: view
     +post-hook: "{{ shared.audit_noop() }}"
+    audits:
+      +schema: audit
+      +materialized: table
+      +tags: ["audit", "ingestion"]
+      +access: protected
+      +meta:
+        source_system: synthetic_jaffle_corp
     staging:
       platform:
         +schema: stg

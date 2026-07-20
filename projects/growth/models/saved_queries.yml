@@ -1,0 +1,14 @@
+version: 2
+
+saved_queries:
+  - name: weekly_campaign_performance
+    label: Weekly Campaign Performance
+    description: Weekly campaign economics used by the growth team to review return and contribution together.
+    query_params:
+      metrics:
+        - campaign_roas
+        - campaign_contribution_usd
+      group_by:
+        - "TimeDimension('campaign_performance__campaign_date', 'week')"
+        - "Dimension('campaign_performance__campaign_id')"
+        - "Dimension('campaign_performance__channel')"

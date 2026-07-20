@@ -60,15 +60,17 @@ Reference history intentionally starts earlier. Stores and products have
 provide realistic dimension history without turning the fixture into a large
 time series.
 
-The committed fixture contains 35 CSV files and 206 data rows. Small counts are
+The committed fixture contains 36 CSV files and 211 data rows. Small counts are
 intentional: every scenario should be traceable from a raw row to a mart.
 
 ## Seed and Domain Map
 
 All raw fixtures live under `projects/shared/seeds`; the owning domain project
-starts at staging or at a contracted upstream mart. Finance and growth have no
-dedicated raw folders because they derive their facts from the core commerce,
-supply, experience, and campaign inputs.
+starts at staging or at a contracted upstream mart. Small business-owned lookup
+tables stay with their domain, such as Customer Experience's order follow-up
+policy under `projects/experience/seeds`. Finance and growth have no dedicated
+raw folders because they derive their facts from the core commerce, supply,
+experience, and campaign inputs.
 
 | Input family | Files | Rows | What it introduces | Main downstream owners |
 | --- | ---: | ---: | --- | --- |
@@ -78,6 +80,7 @@ supply, experience, and campaign inputs.
 | `store_ops` | 4 | 25 | Kitchen events, quality checks, incidents, and shift plans | Store operations |
 | `merchandising` | 6 | 46 | Menu windows, availability, price adjustments, pairings, substitutions, and goals | Merchandising |
 | `planning` | 5 | 32 | Forecasts, calendars, component plans, and capacity scenarios | Planning |
+| `experience/reference` | 1 | 5 | Follow-up actions for normalized order statuses | Customer Experience |
 
 Start with [the platform seeds](../projects/shared/seeds/platform) to follow a
 single order. Use the other folders when a lab crosses a domain boundary.
@@ -103,6 +106,27 @@ business states, not accidental corruption.
 Nulls have business meaning in these cases: an uncaptured declined payment, an
 open ticket, an active effective-dated row, or a date without a holiday name.
 Do not blanket-fill them before deciding what the downstream grain requires.
+
+## Operational Review Surfaces
+
+The estate includes a few terminal assets that a fictional team could use
+without knowing how the fixture is tested:
+
+- Platform reconciles landed order and customer extracts with their normalized
+  outputs, reports raw-order readiness, and blocks incomplete order or
+  order-item publications. Customer Experience applies an owned follow-up
+  policy to orders that need attention.
+- The order-pipeline health dashboard connects raw order availability, the
+  conformed order mart, and the headline order-count metric.
+- Growth reviews weekly campaign return and contribution through a saved query,
+  while its SQL review identifies the governed contribution metric. Finance and
+  Experience expose year-to-date revenue and seven-day experiment conversion
+  semantics.
+- The Reliability extension checks its three public upstream interfaces before
+  a run and publishes a store-and-date lookup over its store-day fact so
+  downstream analysts can reuse the same status logic.
+- Legacy migration analyses compare the pinned v1 customer interface with the
+  corrected v2 contract and report whether the pinned relation is ready to query.
 
 ## Mutations Used by the Labs
 

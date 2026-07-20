@@ -45,3 +45,14 @@ metrics:
       numerator: experiment_conversion_count
       denominator: experiment_exposure_count
 
+  - name: seven_day_experiment_conversion_rate
+    description: Share of exposed customers who complete an order within seven days of exposure.
+    type: conversion
+    label: Seven-Day Experiment Conversion Rate
+    type_params:
+      conversion_type_params:
+        base_measure: experiment_exposure_count
+        conversion_measure: completed_order_count
+        entity: customer
+        calculation: conversion_rate
+        window: 7 day

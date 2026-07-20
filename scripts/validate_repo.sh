@@ -43,6 +43,13 @@ scripts/lint_sql_projects.sh
 # project loads the complete raw layer once without repeating it per domain.
 dbt seed --project-dir "$SEED_PROJECT" --profiles-dir .
 
+# Customer Experience owns this compact operating policy rather than treating
+# it as a landed source fixture.
+dbt seed \
+  --project-dir projects/experience \
+  --profiles-dir . \
+  --select order_status_follow_up_policy
+
 for project in "${PROJECTS[@]}"; do
   dbt build \
     --project-dir "$project" \
@@ -56,6 +63,29 @@ for project in "${EXTENSION_PROJECTS[@]}"; do
     --profiles-dir . \
     --select reliability \
     --exclude resource_type:seed
+done
+
+run_analysis_preview() {
+  local project="$1"
+  local analysis="$2"
+  dbt show \
+    --project-dir "$project" \
+    --profiles-dir . \
+    --select "$analysis" \
+    --limit 20 \
+    --quiet >/dev/null
+}
+
+for project_file in projects/*/dbt_project.yml; do
+  analysis_project="${project_file%/dbt_project.yml}"
+  [[ -d "$analysis_project/analyses" ]] || continue
+
+  while IFS= read -r analysis_file; do
+    analysis_name="${analysis_file##*/}"
+    analysis_name="${analysis_name%.sql}"
+    echo "Checking ${analysis_project#projects/}.${analysis_name} analysis"
+    run_analysis_preview "$analysis_project" "$analysis_name"
+  done < <(find "$analysis_project/analyses" -type f -name '*.sql' | sort)
 done
 
 run_metricflow_validate() {
@@ -80,6 +110,18 @@ run_metricflow_query() {
   )
 }
 
+run_metricflow_saved_query() {
+  local project="$1"
+  local saved_query="$2"
+  (
+    cd "$project"
+    DBT_PROFILES_DIR="$ROOT_DIR" mf query \
+      --saved-query "$saved_query" \
+      --limit 20 \
+      --quiet
+  )
+}
+
 for semantic_file in projects/*/models/semantic_models.yml; do
   [[ -f "$semantic_file" ]] || continue
   run_metricflow_validate "${semantic_file%/models/semantic_models.yml}"
@@ -87,7 +129,7 @@ done
 
 run_metricflow_query \
   projects/finance \
-  "net_revenue_usd,estimated_gross_margin_usd,refund_rate" \
+  "net_revenue_usd,estimated_gross_margin_usd,refund_rate,year_to_date_net_revenue_usd" \
   "metric_time,location,order__country_code"
 
 # Exercise the Finance semantic model's primary entity explicitly. This guards
@@ -100,8 +142,17 @@ run_metricflow_query \
 
 run_metricflow_query \
   projects/growth \
-  "attributed_net_revenue_usd,campaign_roas" \
+  "attributed_net_revenue_usd,campaign_roas,campaign_contribution_usd" \
   "metric_time,campaign_performance__campaign_id,campaign_performance__channel"
+
+run_metricflow_saved_query \
+  projects/growth \
+  "weekly_campaign_performance"
+
+run_metricflow_query \
+  projects/experience \
+  "experiment_conversion_rate,seven_day_experiment_conversion_rate" \
+  "metric_time,experiment_outcome__experiment_id,experiment_outcome__variant_id"
 
 run_metricflow_query \
   projects/merchandising \

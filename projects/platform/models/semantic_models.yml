@@ -37,8 +37,8 @@ semantic_models:
         agg: sum
       - name: completed_order_count
         description: Count of completed orders.
-        expr: case when is_completed_order then 1 else 0 end
-        agg: sum
+        expr: case when is_completed_order then order_id end
+        agg: count
       - name: gross_order_amount_usd
         description: Gross order amount converted to USD.
         expr: order_total_usd
@@ -85,4 +85,3 @@ semantic_models:
       - name: estimated_supply_cost
         expr: estimated_supply_cost_minor
         agg: sum
-
