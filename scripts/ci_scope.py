@@ -20,7 +20,7 @@ DBT_GLOBAL_FILES = {
 DBT_SCRIPTS = {
     "scripts/bootstrap.sh",
     "scripts/check_column_docs.py",
-    "scripts/check_manifest_graph.py",
+    "scripts/check_catalog_contract.py",
     "scripts/check_semantic_models.py",
     "scripts/clean.sh",
     "scripts/docs.sh",

@@ -173,6 +173,7 @@ Use `scripts/clean.sh --dry-run` to preview the complete end-of-session cleanup.
 - [Architecture](docs/architecture.md)
 - [Company and Fixture Guide](docs/company-and-fixtures.md)
 - [Column Documentation](docs/column-documentation.md)
+- [Representing Business Capabilities](docs/representing-business-capabilities.md)
 - [Labs](docs/labs.md)
 - [Extension Authoring](docs/extension_authoring.md)
 - [MetricFlow](docs/metricflow.md)

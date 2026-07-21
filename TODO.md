@@ -36,4 +36,4 @@ outside the current change. Items are grouped by outcome, not by file.
   as part of that whole-repository upgrade rather than a parallel fixture lane.
 - Add Python or JavaScript dbt functions only with an adapter/runtime path that
   can build and execute them end to end. Do not add parse-only function assets
-  to the business graph merely to exercise artifact metadata.
+  to the company estate merely to exercise artifact metadata.

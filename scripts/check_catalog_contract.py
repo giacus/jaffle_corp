@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Protect the representative business relationships in the combined manifest."""
+"""Validate the curated contract of the combined Jaffle catalog."""
 
 from __future__ import annotations
 
@@ -279,15 +279,15 @@ def main() -> int:
         )
 
     if errors:
-        print("Manifest graph checks failed:", file=sys.stderr)
+        print("Catalog contract checks failed:", file=sys.stderr)
         print("\n".join(f"- {error}" for error in errors), file=sys.stderr)
         return 1
 
     relationship_count = sum(len(parents) for parents in REQUIRED_PARENTS.values())
     print(
-        "Manifest graph: "
-        f"{len(REQUIRED_PARENTS)} business resources and "
-        f"{relationship_count} required relationships verified."
+        "Catalog contract: "
+        f"{len(REQUIRED_PARENTS)} protected business resources and "
+        f"{relationship_count} expected relationships verified."
     )
     return 0
 

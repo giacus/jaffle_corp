@@ -184,7 +184,7 @@ plan variance. The reliability extension is intentionally small so students can
 inspect whether those public interfaces are sufficient before they add another
 downstream dependency or change an upstream contract.
 
-## Advanced dbt patterns in the business graph
+## Business capabilities represented with dbt
 
 The fixture uses advanced dbt authoring only where it supports a recognizable
 company workflow:
@@ -201,11 +201,12 @@ company workflow:
 | Campaign economics | `campaign_contribution_usd`, `campaign_performance_review`, and `weekly_campaign_performance` | Tie the operational review to its governed metric, then query contribution and return through the Semantic Layer. |
 | Time-aware measurement | `year_to_date_net_revenue_usd` and `seven_day_experiment_conversion_rate` | Track annual revenue progress and orders completed within seven days of an experiment exposure. |
 
-`scripts/check_manifest_graph.py` protects these representative business
-relationships in the combined catalog. It complements dbt builds and tests; it
-does not create a separate project or alter domain ownership.
+`scripts/check_catalog_contract.py` protects the representative resources,
+relationships, and intentional authoring choices advertised by the combined
+catalog. It complements dbt builds and tests; it is not a general manifest
+parity checker or a separate compatibility project.
 
-Every project in this graph runs on the same pinned dbt Core 1.11.12 stack.
+Every project in this estate runs on the same pinned dbt Core 1.11.12 stack.
 Features that require a different Core or adapter runtime belong in a future
 whole-repository upgrade, not in a parallel compatibility fixture.
 
