@@ -40,3 +40,8 @@ models:
       +schema: mart_experience
       +materialized: table
       +tags: ["mart", "experience"]
+
+seeds:
+  experience:
+    +schema: reference
+    +tags: ["reference", "experience"]

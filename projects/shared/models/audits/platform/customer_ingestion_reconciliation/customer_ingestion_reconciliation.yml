@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: customer_ingestion_reconciliation
+    description: "{{ doc('shared__customer_ingestion_reconciliation') }}"
+    config:
+      group: platform
+      access: protected
+    columns:
+      - name: customer_id
+        description: "{{ doc('shared__customer_ingestion_reconciliation__customer_id') }}"
+        data_type: varchar
+        data_tests:
+          - not_null
+          - unique
+      - name: staged_marketing_consent
+        description: "{{ doc('shared__customer_ingestion_reconciliation__staged_marketing_consent') }}"
+        data_type: boolean
+      - name: raw_marketing_consent
+        description: "{{ doc('shared__customer_ingestion_reconciliation__raw_marketing_consent') }}"
+        data_type: boolean
+      - name: marketing_consent_matches
+        description: "{{ doc('shared__customer_ingestion_reconciliation__marketing_consent_matches') }}"
+        data_type: boolean
+      - name: staged_updated_at_utc
+        description: "{{ doc('shared__customer_ingestion_reconciliation__staged_updated_at_utc') }}"
+        data_type: timestamp
+      - name: raw_updated_at_utc
+        description: "{{ doc('shared__customer_ingestion_reconciliation__raw_updated_at_utc') }}"
+        data_type: timestamp
+      - name: ingestion_status
+        description: "{{ doc('shared__customer_ingestion_reconciliation__ingestion_status') }}"
+        data_type: varchar
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - aligned
+                  - missing_from_staging
+                  - missing_from_raw_extract
+                  - consent_mismatch

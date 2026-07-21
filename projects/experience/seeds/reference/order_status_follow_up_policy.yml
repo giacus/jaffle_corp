@@ -1,0 +1,19 @@
+version: 2
+
+seeds:
+  - name: order_status_follow_up_policy
+    description: Customer follow-up policy for each normalized order status.
+    columns:
+      - name: order_status
+        description: Normalized order status governed by the policy.
+        data_tests:
+          - not_null
+          - unique
+      - name: requires_customer_follow_up
+        description: Whether Customer Experience should contact the customer.
+        data_tests:
+          - not_null
+      - name: follow_up_action
+        description: Action Customer Experience should take for the status.
+        data_tests:
+          - not_null

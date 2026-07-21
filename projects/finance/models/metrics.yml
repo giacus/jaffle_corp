@@ -8,6 +8,15 @@ metrics:
     type_params:
       measure: sum_net_revenue_usd
 
+  - name: year_to_date_net_revenue_usd
+    description: Net revenue accumulated from the start of each calendar year.
+    type: cumulative
+    label: Year-to-Date Net Revenue USD
+    type_params:
+      measure: sum_net_revenue_usd
+      cumulative_type_params:
+        grain_to_date: year
+
   - name: estimated_gross_margin_usd
     description: Net revenue less estimated supply cost.
     type: simple

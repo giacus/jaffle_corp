@@ -53,6 +53,8 @@ for section in (
     "exposures",
     "metrics",
     "semantic_models",
+    "saved_queries",
+    "functions",
     "macros",
 ):
     represented_projects.update(
@@ -68,13 +70,19 @@ if missing_projects:
         + ", ".join(missing_projects)
     )
 
+saved_query_count = len(manifest.get("saved_queries", {}))
+function_count = len(manifest.get("functions", {}))
+
 print(
     "Catalog coverage: "
     f"{len(expected_projects)} projects, "
     f"{len(manifest.get('nodes', {}))} nodes, "
     f"{len(manifest.get('sources', {}))} sources, "
     f"{len(manifest.get('metrics', {}))} metrics, "
-    f"{len(manifest.get('semantic_models', {}))} semantic models."
+    f"{len(manifest.get('semantic_models', {}))} semantic models, "
+    f"{saved_query_count} saved "
+    f"{'query' if saved_query_count == 1 else 'queries'}, "
+    f"{function_count} {'function' if function_count == 1 else 'functions'}."
 )
 PY
 

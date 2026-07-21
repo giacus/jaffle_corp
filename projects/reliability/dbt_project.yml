@@ -19,6 +19,9 @@ clean-targets:
   - target
   - dbt_packages
 
+on-run-start:
+  - "{{ reliability_input_readiness() }}"
+
 models:
   reliability:
     +materialized: view

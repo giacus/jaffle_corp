@@ -52,6 +52,16 @@ metrics:
       numerator: attributed_net_revenue_usd
       denominator: estimated_campaign_cost_usd
 
+  - name: campaign_contribution_usd
+    description: Attributed campaign revenue remaining after estimated campaign cost.
+    type: derived
+    label: Campaign Contribution USD
+    type_params:
+      metrics:
+        - attributed_net_revenue_usd
+        - estimated_campaign_cost_usd
+      expr: attributed_net_revenue_usd - estimated_campaign_cost_usd
+
   - name: growth_experiment_exposures
     description: Count of experiment exposures in growth rollups.
     type: simple
