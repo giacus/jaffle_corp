@@ -30,7 +30,7 @@ DBT_SCRIPTS = {
     "scripts/validate_changed.sh",
     "scripts/validate_repo.sh",
 }
-DBT_SUFFIXES = {".csv", ".md", ".sql", ".yaml", ".yml"}
+DBT_SUFFIXES = {".csv", ".md", ".py", ".sql", ".yaml", ".yml"}
 
 
 def git(*args: str) -> str:
