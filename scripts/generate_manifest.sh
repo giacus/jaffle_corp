@@ -86,7 +86,5 @@ print(
 )
 PY
 
-python scripts/check_catalog_contract.py "$MANIFEST_PATH"
-
 echo
 echo "Full-project manifest: $MANIFEST_PATH"

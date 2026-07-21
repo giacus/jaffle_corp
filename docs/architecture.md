@@ -197,14 +197,9 @@ company workflow:
 | Order-pipeline operations | Platform input reporting, the `fct_orders` publication check, the `fct_order_items` orphan gate, statistics maintenance, and `order_pipeline_health` exposure | Report source readiness, refuse incomplete order publications, refresh order statistics only from the owning project, and connect raw volume to the public order metric. |
 | Customer follow-up | `order_status_follow_up_policy` and `order_customer_follow_up_queue` | Let Customer Experience apply an owned policy to cancelled, refunded, and unrecognized orders. |
 | Legacy migration | Stable and current customer-migration relation helpers, `legacy_surface_inventory`, and `runtime_customer_migration_readiness` | Keep the migration job version-pinned while making the current contract available for an explicit comparison. |
-| Reusable reliability logic | The input-readiness operation, `reliability_status`, `current_store_reliability`, and `store_reliability_at` | Check the three public inputs before a run, then reuse one store-date status interface in SQL. |
-| Campaign economics | `campaign_contribution_usd`, `campaign_performance_review`, and `weekly_campaign_performance` | Tie the operational review to its governed metric, then query contribution and return through the Semantic Layer. |
+| Reusable reliability logic | The input-readiness operation, `reliability_status`, and `current_store_reliability` | Check the three public inputs before a run, then reuse one store-date status interface in SQL. |
+| Campaign economics | `campaign_contribution_usd` and `weekly_campaign_performance` | Query campaign return and contribution together through the Semantic Layer. |
 | Time-aware measurement | `year_to_date_net_revenue_usd` and `seven_day_experiment_conversion_rate` | Track annual revenue progress and orders completed within seven days of an experiment exposure. |
-
-`scripts/check_catalog_contract.py` protects the representative resources,
-relationships, and intentional authoring choices advertised by the combined
-catalog. It complements dbt builds and tests; it is not a general manifest
-parity checker or a separate compatibility project.
 
 Every project in this estate runs on the same pinned dbt Core 1.11.12 stack.
 Features that require a different Core or adapter runtime belong in a future

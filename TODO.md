@@ -27,13 +27,3 @@ outside the current change. Items are grouped by outcome, not by file.
 - Add optional scale fixtures without making the default local workflow heavy.
 - Maintain a small community-facing roadmap after the `v0.1.1` reference
   fixture baseline.
-
-## Runtime evolution
-
-- Upgrade the repository to dbt Core 1.12 only when the supported local
-  Semantic Layer toolchain can move with it. Keep one dbt runtime and one lock;
-  evaluate OSI, semantic YAML v2, UDF overloads, and new file-discovery behavior
-  as part of that whole-repository upgrade rather than a parallel fixture lane.
-- Add Python or JavaScript dbt functions only with an adapter/runtime path that
-  can build and execute them end to end. Do not add parse-only function assets
-  to the company estate merely to exercise artifact metadata.

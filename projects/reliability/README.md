@@ -35,6 +35,5 @@ UDF materialization to equivalent DuckDB scalar macros while keeping standard
 dbt function resources and dependency behavior.
 
 An on-run-start readiness operation names any missing public upstream relation
-before the mart runs, while remaining safe during a first-time parse. The
-`store_reliability_at` macro is the SQL-facing wrapper around the canonical
-store-and-date function; it keeps analyses from rebuilding that lookup logic.
+before the mart runs, while remaining safe during a first-time parse. Analyses
+can call the canonical store-and-date function directly.

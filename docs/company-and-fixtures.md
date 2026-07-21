@@ -118,10 +118,9 @@ without knowing how the fixture is tested:
   policy to orders that need attention.
 - The order-pipeline health dashboard connects raw order availability, the
   conformed order mart, and the headline order-count metric.
-- Growth reviews weekly campaign return and contribution through a saved query,
-  while its SQL review identifies the governed contribution metric. Finance and
-  Experience expose year-to-date revenue and seven-day experiment conversion
-  semantics.
+- Growth reviews weekly campaign return and contribution through a saved query.
+  Finance and Experience expose year-to-date revenue and seven-day experiment
+  conversion semantics.
 - The Reliability extension checks its three public upstream interfaces before
   a run and publishes a store-and-date lookup over its store-day fact so
   downstream analysts can reuse the same status logic.

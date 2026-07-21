@@ -2,13 +2,10 @@ select
     reliability.store_id,
     reliability.reliability_date,
     reliability.reliability_status,
-    {{
-        store_reliability_at(
-            'reliability.store_id',
-            'reliability.reliability_date'
-        )
-    }}
-        as current_store_reliability_status,
+    {{ function('current_store_reliability') }}(
+        reliability.store_id,
+        reliability.reliability_date
+    ) as current_store_reliability_status,
     reliability.product_availability_status,
     reliability.net_revenue_usd,
     reliability.average_product_availability_rate,

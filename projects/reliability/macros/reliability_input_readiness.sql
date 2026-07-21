@@ -1,12 +1,3 @@
-{% macro store_reliability_at(store_expression, date_expression) %}
-    {{
-        return(
-            function('current_store_reliability')
-            ~ '(' ~ store_expression ~ ', ' ~ date_expression ~ ')'
-        )
-    }}
-{% endmacro %}
-
 {% macro reliability_input_readiness() %}
     {% set finance_relation = ref('finance', 'fct_store_day_revenue_quality') %}
     {% set merchandising_relation = ref('merchandising', 'fct_product_store_day_availability') %}
