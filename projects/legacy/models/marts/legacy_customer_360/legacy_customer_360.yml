@@ -6,7 +6,7 @@ models:
     latest_version: 2
     versions:
       - v: 1
-        deprecation_date: 2030-01-01
+        deprecation_date: 2025-01-01
         columns:
           - name: cust
             description: "{{ doc('legacy__int_legacy_customer_notes__cust') }}"
