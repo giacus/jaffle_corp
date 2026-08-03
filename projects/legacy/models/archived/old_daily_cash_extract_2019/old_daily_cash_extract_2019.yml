@@ -2,4 +2,5 @@ version: 2
 
 models:
   - name: old_daily_cash_extract_2019
+    deprecation_date: 2030-01-01
     description: "{{ doc('legacy__old_daily_cash_extract_2019') }}"

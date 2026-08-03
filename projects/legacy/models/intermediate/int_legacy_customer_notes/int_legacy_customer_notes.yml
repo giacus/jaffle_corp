@@ -2,6 +2,7 @@ version: 2
 
 models:
   - name: int_legacy_customer_notes
+    deprecation_date: 2030-01-01
     description: "{{ doc('legacy__int_legacy_customer_notes') }}"
 
     columns:
