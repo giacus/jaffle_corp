@@ -128,6 +128,16 @@ for semantic_file in projects/*/models/semantic_models.yml; do
 done
 
 run_metricflow_query \
+  projects/platform \
+  "order_count,item_quantity" \
+  "metric_time"
+
+run_metricflow_query \
+  projects/supply \
+  "supply_risk_rate,late_purchase_order_rate" \
+  "metric_time,location,component"
+
+run_metricflow_query \
   projects/finance \
   "net_revenue_usd,estimated_gross_margin_usd,refund_rate,year_to_date_net_revenue_usd" \
   "metric_time,location,order__country_code"
@@ -153,6 +163,11 @@ run_metricflow_query \
   projects/experience \
   "experiment_conversion_rate,seven_day_experiment_conversion_rate" \
   "metric_time,experiment_outcome__experiment_id,experiment_outcome__variant_id"
+
+run_metricflow_query \
+  projects/store_ops \
+  "kitchen_ready_target_rate,store_ops_quality_exception_count,store_ops_incident_count" \
+  "metric_time,location,store_day_operations__store_day_status"
 
 run_metricflow_query \
   projects/merchandising \

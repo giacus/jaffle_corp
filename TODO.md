@@ -31,6 +31,9 @@ outside the current change. Items are grouped by outcome, not by file.
 ## Runtime evolution
 
 - Upgrade the repository to dbt Core 1.12.
+- During that upgrade, re-test MetricFlow's DuckDB quoting for the `order`
+  entity. Prefer an upstream quoting fix over renaming the entity and breaking
+  the existing semantic query interface.
 - Add Python or JavaScript dbt functions only with an adapter/runtime path that
   can build and execute them end to end. Do not add parse-only function assets
   to the company estate merely to exercise artifact metadata.
