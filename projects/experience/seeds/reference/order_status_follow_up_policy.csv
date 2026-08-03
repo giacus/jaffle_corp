@@ -1,0 +1,6 @@
+order_status,requires_customer_follow_up,follow_up_action
+completed,false,No follow-up required
+cancelled,true,Confirm the cancellation and payment release
+refunded,true,Confirm the refund timing
+placed,false,Continue standard order updates
+unknown,true,Escalate the unrecognized order status

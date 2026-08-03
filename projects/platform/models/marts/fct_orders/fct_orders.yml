@@ -6,6 +6,15 @@ models:
     config:
       group: platform
       access: public
+      post_hook: |
+        select
+            case when count(*) = 0 then 0
+                else error('Every landed order must be present in the published order fact')
+            end as missing_published_order_count
+        from {{ source('platform_app', 'raw_orders') }} as raw_orders
+        left join {{ this }} as published_orders
+            on cast(raw_orders.order_id as varchar) = published_orders.order_id
+        where published_orders.order_id is null
       contract:
         enforced: true
     columns:

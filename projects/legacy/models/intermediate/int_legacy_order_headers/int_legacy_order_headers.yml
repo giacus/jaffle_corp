@@ -2,6 +2,7 @@ version: 2
 
 models:
   - name: int_legacy_order_headers
+    deprecation_date: 2030-01-01
     description: "{{ doc('legacy__int_legacy_order_headers') }}"
 
     columns:

@@ -66,9 +66,10 @@ Order total at order grain, converted to US dollars with the rate for the order 
 
 ## Enforcement
 
-`scripts/check_column_docs.py` reads the combined manifest and inspects the
-compiled DuckDB output for every model. It verifies that YAML column names and
-types exactly match all model outputs, then traces every column to enforce exact
+`scripts/check_column_docs.py` reads the combined manifest and inspects every
+model's DuckDB output: compiled queries for SQL models and built relations for
+Python models. It verifies that YAML column names and types exactly match all
+model outputs, then traces every column to enforce exact
 `doc()` reuse, block ownership, placement, and uniqueness. The checker requires
 a local definition when lineage is transformed or ambiguous.
 
