@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: legacy_daily_store_rollup
-    deprecation_date: 2030-01-01
+    deprecation_date: 2025-01-01
     description: "{{ doc('legacy__legacy_daily_store_rollup') }}"
     config:
       meta:
