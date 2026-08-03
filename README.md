@@ -136,9 +136,16 @@ same canonical scripts.
 
 The full validator starts by deleting generated artifacts and the default local
 DuckDB database while preserving `.venv`. It then installs packages, lints SQL,
-loads seeds, builds every project in dependency order, runs tests and
+loads seeds, builds shared and platform once followed by each owning package in
+dependency order, runs tests and
 representative MetricFlow queries, and regenerates `target/manifest.json`.
 Use `scripts/clean.sh --dry-run` to preview the complete end-of-session cleanup.
+
+Pull requests use one required `validate` check. Fast Markdown, YAML, semantic,
+repository-policy, and CI-control checks always run; dbt and MetricFlow run only
+when executable fixture or CI files change. The same full check runs weekly as
+an environment-drift sentinel and can be started manually. Protected `master`
+is not rebuilt after a validated pull request is merged.
 
 ## Where to Make a Change
 
@@ -184,7 +191,8 @@ This project is inspired by dbt Labs'
 authored and is not affiliated with or endorsed by dbt Labs. See
 [Attribution](ATTRIBUTION.md) for license and contribution boundaries.
 
-Before opening a pull request, run:
+Pull-request CI is the authoritative clean validation. For a dbt or Semantic
+Layer change, reproduce that integration path locally when useful with:
 
 ```bash
 scripts/validate_repo.sh
