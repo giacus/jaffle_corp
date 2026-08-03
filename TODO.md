@@ -17,8 +17,6 @@ outside the current change. Items are grouped by outcome, not by file.
 
 ## Fixture depth
 
-- Add an automated architecture-policy check for public-only cross-project refs
-  and the deliberate `shared` package exception.
 - Audit the public model surface and keep a model public only when a real
   downstream consumer, architectural claim, or tool-test case justifies the
   contract.

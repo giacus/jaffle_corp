@@ -254,6 +254,10 @@ If an existing `.venv` was created with another Python version, run
 
 - Start a shell with `source .venv/bin/activate`.
 - Use `scripts/validate_repo.sh` as the canonical full health check.
+- Treat pull-request `validate` as the authoritative clean gate; full validation
+  is scoped to executable fixture and CI changes.
+- Use the weekly full run as an environment-drift sentinel instead of
+  repeating the suite after each merge to protected `master`.
 - Use `scripts/generate_manifest.sh` when only the combined artifact matters.
 - Use `scripts/docs.sh generate` and `scripts/docs.sh serve` for local dbt docs.
 - Use `scripts/clean.sh` when the session is over.

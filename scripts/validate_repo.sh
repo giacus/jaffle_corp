@@ -51,17 +51,27 @@ dbt seed \
   --select order_status_follow_up_policy
 
 for project in "${PROJECTS[@]}"; do
-  dbt build \
-    --project-dir "$project" \
-    --profiles-dir . \
-    --exclude resource_type:seed
+  echo "Building owned resources for ${project#projects/}"
+  if [[ "$project" == "$SEED_PROJECT" ]]; then
+    dbt build \
+      --project-dir "$project" \
+      --profiles-dir . \
+      --exclude resource_type:seed
+  else
+    project_name="${project#projects/}"
+    dbt build \
+      --project-dir "$project" \
+      --profiles-dir . \
+      --select "package:$project_name" \
+      --exclude resource_type:seed
+  fi
 done
 
 for project in "${EXTENSION_PROJECTS[@]}"; do
   dbt build \
     --project-dir "$project" \
     --profiles-dir . \
-    --select reliability \
+    --select package:reliability \
     --exclude resource_type:seed
 done
 
@@ -190,4 +200,5 @@ run_metricflow_query \
   "metric_time,location,store_hour_forecast__scenario_name,store_hour_forecast__forecast_accuracy_band"
 
 scripts/generate_manifest.sh
+python scripts/check_architecture.py
 python scripts/check_column_docs.py

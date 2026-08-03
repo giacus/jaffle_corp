@@ -4,15 +4,16 @@
 
 ## Validation
 
-- [ ] `source .venv/bin/activate`
-- [ ] `scripts/validate_repo.sh` (clean rebuild; resets local generated state)
+- The required `validate` check is authoritative and starts from a clean runner.
+- Additional focused checks, if any:
 
 ## Safety Checks
 
 - [ ] I did not add real company, customer, vendor, employee, warehouse, schema, or private system data.
-- [ ] Public model contract changes are intentional and documented.
-- [ ] Downstream extension projects still depend only on public upstream models.
-- [ ] I did not commit generated artifacts such as `target/`, `dbt_packages/`, `logs/`, or `*.duckdb`.
+- [ ] Public model contract changes reported by CI are intentional and documented.
+
+CI rejects tracked generated artifacts, dependency-lock drift, invalid Taskfile
+commands, and non-public cross-project model dependencies.
 
 ## Notes
 
