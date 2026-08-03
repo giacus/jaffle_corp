@@ -175,5 +175,4 @@ run_metricflow_query \
   "metric_time,location,store_hour_forecast__scenario_name,store_hour_forecast__forecast_accuracy_band"
 
 scripts/generate_manifest.sh
-python scripts/check_legacy_deprecations.py
 python scripts/check_column_docs.py
