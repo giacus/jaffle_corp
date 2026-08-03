@@ -2,6 +2,7 @@ version: 2
 
 models:
   - name: legacy_menu_mix_report_v2
+    deprecation_date: 2030-01-01
     description: "{{ doc('legacy__legacy_menu_mix_report_v2') }}"
     config:
       meta:

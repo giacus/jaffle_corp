@@ -1,0 +1,11 @@
+version: 2
+
+snapshots:
+  - name: product_catalog_snapshot
+    description: Raw product-catalog history retained for ingestion audits and menu-change investigations.
+    relation: "source('platform_app', 'raw_products')"
+    config:
+      target_schema: "{{ target.schema }}_snapshots"
+      unique_key: product_id
+      strategy: timestamp
+      updated_at: updated_at_utc

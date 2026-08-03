@@ -184,6 +184,27 @@ plan variance. The reliability extension is intentionally small so students can
 inspect whether those public interfaces are sufficient before they add another
 downstream dependency or change an upstream contract.
 
+## Business capabilities represented with dbt
+
+The fixture uses advanced dbt authoring only where it supports a recognizable
+company workflow:
+
+| Workflow | Representative assets | Why it exists |
+| --- | --- | --- |
+| Ingestion assurance | `customer_ingestion_reconciliation`, `order_ingestion_reconciliation`, and `platform_ingestion_reconciliation` | Compare landed order and customer extracts with their normalized outputs. The order review keeps one business interface while dispatching only the warehouse-specific aggregation syntax. |
+| Historical state | `customer_profile_snapshot`, `product_catalog_snapshot`, and `customer_profile_history_probe` | Preserve normalized customer history and raw product-feed history through SQL- and YAML-authored snapshots. |
+| Referential integrity | The declared and tested customer relationship on `stg_orders`, plus the normalized-order relationship on `stg_order_items` | Preserve the relationships carried by the landed feeds and verify them with dbt tests instead of implying that DuckDB enforces physical foreign keys on views. |
+| Order-pipeline operations | Platform input reporting, the `fct_orders` publication check, the `fct_order_items` orphan gate, statistics maintenance, and `order_pipeline_health` exposure | Report source readiness, refuse incomplete order publications, refresh order statistics only from the owning project, and connect raw volume to the public order metric. |
+| Customer follow-up | `order_status_follow_up_policy` and `order_customer_follow_up_queue` | Let Customer Experience apply an owned policy to cancelled, refunded, and unrecognized orders. |
+| Legacy migration | Stable and current customer-migration relation helpers, `legacy_surface_inventory`, and `runtime_customer_migration_readiness` | Keep the migration job version-pinned while making the current contract available for an explicit comparison. |
+| Reusable reliability logic | The input-readiness operation, `reliability_status`, and `current_store_reliability` | Check the three public inputs before a run, then reuse one store-date status interface in SQL. |
+| Campaign economics | `campaign_contribution_usd` and `weekly_campaign_performance` | Query campaign return and contribution together through the Semantic Layer. |
+| Time-aware measurement | `year_to_date_net_revenue_usd` and `seven_day_experiment_conversion_rate` | Track annual revenue progress and orders completed within seven days of an experiment exposure. |
+
+Every project in this estate runs on the same pinned dbt Core 1.11.12 stack.
+Features that require a different Core or adapter runtime belong in a future
+whole-repository upgrade, not in a parallel compatibility fixture.
+
 ## Non-Goals
 
 This repo does not model any real marketplace, payments company, mobility company, or logistics company. The domain is fictional food retail only.

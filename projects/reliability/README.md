@@ -27,8 +27,15 @@ The extension currently joins:
 
 Those are all public contracted upstream models.
 
-The project also defines the `reliability_status` dbt user-defined function and
-uses `{{ function('reliability_status') }}` in its mart. DuckDB does not yet
-provide dbt's scalar function DDL directly, so the project dispatches dbt's UDF
-materialization to an equivalent DuckDB scalar macro while keeping the standard
-dbt function resource and dependency behavior.
+The project defines two dbt user-defined functions. `reliability_status`
+classifies a bounded score in the mart, while `current_store_reliability`
+provides a reusable store-and-date lookup over that public mart. DuckDB does not
+yet provide dbt's scalar function DDL directly, so the project dispatches dbt's
+UDF materialization to equivalent DuckDB scalar macros while keeping standard
+dbt function resources and dependency behavior.
+
+An on-run-start readiness operation names any missing public upstream relation
+before the mart runs, while remaining safe during a first-time parse. The
+project-scoped mart pre-hook also confirms the public daily store P&L is
+queryable before publishing reliability output. Analyses can call the canonical
+store-and-date function directly.

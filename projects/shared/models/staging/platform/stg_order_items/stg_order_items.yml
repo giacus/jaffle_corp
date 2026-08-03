@@ -14,6 +14,10 @@ models:
       - name: order_id
         description: "{{ doc('shared__stg_order_items__order_id') }}"
         data_type: varchar
+        constraints:
+          - type: foreign_key
+            to: ref('stg_orders')
+            to_columns: [order_id]
         data_tests:
           - relationships:
               arguments:

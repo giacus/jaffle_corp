@@ -19,6 +19,9 @@ clean-targets:
   - target
   - dbt_packages
 
+on-run-start:
+  - "{{ reliability_input_readiness() }}"
+
 models:
   reliability:
     +materialized: view
@@ -29,4 +32,5 @@ models:
     marts:
       +schema: mart_reliability
       +materialized: table
+      +pre-hook: "select count(*) as finance_day_count from {{ ref('finance', 'fct_daily_store_pnl') }}"
       +tags: ["mart", "reliability", "extension"]
