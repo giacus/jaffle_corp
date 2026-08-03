@@ -28,6 +28,30 @@ cd ../..
 project, but the shared `profiles.yml` lives at the repository root.
 The venv hook loads `scripts/env.sh`, which sets it to the absolute repo path.
 
+## Platform
+
+```bash
+cd projects/platform
+mf validate-configs --skip-dw
+mf query \
+  --metrics order_count,item_quantity \
+  --group-by metric_time \
+  --limit 20
+cd ../..
+```
+
+## Supply
+
+```bash
+cd projects/supply
+mf validate-configs --skip-dw
+mf query \
+  --metrics supply_risk_rate,late_purchase_order_rate \
+  --group-by metric_time,location,component \
+  --limit 20
+cd ../..
+```
+
 ## Finance
 
 ```bash
@@ -40,6 +64,18 @@ mf query \
 cd ../..
 ```
 
+## Customer Experience
+
+```bash
+cd projects/experience
+mf validate-configs --skip-dw
+mf query \
+  --metrics experiment_conversion_rate,seven_day_experiment_conversion_rate \
+  --group-by metric_time,experiment_outcome__experiment_id,experiment_outcome__variant_id \
+  --limit 20
+cd ../..
+```
+
 ## Growth
 
 ```bash
@@ -48,6 +84,18 @@ mf validate-configs --skip-dw
 mf query \
   --metrics attributed_net_revenue_usd,campaign_roas \
   --group-by metric_time,campaign_performance__campaign_id,campaign_performance__channel \
+  --limit 20
+cd ../..
+```
+
+## Store Operations
+
+```bash
+cd projects/store_ops
+mf validate-configs --skip-dw
+mf query \
+  --metrics kitchen_ready_target_rate,store_ops_quality_exception_count,store_ops_incident_count \
+  --group-by metric_time,location,store_day_operations__store_day_status \
   --limit 20
 cd ../..
 ```

@@ -51,17 +51,27 @@ dbt seed \
   --select order_status_follow_up_policy
 
 for project in "${PROJECTS[@]}"; do
-  dbt build \
-    --project-dir "$project" \
-    --profiles-dir . \
-    --exclude resource_type:seed
+  echo "Building owned resources for ${project#projects/}"
+  if [[ "$project" == "$SEED_PROJECT" ]]; then
+    dbt build \
+      --project-dir "$project" \
+      --profiles-dir . \
+      --exclude resource_type:seed
+  else
+    project_name="${project#projects/}"
+    dbt build \
+      --project-dir "$project" \
+      --profiles-dir . \
+      --select "package:$project_name" \
+      --exclude resource_type:seed
+  fi
 done
 
 for project in "${EXTENSION_PROJECTS[@]}"; do
   dbt build \
     --project-dir "$project" \
     --profiles-dir . \
-    --select reliability \
+    --select package:reliability \
     --exclude resource_type:seed
 done
 
@@ -128,6 +138,16 @@ for semantic_file in projects/*/models/semantic_models.yml; do
 done
 
 run_metricflow_query \
+  projects/platform \
+  "order_count,item_quantity" \
+  "metric_time"
+
+run_metricflow_query \
+  projects/supply \
+  "supply_risk_rate,late_purchase_order_rate" \
+  "metric_time,location,component"
+
+run_metricflow_query \
   projects/finance \
   "net_revenue_usd,estimated_gross_margin_usd,refund_rate,year_to_date_net_revenue_usd" \
   "metric_time,location,order__country_code"
@@ -155,6 +175,11 @@ run_metricflow_query \
   "metric_time,experiment_outcome__experiment_id,experiment_outcome__variant_id"
 
 run_metricflow_query \
+  projects/store_ops \
+  "kitchen_ready_target_rate,store_ops_quality_exception_count,store_ops_incident_count" \
+  "metric_time,location,store_day_operations__store_day_status"
+
+run_metricflow_query \
   projects/merchandising \
   "merchandising_observed_hours,merchandising_available_hours,merchandising_availability_rate,merchandising_outage_minutes" \
   "metric_time,product,location,product_store_hour__availability_status,product_store_hour__product_family"
@@ -175,4 +200,5 @@ run_metricflow_query \
   "metric_time,location,store_hour_forecast__scenario_name,store_hour_forecast__forecast_accuracy_band"
 
 scripts/generate_manifest.sh
+python scripts/check_architecture.py
 python scripts/check_column_docs.py

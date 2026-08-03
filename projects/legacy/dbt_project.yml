@@ -36,7 +36,7 @@ models:
       +access: protected
     marts:
       +schema: legacy
-      +tags: ["legacy", "deprecated"]
+      +tags: ["legacy"]
       +access: protected
     archived:
       +enabled: false

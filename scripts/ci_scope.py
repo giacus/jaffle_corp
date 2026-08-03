@@ -11,23 +11,25 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DBT_GLOBAL_FILES = {
+    ".github/workflows/ci.yml",
     ".sqlfluff",
-    "Taskfile.yml",
+    ".sqlfluffignore",
     "profiles.yml",
     "requirements.txt",
     "requirements.lock.txt",
 }
 DBT_SCRIPTS = {
     "scripts/bootstrap.sh",
+    "scripts/check_architecture.py",
     "scripts/check_column_docs.py",
     "scripts/check_semantic_models.py",
+    "scripts/ci_scope.py",
     "scripts/clean.sh",
     "scripts/docs.sh",
     "scripts/env.sh",
     "scripts/generate_manifest.sh",
     "scripts/install_venv_hook.sh",
     "scripts/lint_sql_projects.sh",
-    "scripts/validate_changed.sh",
     "scripts/validate_repo.sh",
 }
 DBT_SUFFIXES = {".csv", ".md", ".py", ".sql", ".yaml", ".yml"}
@@ -89,6 +91,7 @@ def main() -> int:
         else [] if args.event in {"schedule", "workflow_dispatch"} else changed_files(base)
     )
     dbt_changed = any(is_dbt_change(path) for path in files)
+    docs_changed = "scripts/docs.sh" in files
     force_full = args.event in {"schedule", "workflow_dispatch"}
 
     print("Changed files:")
@@ -98,6 +101,7 @@ def main() -> int:
         {
             "base_sha": base,
             "dbt_changed": str(dbt_changed).lower(),
+            "docs_changed": str(docs_changed).lower(),
             "full_validate": str(force_full or dbt_changed).lower(),
         },
     )

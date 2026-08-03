@@ -49,10 +49,19 @@ verifies that `dbt compile` can find the repo-local profile for
 `scripts/bootstrap.sh --full` to compile every runnable dbt project
 and generate the full manifest during setup. The validation script installs dbt
 project dependencies, lints SQL project-by-project, seeds local DuckDB sources,
-builds every project sequentially, and runs direct MetricFlow CLI queries. Run
-builds sequentially with the local DuckDB profile. It finishes by regenerating
-the complete git-ignored `target/manifest.json`; use
+builds shared and platform once and then each owning package sequentially, and
+runs direct MetricFlow CLI queries. Run builds sequentially with the local
+DuckDB profile. It finishes by regenerating the complete git-ignored
+`target/manifest.json`; use
 `scripts/generate_manifest.sh` when you only need that artifact.
+
+The required pull-request check is authoritative and starts from a clean
+runner. It always validates Markdown, YAML, Semantic Layer bindings, repository
+policy, public-contract changes, and its own routing/gate logic. The complete
+dbt and MetricFlow validator runs only for executable fixture and CI changes.
+Changes to `scripts/docs.sh` additionally execute docs generation. A weekly run
+keeps the pinned environment honest without repeating the full suite after each
+merge to protected `master`.
 
 ## Safe Change Process
 
@@ -60,10 +69,11 @@ Use pull requests for all changes that should land on the default branch.
 
 1. Create a branch from `master`.
 2. Make the smallest coherent change.
-3. Run `scripts/validate_repo.sh` locally.
-4. Open a pull request and fill out the checklist.
-5. Wait for the `validate` GitHub Actions check to pass.
-6. Merge only after CI is green and the PR has had a reasonable review.
+3. Run the smallest relevant local check; use `scripts/validate_repo.sh` when a
+   dbt or Semantic Layer change needs a clean preflight.
+4. Open a pull request and fill out the human safety checks.
+5. Review CI's public-contract report and wait for `validate` to pass.
+6. Merge only after CI is green and the change has had a reasonable review.
 
 The default branch is `master`. It should be protected in GitHub settings so
 direct pushes, force pushes, deletions, and merges with failing CI are blocked.

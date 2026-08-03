@@ -35,5 +35,7 @@ UDF materialization to equivalent DuckDB scalar macros while keeping standard
 dbt function resources and dependency behavior.
 
 An on-run-start readiness operation names any missing public upstream relation
-before the mart runs, while remaining safe during a first-time parse. Analyses
-can call the canonical store-and-date function directly.
+before the mart runs, while remaining safe during a first-time parse. The
+project-scoped mart pre-hook also confirms the public daily store P&L is
+queryable before publishing reliability output. Analyses can call the canonical
+store-and-date function directly.

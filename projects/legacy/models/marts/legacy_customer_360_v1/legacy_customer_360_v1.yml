@@ -6,6 +6,7 @@ models:
     latest_version: 2
     versions:
       - v: 1
+        deprecation_date: 2030-01-01
         columns:
           - name: cust
             description: "{{ doc('legacy__int_legacy_customer_notes__cust') }}"
@@ -47,6 +48,7 @@ models:
             description: "{{ doc('legacy__int_legacy_customer_notes__old_customer_note_blob') }}"
             data_type: varchar
       - v: 2
+        deprecation_date: 2030-01-01
         columns:
           - name: cust
             description: "{{ doc('legacy__int_legacy_customer_notes__cust') }}"
