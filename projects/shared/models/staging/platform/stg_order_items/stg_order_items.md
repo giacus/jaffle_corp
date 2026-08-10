@@ -6,14 +6,6 @@ Staging model for `stg_order_items` source cleanup and normalization.
 Source-system identifier for the order line item.
 {% enddocs %}
 
-{% docs shared__stg_order_items__order_id %}
-Source-system identifier for the order.
-{% enddocs %}
-
-{% docs shared__stg_order_items__product_id %}
-Source-system identifier for the sellable product.
-{% enddocs %}
-
 {% docs shared__stg_order_items__quantity %}
 Number of product units recorded on the source line item.
 {% enddocs %}
@@ -43,5 +35,5 @@ Count of customization recorded by the source.
 {% enddocs %}
 
 {% docs shared__stg_order_items__updated_at_utc %}
-UTC timestamp when the source system last updated the record.
+UTC timestamp when the source system last updated the `stg_order_items` record.
 {% enddocs %}

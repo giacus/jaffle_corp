@@ -6,14 +6,6 @@ Staging model for `stg_product_availability` source cleanup and normalization.
 Source-system identifier for the availability.
 {% enddocs %}
 
-{% docs shared__stg_product_availability__store_id %}
-Source-system identifier for the store or operating location.
-{% enddocs %}
-
-{% docs shared__stg_product_availability__product_id %}
-Source-system identifier for the sellable product.
-{% enddocs %}
-
 {% docs shared__stg_product_availability__available_date_utc %}
 UTC calendar date associated with available.
 {% enddocs %}
@@ -39,5 +31,5 @@ Duration in minutes for outage.
 {% enddocs %}
 
 {% docs shared__stg_product_availability__updated_at_utc %}
-UTC timestamp when the source system last updated the record.
+UTC timestamp when the source system last updated the `stg_product_availability` record.
 {% enddocs %}

@@ -19,7 +19,7 @@ models:
         description: "{{ doc('shared__stg_menu_price_tests__price_test_id') }}"
         data_type: varchar
       - name: product_id
-        description: "{{ doc('shared__stg_menu_price_tests__product_id') }}"
+        description: "{{ doc('shared__stg_products__product_id') }}"
         data_type: varchar
       - name: product_name
         description: "{{ doc('shared__stg_products__product_name') }}"
@@ -31,13 +31,13 @@ models:
         description: "{{ doc('shared__stg_products__product_family') }}"
         data_type: varchar
       - name: store_id
-        description: "{{ doc('shared__stg_menu_price_tests__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: experiment_id
-        description: "{{ doc('shared__stg_menu_price_tests__experiment_id') }}"
+        description: "{{ doc('shared__stg_experiment_exposures__experiment_id') }}"
         data_type: varchar
       - name: variant_id
-        description: "{{ doc('shared__stg_menu_price_tests__variant_id') }}"
+        description: "{{ doc('shared__stg_experiment_exposures__variant_id') }}"
         data_type: varchar
       - name: effective_from_utc
         description: "{{ doc('shared__stg_menu_price_tests__effective_from_utc') }}"
@@ -52,7 +52,7 @@ models:
         description: "{{ doc('shared__stg_menu_price_tests__list_price_major') }}"
         data_type: double
       - name: currency
-        description: "{{ doc('shared__stg_menu_price_tests__currency') }}"
+        description: "{{ doc('shared__stg_fx_rates__currency') }}"
         data_type: varchar
       - name: observed_order_count
         description: "{{ doc('experience__int_menu_price_test_windows__observed_order_count') }}"

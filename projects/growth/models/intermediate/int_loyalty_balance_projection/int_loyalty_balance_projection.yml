@@ -6,7 +6,7 @@ models:
 
     columns:
       - name: customer_id
-        description: "{{ doc('shared__stg_loyalty_events__customer_id') }}"
+        description: "{{ doc('shared__stg_customers__customer_id') }}"
         data_type: varchar
       - name: event_date_utc
         description: "{{ doc('shared__stg_loyalty_events__event_date_utc') }}"

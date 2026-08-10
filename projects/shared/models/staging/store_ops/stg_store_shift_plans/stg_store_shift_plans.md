@@ -6,10 +6,6 @@ Staging model for `stg_store_shift_plans` source cleanup and normalization.
 Source-system identifier for the shift plan.
 {% enddocs %}
 
-{% docs shared__stg_store_shift_plans__store_id %}
-Source-system identifier for the store or operating location.
-{% enddocs %}
-
 {% docs shared__stg_store_shift_plans__shift_date %}
 Store-local calendar date of the planned shift.
 {% enddocs %}
@@ -43,5 +39,5 @@ Actual labor minutes divided by planned labor minutes for the shift.
 {% enddocs %}
 
 {% docs shared__stg_store_shift_plans__updated_at_utc %}
-UTC timestamp when the source system last updated the record.
+UTC timestamp when the source system last updated the `stg_store_shift_plans` record.
 {% enddocs %}

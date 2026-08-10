@@ -12,10 +12,10 @@ models:
           - not_null
           - unique
       - name: store_id
-        description: "{{ doc('shared__stg_product_availability__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: product_id
-        description: "{{ doc('shared__stg_product_availability__product_id') }}"
+        description: "{{ doc('shared__stg_products__product_id') }}"
         data_type: varchar
       - name: available_date_utc
         description: "{{ doc('shared__stg_product_availability__available_date_utc') }}"

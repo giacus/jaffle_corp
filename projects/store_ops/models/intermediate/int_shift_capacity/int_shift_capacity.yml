@@ -9,7 +9,7 @@ models:
         description: "{{ doc('shared__stg_store_shift_plans__shift_plan_id') }}"
         data_type: varchar
       - name: store_id
-        description: "{{ doc('shared__stg_store_shift_plans__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: country_code
         description: "{{ doc('shared__stg_stores__country_code') }}"

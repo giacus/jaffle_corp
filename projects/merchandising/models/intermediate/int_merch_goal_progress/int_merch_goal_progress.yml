@@ -12,10 +12,10 @@ models:
         description: "{{ doc('shared__stg_menu_goals__goal_id') }}"
         data_type: varchar
       - name: store_id
-        description: "{{ doc('shared__stg_menu_goals__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: product_family
-        description: "{{ doc('shared__stg_menu_goals__product_family') }}"
+        description: "{{ doc('shared__stg_products__product_family') }}"
         data_type: varchar
       - name: goal_week_start_utc
         description: "{{ doc('shared__stg_menu_goals__goal_week_start_utc') }}"

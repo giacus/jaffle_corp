@@ -6,10 +6,6 @@ Staging model for `stg_payments` source cleanup and normalization.
 Source-system identifier for the payment.
 {% enddocs %}
 
-{% docs shared__stg_payments__order_id %}
-Source-system identifier for the order.
-{% enddocs %}
-
 {% docs shared__stg_payments__payment_status %}
 Normalized business classification for payment status. Allowed normalized values: `authorized`, `captured`, `failed`, `refunded`, `unknown`.
 {% enddocs %}
@@ -38,14 +34,10 @@ Amount expressed in the source currency minor unit.
 Amount expressed in the source currency major unit.
 {% enddocs %}
 
-{% docs shared__stg_payments__currency %}
-ISO 4217 currency code attached to monetary values on the source record.
-{% enddocs %}
-
 {% docs shared__stg_payments__processor_region %}
 Processor region recorded on the payments record after type and naming normalization.
 {% enddocs %}
 
 {% docs shared__stg_payments__updated_at_utc %}
-UTC timestamp when the source system last updated the record.
+UTC timestamp when the source system last updated the `stg_payments` record.
 {% enddocs %}

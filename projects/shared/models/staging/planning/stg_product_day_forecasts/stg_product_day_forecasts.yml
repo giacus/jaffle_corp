@@ -15,10 +15,10 @@ models:
         description: "{{ doc('shared__stg_product_day_forecasts__model_run_id') }}"
         data_type: varchar
       - name: store_id
-        description: "{{ doc('shared__stg_product_day_forecasts__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: product_id
-        description: "{{ doc('shared__stg_product_day_forecasts__product_id') }}"
+        description: "{{ doc('shared__stg_products__product_id') }}"
         data_type: varchar
       - name: forecast_date_utc
         description: "{{ doc('shared__stg_product_day_forecasts__forecast_date_utc') }}"
@@ -34,7 +34,7 @@ models:
         description: "{{ doc('shared__stg_product_day_forecasts__planned_price_minor') }}"
         data_type: integer
       - name: scenario_name
-        description: "{{ doc('shared__stg_product_day_forecasts__scenario_name') }}"
+        description: "{{ doc('shared__stg_capacity_scenarios__scenario_name') }}"
         data_type: varchar
         data_tests:
           - accepted_values:

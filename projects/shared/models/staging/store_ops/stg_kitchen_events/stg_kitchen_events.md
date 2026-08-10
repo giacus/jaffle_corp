@@ -6,14 +6,6 @@ Staging model for `stg_kitchen_events` source cleanup and normalization.
 Source-system identifier for the kitchen event.
 {% enddocs %}
 
-{% docs shared__stg_kitchen_events__order_id %}
-Source-system identifier for the order.
-{% enddocs %}
-
-{% docs shared__stg_kitchen_events__store_id %}
-Source-system identifier for the store or operating location.
-{% enddocs %}
-
 {% docs shared__stg_kitchen_events__station %}
 Station recorded on the kitchen events record after type and naming normalization.
 {% enddocs %}
@@ -27,11 +19,11 @@ Normalized business classification for raw event type.
 {% enddocs %}
 
 {% docs shared__stg_kitchen_events__event_at_utc %}
-UTC timestamp when the source event occurred.
+UTC timestamp when the kitchen event occurred.
 {% enddocs %}
 
 {% docs shared__stg_kitchen_events__event_date_utc %}
-UTC calendar date on which the source event occurred.
+UTC calendar date on which the kitchen event occurred.
 {% enddocs %}
 
 {% docs shared__stg_kitchen_events__batch_id %}
@@ -43,5 +35,5 @@ Operator initials recorded on the kitchen events record after type and naming no
 {% enddocs %}
 
 {% docs shared__stg_kitchen_events__updated_at_utc %}
-UTC timestamp when the source system last updated the record.
+UTC timestamp when the source system last updated the `stg_kitchen_events` record.
 {% enddocs %}

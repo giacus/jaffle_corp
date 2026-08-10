@@ -10,10 +10,6 @@ Deterministic surrogate key for the extension fact joining public finance, merch
 Calendar date for reliability on the extension fact joining public finance, merchandising, and planning interfaces at store-day grain. Derived from recognized date.
 {% enddocs %}
 
-{% docs reliability__fct_store_day_reliability__scenario_name %}
-Scenario name represented by the extension fact joining public finance, merchandising, and planning interfaces at store-day grain.
-{% enddocs %}
-
 {% docs reliability__fct_store_day_reliability__observed_product_count %}
 Number of observed products represented by the extension fact joining public finance, merchandising, and planning interfaces at store-day grain.
 {% enddocs %}

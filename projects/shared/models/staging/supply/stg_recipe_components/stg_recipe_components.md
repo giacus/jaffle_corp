@@ -6,10 +6,6 @@ Staging model for `stg_recipe_components` source cleanup and normalization.
 Deterministic key for the recipe component record.
 {% enddocs %}
 
-{% docs shared__stg_recipe_components__product_id %}
-Source-system identifier for the sellable product.
-{% enddocs %}
-
 {% docs shared__stg_recipe_components__component_id %}
 Source-system identifier for the component.
 {% enddocs %}
@@ -35,5 +31,5 @@ Expected recipe waste allowance expressed as a decimal ratio.
 {% enddocs %}
 
 {% docs shared__stg_recipe_components__updated_at_utc %}
-UTC timestamp when the source system last updated the record.
+UTC timestamp when the source system last updated the `stg_recipe_components` record.
 {% enddocs %}

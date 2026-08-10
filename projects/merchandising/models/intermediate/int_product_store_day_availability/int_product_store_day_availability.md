@@ -6,26 +6,6 @@ Intermediate model for `int_product_store_day_availability` transformation logic
 Deterministic surrogate key for the availability fact at product-store-day grain. Derived from product identifier, store identifier, and available date UTC.
 {% enddocs %}
 
-{% docs merchandising__int_product_store_day_availability__product_family %}
-Product family represented by the availability fact at product-store-day grain.
-{% enddocs %}
-
-{% docs merchandising__int_product_store_day_availability__menu_section %}
-Menu section represented by the availability fact at product-store-day grain.
-{% enddocs %}
-
-{% docs merchandising__int_product_store_day_availability__menu_surface %}
-Menu surface represented by the availability fact at product-store-day grain.
-{% enddocs %}
-
-{% docs merchandising__int_product_store_day_availability__country_code %}
-Country code represented by the availability fact at product-store-day grain.
-{% enddocs %}
-
-{% docs merchandising__int_product_store_day_availability__city %}
-City represented by the availability fact at product-store-day grain.
-{% enddocs %}
-
 {% docs merchandising__int_product_store_day_availability__observed_hour_count %}
 Number of observed hour records represented by each `int_product_store_day_availability` row.
 {% enddocs %}

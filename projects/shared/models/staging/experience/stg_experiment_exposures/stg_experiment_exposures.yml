@@ -12,7 +12,7 @@ models:
           - not_null
           - unique
       - name: customer_id
-        description: "{{ doc('shared__stg_experiment_exposures__customer_id') }}"
+        description: "{{ doc('shared__stg_customers__customer_id') }}"
         data_type: varchar
       - name: experiment_id
         description: "{{ doc('shared__stg_experiment_exposures__experiment_id') }}"

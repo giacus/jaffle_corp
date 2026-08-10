@@ -16,7 +16,7 @@ models:
           - not_null
           - unique
       - name: support_ticket_id
-        description: "{{ doc('shared__stg_customer_contacts__support_ticket_id') }}"
+        description: "{{ doc('shared__stg_support_tickets__support_ticket_id') }}"
         data_type: varchar
       - name: first_contact_at_utc
         description: "{{ doc('experience__fct_customer_contact_threads__first_contact_at_utc') }}"

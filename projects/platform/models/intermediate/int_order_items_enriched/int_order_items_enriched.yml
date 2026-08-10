@@ -9,13 +9,13 @@ models:
         description: "{{ doc('shared__stg_order_items__order_item_id') }}"
         data_type: varchar
       - name: order_id
-        description: "{{ doc('shared__stg_order_items__order_id') }}"
+        description: "{{ doc('shared__stg_orders__order_id') }}"
         data_type: varchar
       - name: ordered_date_utc
         description: "{{ doc('shared__stg_orders__ordered_date_utc') }}"
         data_type: date
       - name: product_id
-        description: "{{ doc('shared__stg_order_items__product_id') }}"
+        description: "{{ doc('shared__stg_products__product_id') }}"
         data_type: varchar
       - name: sku
         description: "{{ doc('shared__stg_products__sku') }}"

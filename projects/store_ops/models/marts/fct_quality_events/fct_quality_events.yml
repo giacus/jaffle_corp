@@ -19,13 +19,13 @@ models:
         description: "{{ doc('shared__stg_quality_checks__quality_check_id') }}"
         data_type: varchar
       - name: store_id
-        description: "{{ doc('shared__stg_quality_checks__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: order_id
-        description: "{{ doc('shared__stg_quality_checks__order_id') }}"
+        description: "{{ doc('shared__stg_orders__order_id') }}"
         data_type: varchar
       - name: product_id
-        description: "{{ doc('shared__stg_quality_checks__product_id') }}"
+        description: "{{ doc('shared__stg_products__product_id') }}"
         data_type: varchar
       - name: check_type
         description: "{{ doc('shared__stg_quality_checks__check_type') }}"

@@ -6,10 +6,10 @@ models:
 
     columns:
       - name: store_id
-        description: "{{ doc('shared__stg_orders__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: product_id
-        description: "{{ doc('shared__stg_order_items__product_id') }}"
+        description: "{{ doc('shared__stg_products__product_id') }}"
         data_type: varchar
       - name: actual_date_utc
         description: "{{ doc('planning__int_product_day_actuals__actual_date_utc') }}"

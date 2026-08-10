@@ -22,20 +22,12 @@ order by 1
 Source-system identifier for the price adjustment.
 {% enddocs %}
 
-{% docs shared__stg_price_adjustments__store_id %}
-Source-system identifier for the store or operating location.
-{% enddocs %}
-
-{% docs shared__stg_price_adjustments__product_id %}
-Source-system identifier for the sellable product.
-{% enddocs %}
-
 {% docs shared__stg_price_adjustments__effective_from_utc %}
-UTC timestamp at which the record becomes effective.
+UTC timestamp at which the `stg_price_adjustments` record becomes effective.
 {% enddocs %}
 
 {% docs shared__stg_price_adjustments__effective_to_utc %}
-UTC timestamp at which the record stops being effective; null means open-ended.
+UTC timestamp at which the `stg_price_adjustments` record stops being effective; null means open-ended.
 {% enddocs %}
 
 {% docs shared__stg_price_adjustments__adjustment_reason %}
@@ -51,5 +43,5 @@ Normalized business classification for approved by role. Allowed normalized valu
 {% enddocs %}
 
 {% docs shared__stg_price_adjustments__updated_at_utc %}
-UTC timestamp when the source system last updated the record.
+UTC timestamp when the source system last updated the `stg_price_adjustments` record.
 {% enddocs %}

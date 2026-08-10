@@ -8,7 +8,7 @@ models:
         description: "{{ doc('shared__stg_supplies__supply_id') }}"
         data_type: varchar
       - name: product_id
-        description: "{{ doc('shared__stg_supplies__product_id') }}"
+        description: "{{ doc('shared__stg_products__product_id') }}"
         data_type: varchar
       - name: supplier_name
         description: "{{ doc('shared__stg_supplies__supplier_name') }}"
@@ -23,7 +23,7 @@ models:
         description: "{{ doc('shared__stg_supplies__unit_cost_major') }}"
         data_type: double
       - name: currency
-        description: "{{ doc('shared__stg_supplies__currency') }}"
+        description: "{{ doc('shared__stg_fx_rates__currency') }}"
         data_type: varchar
       - name: perishable
         description: "{{ doc('shared__stg_supplies__perishable') }}"

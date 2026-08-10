@@ -12,7 +12,7 @@ models:
         description: "{{ doc('shared__stg_substitution_rules__substitution_rule_id') }}"
         data_type: varchar
       - name: store_id
-        description: "{{ doc('shared__stg_substitution_rules__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: available_date_utc
         description: "{{ doc('shared__stg_product_availability__available_date_utc') }}"

@@ -6,10 +6,10 @@ models:
 
     columns:
       - name: store_id
-        description: "{{ doc('shared__stg_quality_checks__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: order_id
-        description: "{{ doc('shared__stg_quality_checks__order_id') }}"
+        description: "{{ doc('shared__stg_orders__order_id') }}"
         data_type: varchar
       - name: checked_date_utc
         description: "{{ doc('shared__stg_quality_checks__checked_date_utc') }}"

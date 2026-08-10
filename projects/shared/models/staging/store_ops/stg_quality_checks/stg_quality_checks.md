@@ -6,18 +6,6 @@ Staging model for `stg_quality_checks` source cleanup and normalization.
 Source-system identifier for the quality check.
 {% enddocs %}
 
-{% docs shared__stg_quality_checks__store_id %}
-Source-system identifier for the store or operating location.
-{% enddocs %}
-
-{% docs shared__stg_quality_checks__order_id %}
-Source-system identifier for the order.
-{% enddocs %}
-
-{% docs shared__stg_quality_checks__product_id %}
-Source-system identifier for the sellable product.
-{% enddocs %}
-
 {% docs shared__stg_quality_checks__check_type %}
 Normalized business classification for check type.
 {% enddocs %}
@@ -47,5 +35,5 @@ UTC calendar date associated with checked.
 {% enddocs %}
 
 {% docs shared__stg_quality_checks__updated_at_utc %}
-UTC timestamp when the source system last updated the record.
+UTC timestamp when the source system last updated the `stg_quality_checks` record.
 {% enddocs %}

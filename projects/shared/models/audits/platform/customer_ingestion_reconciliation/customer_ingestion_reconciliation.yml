@@ -8,7 +8,7 @@ models:
       access: protected
     columns:
       - name: customer_id
-        description: "{{ doc('shared__customer_ingestion_reconciliation__customer_id') }}"
+        description: "{{ doc('shared__stg_customers__customer_id') }}"
         data_type: varchar
         data_tests:
           - not_null

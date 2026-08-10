@@ -6,14 +6,6 @@ Staging model for `stg_menu_goals` source cleanup and normalization.
 Source-system identifier for the goal.
 {% enddocs %}
 
-{% docs shared__stg_menu_goals__store_id %}
-Source-system identifier for the store or operating location.
-{% enddocs %}
-
-{% docs shared__stg_menu_goals__product_family %}
-Business grouping used to organize products with similar menu roles.
-{% enddocs %}
-
 {% docs shared__stg_menu_goals__goal_week_start_utc %}
 UTC week-start date associated with goal.
 {% enddocs %}

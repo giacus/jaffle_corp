@@ -12,10 +12,10 @@ models:
           - not_null
           - unique
       - name: store_id
-        description: "{{ doc('shared__stg_purchase_orders__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: component_id
-        description: "{{ doc('shared__stg_purchase_orders__component_id') }}"
+        description: "{{ doc('shared__stg_recipe_components__component_id') }}"
         data_type: varchar
       - name: supplier_name
         description: "{{ doc('shared__stg_purchase_orders__supplier_name') }}"
@@ -51,7 +51,7 @@ models:
         description: "{{ doc('shared__stg_purchase_orders__quantity_received') }}"
         data_type: double
       - name: unit
-        description: "{{ doc('shared__stg_purchase_orders__unit') }}"
+        description: "{{ doc('shared__stg_recipe_components__unit') }}"
         data_type: varchar
       - name: unit_cost_minor
         description: "{{ doc('shared__stg_purchase_orders__unit_cost_minor') }}"
@@ -60,7 +60,7 @@ models:
         description: "{{ doc('shared__stg_purchase_orders__unit_cost_major') }}"
         data_type: double
       - name: currency
-        description: "{{ doc('shared__stg_purchase_orders__currency') }}"
+        description: "{{ doc('shared__stg_fx_rates__currency') }}"
         data_type: varchar
       - name: updated_at_utc
         description: "{{ doc('shared__stg_purchase_orders__updated_at_utc') }}"

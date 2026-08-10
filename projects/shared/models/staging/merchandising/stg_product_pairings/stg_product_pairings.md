@@ -19,11 +19,11 @@ Normalized business classification for pairing reason.
 {% enddocs %}
 
 {% docs shared__stg_product_pairings__effective_from_utc %}
-UTC timestamp at which the record becomes effective.
+UTC timestamp at which the `stg_product_pairings` record becomes effective.
 {% enddocs %}
 
 {% docs shared__stg_product_pairings__effective_to_utc %}
-UTC timestamp at which the record stops being effective; null means open-ended.
+UTC timestamp at which the `stg_product_pairings` record stops being effective; null means open-ended.
 {% enddocs %}
 
 {% docs shared__stg_product_pairings__pairing_rank %}

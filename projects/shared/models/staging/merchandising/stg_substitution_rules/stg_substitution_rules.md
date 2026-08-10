@@ -6,10 +6,6 @@ Staging model for `stg_substitution_rules` source cleanup and normalization.
 Source-system identifier for the substitution rule.
 {% enddocs %}
 
-{% docs shared__stg_substitution_rules__store_id %}
-Source-system identifier for the store or operating location.
-{% enddocs %}
-
 {% docs shared__stg_substitution_rules__unavailable_product_id %}
 Source-system identifier for the unavailable product.
 {% enddocs %}
@@ -23,11 +19,11 @@ Priority rank recorded on the substitution rules record after type and naming no
 {% enddocs %}
 
 {% docs shared__stg_substitution_rules__effective_from_utc %}
-UTC timestamp at which the record becomes effective.
+UTC timestamp at which the `stg_substitution_rules` record becomes effective.
 {% enddocs %}
 
 {% docs shared__stg_substitution_rules__effective_to_utc %}
-UTC timestamp at which the record stops being effective; null means open-ended.
+UTC timestamp at which the `stg_substitution_rules` record stops being effective; null means open-ended.
 {% enddocs %}
 
 {% docs shared__stg_substitution_rules__reason_code %}

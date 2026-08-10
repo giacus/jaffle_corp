@@ -5,7 +5,7 @@ models:
     description: "{{ doc('platform__stg_store_hours_legacy') }}"
     columns:
       - name: store_id
-        description: "{{ doc('shared__stg_store_hours_legacy__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: legacy_hours_blob
         description: "{{ doc('shared__stg_store_hours_legacy__legacy_hours_blob') }}"

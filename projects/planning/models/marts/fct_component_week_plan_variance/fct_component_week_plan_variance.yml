@@ -19,16 +19,16 @@ models:
         description: "{{ doc('shared__stg_component_week_plans__plan_id') }}"
         data_type: varchar
       - name: store_id
-        description: "{{ doc('shared__stg_component_week_plans__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: component_id
-        description: "{{ doc('shared__stg_component_week_plans__component_id') }}"
+        description: "{{ doc('shared__stg_recipe_components__component_id') }}"
         data_type: varchar
       - name: component_name
-        description: "{{ doc('supply__int_component_catalog__component_name') }}"
+        description: "{{ doc('shared__stg_recipe_components__component_name') }}"
         data_type: varchar
       - name: component_family
-        description: "{{ doc('supply__int_component_catalog__component_family') }}"
+        description: "{{ doc('shared__stg_recipe_components__component_family') }}"
         data_type: varchar
       - name: recipe_unit
         description: "{{ doc('supply__int_component_catalog__recipe_unit') }}"
@@ -37,7 +37,7 @@ models:
         description: "{{ doc('shared__stg_component_week_plans__plan_week_start_utc') }}"
         data_type: date
       - name: scenario_name
-        description: "{{ doc('shared__stg_component_week_plans__scenario_name') }}"
+        description: "{{ doc('shared__stg_capacity_scenarios__scenario_name') }}"
         data_type: varchar
       - name: planned_receipt_quantity
         description: "{{ doc('shared__stg_component_week_plans__planned_receipt_quantity') }}"

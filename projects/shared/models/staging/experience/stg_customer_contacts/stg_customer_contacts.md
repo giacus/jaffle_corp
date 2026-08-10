@@ -6,10 +6,6 @@ Staging model for `stg_customer_contacts` source cleanup and normalization.
 Source-system identifier for the contact event.
 {% enddocs %}
 
-{% docs shared__stg_customer_contacts__support_ticket_id %}
-Source-system identifier for the support ticket.
-{% enddocs %}
-
 {% docs shared__stg_customer_contacts__contact_channel %}
 Contact channel recorded on the customer contacts record after type and naming normalization.
 {% enddocs %}
@@ -31,5 +27,5 @@ Normalized business classification for handled by role.
 {% enddocs %}
 
 {% docs shared__stg_customer_contacts__updated_at_utc %}
-UTC timestamp when the source system last updated the record.
+UTC timestamp when the source system last updated the `stg_customer_contacts` record.
 {% enddocs %}

@@ -3,15 +3,7 @@ Staging model for `stg_store_hour_forecasts` source cleanup and normalization.
 {% enddocs %}
 
 {% docs shared__stg_store_hour_forecasts__forecast_id %}
-Source-system identifier for the forecast.
-{% enddocs %}
-
-{% docs shared__stg_store_hour_forecasts__model_run_id %}
-Source-system identifier for the model run.
-{% enddocs %}
-
-{% docs shared__stg_store_hour_forecasts__store_id %}
-Source-system identifier for the store or operating location.
+Source-system identifier for the store-hour forecast record.
 {% enddocs %}
 
 {% docs shared__stg_store_hour_forecasts__forecast_hour_utc %}
@@ -30,18 +22,14 @@ Lower bound orders recorded on the store hour forecasts record after type and na
 Upper bound orders recorded on the store hour forecasts record after type and naming normalization.
 {% enddocs %}
 
-{% docs shared__stg_store_hour_forecasts__scenario_name %}
-Human-readable name of the planning scenario. Allowed normalized values: `base`, `stretch`.
-{% enddocs %}
-
 {% docs shared__stg_store_hour_forecasts__model_version %}
-Version label of the forecasting model that produced the record.
+Version label of the store-hour forecasting model that produced the record.
 {% enddocs %}
 
 {% docs shared__stg_store_hour_forecasts__created_at_utc %}
-UTC timestamp when created occurred.
+UTC timestamp when the store-hour forecast record was created.
 {% enddocs %}
 
 {% docs shared__stg_store_hour_forecasts__updated_at_utc %}
-UTC timestamp when the source system last updated the record.
+UTC timestamp when the source system last updated the `stg_store_hour_forecasts` record.
 {% enddocs %}

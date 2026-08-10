@@ -12,10 +12,10 @@ models:
           - not_null
           - unique
       - name: order_id
-        description: "{{ doc('shared__stg_kitchen_events__order_id') }}"
+        description: "{{ doc('shared__stg_orders__order_id') }}"
         data_type: varchar
       - name: store_id
-        description: "{{ doc('shared__stg_kitchen_events__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: station
         description: "{{ doc('shared__stg_kitchen_events__station') }}"

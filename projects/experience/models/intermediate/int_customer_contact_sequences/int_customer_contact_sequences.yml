@@ -9,7 +9,7 @@ models:
         description: "{{ doc('shared__stg_customer_contacts__contact_event_id') }}"
         data_type: varchar
       - name: support_ticket_id
-        description: "{{ doc('shared__stg_customer_contacts__support_ticket_id') }}"
+        description: "{{ doc('shared__stg_support_tickets__support_ticket_id') }}"
         data_type: varchar
       - name: contact_channel
         description: "{{ doc('shared__stg_customer_contacts__contact_channel') }}"

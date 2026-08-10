@@ -12,7 +12,7 @@ models:
           - not_null
           - unique
       - name: product_id
-        description: "{{ doc('shared__stg_recipe_components__product_id') }}"
+        description: "{{ doc('shared__stg_products__product_id') }}"
         data_type: varchar
         data_tests:
           - not_null

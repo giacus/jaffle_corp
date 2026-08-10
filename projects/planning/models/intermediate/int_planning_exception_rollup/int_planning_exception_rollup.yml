@@ -6,13 +6,13 @@ models:
 
     columns:
       - name: store_id
-        description: "{{ doc('planning__int_planning_exception_rollup__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: exception_date_utc
         description: "{{ doc('planning__int_planning_exception_rollup__exception_date_utc') }}"
         data_type: date
       - name: scenario_name
-        description: "{{ doc('planning__int_planning_exception_rollup__scenario_name') }}"
+        description: "{{ doc('shared__stg_capacity_scenarios__scenario_name') }}"
         data_type: varchar
       - name: exception_family
         description: "{{ doc('planning__int_planning_exception_rollup__exception_family') }}"

@@ -43,5 +43,5 @@ Whether the source record is classified as dark kitchen.
 {% enddocs %}
 
 {% docs shared__stg_stores__updated_at_utc %}
-UTC timestamp when the source system last updated the record.
+UTC timestamp when the source system last updated the `stg_stores` record.
 {% enddocs %}

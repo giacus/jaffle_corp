@@ -6,7 +6,7 @@ models:
 
     columns:
       - name: order_id
-        description: "{{ doc('shared__stg_order_items__order_id') }}"
+        description: "{{ doc('shared__stg_orders__order_id') }}"
         data_type: varchar
       - name: order_item_count
         description: "{{ doc('finance__int_order_cost_rollup__order_item_count') }}"

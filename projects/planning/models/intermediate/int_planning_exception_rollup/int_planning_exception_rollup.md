@@ -2,16 +2,8 @@
 Intermediate model for `int_planning_exception_rollup` transformation logic.
 {% enddocs %}
 
-{% docs planning__int_planning_exception_rollup__store_id %}
-Identifier of the store represented by the daily planning exception fact by scenario and exception family.
-{% enddocs %}
-
 {% docs planning__int_planning_exception_rollup__exception_date_utc %}
 Calendar date for exception on the daily planning exception fact by scenario and exception family. Derived from forecast date UTC.
-{% enddocs %}
-
-{% docs planning__int_planning_exception_rollup__scenario_name %}
-Scenario name represented by the daily planning exception fact by scenario and exception family.
 {% enddocs %}
 
 {% docs planning__int_planning_exception_rollup__exception_family %}

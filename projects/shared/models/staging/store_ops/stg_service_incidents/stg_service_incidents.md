@@ -6,20 +6,16 @@ Staging model for `stg_service_incidents` source cleanup and normalization.
 Source-system identifier for the incident.
 {% enddocs %}
 
-{% docs shared__stg_service_incidents__store_id %}
-Source-system identifier for the store or operating location.
-{% enddocs %}
-
 {% docs shared__stg_service_incidents__opened_at_utc %}
-UTC timestamp when opened occurred.
+UTC timestamp when the operational service incident was opened.
 {% enddocs %}
 
 {% docs shared__stg_service_incidents__resolved_at_utc %}
-UTC timestamp when resolved occurred.
+UTC timestamp when the operational service incident was resolved.
 {% enddocs %}
 
 {% docs shared__stg_service_incidents__opened_date_utc %}
-UTC calendar date associated with opened.
+UTC calendar date on which the operational service incident was opened.
 {% enddocs %}
 
 {% docs shared__stg_service_incidents__incident_type %}
@@ -43,5 +39,5 @@ Duration in minutes for incident.
 {% enddocs %}
 
 {% docs shared__stg_service_incidents__updated_at_utc %}
-UTC timestamp when the source system last updated the record.
+UTC timestamp when the source system last updated the `stg_service_incidents` record.
 {% enddocs %}

@@ -6,7 +6,7 @@ models:
 
     columns:
       - name: store_id
-        description: "{{ doc('shared__stg_orders__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: usage_date_utc
         description: "{{ doc('supply__int_component_daily_usage__usage_date_utc') }}"

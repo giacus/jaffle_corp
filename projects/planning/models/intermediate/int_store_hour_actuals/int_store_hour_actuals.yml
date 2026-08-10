@@ -6,7 +6,7 @@ models:
 
     columns:
       - name: store_id
-        description: "{{ doc('shared__stg_orders__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: actual_hour_utc
         description: "{{ doc('planning__int_store_hour_actuals__actual_hour_utc') }}"

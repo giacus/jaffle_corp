@@ -6,19 +6,19 @@ models:
 
     columns:
       - name: store_id
-        description: "{{ doc('finance__int_order_payment_allocations__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: operating_date
         description: "{{ doc('store_ops__int_store_day_operating_inputs__operating_date') }}"
         data_type: date
       - name: country_code
-        description: "{{ doc('finance__int_order_payment_allocations__country_code') }}"
+        description: "{{ doc('shared__stg_stores__country_code') }}"
         data_type: varchar
       - name: city
-        description: "{{ doc('finance__int_order_payment_allocations__city') }}"
+        description: "{{ doc('shared__stg_stores__city') }}"
         data_type: varchar
       - name: franchise_owner
-        description: "{{ doc('finance__int_order_payment_allocations__franchise_owner') }}"
+        description: "{{ doc('shared__stg_stores__franchise_owner') }}"
         data_type: varchar
       - name: order_count
         description: "{{ doc('finance__fct_daily_store_pnl__order_count') }}"
