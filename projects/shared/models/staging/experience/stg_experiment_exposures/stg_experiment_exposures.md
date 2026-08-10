@@ -6,10 +6,6 @@ Staging model for `stg_experiment_exposures` source cleanup and normalization.
 Source-system identifier for the exposure.
 {% enddocs %}
 
-{% docs shared__stg_experiment_exposures__customer_id %}
-Source-system identifier for the customer.
-{% enddocs %}
-
 {% docs shared__stg_experiment_exposures__experiment_id %}
 Source-system identifier for the experiment.
 {% enddocs %}
@@ -35,5 +31,5 @@ Business reason recorded for assigning the experiment variant.
 {% enddocs %}
 
 {% docs shared__stg_experiment_exposures__updated_at_utc %}
-UTC timestamp when the source system last updated the record.
+UTC timestamp when the source system last updated the `stg_experiment_exposures` record.
 {% enddocs %}

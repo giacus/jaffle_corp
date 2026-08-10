@@ -9,7 +9,7 @@ models:
         description: "{{ doc('shared__stg_recipe_components__recipe_component_key') }}"
         data_type: varchar
       - name: product_id
-        description: "{{ doc('shared__stg_recipe_components__product_id') }}"
+        description: "{{ doc('shared__stg_products__product_id') }}"
         data_type: varchar
       - name: component_id
         description: "{{ doc('shared__stg_recipe_components__component_id') }}"

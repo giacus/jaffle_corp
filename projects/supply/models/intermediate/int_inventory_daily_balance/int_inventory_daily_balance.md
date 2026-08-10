@@ -2,20 +2,8 @@
 Intermediate model for `int_inventory_daily_balance` transformation logic.
 {% enddocs %}
 
-{% docs supply__int_inventory_daily_balance__store_id %}
-Identifier of the store represented by the component inventory fact at store-component-day grain.
-{% enddocs %}
-
-{% docs supply__int_inventory_daily_balance__component_id %}
-Identifier of the component represented by the component inventory fact at store-component-day grain.
-{% enddocs %}
-
 {% docs supply__int_inventory_daily_balance__balance_date_utc %}
 Calendar date for balance on the component inventory fact at store-component-day grain. Derived from counted date UTC.
-{% enddocs %}
-
-{% docs supply__int_inventory_daily_balance__unit %}
-Unit represented by the component inventory fact at store-component-day grain.
 {% enddocs %}
 
 {% docs supply__int_inventory_daily_balance__counted_quantity %}

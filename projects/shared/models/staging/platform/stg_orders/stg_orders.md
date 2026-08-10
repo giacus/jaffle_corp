@@ -6,16 +6,8 @@ Staging model for `stg_orders` source cleanup and normalization.
 Source-system identifier for the order.
 {% enddocs %}
 
-{% docs shared__stg_orders__customer_id %}
-Source-system identifier for the customer.
-{% enddocs %}
-
-{% docs shared__stg_orders__store_id %}
-Source-system identifier for the store or operating location.
-{% enddocs %}
-
 {% docs shared__stg_orders__ordered_at_utc %}
-UTC timestamp when the order was placed.
+UTC timestamp when the customer order was placed.
 {% enddocs %}
 
 {% docs shared__stg_orders__ordered_date_utc %}
@@ -31,11 +23,7 @@ Unmodified order status retained for audit and migration work.
 {% enddocs %}
 
 {% docs shared__stg_orders__channel %}
-Normalized acquisition or ordering channel recorded by the source.
-{% enddocs %}
-
-{% docs shared__stg_orders__currency %}
-ISO 4217 currency code attached to monetary values on the source record.
+Normalized acquisition or ordering channel for the customer order.
 {% enddocs %}
 
 {% docs shared__stg_orders__subtotal_minor %}
@@ -71,5 +59,5 @@ Legacy human-facing order number retained for compatibility exercises.
 {% enddocs %}
 
 {% docs shared__stg_orders__updated_at_utc %}
-UTC timestamp when the source system last updated the record.
+UTC timestamp when the source system last updated the `stg_orders` record.
 {% enddocs %}

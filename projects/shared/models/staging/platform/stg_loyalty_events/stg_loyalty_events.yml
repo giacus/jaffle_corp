@@ -8,10 +8,10 @@ models:
         description: "{{ doc('shared__stg_loyalty_events__loyalty_event_id') }}"
         data_type: varchar
       - name: customer_id
-        description: "{{ doc('shared__stg_loyalty_events__customer_id') }}"
+        description: "{{ doc('shared__stg_customers__customer_id') }}"
         data_type: varchar
       - name: order_id
-        description: "{{ doc('shared__stg_loyalty_events__order_id') }}"
+        description: "{{ doc('shared__stg_orders__order_id') }}"
         data_type: varchar
       - name: event_type
         description: "{{ doc('shared__stg_loyalty_events__event_type') }}"

@@ -15,7 +15,7 @@ Order value before refunds, expressed in US dollars.
 {% enddocs %}
 
 {% docs finance__fct_daily_store_pnl__net_revenue_usd %}
-Captured revenue minus refunded revenue, expressed in US dollars.
+Captured revenue minus refunded revenue at the daily store P&L grain, expressed in US dollars.
 {% enddocs %}
 
 {% docs finance__fct_daily_store_pnl__refunded_amount_usd %}
@@ -27,7 +27,7 @@ Estimated supply cost for the finance fact at one row per store per recognized d
 {% enddocs %}
 
 {% docs finance__fct_daily_store_pnl__estimated_gross_margin_usd %}
-Net revenue minus estimated supply cost, expressed in US dollars.
+Net revenue minus estimated supply cost at the daily store P&L grain, expressed in US dollars.
 {% enddocs %}
 
 {% docs finance__fct_daily_store_pnl__order_item_count %}

@@ -16,10 +16,10 @@ models:
           - not_null
           - unique
       - name: component_name
-        description: "{{ doc('supply__int_component_catalog__component_name') }}"
+        description: "{{ doc('shared__stg_recipe_components__component_name') }}"
         data_type: varchar
       - name: component_family
-        description: "{{ doc('supply__int_component_catalog__component_family') }}"
+        description: "{{ doc('shared__stg_recipe_components__component_family') }}"
         data_type: varchar
       - name: recipe_unit
         description: "{{ doc('supply__int_component_catalog__recipe_unit') }}"

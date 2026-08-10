@@ -16,16 +16,16 @@ models:
           - not_null
           - unique
       - name: store_id
-        description: "{{ doc('finance__int_order_payment_allocations__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: recognized_date
         description: "{{ doc('finance__fct_order_revenue__recognized_date') }}"
         data_type: date
       - name: country_code
-        description: "{{ doc('finance__int_order_payment_allocations__country_code') }}"
+        description: "{{ doc('shared__stg_stores__country_code') }}"
         data_type: varchar
       - name: city
-        description: "{{ doc('finance__int_order_payment_allocations__city') }}"
+        description: "{{ doc('shared__stg_stores__city') }}"
         data_type: varchar
       - name: order_count
         description: "{{ doc('finance__int_store_day_revenue_quality__order_count') }}"

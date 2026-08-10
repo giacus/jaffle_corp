@@ -9,10 +9,10 @@ models:
         description: "{{ doc('shared__stg_orders__order_id') }}"
         data_type: varchar
       - name: customer_id
-        description: "{{ doc('shared__stg_orders__customer_id') }}"
+        description: "{{ doc('shared__stg_customers__customer_id') }}"
         data_type: varchar
       - name: store_id
-        description: "{{ doc('shared__stg_orders__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: store_name
         description: "{{ doc('shared__stg_stores__store_name') }}"
@@ -54,7 +54,7 @@ models:
         description: "{{ doc('shared__stg_orders__channel') }}"
         data_type: varchar
       - name: currency
-        description: "{{ doc('shared__stg_orders__currency') }}"
+        description: "{{ doc('shared__stg_fx_rates__currency') }}"
         data_type: varchar
       - name: subtotal_minor
         description: "{{ doc('shared__stg_orders__subtotal_minor') }}"

@@ -23,7 +23,7 @@ Business grouping used to organize products with similar menu roles.
 {% enddocs %}
 
 {% docs shared__stg_products__list_price_minor %}
-List price expressed in the source currency minor unit.
+Base catalog list price for the product, expressed in the source currency minor unit.
 {% enddocs %}
 
 {% docs shared__stg_products__list_price_usd %}
@@ -43,5 +43,5 @@ Introduced at recorded on the products record after type and naming normalizatio
 {% enddocs %}
 
 {% docs shared__stg_products__updated_at_utc %}
-UTC timestamp when the source system last updated the record.
+UTC timestamp when the source system last updated the `stg_products` record.
 {% enddocs %}

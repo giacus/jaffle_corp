@@ -6,10 +6,6 @@ Staging model for `stg_operating_calendar` source cleanup and normalization.
 Source-system identifier for the calendar.
 {% enddocs %}
 
-{% docs shared__stg_operating_calendar__store_id %}
-Source-system identifier for the store or operating location.
-{% enddocs %}
-
 {% docs shared__stg_operating_calendar__calendar_date_utc %}
 UTC calendar date associated with calendar.
 {% enddocs %}
@@ -31,5 +27,5 @@ Menu strategy focus attached to the operating-calendar date.
 {% enddocs %}
 
 {% docs shared__stg_operating_calendar__updated_at_utc %}
-UTC timestamp when the source system last updated the record.
+UTC timestamp when the source system last updated the `stg_operating_calendar` record.
 {% enddocs %}

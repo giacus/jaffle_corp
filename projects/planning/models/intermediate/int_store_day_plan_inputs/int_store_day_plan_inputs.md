@@ -6,10 +6,6 @@ Intermediate model for `int_store_day_plan_inputs` transformation logic.
 Deterministic surrogate key for the store-day scenario plan fact that blends forecasts, calendar, operations, and finance actuals. Derived from store identifier, calendar date UTC, and scenario name.
 {% enddocs %}
 
-{% docs planning__int_store_day_plan_inputs__scenario_name %}
-Scenario name represented by the store-day scenario plan fact that blends forecasts, calendar, operations, and finance actuals.
-{% enddocs %}
-
 {% docs planning__int_store_day_plan_inputs__forecasted_order_count %}
 Number of forecasted orders represented by the store-day scenario plan fact that blends forecasts, calendar, operations, and finance actuals.
 {% enddocs %}

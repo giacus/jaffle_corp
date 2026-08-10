@@ -16,7 +16,7 @@ models:
           - not_null
           - unique
       - name: store_id
-        description: "{{ doc('shared__stg_operating_calendar__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: calendar_date_utc
         description: "{{ doc('shared__stg_operating_calendar__calendar_date_utc') }}"

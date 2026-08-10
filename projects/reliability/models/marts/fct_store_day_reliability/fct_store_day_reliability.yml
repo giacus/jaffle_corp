@@ -15,13 +15,13 @@ models:
           - not_null
           - unique
       - name: store_id
-        description: "{{ doc('finance__int_order_payment_allocations__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: reliability_date
         description: "{{ doc('reliability__fct_store_day_reliability__reliability_date') }}"
         data_type: date
       - name: scenario_name
-        description: "{{ doc('reliability__fct_store_day_reliability__scenario_name') }}"
+        description: "{{ doc('shared__stg_capacity_scenarios__scenario_name') }}"
         data_type: varchar
       - name: order_count
         description: "{{ doc('finance__int_store_day_revenue_quality__order_count') }}"

@@ -16,40 +16,40 @@ models:
           - not_null
           - unique
       - name: order_id
-        description: "{{ doc('finance__int_order_payment_allocations__order_id') }}"
+        description: "{{ doc('shared__stg_orders__order_id') }}"
         data_type: varchar
       - name: customer_id
-        description: "{{ doc('finance__int_order_payment_allocations__customer_id') }}"
+        description: "{{ doc('shared__stg_customers__customer_id') }}"
         data_type: varchar
       - name: store_id
-        description: "{{ doc('finance__int_order_payment_allocations__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: ordered_at_utc
-        description: "{{ doc('finance__int_order_payment_allocations__ordered_at_utc') }}"
+        description: "{{ doc('shared__stg_orders__ordered_at_utc') }}"
         data_type: timestamp
       - name: recognized_date
         description: "{{ doc('finance__fct_order_revenue__recognized_date') }}"
         data_type: date
       - name: order_status
-        description: "{{ doc('finance__int_order_payment_allocations__order_status') }}"
+        description: "{{ doc('shared__stg_orders__order_status') }}"
         data_type: varchar
       - name: channel
-        description: "{{ doc('finance__int_order_payment_allocations__channel') }}"
+        description: "{{ doc('shared__stg_orders__channel') }}"
         data_type: varchar
       - name: currency
-        description: "{{ doc('finance__int_order_payment_allocations__currency') }}"
+        description: "{{ doc('shared__stg_fx_rates__currency') }}"
         data_type: varchar
       - name: country_code
-        description: "{{ doc('finance__int_order_payment_allocations__country_code') }}"
+        description: "{{ doc('shared__stg_stores__country_code') }}"
         data_type: varchar
       - name: city
-        description: "{{ doc('finance__int_order_payment_allocations__city') }}"
+        description: "{{ doc('shared__stg_stores__city') }}"
         data_type: varchar
       - name: tax_jurisdiction
-        description: "{{ doc('finance__int_order_payment_allocations__tax_jurisdiction') }}"
+        description: "{{ doc('shared__stg_stores__tax_jurisdiction') }}"
         data_type: varchar
       - name: franchise_owner
-        description: "{{ doc('finance__int_order_payment_allocations__franchise_owner') }}"
+        description: "{{ doc('shared__stg_stores__franchise_owner') }}"
         data_type: varchar
       - name: gross_revenue_usd
         description: "{{ doc('finance__fct_order_revenue__gross_revenue_usd') }}"

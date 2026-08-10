@@ -35,5 +35,5 @@ Whether the customer granted marketing communication consent.
 {% enddocs %}
 
 {% docs shared__stg_customers__updated_at_utc %}
-UTC timestamp when the source system last updated the record.
+UTC timestamp when the source system last updated the `stg_customers` record.
 {% enddocs %}

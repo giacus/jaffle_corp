@@ -19,10 +19,10 @@ models:
         description: "{{ doc('shared__stg_price_adjustments__price_adjustment_id') }}"
         data_type: varchar
       - name: store_id
-        description: "{{ doc('shared__stg_price_adjustments__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: product_id
-        description: "{{ doc('shared__stg_price_adjustments__product_id') }}"
+        description: "{{ doc('shared__stg_products__product_id') }}"
         data_type: varchar
       - name: product_name
         description: "{{ doc('shared__stg_products__product_name') }}"

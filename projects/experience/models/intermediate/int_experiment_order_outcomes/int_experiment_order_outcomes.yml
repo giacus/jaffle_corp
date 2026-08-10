@@ -9,7 +9,7 @@ models:
         description: "{{ doc('shared__stg_experiment_exposures__exposure_id') }}"
         data_type: varchar
       - name: customer_id
-        description: "{{ doc('shared__stg_experiment_exposures__customer_id') }}"
+        description: "{{ doc('shared__stg_customers__customer_id') }}"
         data_type: varchar
       - name: experiment_id
         description: "{{ doc('shared__stg_experiment_exposures__experiment_id') }}"

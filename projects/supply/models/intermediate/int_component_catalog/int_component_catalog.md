@@ -2,14 +2,6 @@
 Intermediate model for `int_component_catalog` transformation logic.
 {% enddocs %}
 
-{% docs supply__int_component_catalog__component_name %}
-Component name represented by the component dimension used for recipe and stock examples.
-{% enddocs %}
-
-{% docs supply__int_component_catalog__component_family %}
-Component family represented by the component dimension used for recipe and stock examples.
-{% enddocs %}
-
 {% docs supply__int_component_catalog__recipe_unit %}
 Recipe unit represented by the component dimension used for recipe and stock examples. Aggregated from unit.
 {% enddocs %}

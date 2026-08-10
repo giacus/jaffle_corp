@@ -6,20 +6,12 @@ Staging model for `stg_purchase_orders` source cleanup and normalization.
 Source-system identifier for the purchase order.
 {% enddocs %}
 
-{% docs shared__stg_purchase_orders__store_id %}
-Source-system identifier for the store or operating location.
-{% enddocs %}
-
-{% docs shared__stg_purchase_orders__component_id %}
-Source-system identifier for the component.
-{% enddocs %}
-
 {% docs shared__stg_purchase_orders__supplier_name %}
-Human-readable name of the supplier.
+Human-readable name of the supplier fulfilling the component purchase order.
 {% enddocs %}
 
 {% docs shared__stg_purchase_orders__ordered_at_utc %}
-UTC timestamp when the order was placed.
+UTC timestamp when the component purchase order was placed.
 {% enddocs %}
 
 {% docs shared__stg_purchase_orders__expected_at_utc %}
@@ -46,22 +38,14 @@ Component quantity requested on the purchase order.
 Component quantity received against the purchase order.
 {% enddocs %}
 
-{% docs shared__stg_purchase_orders__unit %}
-Unit of measure used for the component quantity.
-{% enddocs %}
-
 {% docs shared__stg_purchase_orders__unit_cost_minor %}
-Unit cost expressed in the source currency minor unit.
+Unit cost of the purchased component, expressed in the source currency minor unit.
 {% enddocs %}
 
 {% docs shared__stg_purchase_orders__unit_cost_major %}
-Unit cost expressed in the source currency major unit.
-{% enddocs %}
-
-{% docs shared__stg_purchase_orders__currency %}
-ISO 4217 currency code attached to monetary values on the source record.
+Unit cost of the purchased component, expressed in the source currency major unit.
 {% enddocs %}
 
 {% docs shared__stg_purchase_orders__updated_at_utc %}
-UTC timestamp when the source system last updated the record.
+UTC timestamp when the source system last updated the `stg_purchase_orders` record.
 {% enddocs %}

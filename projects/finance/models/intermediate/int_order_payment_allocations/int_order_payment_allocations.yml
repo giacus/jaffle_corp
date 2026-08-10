@@ -6,58 +6,58 @@ models:
 
     columns:
       - name: order_id
-        description: "{{ doc('finance__int_order_payment_allocations__order_id') }}"
+        description: "{{ doc('shared__stg_orders__order_id') }}"
         data_type: varchar
       - name: customer_id
-        description: "{{ doc('finance__int_order_payment_allocations__customer_id') }}"
+        description: "{{ doc('shared__stg_customers__customer_id') }}"
         data_type: varchar
       - name: store_id
-        description: "{{ doc('finance__int_order_payment_allocations__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: ordered_at_utc
-        description: "{{ doc('finance__int_order_payment_allocations__ordered_at_utc') }}"
+        description: "{{ doc('shared__stg_orders__ordered_at_utc') }}"
         data_type: timestamp
       - name: ordered_date_utc
-        description: "{{ doc('finance__int_order_payment_allocations__ordered_date_utc') }}"
+        description: "{{ doc('shared__stg_orders__ordered_date_utc') }}"
         data_type: date
       - name: order_status
-        description: "{{ doc('finance__int_order_payment_allocations__order_status') }}"
+        description: "{{ doc('shared__stg_orders__order_status') }}"
         data_type: varchar
       - name: channel
-        description: "{{ doc('finance__int_order_payment_allocations__channel') }}"
+        description: "{{ doc('shared__stg_orders__channel') }}"
         data_type: varchar
       - name: currency
-        description: "{{ doc('finance__int_order_payment_allocations__currency') }}"
+        description: "{{ doc('shared__stg_fx_rates__currency') }}"
         data_type: varchar
       - name: country_code
-        description: "{{ doc('finance__int_order_payment_allocations__country_code') }}"
+        description: "{{ doc('shared__stg_stores__country_code') }}"
         data_type: varchar
       - name: city
-        description: "{{ doc('finance__int_order_payment_allocations__city') }}"
+        description: "{{ doc('shared__stg_stores__city') }}"
         data_type: varchar
       - name: tax_jurisdiction
-        description: "{{ doc('finance__int_order_payment_allocations__tax_jurisdiction') }}"
+        description: "{{ doc('shared__stg_stores__tax_jurisdiction') }}"
         data_type: varchar
       - name: franchise_owner
-        description: "{{ doc('finance__int_order_payment_allocations__franchise_owner') }}"
+        description: "{{ doc('shared__stg_stores__franchise_owner') }}"
         data_type: varchar
       - name: subtotal_minor
-        description: "{{ doc('finance__int_order_payment_allocations__subtotal_minor') }}"
+        description: "{{ doc('shared__stg_orders__subtotal_minor') }}"
         data_type: integer
       - name: tax_minor
-        description: "{{ doc('finance__int_order_payment_allocations__tax_minor') }}"
+        description: "{{ doc('shared__stg_orders__tax_minor') }}"
         data_type: integer
       - name: discount_minor
-        description: "{{ doc('finance__int_order_payment_allocations__discount_minor') }}"
+        description: "{{ doc('shared__stg_orders__discount_minor') }}"
         data_type: integer
       - name: service_fee_minor
-        description: "{{ doc('finance__int_order_payment_allocations__service_fee_minor') }}"
+        description: "{{ doc('shared__stg_orders__service_fee_minor') }}"
         data_type: integer
       - name: order_total_minor
-        description: "{{ doc('finance__int_order_payment_allocations__order_total_minor') }}"
+        description: "{{ doc('shared__stg_orders__order_total_minor') }}"
         data_type: integer
       - name: order_total_major
-        description: "{{ doc('finance__int_order_payment_allocations__order_total_major') }}"
+        description: "{{ doc('shared__stg_orders__order_total_major') }}"
         data_type: double
       - name: order_total_usd
         description: "{{ doc('finance__int_order_payment_allocations__order_total_usd') }}"

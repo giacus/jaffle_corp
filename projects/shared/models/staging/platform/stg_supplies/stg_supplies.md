@@ -6,12 +6,8 @@ Staging model for `stg_supplies` source cleanup and normalization.
 Source-system identifier for the supply.
 {% enddocs %}
 
-{% docs shared__stg_supplies__product_id %}
-Source-system identifier for the sellable product.
-{% enddocs %}
-
 {% docs shared__stg_supplies__supplier_name %}
-Human-readable name of the supplier.
+Human-readable name of the supplier for the sellable-product supply.
 {% enddocs %}
 
 {% docs shared__stg_supplies__supplier_country_code %}
@@ -19,15 +15,11 @@ Normalized code identifying supplier country.
 {% enddocs %}
 
 {% docs shared__stg_supplies__unit_cost_minor %}
-Unit cost expressed in the source currency minor unit.
+Unit cost of the sellable-product supply, expressed in the source currency minor unit.
 {% enddocs %}
 
 {% docs shared__stg_supplies__unit_cost_major %}
-Unit cost expressed in the source currency major unit.
-{% enddocs %}
-
-{% docs shared__stg_supplies__currency %}
-ISO 4217 currency code attached to monetary values on the source record.
+Unit cost of the sellable-product supply, expressed in the source currency major unit.
 {% enddocs %}
 
 {% docs shared__stg_supplies__perishable %}
@@ -43,5 +35,5 @@ Replenishment mode recorded on the supplies record after type and naming normali
 {% enddocs %}
 
 {% docs shared__stg_supplies__updated_at_utc %}
-UTC timestamp when the source system last updated the record.
+UTC timestamp when the source system last updated the `stg_supplies` record.
 {% enddocs %}

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Enforce complete, typed, lineage-aware model column documentation."""
+"""Enforce complete, typed, semantics- and lineage-aware column documentation."""
 
 from __future__ import annotations
 
@@ -25,6 +25,63 @@ DOC_BLOCK = re.compile(
     r"\{%\s*docs\s+([A-Za-z0-9_]+)\s*%\}(.*?)\{%\s*enddocs\s*%\}",
     re.DOTALL,
 )
+
+# These exact column names are governed business concepts across the fixture.
+# Their docs live with the staging model that establishes the canonical entity
+# or reference domain, even when another source also carries the value.
+CANONICAL_COLUMN_OWNERS: dict[str, tuple[str, str]] = {
+    # Entity and relationship identifiers.
+    "anchor_product_id": ("shared", "stg_product_pairings"),
+    "component_id": ("shared", "stg_recipe_components"),
+    "customer_id": ("shared", "stg_customers"),
+    "experiment_id": ("shared", "stg_experiment_exposures"),
+    "model_run_id": ("shared", "stg_product_day_forecasts"),
+    "order_id": ("shared", "stg_orders"),
+    "paired_product_id": ("shared", "stg_product_pairings"),
+    "pairing_id": ("shared", "stg_product_pairings"),
+    "product_id": ("shared", "stg_products"),
+    "store_id": ("shared", "stg_stores"),
+    "support_ticket_id": ("shared", "stg_support_tickets"),
+    "variant_id": ("shared", "stg_experiment_exposures"),
+    # Shared reference domains and stable descriptive attributes.
+    "city": ("shared", "stg_stores"),
+    "component_family": ("shared", "stg_recipe_components"),
+    "component_name": ("shared", "stg_recipe_components"),
+    "country_code": ("shared", "stg_stores"),
+    "currency": ("shared", "stg_fx_rates"),
+    "franchise_owner": ("shared", "stg_stores"),
+    "menu_section": ("shared", "stg_menu_publications"),
+    "menu_surface": ("shared", "stg_menu_publications"),
+    "pairing_reason": ("shared", "stg_product_pairings"),
+    "product_family": ("shared", "stg_products"),
+    "scenario_name": ("shared", "stg_capacity_scenarios"),
+    "tax_jurisdiction": ("shared", "stg_stores"),
+    "unit": ("shared", "stg_recipe_components"),
+    # Stable order attributes retained at order grain.
+    "discount_minor": ("shared", "stg_orders"),
+    "order_status": ("shared", "stg_orders"),
+    "order_total_major": ("shared", "stg_orders"),
+    "order_total_minor": ("shared", "stg_orders"),
+    "ordered_date_utc": ("shared", "stg_orders"),
+    "service_fee_minor": ("shared", "stg_orders"),
+    "subtotal_minor": ("shared", "stg_orders"),
+    "tax_minor": ("shared", "stg_orders"),
+}
+
+# Some names are canonical only within a lineage branch. For example, promo
+# `channel` and purchase-order `ordered_at_utc` are different business fields.
+CANONICAL_MODEL_COLUMN_OWNERS: dict[
+    tuple[str, str, str], tuple[str, str]
+] = {
+    ("finance", "int_order_payment_allocations", "channel"): (
+        "shared",
+        "stg_orders",
+    ),
+    ("finance", "int_order_payment_allocations", "ordered_at_utc"): (
+        "shared",
+        "stg_orders",
+    ),
+}
 
 
 def is_staging(node: dict) -> bool:
@@ -61,8 +118,35 @@ def main() -> int:
         for unique_id, node in models.items()
     }
     ids_by_model_name: dict[str, list[str]] = defaultdict(list)
+    ids_by_package_model: dict[tuple[str, str], list[str]] = defaultdict(list)
     for unique_id, node in models.items():
         ids_by_model_name[node["name"].lower()].append(unique_id)
+        ids_by_package_model[
+            (node["package_name"].lower(), node["name"].lower())
+        ].append(unique_id)
+
+    owner_configuration_errors: list[str] = []
+
+    def resolve_owner(spec: tuple[str, str], label: str) -> str | None:
+        matches = ids_by_package_model.get((spec[0].lower(), spec[1].lower()), [])
+        if len(matches) != 1:
+            owner_configuration_errors.append(
+                f"{label}: expected one canonical owner model for {spec}, "
+                f"found {len(matches)}"
+            )
+            return None
+        return matches[0]
+
+    canonical_column_owner_ids = {
+        column: owner_id
+        for column, spec in CANONICAL_COLUMN_OWNERS.items()
+        if (owner_id := resolve_owner(spec, column)) is not None
+    }
+    canonical_model_column_owner_ids = {
+        key: owner_id
+        for key, spec in CANONICAL_MODEL_COLUMN_OWNERS.items()
+        if (owner_id := resolve_owner(spec, ".".join(key))) is not None
+    }
 
     package_folders: dict[str, str] = {}
     metadata: dict[
@@ -92,13 +176,18 @@ def main() -> int:
                         )
 
     definitions: dict[str, tuple[Path, str]] = {}
+    definition_bodies: dict[tuple[str, str], list[str]] = defaultdict(list)
     duplicate_docs: list[str] = []
     for markdown in sorted((ROOT / "projects").glob("*/models/**/*.md")):
         text = markdown.read_text(encoding="utf-8")
         for name, body in DOC_BLOCK.findall(text):
             if name in definitions:
                 duplicate_docs.append(name)
+            normalized_body = " ".join(body.split())
             definitions[name] = (markdown, body.strip())
+            parts = name.split("__")
+            if len(parts) == 3:
+                definition_bodies[(parts[-1], normalized_body)].append(name)
 
     def source_model(lineage_node):
         """Resolve the single physical model represented by a lineage node's source."""
@@ -166,6 +255,15 @@ def main() -> int:
     @lru_cache(maxsize=None)
     def owner(unique_id: str, column: str) -> tuple[str, str]:
         node = models[unique_id]
+        normalized_column = column.lower()
+        scoped_owner_id = canonical_model_column_owner_ids.get(
+            (node["package_name"].lower(), node["name"].lower(), normalized_column)
+        )
+        if scoped_owner_id is not None:
+            return scoped_owner_id, normalized_column
+        canonical_owner_id = canonical_column_owner_ids.get(normalized_column)
+        if canonical_owner_id is not None:
+            return canonical_owner_id, normalized_column
         if is_staging(node):
             return unique_id, column
         try:
@@ -188,7 +286,14 @@ def main() -> int:
         return local_doc_id(owner_node, owner_column), owner_id, owner_column
 
     errors: list[str] = []
+    errors.extend(owner_configuration_errors)
     errors.extend(f"duplicate docs block: {name}" for name in sorted(set(duplicate_docs)))
+    for (column, _), names in sorted(definition_bodies.items()):
+        if len(names) > 1:
+            errors.append(
+                f"verbatim duplicate docs for {column}: {', '.join(sorted(names))}; "
+                "reuse one block or describe the distinct contexts"
+            )
     errors.extend(
         f"duplicate model column declaration: {name}"
         for name in sorted(set(duplicate_metadata))
@@ -222,6 +327,26 @@ def main() -> int:
         actual_columns[unique_id] = [
             (str(row[0]), str(row[1]).lower()) for row in rows
         ]
+
+    for column, owner_id in sorted(canonical_column_owner_ids.items()):
+        owner_columns = {
+            name.lower() for name, _ in actual_columns.get(owner_id, [])
+        }
+        if column not in owner_columns:
+            errors.append(
+                f"{column}: canonical owner {models[owner_id]['name']} "
+                "does not output the column"
+            )
+    for key, owner_id in sorted(canonical_model_column_owner_ids.items()):
+        column = key[2]
+        owner_columns = {
+            name.lower() for name, _ in actual_columns.get(owner_id, [])
+        }
+        if column not in owner_columns:
+            errors.append(
+                f"{'.'.join(key)}: canonical owner {models[owner_id]['name']} "
+                "does not output the column"
+            )
 
     expected_definitions: dict[str, tuple[str, str]] = {}
     model_assignments = 0

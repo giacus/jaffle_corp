@@ -12,7 +12,7 @@ models:
         description: "{{ doc('shared__stg_capacity_scenarios__scenario_id') }}"
         data_type: varchar
       - name: store_id
-        description: "{{ doc('shared__stg_capacity_scenarios__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: scenario_name
         description: "{{ doc('shared__stg_capacity_scenarios__scenario_name') }}"

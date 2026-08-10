@@ -19,7 +19,7 @@ models:
         description: "{{ doc('shared__stg_service_incidents__incident_id') }}"
         data_type: varchar
       - name: store_id
-        description: "{{ doc('shared__stg_service_incidents__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: opened_at_utc
         description: "{{ doc('shared__stg_service_incidents__opened_at_utc') }}"

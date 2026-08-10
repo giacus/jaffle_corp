@@ -9,10 +9,10 @@ models:
         description: "{{ doc('shared__stg_promo_events__promo_event_id') }}"
         data_type: varchar
       - name: customer_id
-        description: "{{ doc('shared__stg_promo_events__customer_id') }}"
+        description: "{{ doc('shared__stg_customers__customer_id') }}"
         data_type: varchar
       - name: order_id
-        description: "{{ doc('shared__stg_promo_events__order_id') }}"
+        description: "{{ doc('shared__stg_orders__order_id') }}"
         data_type: varchar
       - name: campaign_id
         description: "{{ doc('shared__stg_promo_events__campaign_id') }}"
@@ -33,7 +33,7 @@ models:
         description: "{{ doc('shared__stg_promo_events__cost_major') }}"
         data_type: double
       - name: currency
-        description: "{{ doc('shared__stg_promo_events__currency') }}"
+        description: "{{ doc('shared__stg_fx_rates__currency') }}"
         data_type: varchar
       - name: estimated_cost_usd
         description: "{{ doc('growth__int_campaign_touchpoints__estimated_cost_usd') }}"

@@ -6,7 +6,7 @@ models:
 
     columns:
       - name: customer_id
-        description: "{{ doc('shared__stg_orders__customer_id') }}"
+        description: "{{ doc('shared__stg_customers__customer_id') }}"
         data_type: varchar
       - name: first_ordered_at_utc
         description: "{{ doc('platform__int_customer_order_rollup__first_ordered_at_utc') }}"

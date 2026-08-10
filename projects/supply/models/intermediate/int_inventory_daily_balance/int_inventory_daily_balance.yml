@@ -6,16 +6,16 @@ models:
 
     columns:
       - name: store_id
-        description: "{{ doc('supply__int_inventory_daily_balance__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: component_id
-        description: "{{ doc('supply__int_inventory_daily_balance__component_id') }}"
+        description: "{{ doc('shared__stg_recipe_components__component_id') }}"
         data_type: varchar
       - name: balance_date_utc
         description: "{{ doc('supply__int_inventory_daily_balance__balance_date_utc') }}"
         data_type: date
       - name: unit
-        description: "{{ doc('supply__int_inventory_daily_balance__unit') }}"
+        description: "{{ doc('shared__stg_recipe_components__unit') }}"
         data_type: varchar
       - name: counted_quantity
         description: "{{ doc('supply__int_inventory_daily_balance__counted_quantity') }}"

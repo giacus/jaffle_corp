@@ -12,10 +12,10 @@ models:
         description: "{{ doc('shared__stg_menu_publications__publication_id') }}"
         data_type: varchar
       - name: store_id
-        description: "{{ doc('shared__stg_menu_publications__store_id') }}"
+        description: "{{ doc('shared__stg_stores__store_id') }}"
         data_type: varchar
       - name: product_id
-        description: "{{ doc('shared__stg_menu_publications__product_id') }}"
+        description: "{{ doc('shared__stg_products__product_id') }}"
         data_type: varchar
       - name: product_name
         description: "{{ doc('shared__stg_products__product_name') }}"
@@ -27,7 +27,7 @@ models:
         description: "{{ doc('shared__stg_stores__country_code') }}"
         data_type: varchar
       - name: currency
-        description: "{{ doc('shared__stg_menu_publications__currency') }}"
+        description: "{{ doc('shared__stg_fx_rates__currency') }}"
         data_type: varchar
       - name: published_price_minor
         description: "{{ doc('shared__stg_menu_publications__published_price_minor') }}"

@@ -7,7 +7,7 @@ Number of orders represented by the finance fact for store-day revenue quality m
 {% enddocs %}
 
 {% docs finance__int_store_day_revenue_quality__net_revenue_usd %}
-Captured revenue minus refunded revenue, expressed in US dollars.
+Captured revenue minus refunded revenue at the store-day revenue-quality grain, expressed in US dollars.
 {% enddocs %}
 
 {% docs finance__int_store_day_revenue_quality__recipe_margin_usd %}

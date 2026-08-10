@@ -15,11 +15,11 @@ Order total for the support ticket fact with SLA and order context, expressed in
 {% enddocs %}
 
 {% docs experience__int_ticket_sla_events__net_revenue_usd %}
-Captured revenue minus refunded revenue, expressed in US dollars.
+Captured revenue minus refunded revenue for the order associated with the support ticket, expressed in US dollars.
 {% enddocs %}
 
 {% docs experience__int_ticket_sla_events__estimated_gross_margin_usd %}
-Net revenue minus estimated supply cost, expressed in US dollars.
+Net revenue minus estimated supply cost for the order associated with the support ticket, expressed in US dollars.
 {% enddocs %}
 
 {% docs experience__int_ticket_sla_events__refund_event_count %}
