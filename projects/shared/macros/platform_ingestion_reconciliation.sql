@@ -309,6 +309,48 @@
     {{ return('unclassified') }}
 {% endmacro %}
 
+{% macro platform_ingestion_scheduled_review_windows(review_bands, feed_scope) %}
+    {#
+      Materialize the complete set of active review windows once so scheduled
+      reconciliations can apply the same operating policy to every feed. An
+      omitted feed scope represents the default all-feed schedule.
+    #}
+    {% set policies = shared.platform_ingestion_review_window_policies() %}
+    {% set scheduled_review_windows = [] %}
+
+    {% for review_window, review_band in policies.items() %}
+        {% if review_band in review_bands and feed_scope not in ('paused', 'retired') %}
+            {% do scheduled_review_windows.append(review_window) %}
+        {% endif %}
+    {% endfor %}
+
+    {{ return(scheduled_review_windows) }}
+{% endmacro %}
+
+{% macro platform_ingestion_scheduled_volume_reconciliation(review_bands, feed_scope) %}
+    {% set scheduled_review_windows =
+        shared.platform_ingestion_scheduled_review_windows(review_bands) %}
+
+    {% for feed in shared.platform_ingestion_feed_specs() %}
+        {% set review_window_key = feed.get('review_window_minutes', 0) | string %}
+
+        {% if review_window_key in scheduled_review_windows %}
+            {% if not loop.first %}
+                union all
+            {% endif %}
+
+            {{
+                shared.render_platform_ingestion_volume_reconciliation(
+                    feed.feed_name,
+                    shared.platform_ingestion_relation_name('raw', feed.subject),
+                    shared.platform_ingestion_relation_name('stg', feed.subject),
+                    shared.platform_ingestion_review_band(feed.review_window_minutes)
+                )
+            }}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
 {% macro platform_ingestion_volume_reconciliation() %}
     {% for feed in shared.platform_ingestion_feed_specs() %}
         {% set review_band = shared.platform_ingestion_review_band(feed.review_window_minutes) %}
