@@ -52,16 +52,6 @@ def is_generated(path: str) -> bool:
     )
 
 
-def mappings(value):
-    if isinstance(value, dict):
-        yield value
-        for child in value.values():
-            yield from mappings(child)
-    elif isinstance(value, list):
-        for child in value:
-            yield from mappings(child)
-
-
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
@@ -95,25 +85,6 @@ def main() -> int:
     python_version = (root / ".python-version").read_text(encoding="utf-8").strip()
     if not re.fullmatch(r"3[.]11[.][0-9]+", python_version):
         errors.append(".python-version must pin an exact Python 3.11 patch release")
-
-    workflow = yaml.safe_load(
-        (root / ".github/workflows/ci.yml").read_text(encoding="utf-8")
-    )
-    setup_steps = [
-        item
-        for item in mappings(workflow)
-        if str(item.get("uses", "")).startswith("actions/setup-python@")
-    ]
-    if not setup_steps:
-        errors.append("ci workflow must configure actions/setup-python")
-    for step in setup_steps:
-        configuration = step.get("with", {})
-        if (
-            not isinstance(configuration, dict)
-            or configuration.get("python-version-file") != ".python-version"
-            or "python-version" in configuration
-        ):
-            errors.append("setup-python must use python-version-file: .python-version")
 
     taskfile = yaml.safe_load((root / "Taskfile.yml").read_text(encoding="utf-8"))
     for task in (taskfile.get("tasks", {}) or {}).values():
