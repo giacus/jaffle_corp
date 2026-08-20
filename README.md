@@ -1,7 +1,5 @@
 # jaffle-corp
 
-[![CI](https://github.com/giacus/jaffle_corp/actions/workflows/ci.yml/badge.svg)](https://github.com/giacus/jaffle_corp/actions/workflows/ci.yml)
-
 `jaffle-corp` is a laptop-runnable, multi-project dbt Core reference fixture for
 exploring and testing domain boundaries, public model contracts, cross-project
 dependencies, Semantic Layer behavior, downstream extensions, and legacy
@@ -127,6 +125,7 @@ Run commands sequentially because all projects share one local DuckDB file.
 | Serve generated docs locally | `scripts/docs.sh serve` |
 | Lint all project SQL | `scripts/lint_sql_projects.sh` |
 | Clean rebuild and validate everything | `scripts/validate_repo.sh` |
+| Complete pre-push local gate | `scripts/validate_local.sh` |
 | Reset generated state but keep `.venv` | `scripts/clean.sh --keep-venv` |
 | Remove all generated local state | `scripts/clean.sh` |
 
@@ -141,11 +140,11 @@ dependency order, runs tests and
 representative MetricFlow queries, and regenerates `target/manifest.json`.
 Use `scripts/clean.sh --dry-run` to preview the complete end-of-session cleanup.
 
-Pull requests use one required `validate` check. Fast Markdown, YAML, semantic,
-repository-policy, and CI-control checks always run; dbt and MetricFlow run only
-when executable fixture or CI files change. The same full check runs weekly as
-an environment-drift sentinel and can be started manually. Protected `master`
-is not rebuilt after a validated pull request is merged.
+Pull requests are validated locally with `scripts/validate_local.sh` before the
+branch is pushed. GitHub Actions never runs automatically on a pull request,
+push, or schedule; its optional manual button performs only a dependency-free
+trigger-policy check. The complete local gate retains Markdown, YAML, semantic,
+repository-policy, dbt, MetricFlow, documentation, and manifest evidence.
 
 ## Where to Make a Change
 

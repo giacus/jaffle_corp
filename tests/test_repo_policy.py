@@ -21,12 +21,7 @@ class RepoPolicyTests(unittest.TestCase):
         (root / "requirements.txt").write_text("demo==1.0\n", encoding="utf-8")
         (root / "requirements.lock.txt").write_text("demo==1.0\n", encoding="utf-8")
         (root / ".github/workflows/ci.yml").write_text(
-            "jobs:\n"
-            "  static:\n"
-            "    steps:\n"
-            "      - uses: actions/setup-python@v6\n"
-            "        with:\n"
-            "          python-version-file: .python-version\n",
+            "on:\n  workflow_dispatch:\njobs: {}\n",
             encoding="utf-8",
         )
         (root / "Taskfile.yml").write_text(
@@ -73,23 +68,6 @@ class RepoPolicyTests(unittest.TestCase):
 
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("tracked generated artifact: target/manifest.json", result.stderr)
-
-    def test_actions_python_setup_uses_the_repository_version_file(self) -> None:
-        root = self.make_repo()
-        (root / ".github/workflows/ci.yml").write_text(
-            "jobs:\n"
-            "  static:\n"
-            "    steps:\n"
-            "      - uses: actions/setup-python@v6\n"
-            "        with:\n"
-            "          python-version: '3.11'\n",
-            encoding="utf-8",
-        )
-
-        result = self.run_policy(root)
-
-        self.assertNotEqual(result.returncode, 0)
-        self.assertIn("setup-python must use python-version-file", result.stderr)
 
     def test_taskfile_script_commands_must_exist(self) -> None:
         root = self.make_repo()

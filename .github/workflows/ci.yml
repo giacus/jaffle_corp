@@ -1,164 +1,18 @@
-name: ci
+name: Manual Actions policy check
 
 on:
-  pull_request:
-  schedule:
-    - cron: "17 6 * * 1"
   workflow_dispatch:
 
 permissions:
   contents: read
 
-concurrency:
-  group: ci-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
-  scope:
-    name: classify changes
+  policy:
+    name: Manual-only workflow policy
     runs-on: ubuntu-latest
-    outputs:
-      base_sha: ${{ steps.scope.outputs.base_sha }}
-      docs_changed: ${{ steps.scope.outputs.docs_changed }}
-      full_validate: ${{ steps.scope.outputs.full_validate }}
+    timeout-minutes: 2
     steps:
       - name: Check out repository
         uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version-file: .python-version
-
-      - name: Classify changed files
-        id: scope
-        env:
-          EVENT_BEFORE: ${{ github.event.before }}
-        run: python scripts/ci_scope.py
-
-  markdown:
-    name: markdown links and style
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v7
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version-file: .python-version
-
-      - name: Check Markdown
-        run: python scripts/check_markdown.py
-
-  static:
-    name: repository policy and static checks
-    needs: scope
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version-file: .python-version
-
-      - name: Install YAML parser
-        run: python -m pip install PyYAML==6.0.3
-
-      - name: Check YAML
-        run: python scripts/check_yaml.py
-
-      - name: Check Semantic Layer bindings
-        run: python scripts/check_semantic_models.py
-
-      - name: Check repository policy
-        run: python scripts/check_repo_policy.py
-
-      - name: Check changed-file whitespace
-        run: git diff --check "${{ needs.scope.outputs.base_sha }}...HEAD"
-
-      - name: Test CI control logic
-        run: python -m unittest discover -s tests -p 'test_*.py' -v
-
-      - name: Report public contract changes
-        if: github.event_name == 'pull_request'
-        run: python scripts/report_public_contract_changes.py "${{ needs.scope.outputs.base_sha }}" | tee -a "$GITHUB_STEP_SUMMARY"
-
-      - name: Check shell and Python syntax
-        run: |
-          bash -n scripts/*.sh
-          python -m py_compile scripts/*.py
-
-  full_validation:
-    name: full dbt and MetricFlow validation
-    needs: [scope, markdown, static]
-    if: >-
-      always() &&
-      needs.scope.outputs.full_validate == 'true' &&
-      needs.markdown.result == 'success' &&
-      needs.static.result == 'success'
-    runs-on: ubuntu-latest
-    timeout-minutes: 25
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v7
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version-file: .python-version
-          cache: pip
-          cache-dependency-path: requirements.lock.txt
-
-      - name: Bootstrap local toolchain
-        run: scripts/bootstrap.sh
-
-      - name: Check locked Python environment
-        run: |
-          source .venv/bin/activate
-          python -m pip check
-          dbt --version
-
-      - name: Validate complete fixture
-        run: |
-          source .venv/bin/activate
-          scripts/validate_repo.sh
-
-      - name: Generate dbt docs
-        if: needs.scope.outputs.docs_changed == 'true'
-        run: |
-          source .venv/bin/activate
-          scripts/docs.sh generate
-          test -s target/index.html
-          test -s target/manifest.json
-          test -s target/catalog.json
-
-  validate:
-    name: validate
-    needs: [scope, markdown, static, full_validation]
-    if: always()
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v7
-
-      - name: Require every applicable validation layer
-        env:
-          FULL_REQUIRED: ${{ needs.scope.outputs.full_validate }}
-          SCOPE_RESULT: ${{ needs.scope.result }}
-          MARKDOWN_RESULT: ${{ needs.markdown.result }}
-          STATIC_RESULT: ${{ needs.static.result }}
-          FULL_RESULT: ${{ needs.full_validation.result }}
-        run: |
-          python scripts/check_ci_gate.py \
-            --full-required "$FULL_REQUIRED" \
-            --scope "$SCOPE_RESULT" \
-            --markdown "$MARKDOWN_RESULT" \
-            --static "$STATIC_RESULT" \
-            --full "$FULL_RESULT"
+      - name: Reject automatic GitHub Actions triggers
+        run: python scripts/check_actions_policy.py
