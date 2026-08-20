@@ -10,3 +10,7 @@ project catalog before changing this repository.
 - GitHub Actions must use `workflow_dispatch` only. Keep dbt, MetricFlow,
   documentation, manifest, and repository validation local; the remote manual
   job is only a dependency-free trigger-policy safeguard.
+- Do not run validation expected to exceed five minutes without first warning
+  the owner and receiving explicit consent. Reuse still-valid evidence when
+  the fixture surface under that expensive gate is unchanged, and record that
+  the gate was not rerun.
