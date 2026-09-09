@@ -74,8 +74,6 @@ for project in "${unique_projects[@]}"; do
   fi
 
   echo "Linting $project_label"
-  (
-    cd "$project_path"
-    DBT_PROFILES_DIR="$ROOT_DIR" sqlfluff lint --config "$ROOT_DIR/.sqlfluff" "${args[@]}"
-  )
+  python "$ROOT_DIR/scripts/lint_sql_project.py" \
+    --project "$project_path" --root "$ROOT_DIR" "${args[@]}"
 done
