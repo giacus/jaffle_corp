@@ -133,6 +133,17 @@ If [Task](https://taskfile.dev/) is installed, `task`, `task setup`,
 `task manifest`, `task lint`, and `task validate` are thin wrappers around the
 same canonical scripts.
 
+SQL files containing multiple snapshot declarations are linted in a temporary
+project copy because SQLFluff's dbt templater selects one manifest node per file.
+The lint helper uses dbt's block extractor and places each declaration under a
+separate snapshot search root with its original relative filename, preserving
+resource names, FQNs, configuration and dependencies. It runs ordinary dbt-templated
+linting on every selected block, including failure checks for the second block;
+it does not add dependencies or suppress lint rules. Target/log paths stay inside
+the temporary copy, which is removed after success or failure. Only explicitly
+reconstructed package symlinks are permitted. The original combined file remains
+subject to the normal dbt compile/build gates.
+
 The full validator starts by deleting generated artifacts and the default local
 DuckDB database while preserving `.venv`. It then installs packages, lints SQL,
 loads seeds, builds shared and platform once followed by each owning package in
