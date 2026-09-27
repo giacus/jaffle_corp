@@ -5,14 +5,8 @@ outside the current change. Items are grouped by outcome, not by file.
 
 ## Maintenance actions
 
-See the [dependency review](docs/maintenance-review.md) for exact PR heads,
-compatibility evidence, and validation limits.
-
-- [ ] Close or replace incompatible dependency PRs #27 and #29 as part of a
-  coordinated runtime upgrade; neither can install with the current pins.
 - [ ] Complete the local validation gate for regex PR #28 before merging; clean
   installation and focused compatibility checks pass.
-- [ ] Close obsolete setup-python PR #30; its workflow steps no longer exist.
 - [ ] Recreate the drifted local fixture venv from the lock before the next full
   run, keeping unrelated tools in separate environments and preserving data.
 
