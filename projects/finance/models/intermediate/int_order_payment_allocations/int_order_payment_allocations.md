@@ -5,9 +5,11 @@ recognition-ready order record.
 - **Grain:** one row per `order_id`.
 - **Business rules:** infers an order-level USD conversion ratio, translates
   captured and refunded amounts, and assigns one revenue-quality status with a
-  deliberate precedence from payment risk through pending.
+  precedence: failed payment, cancellation, refund, completion, then pending.
+  A completion flag cannot hide a higher-priority review condition.
 - **Caveats:** a zero order total produces a zero conversion ratio, and the
   inferred ratio is a fixture simplification rather than transaction-level FX.
+  A missing order total leaves converted amounts unknown (null).
 
 A useful review query makes the status precedence and monetary exposure visible:
 

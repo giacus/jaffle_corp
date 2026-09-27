@@ -20,8 +20,8 @@ during setup.
 
 `requirements.txt` records the intentional top-level tool choices.
 `requirements.lock.txt` records the exact Python 3.11 environment used by
-bootstrap and CI. Update both together after testing an intentional dependency
-upgrade; do not hand-edit one transitive package in isolation.
+bootstrap and local validation. Update both together after testing an intentional
+dependency upgrade; do not hand-edit one transitive package in isolation.
 
 If Python 3.11 is not installed, use your normal Python manager. For example,
 with pyenv:
@@ -254,10 +254,11 @@ If an existing `.venv` was created with another Python version, run
 
 - Start a shell with `source .venv/bin/activate`.
 - Use `scripts/validate_repo.sh` as the canonical full health check.
-- Treat pull-request `validate` as the authoritative clean gate; full validation
-  is scoped to executable fixture and CI changes.
-- Use the weekly full run as an environment-drift sentinel instead of
-  repeating the suite after each merge to protected `master`.
+- Use `scripts/validate_local.sh` as the complete pre-push gate and record local
+  evidence in the pull request. Obtain owner consent before an agent starts a
+  validation command expected to exceed five minutes.
+- GitHub Actions is manual-only and checks workflow trigger policy; no automatic
+  pull-request or weekly fixture validation runs.
 - Use `scripts/generate_manifest.sh` when only the combined artifact matters.
 - Use `scripts/docs.sh generate` and `scripts/docs.sh serve` for local dbt docs.
 - Use `scripts/clean.sh` when the session is over.

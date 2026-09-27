@@ -201,9 +201,9 @@ This project is inspired by dbt Labs'
 authored and is not affiliated with or endorsed by dbt Labs. See
 [Attribution](ATTRIBUTION.md) for license and contribution boundaries.
 
-Pull-request CI is the authoritative clean validation. For a dbt or Semantic
-Layer change, reproduce that integration path locally when useful with:
+Local validation is authoritative. Before pushing a branch or pull request,
+run the complete gate and record its result:
 
 ```bash
-scripts/validate_repo.sh
+scripts/validate_local.sh
 ```

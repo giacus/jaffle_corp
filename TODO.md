@@ -5,8 +5,9 @@ outside the current change. Items are grouped by outcome, not by file.
 
 ## Documentation depth
 
-- Deepen model-local `.md` files with grain, business meaning, caveats, and a
-  useful example where it materially improves inspection or use.
+- Deepen model-local `.md` files where grain, business meaning, caveats, or a
+  useful example materially improves use. Reuse the existing `fct_orders` and
+  `fct_order_revenue` examples instead of rewriting already sufficient docs.
 
 ## Live-data readiness
 
@@ -20,8 +21,10 @@ outside the current change. Items are grouped by outcome, not by file.
 - Audit the public model surface and keep a model public only when a real
   downstream consumer, architectural claim, or tool-test case justifies the
   contract.
-- Add focused model versions, dbt unit tests, and relationship tests where they
-  demonstrate compatibility or protect important business behavior.
+- Extend focused dbt unit tests to other important business rules; Finance
+  margin-waterfall tests now cover item aggregation, variance signs, and missing
+  recipe costs. Existing legacy versions and staging relationship tests provide
+  compatibility and integrity examples.
 - Add optional scale fixtures without making the default local workflow heavy.
 - Maintain a small community-facing roadmap after the `v0.1.1` reference
   fixture baseline.

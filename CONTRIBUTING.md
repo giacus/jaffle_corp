@@ -32,9 +32,7 @@ This project is inspired by dbt Labs' [`jaffle-shop`](https://github.com/dbt-lab
 ## Local Validation
 
 ```bash
-scripts/bootstrap.sh
-source .venv/bin/activate
-scripts/validate_repo.sh
+scripts/validate_local.sh
 ```
 
 The validator is a clean rebuild: it removes generated dbt artifacts and the
@@ -55,13 +53,19 @@ DuckDB profile. It finishes by regenerating the complete git-ignored
 `target/manifest.json`; use
 `scripts/generate_manifest.sh` when you only need that artifact.
 
-The required pull-request check is authoritative and starts from a clean
-runner. It always validates Markdown, YAML, Semantic Layer bindings, repository
-policy, public-contract changes, and its own routing/gate logic. The complete
-dbt and MetricFlow validator runs only for executable fixture and CI changes.
-Changes to `scripts/docs.sh` additionally execute docs generation. A weekly run
-keeps the pinned environment honest without repeating the full suite after each
-merge to protected `master`.
+The complete pre-push gate is `scripts/validate_local.sh`. It bootstraps the
+pinned environment, checks Markdown, YAML, Semantic Layer bindings and repository
+policy, runs Python tests and shell/Python syntax checks, then executes the full
+dbt/MetricFlow validator and generates documentation.
+
+Before an agent starts validation expected to exceed five minutes, it must warn
+the owner and receive explicit consent. When the executable fixture surface is
+unchanged, still-valid prior evidence may be reused; record its source and state
+which long gate was not rerun. Never report reused evidence as a fresh pass.
+
+GitHub Actions runs only through `workflow_dispatch`. Its optional manual job
+checks trigger policy; it does not validate the fixture. There is no automatic
+pull-request, push, or weekly validation run.
 
 ## Safe Change Process
 
@@ -69,21 +73,16 @@ Use pull requests for all changes that should land on the default branch.
 
 1. Create a branch from `master`.
 2. Make the smallest coherent change.
-3. Run the smallest relevant local check; use `scripts/validate_repo.sh` when a
-   dbt or Semantic Layer change needs a clean preflight.
-4. Open a pull request and fill out the human safety checks.
-5. Review CI's public-contract report and wait for `validate` to pass.
-6. Merge only after CI is green and the change has had a reasonable review.
+3. Run `scripts/validate_local.sh` before pushing, subject to the long-run
+   consent and evidence-reuse rules above. Record exact commands and outcomes.
+4. Open a draft pull request and fill out the human safety checks.
+5. Review public contract changes with
+   `python scripts/report_public_contract_changes.py origin/master`.
+6. Merge only after reviewing local validation evidence and the change itself.
+   The optional remote policy job is not a merge gate.
 
-The default branch is `master`. It should be protected in GitHub settings so
-direct pushes, force pushes, deletions, and merges with failing CI are blocked.
-If the repository is renamed to use `main`, apply the same protection to `main`.
-
-Recommended branch protection for the default branch:
-
-- Require a pull request before merging.
-- Require the `validate` status check to pass.
-- Require branches to be up to date before merging.
-- Block force pushes and branch deletion.
-- Include administrators unless there is an explicit emergency-maintenance
-  reason not to.
+The default branch is `master`. Recommended protection requires pull requests
+and blocks direct pushes, force pushes, and branch deletion, including for
+administrators outside an explicit emergency-maintenance reason. Do not require
+the removed automatic `validate` check. If the default branch is renamed, apply
+the same protections to the new name.
