@@ -3,13 +3,6 @@
 This backlog holds improvements that matter to the fixture but are intentionally
 outside the current change. Items are grouped by outcome, not by file.
 
-## Maintenance actions
-
-- [ ] Complete the local validation gate for regex PR #28 before merging; clean
-  installation and focused compatibility checks pass.
-- [ ] Recreate the drifted local fixture venv from the lock before the next full
-  run, keeping unrelated tools in separate environments and preserving data.
-
 ## Documentation depth
 
 - Deepen model-local `.md` files where grain, business meaning, caveats, or a
@@ -28,9 +21,10 @@ outside the current change. Items are grouped by outcome, not by file.
 - Audit the public model surface and keep a model public only when a real
   downstream consumer, architectural claim, or tool-test case justifies the
   contract.
-- Add focused dbt unit tests for important business behavior first. Existing
-  legacy model versions and two staging relationship-test declarations provide
-  examples; add more only for a named compatibility or integrity scenario.
+- Extend focused dbt unit tests to other important business rules; Finance
+  margin-waterfall tests now cover item aggregation, variance signs, and missing
+  recipe costs. Existing legacy versions and staging relationship tests provide
+  compatibility and integrity examples.
 - Add optional scale fixtures without making the default local workflow heavy.
 - Maintain a small community-facing roadmap after the `v0.1.1` reference
   fixture baseline.

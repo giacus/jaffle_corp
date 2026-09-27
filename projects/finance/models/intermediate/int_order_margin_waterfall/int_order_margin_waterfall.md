@@ -1,5 +1,34 @@
 {% docs finance__int_order_margin_waterfall %}
-Intermediate model for `int_order_margin_waterfall` transformation logic.
+Reconciles two estimates of order margin: the platform supply-cost estimate
+and the component costs implied by Supply's recipes.
+
+- **Grain:** one row per `order_id` from the order-revenue interface.
+- **Business rules:** sums item-level recipe costs by order and subtracts them
+  from net revenue. `recipe_cost_variance_usd` is recipe cost minus platform
+  cost; `margin_method_variance_usd` is platform margin minus recipe margin.
+  Both are positive when the recipe estimate makes an order less profitable.
+- **Caveats:** missing recipe rollups become zero cost, so recipe margin may
+  overstate profitability when coverage is incomplete. `component_count` sums
+  item-level distinct counts; it is not a count of unique components across the
+  whole order. Orders retain their upstream revenue-quality status rather than
+  being filtered to recognized revenue.
+
+Native unit tests in the adjacent YAML cover multiple items per order, both
+variance signs, missing item rows, and null recipe costs. After building the
+upstream Finance relations, run:
+
+```bash
+dbt test --project-dir projects/finance --select test_type:unit
+```
+
+Find orders where the recipe method reduces estimated margin:
+
+```sql
+select order_id, platform_margin_usd, recipe_margin_usd, margin_method_variance_usd
+from {% raw %}{{ ref('int_order_margin_waterfall') }}{% endraw %}
+where margin_method_variance_usd > 0
+order by margin_method_variance_usd desc, order_id
+```
 {% enddocs %}
 
 {% docs finance__int_order_margin_waterfall__platform_supply_cost_usd %}

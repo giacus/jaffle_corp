@@ -77,3 +77,88 @@ models:
       - name: revenue_quality_status
         description: "{{ doc('finance__int_order_payment_allocations__revenue_quality_status') }}"
         data_type: varchar
+
+unit_tests:
+  - name: order_margin_aggregates_items_and_preserves_variance_sign
+    description: >-
+      Multiple item costs produce one order row. A more expensive recipe lowers
+      margin and gives positive variance; a cheaper recipe gives negative variance.
+    model: int_order_margin_waterfall
+    given:
+      - input: ref('fct_order_revenue')
+        rows:
+          - order_id: expensive_recipe
+            net_revenue_usd: 100
+            estimated_supply_cost_usd: 20
+            estimated_gross_margin_usd: 80
+          - order_id: cheaper_recipe
+            net_revenue_usd: 40
+            estimated_supply_cost_usd: 12
+            estimated_gross_margin_usd: 28
+      # Ephemeral inputs need typed SQL fixtures; there is no relation to inspect.
+      - input: ref('int_order_component_cost_bridge')
+        format: sql
+        rows: |
+          select 'expensive_recipe' as order_id,
+                 15.0 as recipe_expected_component_cost_usd,
+                 0.0 as platform_estimated_supply_cost_major, 2 as component_count
+          union all
+          select 'expensive_recipe', 12.0, 0.0, 3
+          union all
+          select 'cheaper_recipe', 8.0, 0.0, 1
+    expect:
+      rows:
+        - order_id: expensive_recipe
+          platform_supply_cost_usd: 20
+          recipe_expected_component_cost_usd: 27
+          recipe_cost_variance_usd: 7
+          recipe_margin_usd: 73
+          platform_margin_usd: 80
+          margin_method_variance_usd: 7
+          component_count: 5
+        - order_id: cheaper_recipe
+          platform_supply_cost_usd: 12
+          recipe_expected_component_cost_usd: 8
+          recipe_cost_variance_usd: -4
+          recipe_margin_usd: 32
+          platform_margin_usd: 28
+          margin_method_variance_usd: -4
+          component_count: 1
+
+  - name: order_margin_retains_orders_with_missing_recipe_costs
+    description: >-
+      Missing item rows and unknown recipe cost both retain the order and use
+      zero recipe cost. The resulting margin equals net revenue, so consumers
+      must treat it as incomplete cost coverage rather than real profitability.
+    model: int_order_margin_waterfall
+    given:
+      - input: ref('fct_order_revenue')
+        rows:
+          - order_id: no_item_rows
+            net_revenue_usd: 50
+            estimated_supply_cost_usd: 10
+            estimated_gross_margin_usd: 40
+          - order_id: unknown_recipe_cost
+            net_revenue_usd: 30
+            estimated_supply_cost_usd: 5
+            estimated_gross_margin_usd: 25
+      - input: ref('int_order_component_cost_bridge')
+        format: sql
+        rows: |
+          select 'unknown_recipe_cost' as order_id,
+                 cast(null as double) as recipe_expected_component_cost_usd,
+                 0.0 as platform_estimated_supply_cost_major, 0 as component_count
+    expect:
+      rows:
+        - order_id: no_item_rows
+          recipe_expected_component_cost_usd: 0
+          recipe_cost_variance_usd: -10
+          recipe_margin_usd: 50
+          margin_method_variance_usd: -10
+          component_count: 0
+        - order_id: unknown_recipe_cost
+          recipe_expected_component_cost_usd: 0
+          recipe_cost_variance_usd: -5
+          recipe_margin_usd: 30
+          margin_method_variance_usd: -5
+          component_count: 0
