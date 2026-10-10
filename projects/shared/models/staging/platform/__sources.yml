@@ -3,10 +3,10 @@ version: 2
 sources:
   - name: platform_app
     schema: "{{ target.schema }}_raw"
-    description: Synthetic source tables for the core jaffle application.
+    description: "{{ doc('platform_app_source_overview') }}"
     tables:
       - name: raw_customers
-        description: One row per customer profile from the fictional jaffle app.
+        description: "{{ doc('platform_app_raw_customers') }}"
       - name: raw_stores
         description: Store metadata with local currency and timezone fields.
       - name: raw_products
