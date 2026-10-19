@@ -1,0 +1,4 @@
+name: legacy
+version: '0.1.0'
+config-version: 2
+profile: jaffle_corp_dbt2_semantic_graph

@@ -1,0 +1,7 @@
+jaffle_corp_dbt2_semantic_graph:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: '{{ env_var("JAFFLE_CORP_DBT2_SEMANTIC_DB", "semantic_graph.duckdb") }}'
+      threads: 1

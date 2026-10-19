@@ -1,0 +1,9 @@
+name: jaffle_corp_dbt2_semantic_graph
+version: '0.1.0'
+config-version: 2
+profile: jaffle_corp_dbt2_semantic_graph
+require-dbt-version: '>=2.0.0,<2.1.0'
+model-paths: ['models']
+seed-paths: ['seeds']
+target-path: target
+clean-targets: ['target']

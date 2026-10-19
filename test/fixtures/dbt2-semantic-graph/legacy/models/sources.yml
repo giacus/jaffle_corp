@@ -1,0 +1,6 @@
+version: 2
+sources:
+  - name: settlement_gateway
+    schema: raw
+    tables:
+      - name: settlement_events
