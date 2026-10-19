@@ -1,0 +1,36 @@
+version: 2
+metrics:
+  - name: settlement_rate
+    description: Share of events with a positive settlement.
+    type: ratio
+    label: Settlement Rate
+    numerator:
+      name: settled_amount_total
+    denominator:
+      name: gross_amount_total
+  - name: unsettled_amount_total
+    description: Gross amount remaining after settlement.
+    type: derived
+    label: Unsettled Amount Total
+    expr: gross_amount_total - settled_amount_total
+    input_metrics:
+      - name: gross_amount_total
+      - name: settled_amount_total
+  - name: cumulative_settled_amount
+    description: Settled amount accumulated through each calendar year.
+    type: cumulative
+    label: Cumulative Settled Amount
+    input_metric:
+      name: settled_amount_total
+    grain_to_date: year
+  - name: seven_day_settlement_rate
+    description: Customer settlement conversion within seven days.
+    type: conversion
+    label: Seven-Day Settlement Rate
+    base_metric:
+      name: settlement_event_count
+    conversion_metric:
+      name: settled_amount_total
+    calculation: conversion_rate
+    entity: customer
+    window: 7 day

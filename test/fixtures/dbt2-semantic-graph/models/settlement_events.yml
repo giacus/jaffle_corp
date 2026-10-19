@@ -1,0 +1,46 @@
+version: 2
+models:
+  - name: settlement_events
+    description: Settlement events received from the gateway and reconciled to customer accounts.
+    semantic_model:
+      name: settlement_events
+      enabled: true
+    agg_time_dimension: occurred_on
+    derived_semantics:
+      entities:
+        - name: settlement_event
+          type: primary
+          expr: settlement_event_id
+        - name: customer
+          type: foreign
+          expr: customer_id
+      dimensions:
+        - name: occurred_on
+          type: time
+          expr: occurred_on
+          granularity: day
+    metrics:
+      - name: settlement_event_count
+        description: Number of settlement events.
+        type: simple
+        label: Settlement Event Count
+        agg: sum
+        expr: settled_event_count
+        config:
+          enabled: true
+      - name: settled_amount_total
+        description: Total settled amount.
+        type: simple
+        label: Settled Amount Total
+        agg: sum
+        expr: settled_amount
+        config:
+          enabled: true
+      - name: gross_amount_total
+        description: Total gross amount before settlement.
+        type: simple
+        label: Gross Amount Total
+        agg: sum
+        expr: gross_amount
+        config:
+          enabled: true
