@@ -231,9 +231,18 @@ def main() -> None:
         model_deps = sorted(manifest.get("nodes", {}).get("model.jaffle_corp_dbt2_semantic_graph.settlement_events", {}).get("depends_on", {}).get("nodes", [])) if manifest else []
         expected_source = "source.legacy.settlement_gateway.settlement_events"
         local_collision_source = "source.jaffle_corp_dbt2_semantic_graph.legacy.settlement_gateway.settlement_events"
+        model_id = "model.jaffle_corp_dbt2_semantic_graph.settlement_events"
         assert code == 0 and source_ids == sorted([expected_source, local_collision_source]), (code, source_ids, logs)
         assert model_deps == [local_collision_source], model_deps
         cases["duplicate-dotted-source"] = {"exit": code, "sourceIds": source_ids, "modelDependsOn": model_deps, "selectedSource": local_collision_source, "packageSource": expected_source, "diagnosticsTail": logs}
+        disabled_collision = root / "disabled-local-dotted-source"; shutil.copytree(FIXTURE, disabled_collision)
+        (disabled_collision / "models/sources.yml").write_text("version: 2\nsources:\n  - name: legacy.settlement_gateway\n    config:\n      enabled: false\n    schema: raw\n    tables:\n      - name: settlement_events\n")
+        code, manifest, logs, _ = run_parse(dbt, disabled_collision, "disabled-local-dotted-source")
+        source_ids = sorted(manifest.get("sources", {})) if manifest else []
+        model_deps = sorted(manifest.get("nodes", {}).get(model_id, {}).get("depends_on", {}).get("nodes", [])) if manifest else []
+        assert code == 0 and source_ids == [expected_source], (code, source_ids, logs)
+        assert model_deps == [expected_source], model_deps
+        cases["disabled-local-dotted-source"] = {"exit": code, "sourceIds": source_ids, "modelDependsOn": model_deps, "selectedSource": expected_source, "disabledLocalSource": local_collision_source, "diagnosticsTail": logs}
     report = {"schemaVersion": 2, "kind": "dbt2-semantic-graph-fixture-verification", "dbt": str(dbt), "fixture": "test/fixtures/dbt2-semantic-graph", "cases": cases}
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True); args.output.write_text(json.dumps(report, indent=2) + "\n")
