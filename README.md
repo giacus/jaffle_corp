@@ -7,7 +7,7 @@ migrations.
 
 The company is fictional, the data is synthetic, and the default stack is dbt
 Core plus DuckDB. No warehouse credentials or dbt Cloud account are required.
-Every dbt project requires the tested dbt Core 1.11.12 release, and bootstrap
+Every dbt project requires the tested dbt Core 1.11.16 release, and bootstrap
 installs the exact transitive Python versions in `requirements.lock.txt`.
 
 `jaffle-corp` is the human-facing fixture name, `jaffle_corp` is the repository

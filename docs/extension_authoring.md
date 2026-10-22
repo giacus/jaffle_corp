@@ -161,7 +161,7 @@ version: "0.1.0"
 config-version: 2
 
 profile: jaffle_corp
-require-dbt-version: "=1.11.12"
+require-dbt-version: "=1.11.16"
 restrict-access: true
 
 model-paths: ["models"]

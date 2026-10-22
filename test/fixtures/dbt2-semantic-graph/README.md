@@ -1,7 +1,7 @@
 # dbt 2 semantic graph fixture
 
 This compact fixture is intentionally outside `projects/`: the maintained Jaffle
-projects require dbt 1.11.12, while this case exercises the model-attached
+projects require dbt 1.11.16, while this case exercises the model-attached
 semantic and metric contract introduced by official dbt 2.0.6.
 
 The model uses the qualified source literal

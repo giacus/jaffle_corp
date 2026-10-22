@@ -3,7 +3,7 @@ version: "0.1.0"
 config-version: 2
 
 profile: jaffle_corp
-require-dbt-version: "=1.11.12"
+require-dbt-version: "=1.11.16"
 
 # Shared is deliberately a local code package. Its protected staging models are
 # implementation inputs for domain projects, not dbt Mesh public interfaces.

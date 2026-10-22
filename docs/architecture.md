@@ -201,7 +201,7 @@ company workflow:
 | Campaign economics | `campaign_contribution_usd` and `weekly_campaign_performance` | Query campaign return and contribution together through the Semantic Layer. |
 | Time-aware measurement | `year_to_date_net_revenue_usd` and `seven_day_experiment_conversion_rate` | Track annual revenue progress and orders completed within seven days of an experiment exposure. |
 
-Every project in this estate runs on the same pinned dbt Core 1.11.12 stack.
+Every project in this estate runs on the same pinned dbt Core 1.11.16 stack.
 Features that require a different Core or adapter runtime belong in a future
 whole-repository upgrade, not in a parallel compatibility fixture.
 
