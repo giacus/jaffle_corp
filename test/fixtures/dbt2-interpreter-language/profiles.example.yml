@@ -1,0 +1,4 @@
+jaffle_interpreter_language:
+  target: dev
+  outputs:
+    dev: {type: duckdb, path: ':memory:', threads: 1}
