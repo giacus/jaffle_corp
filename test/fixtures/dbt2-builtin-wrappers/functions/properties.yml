@@ -1,0 +1,16 @@
+version: 2
+functions:
+  - name: settlement_amount_project_disabled
+    description: Proposed minor-unit conversion, disabled in project configuration and intentionally unconsumed.
+    arguments:
+      - name: amount_in_minor_units
+        data_type: bigint
+    returns:
+      data_type: double
+  - name: settlement_amount_inline_disabled
+    description: Proposed minor-unit conversion, disabled inline and intentionally unconsumed.
+    arguments:
+      - name: amount_in_minor_units
+        data_type: bigint
+    returns:
+      data_type: double

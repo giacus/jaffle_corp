@@ -1,0 +1,7 @@
+version: 2
+sources:
+  - name: settlement_gateway
+    schema: main
+    tables:
+      - name: raw_settlement_events
+        description: Synthetic gateway events loaded by the fixture seed.

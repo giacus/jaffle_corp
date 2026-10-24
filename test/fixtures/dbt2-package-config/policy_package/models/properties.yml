@@ -1,0 +1,9 @@
+version: 2
+models:
+  - name: settlement_events
+    description: Package policy defaults, explicitly admitted by the controlling reconciliation project.
+    config:
+      enabled: false
+      materialized: ephemeral
+      tags: ['policy_contract']
+      pre-hook: 'select 2'

@@ -1,0 +1,15 @@
+name: jaffle_corp_builtin_wrappers
+version: '0.1.0'
+config-version: 2
+profile: jaffle_corp_builtin_wrappers
+require-dbt-version: '>=2.0.0'
+model-paths: ['models']
+macro-paths: ['macros']
+function-paths: ['functions']
+data-paths: ['seeds']
+target-path: target
+clean-targets: ['target']
+functions:
+  jaffle_corp_builtin_wrappers:
+    settlement_amount_project_disabled:
+      +enabled: false

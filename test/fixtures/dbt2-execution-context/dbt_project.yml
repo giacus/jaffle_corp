@@ -1,0 +1,7 @@
+name: jaffle_execution_context
+version: '1.0.0'
+config-version: 2
+profile: jaffle_context
+require-dbt-version: ['>=2.0.0', '<2.1.0']
+model-paths: ['models']
+
