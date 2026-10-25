@@ -1,0 +1,6 @@
+name: jaffle_logging_effects
+version: '1.0'
+config-version: 2
+require-dbt-version: '>=1.5.0'
+profile: jaffle_logging_effects
+model-paths: [models]

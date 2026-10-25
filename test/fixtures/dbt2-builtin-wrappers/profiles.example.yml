@@ -1,0 +1,7 @@
+jaffle_corp_builtin_wrappers:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: builtin_wrappers.duckdb
+      threads: 1

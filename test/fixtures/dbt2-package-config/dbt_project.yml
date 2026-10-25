@@ -1,0 +1,13 @@
+name: jaffle_corp_package_config
+version: '0.1.0'
+config-version: 2
+profile: jaffle_corp_package_config
+require-dbt-version: '>=2.0.0,<2.1.0'
+model-paths: ['models']
+models:
+  settlement_policy:
+    +materialized: table
+    +tags: ['reconciliation_owner']
+    settlement_events:
+      +enabled: true
+      +pre-hook: "select count(*) from {{ ref('reconciliation_window') }}"

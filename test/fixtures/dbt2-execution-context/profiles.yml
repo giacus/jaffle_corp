@@ -1,0 +1,19 @@
+jaffle_context:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: ':memory:'
+      threads: 1
+    prod:
+      type: duckdb
+      path: ':memory:'
+      threads: 1
+alternate_context:
+  target: prod
+  outputs:
+    prod:
+      type: duckdb
+      path: ':memory:'
+      threads: 1
+

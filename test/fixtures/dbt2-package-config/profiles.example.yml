@@ -1,0 +1,7 @@
+jaffle_corp_package_config:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: jaffle_package_config.duckdb
+      threads: 1

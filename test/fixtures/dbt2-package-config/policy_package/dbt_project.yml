@@ -1,0 +1,11 @@
+name: settlement_policy
+version: '0.1.0'
+config-version: 2
+require-dbt-version: '>=2.0.0,<2.1.0'
+model-paths: ['models']
+models:
+  settlement_policy:
+    +materialized: view
+    +tags: ['policy_defaults']
+    settlement_events:
+      +pre-hook: 'select 1'
