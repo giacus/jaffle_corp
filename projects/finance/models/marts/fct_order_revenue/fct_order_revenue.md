@@ -54,7 +54,12 @@ Estimated supply cost for the finance fact at one row per order, expressed in US
 {% enddocs %}
 
 {% docs finance__fct_order_revenue__estimated_gross_margin_usd %}
-Net revenue minus estimated supply cost, expressed in US dollars. Derived from captured amount USD, refunded amount USD, and estimated supply cost USD.
+Estimated gross margin is expressed in US dollars.
+{% set components = ['captured revenue', 'refunded revenue', 'estimated supply cost'] %}
+Calculation: {{ components | join(' minus ') }}.
+{% for component in components %}
+- {{ component | capitalize }} uses the same order grain.
+{% endfor %}
 {% enddocs %}
 
 {% docs finance__fct_order_revenue__order_item_count %}
