@@ -22,6 +22,7 @@ vars:
   data_interval_start: "2026-01-01 00:00:00"
   data_interval_end: "2026-01-08 00:00:00"
   window_hours_back: 12
+  include_refund_review: false
 
 models:
   finance:

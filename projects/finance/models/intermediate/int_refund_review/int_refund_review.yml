@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: int_refund_review
+    description: "{{ doc('finance__int_refund_review') }}"
+    columns:
+      - name: order_id
+        description: Order being reviewed after a refund.
+        data_type: varchar
+      - name: customer_id
+        description: Customer who placed the refunded order.
+        data_type: varchar
+      - name: refunded_amount_usd
+        description: Refunded amount converted to US dollars.
+        data_type: double
+      - name: refund_event_count
+        description: Number of refund events attached to the order.
+        data_type: integer
