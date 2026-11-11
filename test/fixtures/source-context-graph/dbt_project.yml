@@ -1,0 +1,16 @@
+name: jaffle_source_context
+version: "1.0.0"
+config-version: 2
+profile: jaffle_source_context
+require-dbt-version: ">=1.10.0,<3.0.0"
+model-paths: [models]
+macro-paths: [macros]
+docs-paths: [docs]
+vars:
+  orders_relation_override: null
+  orders_relation: |-
+    {% if var('orders_relation_override', none) is not none %}
+    {{ ref(var('orders_relation_override')) }}
+    {% else %}
+    {{ ref('stg_orders') }}
+    {% endif %}

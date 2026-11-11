@@ -1,0 +1,26 @@
+# Order-audit source selection
+
+This small project exercises the same business rule on dbt Core 1.x and native
+dbt 2.x. An order audit normally reads `stg_orders`; the
+`orders_relation_override` variable can select `expedited_orders` instead.
+The relation lives in a block-form Jinja string under `vars`, and a macro reads
+it. Only the selected branch contributes a dependency.
+
+The schema also uses scalar model/source tags and sequence table tags. A doc
+block and a macro keep source navigation observable. The project is separate
+from the twelve maintained warehouse projects and needs no warehouse data for
+manifest parsing.
+
+Copy `profiles.example.yml` to a private profiles directory as `profiles.yml`,
+then run `dbt parse --project-dir . --profiles-dir <directory>`. Repeat with
+`--vars '{"orders_relation_override": "expedited_orders"}'`. The audit edge
+must move from `stg_orders` to `expedited_orders`; the source, model and table
+tags remain present in both manifests.
+
+Run this from the repository root:
+
+```sh
+python scripts/verify_source_context_graph.py --dbt <executable> --out <report.json>
+```
+
+It creates isolated temporary copies and leaves the authored fixture untouched.
