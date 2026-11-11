@@ -1,0 +1,15 @@
+version: 2
+models:
+  - name: order_audit
+    description: "{{ doc('audit_order_source') }}"
+    config:
+      tags: order_audit
+      materialized: table
+sources:
+  - name: checkout
+    config:
+      tags: landed
+    tables:
+      - name: orders
+        config:
+          tags: [orders, landed]

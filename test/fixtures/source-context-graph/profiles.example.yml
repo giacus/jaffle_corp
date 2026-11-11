@@ -1,0 +1,11 @@
+jaffle_source_context:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: ":memory:"
+      threads: 1
+    preview:
+      type: duckdb
+      path: ":memory:"
+      threads: 1
