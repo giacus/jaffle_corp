@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check order-audit block variables and scalar tags in isolated dbt copies."""
+"""Check order-audit block variables, scalar tags and ignored order drafts in isolated dbt copies."""
 from __future__ import annotations
 import argparse
 import hashlib
@@ -22,7 +22,8 @@ def source_digest() -> str:
 
 def verify(dbt: Path, output: Path) -> None:
     before = source_digest()
-    version = subprocess.run([str(dbt), "--version"], text=True, capture_output=True, check=True, timeout=30)
+    version = subprocess.run([str(dbt), "--version"], text=True, capture_output=True, check=True, timeout=30,
+                             env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1", "DBT_SEND_ANONYMOUS_USAGE_STATS": "false"})
     report = {"schemaVersion": 1, "nativeExecutable": str(dbt), "nativeVersionOutput": version.stdout + version.stderr,
               "fixtureSha256": before, "cases": []}
     passed = True
@@ -56,11 +57,14 @@ def verify(dbt: Path, output: Path) -> None:
                                  "auditDependencies": audit["depends_on"]["nodes"],
                                  "auditTags": audit["tags"], "sourceTags": source["tags"],
                                  "macroPresent": "macro.jaffle_source_context.audit_orders_relation" in manifest.get("macros", {}),
-                                 "docPresent": "doc.jaffle_source_context.audit_order_source" in manifest.get("docs", {})})
+                                 "docPresent": "doc.jaffle_source_context.audit_order_source" in manifest.get("docs", {}),
+                                 "ignoredResourcesAbsent": (not any("scratch" in key for key in nodes)
+                                     and "macro.jaffle_source_context.scratch_order_amount" not in manifest.get("macros", {})
+                                     and "doc.jaffle_source_context.scratch_order_notes" not in manifest.get("docs", {}))})
                     case["exact"] = (result.returncode == 0 and sorted(audit["depends_on"]["nodes"]) == expected
                                      and audit["tags"] == ["order_audit"]
                                      and set(source["tags"]) == {"landed", "orders"}
-                                     and case["macroPresent"] and case["docPresent"])
+                                     and case["macroPresent"] and case["docPresent"] and case["ignoredResourcesAbsent"])
                 report["cases"].append(case)
                 passed = passed and case["exact"]
     finally:

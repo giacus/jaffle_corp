@@ -11,6 +11,10 @@ block and a macro keep source navigation observable. The project is separate
 from the twelve maintained warehouse projects and needs no warehouse data for
 manifest parsing.
 
+Local order sketches live under `drafts/` and are excluded through `.dbtignore`.
+Their models, macros and doc blocks must stay out of the manifest. A dot-prefixed
+SQL filename checks native dbt's separate basename exclusion.
+
 Copy `profiles.example.yml` to a private profiles directory as `profiles.yml`,
 then run `dbt parse --project-dir . --profiles-dir <directory>`. Repeat with
 `--vars '{"orders_relation_override": "expedited_orders"}'`. The audit edge
