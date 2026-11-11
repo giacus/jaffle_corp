@@ -6,7 +6,12 @@ require-dbt-version: ">=1.10.0,<3.0.0"
 model-paths: [models]
 macro-paths: [macros]
 docs-paths: [docs]
+models:
+  jaffle_source_context:
+    published:
+      +materialized: "{{ 'view' if target.name == 'preview' else 'table' }}"
 vars:
+  audit_force_full_rebuild: false
   orders_relation_override: null
   orders_relation: |-
     {% if var('orders_relation_override', none) is not none %}

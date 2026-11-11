@@ -5,3 +5,7 @@ jaffle_source_context:
       type: duckdb
       path: ":memory:"
       threads: 1
+    preview:
+      type: duckdb
+      path: ":memory:"
+      threads: 1

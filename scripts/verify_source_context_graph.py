@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Check order-audit block variables, scalar tags and ignored order drafts in isolated dbt copies."""
+"""Check order-audit context, conditional dependencies and materialization in isolated dbt copies."""
 from __future__ import annotations
 import argparse
 import hashlib
+import itertools
 import json
 import os
 from pathlib import Path
@@ -28,7 +29,8 @@ def verify(dbt: Path, output: Path) -> None:
               "fixtureSha256": before, "cases": []}
     passed = True
     try:
-        for override in (None, "expedited_orders"):
+        for override, (target, full_rebuild) in itertools.product(
+                (None, "expedited_orders"), (("dev", False), ("preview", True))):
             with tempfile.TemporaryDirectory(prefix="jaffle-source-context-") as directory:
                 scratch = Path(directory)
                 project = scratch / "project"
@@ -38,11 +40,14 @@ def verify(dbt: Path, output: Path) -> None:
                 shutil.copyfile(project / "profiles.example.yml", profiles / "profiles.yml")
                 args = [str(dbt), "parse", "--project-dir", str(project), "--profiles-dir", str(profiles),
                         "--target-path", str(scratch / "target"), "--log-path", str(scratch / "logs"),
-                        "--no-partial-parse", "--vars", json.dumps({"orders_relation_override": override})]
+                        "--no-partial-parse", "--target", target, "--vars",
+                        json.dumps({"orders_relation_override": override,
+                                    "audit_force_full_rebuild": full_rebuild})]
                 env = {**os.environ, "HOME": str(scratch), "DBT_SEND_ANONYMOUS_USAGE_STATS": "false",
                        "PYTHONDONTWRITEBYTECODE": "1"}
                 result = subprocess.run(args, cwd=project, env=env, capture_output=True, text=True, check=False, timeout=120)
-                case = {"override": override, "command": args, "exitCode": result.returncode,
+                case = {"override": override, "target": target, "fullRebuild": full_rebuild,
+                        "command": args, "exitCode": result.returncode,
                         "stdout": result.stdout, "stderr": result.stderr, "exact": False}
                 manifest_path = scratch / "target/manifest.json"
                 if manifest_path.exists():
@@ -50,11 +55,17 @@ def verify(dbt: Path, output: Path) -> None:
                     manifest = json.loads(data)
                     nodes = manifest.get("nodes", {})
                     audit = nodes["model.jaffle_source_context.order_audit"]
+                    lineage = nodes["model.jaffle_source_context.order_lineage_audit"]
+                    totals = nodes["model.jaffle_source_context.order_totals"]
+                    published = nodes["model.jaffle_source_context.published_order_audit"]
                     source = manifest["sources"]["source.jaffle_source_context.checkout.orders"]
                     expected = ["model.jaffle_source_context." + (override or "stg_orders")]
                     case.update({"dbtVersion": manifest["metadata"]["dbt_version"],
                                  "manifestSha256": hashlib.sha256(data).hexdigest(),
                                  "auditDependencies": audit["depends_on"]["nodes"],
+                                 "lineageDependencies": lineage["depends_on"]["nodes"],
+                                 "totalsMaterialized": totals["config"]["materialized"],
+                                 "publishedMaterialized": published["config"]["materialized"],
                                  "auditTags": audit["tags"], "sourceTags": source["tags"],
                                  "macroPresent": "macro.jaffle_source_context.audit_orders_relation" in manifest.get("macros", {}),
                                  "docPresent": "doc.jaffle_source_context.audit_order_source" in manifest.get("docs", {}),
@@ -62,6 +73,9 @@ def verify(dbt: Path, output: Path) -> None:
                                      and "macro.jaffle_source_context.scratch_order_amount" not in manifest.get("macros", {})
                                      and "doc.jaffle_source_context.scratch_order_notes" not in manifest.get("docs", {}))})
                     case["exact"] = (result.returncode == 0 and sorted(audit["depends_on"]["nodes"]) == expected
+                                     and sorted(lineage["depends_on"]["nodes"]) == expected
+                                     and totals["config"]["materialized"] == ("table" if full_rebuild else "incremental")
+                                     and published["config"]["materialized"] == ("view" if target == "preview" else "table")
                                      and audit["tags"] == ["order_audit"]
                                      and set(source["tags"]) == {"landed", "orders"}
                                      and case["macroPresent"] and case["docPresent"] and case["ignoredResourcesAbsent"])
@@ -69,12 +83,12 @@ def verify(dbt: Path, output: Path) -> None:
                 passed = passed and case["exact"]
     finally:
         report["fixtureUnchanged"] = before == source_digest()
-        report["exact"] = passed and report["fixtureUnchanged"] and len(report["cases"]) == 2
+        report["exact"] = passed and report["fixtureUnchanged"] and len(report["cases"]) == 4
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(json.dumps(report, indent=2) + "\n")
     if not report["exact"]:
         raise SystemExit(f"Native source-context control failed; inspect {output}")
-    print(f"Both source-selection cases passed; source fixture unchanged. {output}")
+    print(f"All four source-context cases passed; source fixture unchanged. {output}")
 
 
 if __name__ == "__main__":
